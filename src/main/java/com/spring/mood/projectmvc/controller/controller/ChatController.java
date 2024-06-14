@@ -1,16 +1,14 @@
-package com.spring.mood.projectmvc.controller.controller.chatController;
+package com.spring.mood.projectmvc.controller.controller;
 
 
 import com.spring.mood.projectmvc.entity.ChatEntity;
 import com.spring.mood.projectmvc.service.ChatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Controller

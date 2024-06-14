@@ -1,4 +1,4 @@
-package com.spring.mood.projectmvc.controller.restApiController.chatRestApiController;
+package com.spring.mood.projectmvc.controller.restApiController;
 
 
 import com.spring.mood.projectmvc.entity.ChatEntity;
