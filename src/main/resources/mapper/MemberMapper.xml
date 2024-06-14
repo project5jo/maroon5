@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.MemberMapper">
+
+    <insert id="save">
+        INSERT INTO Users
+        (user_account, user_password, user_name, user_email, user_profile, user_address, user_birth)
+        VALUES
+        (#{userAccount}, #{userPassword}, #{userName}, #{userEmail}, #{userProfile}, #{userAddress}, #{userBirth})
+    </insert>
+
+    <select id="findOne" resultType="member">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , create_at
+        , user_point
+        FROM Users
+        WHERE user_account = #{userAccount}
+    </select>
+
+</mapper>
