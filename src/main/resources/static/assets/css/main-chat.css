@@ -1,7 +1,8 @@
 /* chat */
+
 .chat {
   /* display: none; */
-  z-index: 999;
+  z-index: 99;
   margin: 0 auto;
   padding: 20px 40px;
   width: 750px;
@@ -12,7 +13,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
 
   animation: slide-up 0.8s ease-out;
 }
@@ -94,7 +95,6 @@
   transform: rotate(-45deg);
   background-color: #fff;
 }
-
 
 /* 채팅 메세지 창 */
 .chatting {
@@ -201,7 +201,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  right: -14px;
-  top: 7px;
 }
