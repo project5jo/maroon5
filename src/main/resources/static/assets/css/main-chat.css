@@ -1,10 +1,6 @@
 /* chat */
 .chat {
-<<<<<<< HEAD
-   /*display: none;*/
-=======
   /* display: none; */
->>>>>>> d81f59fdd3a0ef232b0c004e74477de796917e7b
   z-index: 999;
   margin: 0 auto;
   padding: 20px 40px;
