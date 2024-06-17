@@ -1,6 +1,6 @@
 /* chat */
 .chat {
-   display: none;
+  /* display: none; */
   z-index: 999;
   margin: 0 auto;
   padding: 20px 40px;
@@ -25,6 +25,18 @@
   to {
     transform: translate(-50%, -50%);
     opacity: 1; /* 끝날 때 투명도를 1로 설정하여 완전히 나타나도록 설정 */
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translate(-50%, -50%);
+
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -30%);
+    opacity: 0;
   }
 }
 
@@ -58,13 +70,31 @@
   padding-right: 15px;
 }
 
-.fa-times {
-  color: #ffffff;
-  display: flex;
-  align-items: start;
-  font-weight: 200;
-  font-size: 20px;
+.cancel_btn {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background: none;
 }
+
+.cancel_btn span {
+  position: absolute;
+  width: 30px;
+  height: 2px;
+
+  left: 22px;
+  top: 15px;
+}
+.cancel_btn span:nth-child(1) {
+  transform: rotate(45deg);
+  background-color: #fff;
+}
+
+.cancel_btn span:nth-child(2) {
+  transform: rotate(-45deg);
+  background-color: #fff;
+}
+
 
 /* 채팅 메세지 창 */
 .chatting {
