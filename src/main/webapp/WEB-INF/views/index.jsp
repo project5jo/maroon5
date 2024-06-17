@@ -47,7 +47,10 @@
             <i class="fas fa-bell"></i>
             <p class="point">고민을 이야기해주세요</p>
           </div>
-          <i class="fas fa-times"></i>
+          <button class="cancel_btn">
+            <span></span>
+            <span></span>
+          </button>
         </div>
         <!-- 채팅 메세지 창 -->
         <ul class="chatting">
