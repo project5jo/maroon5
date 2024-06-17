@@ -1,0 +1,123 @@
+/* common css  */
+@import url("../../common.css");
+/* 채팅 css */
+@import url("../css/main-chat.css");
+
+header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 17px;
+}
+
+.menu .inner {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+nav.menu {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu .logo {
+  font-weight: 700;
+}
+
+.gnb {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.login {
+  padding: 0 60px;
+  font-weight: 600;
+}
+
+.login a {
+  color: #fff;
+}
+
+i.fa-bars {
+  font-size: 20px;
+}
+
+/*main 시작*/
+.main_banner {
+  height: 100vh;
+  width: 100%;
+  background: url(../img/a58e6526-b43d-4493-aa07-b17a2d5cccf1.jpeg);
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main_banner::before {
+  content: "";
+  display: block;
+  background: rgb(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+}
+
+/* 마우스 애니메이션 */
+.mouse {
+  display: none;
+  z-index: 999;
+  position: absolute; /* 변경: 절대 위치 지정 */
+  bottom: 10%; /* 원하는 위치로 설정 (예: 가운데) */
+  left: 50%; /* 원하는 위치로 설정 (예: 가운데) */
+  transform: translate(-50%, -50%); /* 가운데 정렬 */
+  width: 18px;
+  height: 32px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid #ffffff;
+}
+
+.wheel {
+  width: 4px;
+  height: 4px;
+  border-radius: 50px;
+  background-color: #fff;
+  position: absolute; /* 변경: 절대 위치 지정 */
+  top: 20%; /* 원하는 위치로 설정 (예: 가운데) */
+  left: 50%; /* 원하는 위치로 설정 (예: 가운데) */
+  transform: translate(-50%, -50%); /* 가운데 정렬 */
+  animation: wheelAnimation 2s infinite; /* 애니메이션 적용 */
+}
+
+@keyframes wheelAnimation {
+  0%,
+  100% {
+    height: 3px;
+    top: 50%;
+  }
+  68% {
+    top: 20%;
+    height: 4px;
+  }
+  75% {
+    top: 30%;
+    height: 7px;
+  }
+
+  84%,
+  92% {
+    top: 80%;
+    height: 4px;
+  }
+}

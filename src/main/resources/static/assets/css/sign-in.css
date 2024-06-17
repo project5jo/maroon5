@@ -1,0 +1,189 @@
+/* common css  */
+@import url("../../common.css");
+
+body {
+  background-color: #ebeae3;
+  color: #432626;
+}
+
+.menu .logo a,
+.login a {
+  color: #432626;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  font-size: 17px;
+  border-bottom: 1px solid #432626;
+}
+
+nav.menu {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu .inner {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  /* background-color: #fff; */
+}
+
+.menu .logo {
+  font-weight: 700;
+}
+
+.gnb {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.login {
+  padding: 0 60px;
+  font-weight: 600;
+}
+
+i.fa-bars {
+  font-size: 20px;
+}
+
+/* main */
+main {
+  margin-top: 80px;
+  font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
+    "malgun gothic", "돋움", "dotum", sans-serif !important;
+}
+
+main .inner {
+  width: 600px;
+}
+
+.sign-in {
+  color: #432626;
+}
+
+.sign-in-title {
+  margin: 180px 0 60px 0;
+}
+
+.sign-in-title p {
+  color: #432626;
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+}
+
+input.email,
+input.pw {
+  border: 1px solid #432626;
+  display: block;
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 17px;
+  background: none;
+}
+
+input::placeholder {
+  font-size: 17px;
+}
+
+button.sign-in-btn,
+button.kakao-btn {
+  background-color: #432626;
+  color: #fff;
+  width: 100%;
+  height: 70px;
+  font-size: 17px;
+  margin-top: 10px;
+  /* font-weight: 400; */
+}
+
+button.sign-in-btn a,
+button.kakao-btn a {
+  color: #fff;
+}
+
+button.sign-in-btn {
+  margin-top: 40px;
+}
+
+.sign-up-btn {
+  background: none;
+  border: 1px solid #432626;
+  width: 100%;
+  height: 70px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+button.sign-up-btn a {
+  color: #432626;
+}
+
+.find {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  color: #888888;
+}
+
+.find-email,
+.find-pw,
+.find span {
+  color: #888888;
+}
+
+.find span {
+  margin: 0 5px;
+}
+
+/* 체크박스 */
+span.text {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.circle {
+  display: inline-block; /* 영역적용가능해짐 */
+  width: 20px;
+  height: 20px;
+
+  border: 1px solid #432626;
+  box-sizing: border-box;
+
+  position: relative;
+  top: 4px;
+  cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+
+  /* background-image: url(https://blog.kakaocdn.net/dn/XTnSL/btrhtUIVtpB/5FungHN6IXVXG8bLbhE9Dk/img.png); */
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#chk:checked + .circle {
+  background-color: #432626;
+  border-color: #432626;
+  background-image: url(https://blog.kakaocdn.net/dn/t7a2D/btrhtVgLYmG/dUxzAkBy9hIZ4gHmyllQrk/img.png);
+}
+
+/* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
+#chk {
+  position: absolute;
+  left: -999em;
+}
