@@ -25,7 +25,7 @@
         , create_at
         , user_point
         FROM Users
-        WHERE user_account = #{userAccount}
+        WHERE user_account = #{account}
     </select>
 
 </mapper>

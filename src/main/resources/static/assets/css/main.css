@@ -1,7 +1,7 @@
 /* common css  */
-@import url("../../common.css");
+@import url("common.css");
 /* 채팅 css */
-@import url("../css/main-chat.css");
+@import url("main-chat.css");
 
 header {
   width: 100%;
@@ -59,7 +59,7 @@ i.fa-bars {
 .main_banner {
   height: 100vh;
   width: 100%;
-  background: url(../img/a58e6526-b43d-4493-aa07-b17a2d5cccf1.jpeg);
+  /*background: url(../img/a58e6526-b43d-4493-aa07-b17a2d5cccf1.jpeg);*/
   background-position: 0 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -75,7 +75,7 @@ i.fa-bars {
 
 /* 마우스 애니메이션 */
 .mouse {
-  display: none;
+  /*display: none;*/
   z-index: 999;
   position: absolute; /* 변경: 절대 위치 지정 */
   bottom: 10%; /* 원하는 위치로 설정 (예: 가운데) */

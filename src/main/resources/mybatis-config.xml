@@ -17,7 +17,7 @@
 
     <mappers>
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
-        <mapper resource="mappers/MemberMapper.xml" />
+        <mapper resource="mapper/MemberMapper.xml" />
 
     </mappers>
 </configuration>

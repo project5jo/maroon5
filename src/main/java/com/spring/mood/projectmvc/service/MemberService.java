@@ -1,15 +1,13 @@
 package com.spring.mood.projectmvc.service;
 
 import com.spring.mood.projectmvc.dto.requestDto.RequestMemberDto;
+import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.mapper.MemberMapper;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 
 @Service
 @RequiredArgsConstructor
@@ -24,21 +22,22 @@ public class MemberService {
     public boolean memberServiceSave (RequestMemberDto dto) {
 
         // RequestMemberDto 를 MemberEntity 로 변환
-        Member member = dto.toEntityMember ();
+        Member memberEntity = dto.toMemberEntity();
 
         // 비밀번호 암호화
         String encodedPassword = encoder.encode(dto.getPassword());
-        member.setPassword(encodedPassword);
+        memberEntity.setUserPassword(encodedPassword);
 
         // 중복확인
 
 
         // memberMapper 에서 dto 저장
-        memberMapper.save(dto);
+        boolean flag = memberMapper.save(memberEntity);
+        return flag;
     }
 
     // 회원가입 중간처리
-    public void joinInServiceProcess (){
+    public void joinInServiceProcess (RequestMemberDto dto){
         // 1. 회원가입여부 확인
         Member checkMember = memberMapper.findOne(dto.getAccount());
         if (checkMember == null) {
@@ -47,7 +46,7 @@ public class MemberService {
 
         // 2. 입력 비밀번호 중복검사
         String inputPassword = dto.getPassword(); // 입력한 비밀번호
-        String savedPassword = checkMember.getPassword(); // DB에 저장된 비밀번호
+        String savedPassword = checkMember.getUserPassword(); // DB에 저장된 비밀번호
 
         if (!encoder.matches(inputPassword, savedPassword)) {
             log.info("일치하지 않은 비밀번호입니다.");

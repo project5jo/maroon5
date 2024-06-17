@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.dto.requestDto;
 
+import com.spring.mood.projectmvc.entity.Member;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class RequestMemberDto {
 
     @NotBlank(message = "아이디는 필수입력정보입니다.")
@@ -40,12 +42,7 @@ public class RequestMemberDto {
 
     // RequestMemberDto 를 MemberEntity 로 변환
     public Member toMemberEntity() {
-        return Member.builder()
-                                .account(this.account)
-                                .name(this.name)
-                                .password(this.password)
-                                .email(this.email)
-                                .birth(this.birth)
-                                .build();
+        return Member.builder().userAccount(this.account).userName(this.name)
+                .userPassword(this.password).userEmail(this.email).userBirth(birth).build();
     }
 }

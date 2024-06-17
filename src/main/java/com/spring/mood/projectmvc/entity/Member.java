@@ -17,6 +17,7 @@ public class Member {
 
     private String userRole;
     private String userName;
+    @Setter
     private String userPassword;
     private String userEmail;
     private LocalDateTime createAt;
