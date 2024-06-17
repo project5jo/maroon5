@@ -59,7 +59,7 @@ i.fa-bars {
 .main_banner {
   height: 100vh;
   width: 100%;
-  /*background: url(../img/a58e6526-b43d-4493-aa07-b17a2d5cccf1.jpeg);*/
+  background: url('/assets/img/firepit.gif');
   background-position: 0 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -121,3 +121,39 @@ i.fa-bars {
     height: 4px;
   }
 }
+
+
+.category-drawer {
+  position: fixed;
+  top: 0;
+  right: -60%;
+  width: 50%;
+  height: 100vh;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: baseline; 
+  justify-content: center;
+  z-index: 1000;
+  transition: right 0.5s ease-in-out;
+  
+}
+.category-drawer.show {
+  right: 0;
+}
+.category-drawer a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10%;
+  margin-bottom: 5%;
+  font-size: 40px;
+}
+.category-drawer :nth-child(3){
+  margin-bottom: 40%;
+}
+
+.fa-bars {
+  cursor: pointer;
+}
+
