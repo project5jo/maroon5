@@ -12,9 +12,12 @@
 
     <typeAliases>
 <!--        <typeAlias type="com.study.springStudy.database.chap01.Person" alias="person"/>-->
+        <typeAlias type="com.spring.mood.projectmvc.entity.Member" alias="member"/>
     </typeAliases>
 
     <mappers>
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
+        <mapper resource="mappers/MemberMapper.xml" />
+
     </mappers>
 </configuration>
