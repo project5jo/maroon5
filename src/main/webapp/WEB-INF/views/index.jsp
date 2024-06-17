@@ -19,6 +19,11 @@
               <a href="../../sign-in/html/sign-in.html">LOGIN</a>
             </li>
             <li><i class="fas fa-bars"></i></li>
+            <div class="category-drawer">
+                <a href="#chat">Chat</a>
+                <a href="#shop">Shop</a>
+                <a href="#mypage">MyPage</a>
+            </div>
           </ul>
         </div>
       </nav>
@@ -142,5 +147,28 @@
       </section>
     </main>
     <footer></footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuIcon = document.querySelector('.fa-bars');
+            const categoryDrawer = document.querySelector('.category-drawer');
+
+            menuIcon.addEventListener('mouseover', () => {
+                categoryDrawer.classList.add('show');
+            });
+
+            menuIcon.addEventListener('mouseout', () => {
+                categoryDrawer.classList.remove('show');
+            });
+
+            categoryDrawer.addEventListener('mouseover', () => {
+                categoryDrawer.classList.add('show');
+            });
+
+            categoryDrawer.addEventListener('mouseout', () => {
+                categoryDrawer.classList.remove('show');
+            });
+        });
+
+    </script>
   </body>
 </html>
