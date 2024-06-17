@@ -11,6 +11,7 @@
   </head>
   <body>
     <!-- header  -->
+<%--    <div>--%>
     <header>
       <nav class="menu">
         <div class="inner">
@@ -148,6 +149,7 @@
         </div>
       </section>
     </main>
+<%--    </div>--%>
     <footer></footer>
     <script>
 

@@ -201,4 +201,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  right: -14px;
+  top: 7px;
 }
