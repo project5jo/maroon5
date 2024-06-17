@@ -45,12 +45,10 @@ nav.menu {
 .login {
   padding: 0 60px;
   font-weight: 600;
-  
 }
 
 .login a {
   color: #fff;
-  
 }
 
 i.fa-bars {
@@ -61,7 +59,7 @@ i.fa-bars {
 .main_banner {
   height: 100vh;
   width: 100%;
-  background: url('/assets/img/firepit.gif');
+  background: url("/assets/img/firepit.gif");
   background-position: 0 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -124,23 +122,22 @@ i.fa-bars {
   }
 }
 
-
 .category-drawer {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: -60%;
   width: 50%;
   height: 100vh;
-  z-index: 999999;
+  z-index: 99999;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  align-items: baseline; 
+  align-items: baseline;
   justify-content: center;
   transition: right 0.5s ease-in-out;
-  
 }
+
 .category-drawer.show {
   right: 0;
 }
@@ -151,19 +148,19 @@ i.fa-bars {
   margin-bottom: 5%;
   font-size: 40px;
 }
-.category-drawer :nth-child(3){
+.category-drawer :nth-child(3) {
   margin-bottom: 40%;
 }
 
 .menu-icon-container {
-    display: inline-block;
-    width: 24px; /* 아이콘의 크기와 맞춰 설정 */
-    text-align: center;
+  display: inline-block;
+  width: 24px; /* 아이콘의 크기와 맞춰 설정 */
+  text-align: center;
 }
 
 .fa-bars {
-    visibility: visible;
-    cursor: pointer;
+  visibility: visible;
+  cursor: pointer;
 }
 
 .fa-xmark {
@@ -175,4 +172,3 @@ i.fa-bars {
   opacity: 0.3;
   font-size: 40px;
 }
-
