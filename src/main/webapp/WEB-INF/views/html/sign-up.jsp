@@ -38,24 +38,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <p class="th-title">아이디<span></span></p>
               <input
                 type="text"
-                class="email"
+                class="account"
                 placeholder="아이디를 입력하세요"
                 name="account"
               />
-              <p class="th-sub">영문 소문자 / 숫자, 4~16자로 입력해 주세요.</p>
+              <p class="th-accountSub">영문 소문자 / 숫자, 4~16자로 입력해 주세요.</p>
             </div>
             <div class="tr">
               <p class="th-title">비밀번호<span></span></p>
-              <input type="text" class="pw" placeholder="비밀번호를 입력하세요" name="password"/>
-              <p class="th-sub">
+              <input type="text" class="pw1" placeholder="비밀번호를 입력하세요" name="password"/>
+              <p class="th-passwordSub">
                 (영문 대소문자 / 숫자 / 특수문자 중 3가지 이상 조합, 8자~16자)
               </p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
-              <input type="text" class="pw" placeholder="비밀번호를 입력하세요" name="repassword"/>
+              <input type="text" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
+              <p class="th-passwordSub">
+                (영문 대소문자 / 숫자 / 특수문자 중 3가지 이상 조합, 8자~16자)
+              </p>
             </div>
             <div class="tr">
               <p class="th-title">이름<span></span></p>
-              <input type="text" class="email" placeholder="이름을 입력하세요" name="name"/>
+              <input type="text" class="name" placeholder="이름을 입력하세요" name="name"/>
             </div>
             <div class="tr">
               <p class="th-title">생일<span></span></p>
@@ -79,5 +82,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </section>
     </main>
     <footer></footer>
+    <script src="/assets/js/SignUp.js"></script>
   </body>
 </html>
