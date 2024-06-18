@@ -22,11 +22,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <span></span>
     </button>
     <ul class="category">
-      <li class="point"><a href="#chat">Home</a></li>
+      <li class="point"><a href="#chat">Chat</a></li>
       <li class="point"><a href="#shop">Shop</a></li>
       <li class="point"><a href="#mypage">MyPage</a></li>
-
-      <!-- <i class="fas fa-times"></i> -->
     </ul>
   </div>
 </header>
