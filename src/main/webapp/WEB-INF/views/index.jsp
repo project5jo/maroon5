@@ -164,26 +164,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </section>
     </main>
     <footer></footer>
-    <script>
-      const menuIcon = document.querySelector(".fa-bars");
-      const categoryDrawer = document.querySelector(".category-drawer");
-      const categoryButton = document.querySelector(
-        ".category-drawer > .cancel_btn"
-      );
-
-      let timeout;
-
-      menuIcon.addEventListener("click", () => {
-        categoryDrawer.classList.add("show");
-        menuIcon.style.opacity = "0";
-      });
-
-      // x 버튼 이벤트
-      categoryButton.addEventListener("click", () => {
-        clearTimeout(timeout);
-        categoryDrawer.classList.remove("show");
-        menuIcon.style.opacity = "1";
-      });
-    </script>
+    <script src="/assets/js/bgChangeWithTime.js"></script>
+    <script src="/assets/js/category.js"></script>
   </body>
 </html>

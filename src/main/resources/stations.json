@@ -1,0 +1,13 @@
+[
+  { "stnId": 108, "stnName": "서울", "latitude": 37.5665, "longitude": 126.9780 },
+  { "stnId": 159, "stnName": "부산", "latitude": 35.1796, "longitude": 129.0756 },
+  { "stnId": 143, "stnName": "대구", "latitude": 35.8722, "longitude": 128.6014 },
+  { "stnId": 112, "stnName": "인천", "latitude": 37.4563, "longitude": 126.7052 },
+  { "stnId": 156, "stnName": "광주", "latitude": 35.1595, "longitude": 126.8526 },
+  { "stnId": 133, "stnName": "대전", "latitude": 36.3504, "longitude": 127.3845 },
+  { "stnId": 184, "stnName": "울산", "latitude": 35.5384, "longitude": 129.3114 },
+  { "stnId": 98, "stnName": "수원", "latitude": 37.2636, "longitude": 127.0286 },
+  { "stnId": 232, "stnName": "청주", "latitude": 36.6424, "longitude": 127.4890 },
+  { "stnId": 165, "stnName": "전주", "latitude": 35.8242, "longitude": 127.1480 },
+  { "stnId": 277, "stnName": "제주", "latitude": 33.4996, "longitude": 126.5312 }
+]
