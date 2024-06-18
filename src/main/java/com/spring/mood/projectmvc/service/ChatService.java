@@ -20,6 +20,7 @@ public class ChatService {
     }
 
     public List<ChatEntity> getAllMessages() {
+
         return repository.findAll();
     }
 }
