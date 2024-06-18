@@ -8,40 +8,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/header.css"/>
+  </head>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-  </head>
   <body>
-
-    <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="logo point">나의 애착 페이지</div>
-          <ul class="gnb">
-            <li class="login point">
-              <a href="../../sign-in/html/sign-in.html">LOGIN</a>
-            </li>
-
-            <li><i class="fas fa-bars"></i></li>
-          </ul>
-        </div>
-      </nav>
-      <!-- 메뉴바 -->
-      <div class="category-drawer">
-        <button class="cancel_btn">
-          <span></span>
-          <span></span>
-        </button>
-        <ul class="category">
-          <li class="point"><a href="#chat">Chat</a></li>
-          <li class="point"><a href="#shop">Shop</a></li>
-          <li class="point"><a href="#mypage">MyPage</a></li>
-
-          <!-- <i class="fas fa-times"></i> -->
-        </ul>
-      </div>
-    </header>
+    <%@ include file="./include/header.jsp" %>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <!-- main -->
     <main>
       <!-- 마우스 애니메이션 -->
@@ -105,28 +79,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </section>
     </main>
     <footer></footer>
-    <script>
-      const menuIcon = document.querySelector(".fa-bars");
-      const categoryDrawer = document.querySelector(".category-drawer");
-      const categoryButton = document.querySelector(
-        ".category-drawer > .cancel_btn"
-      );
-
-      let timeout;
-
-      menuIcon.addEventListener("click", () => {
-        categoryDrawer.classList.add("show");
-        menuIcon.style.opacity = "0";
-      });
-
-      // x 버튼 이벤트
-      categoryButton.addEventListener("click", () => {
-        clearTimeout(timeout);
-        categoryDrawer.classList.remove("show");
-        menuIcon.style.opacity = "1";
-      });
-    </script>
-
 
     <script>
 
@@ -204,7 +156,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
       connect();
     </script>
-    <script src="/assets/js/bgChangeWithTime.js"></script>
     <script src="/assets/js/category.js"></script>
+    <script src="/assets/js/bgChange.js"></script>
   </body>
 </html>
