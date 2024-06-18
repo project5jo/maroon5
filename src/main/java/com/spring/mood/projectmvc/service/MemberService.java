@@ -30,7 +30,7 @@ public class MemberService {
 
         // 중복확인
 
-
+        
         // memberMapper 에서 dto 저장
         boolean flag = memberMapper.save(memberEntity);
         return flag;
