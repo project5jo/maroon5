@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Controller
@@ -25,7 +26,10 @@ public class ChatController {
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public ChatEntity sendMessage(ChatEntity message) {
-        message.setTimestamp(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a HH:mm");
+        String formattedDate = now.format(formatter);
+        message.setTimestamp(formattedDate);
         chatMessageService.saveMessage(message);
         return message;
     }

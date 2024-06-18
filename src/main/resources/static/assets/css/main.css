@@ -4,64 +4,15 @@
 /* 채팅 css */
 @import url("main-chat.css");
 
-header {
-  width: 100%;
-  overflow: hidden;
-  color: #fff;
-  font-size: 17px;
-}
-
-.menu .inner {
-  width: 100%;
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-}
-
-nav.menu {
-  width: 100%;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu .logo {
-  font-weight: 700;
-}
-
-.gnb {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.login {
-  padding: 0 60px;
-  font-weight: 600;
-}
-
-.login a {
-  color: #fff;
-}
-
-i.fa-bars {
-  font-size: 20px;
-}
-
 /*main 시작*/
 .main_banner {
   height: 100vh;
   width: 100%;
-  background: url("/assets/img/firepit.gif");
+  background: none;
   background-position: 0 50%;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: background-image 2s ease-in-out;
 }
 
 .main_banner::before {
@@ -119,80 +70,4 @@ i.fa-bars {
     top: 80%;
     height: 4px;
   }
-}
-
-/* 메뉴 */
-
-.category-drawer {
-  position: fixed;
-  top: 0;
-  right: -60%;
-  width: 40%;
-  height: 100vh;
-  z-index: 9999;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  /* flex-direction: column; */
-  /* align-items: baseline; */
-  /* justify-content: center; */
-  transition: right 0.5s ease-in-out;
-}
-
-.category-drawer.show {
-  right: 0;
-}
-
-.category {
-  margin: 200px 0 0 20px;
-}
-
-.category li {
-  margin-bottom: 50px;
-  font-size: 50px;
-  font-weight: 500;
-}
-
-.category li a {
-  color: #fff;
-}
-
-/* .category-drawer :nth-child(3) {
-  margin-bottom: 40%;
-} */
-
-.fa-times {
-  position: absolute;
-  top: 24px;
-  right: 205px;
-  cursor: pointer;
-  color: white;
-  /* opacity: 0.3; */
-  font-size: 40px;
-}
-
-.category-drawer > .cancel_btn {
-  background: none;
-  position: absolute;
-  top: 30px;
-  left: 520px;
-}
-
-.category-drawer > .cancel_btn span {
-  position: absolute;
-  width: 30px;
-  height: 3px;
-  border-radius: 20px;
-
-  left: 22px;
-  top: 15px;
-}
-.category-drawer > .cancel_btn span:nth-child(1) {
-  transform: rotate(45deg);
-  background-color: #fff;
-}
-
-.category-drawer > .cancel_btn span:nth-child(2) {
-  transform: rotate(-45deg);
-  background-color: #fff;
 }
