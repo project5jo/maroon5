@@ -164,7 +164,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </section>
     </main>
     <footer></footer>
-    <script src="/assets/js/bgChangeWithTime.js"></script>
     <script src="/assets/js/category.js"></script>
+    <script src="/assets/js/bgChange.js"></script>
   </body>
 </html>
