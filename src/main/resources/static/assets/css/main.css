@@ -52,6 +52,7 @@ nav.menu {
 
 i.fa-bars {
   font-size: 20px;
+  cursor: pointer;
 }
 
 /*main 시작*/
@@ -170,6 +171,7 @@ i.fa-bars {
   color: white;
   /* opacity: 0.3; */
   font-size: 40px;
+  cursor: pointer;
 }
 
 .category-drawer > .cancel_btn {
