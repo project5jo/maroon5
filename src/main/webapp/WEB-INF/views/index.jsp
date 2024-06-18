@@ -204,5 +204,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
       connect();
     </script>
+    <script src="/assets/js/bgChangeWithTime.js"></script>
+    <script src="/assets/js/category.js"></script>
   </body>
 </html>
