@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/sign-in.css" />
+    <link rel="stylesheet" href="/assets/css/sign-in.css" />
   </head>
   <body>
     <!-- header  -->
@@ -51,7 +51,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <a href="">카카오 로그인 / 회원가입</a>
           </button>
           <button class="sign-up-btn">
-            <a href="../../sign-up/html/sign-up.html">회원가입</a>
+            <a href="/create">회원가입</a>
           </button>
           <div class="find">
             <a class="find-email" href="#">아이디 찾기</a>
@@ -61,6 +61,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </section>
     </main>
-    <footer></footer>
+    <footer></footer> 
   </body>
 </html>

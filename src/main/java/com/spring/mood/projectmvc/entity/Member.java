@@ -2,6 +2,7 @@ package com.spring.mood.projectmvc.entity;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter @ToString
@@ -21,7 +22,7 @@ public class Member {
     private String userPassword;
     private String userEmail;
     private LocalDateTime createAt;
-    private LocalDateTime userBirth;
+    private LocalDate userBirth;
     private String userAddress;
     private String userProfile;
     private int userPoint;
