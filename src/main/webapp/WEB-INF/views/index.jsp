@@ -16,8 +16,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="/assets/js/showChatBox.js/" defer></script>
   <body>
     <%@ include file="./include/header.jsp" %>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <!-- main -->
     <main>
       <!-- 마우스 애니메이션 -->
@@ -123,7 +121,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function showMessage(message) {
         console.log('msg: ', message.sender)
         let messageElement = document.createElement('li');
-        if (message.sender === 'wlstkdgns') {
+        if (message.sender === 'wlstkdgns1') {
           messageElement.className = 'my-msg';
           messageElement.innerHTML = `
             <div class="my-msg-writing-time"><p>\${message.timestamp}</p></div>

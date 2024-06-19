@@ -16,5 +16,5 @@ import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
+public interface ChatRepository extends JpaRepository<ChatEntity, Long> ,  ChatRepositoryCustom {
 }
