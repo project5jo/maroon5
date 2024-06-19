@@ -10,7 +10,7 @@ public class ShopController {
     @GetMapping("/shop")
     public String shop(){
         System.out.println("shop 페이지 진입");
-        return "html/shop-index";
+        return "html/shop-Index";
     }
 
 }

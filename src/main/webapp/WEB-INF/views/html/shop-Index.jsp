@@ -48,5 +48,6 @@
     </div>
     <%@ include file="../include/footer.jsp" %>
   </div>
+  <script src="/assets/js/category.js"></script>
 </body>
 </html>
