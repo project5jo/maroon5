@@ -14,8 +14,15 @@
   transform: translate(-50%, -50%);
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.9);
+}
 
-  animation: slide-up 0.8s ease-out;
+.slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+  display: block !important;
+}
+
+.slide-down {
+  animation: slide-down 0.8s ease-out forwards;
 }
 
 @keyframes slide-up {
@@ -71,14 +78,15 @@
   padding-right: 15px;
 }
 
-.cancel_btn {
+.cancelBtn {
   width: 50px;
   height: 50px;
   position: relative;
   background: none;
+  cursor: pointer;
 }
 
-.cancel_btn span {
+.cancelBtn span {
   position: absolute;
   width: 30px;
   height: 2px;
@@ -86,12 +94,12 @@
   left: 22px;
   top: 15px;
 }
-.cancel_btn span:nth-child(1) {
+.cancelBtn span:nth-child(1) {
   transform: rotate(45deg);
   background-color: #fff;
 }
 
-.cancel_btn span:nth-child(2) {
+.cancelBtn span:nth-child(2) {
   transform: rotate(-45deg);
   background-color: #fff;
 }
