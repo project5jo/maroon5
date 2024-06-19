@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <div class="logo point">나의 애착 페이지</div>
       <ul class="gnb">
         <li class="login point">
-          <a href="../../sign-in/html/sign-in.html">LOGIN</a>
+          <a href="/sign-in">LOGIN</a>
         </li>
 
         <li><i class="fas fa-bars"></i></li>

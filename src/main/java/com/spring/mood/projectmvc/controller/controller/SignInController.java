@@ -23,6 +23,7 @@ import static com.spring.mood.projectmvc.service.LoginResult.SUCCESS;
 @RequiredArgsConstructor
 public class SignInController {
 
+
     private final SignInService service;
 
     private static final Logger log = LoggerFactory.getLogger(SignInController.class);
@@ -33,6 +34,7 @@ public class SignInController {
 
         session.setAttribute("redirect", redirect);
         log.info("html/sign-in GET : forwarding to sign-in.jsp");
+
         return "html/sign-in";
     }
 

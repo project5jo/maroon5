@@ -12,6 +12,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </head>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+       <script src="/assets/js/toggleChat.js/" defer></script>
+        <script src="/assets/js/showChatBox.js/" defer></script>
   <body>
     <%@ include file="./include/header.jsp" %>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
@@ -36,7 +38,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <p class="point">고민을 이야기해주세요</p>
           </div>
 
-          <button class="cancel_btn">
+          <button class="cancelBtn">
             <span></span>
             <span></span>
           </button>
@@ -95,7 +97,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         let socket = new SockJS('/chat-websocket'); // 1. 사용자가 서버로 /chat-websocket이란 명령어를 보내서 접속
         stompClient = Stomp.over(socket); //2. 소켓을 사용해서 Stomp 프로토콜에 접속함.
         stompClient.connect({}, function (frame) { // 3. stopmp 를 사용해서 접속에 성공하면 /topic/messages랑 연결
-          console.log('Connected:asdsad ' + frame);
+          console.log('Connected: ' + frame);
           stompClient.subscribe('/topic/messages', function (message) { // 4. 3번에서 연결이 끊어지지 않은 상태에서
             // 클라이언트에서 메세지를 보내면 서버에서도 클라이언트에서 값을 보낸 message 값을 json 형식으로 showmessage로 보내줌
             showMessage(JSON.parse(message.body));
@@ -105,7 +107,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function sendMessage() { // 값을 입력하고 버튼을 누르면 /app/sendMessage라는 경로로 서버에 요청을 함
         // let sender = document.querySelector('.send').value;
         let content = document.querySelector('.my-chat-input').value;
-        let sender = 'sanghun';
+        let sender = 'wlstkdgns';
 
         // 1. "/app/sendMessage":
         // •	메시지를 보낼 서버의 경로임~
@@ -119,8 +121,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       }
 
       function showMessage(message) {
-          console.log('msg: ',message.sender)
-          let messageElement = document.createElement('li');
+        console.log('msg: ', message.sender)
+        let messageElement = document.createElement('li');
+        if (message.sender === 'wlstkdgns') {
+          messageElement.className = 'my-msg';
+          messageElement.innerHTML = `
+            <div class="my-msg-writing-time"><p>\${message.timestamp}</p></div>
+            <div class="msg-text">
+              <p>\${message.content}</p>
+            </div>
+                `
+        } else {
           messageElement.className = 'chatting-msg';
           messageElement.innerHTML = `
             <div class="msg-profile"></div>
@@ -132,11 +143,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </div>
              <div class="msg-writing-time"><p>\${message.timestamp}</p></div>
                 `;
+        }
 
-          let firstMessage = document.querySelector('.chatting');
 
-          firstMessage.appendChild(messageElement);
+        let firstMessage = document.querySelector('.chatting');
 
+        firstMessage.appendChild(messageElement);
+
+      }
         function loadMessages() {
           //비동기로 메세지 목록 로딩 계속 해주는거
           fetch('/messages')
@@ -147,16 +161,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     });
                   });
         }
+
+
         window.onload = function() {
           // 사이트 진입시 일단은 자동으로 연결
           connect();
           loadMessages();
+          setupInfiniteScroll();
         }
-      }
 
       connect();
     </script>
-    <script src="/assets/js/category.js"></script>
-    <script src="/assets/js/bgChange.js"></script>
+    <script defer src="/assets/js/category.js"></script>
+    <script defer src="/assets/js/bgChange.js"></script>
   </body>
 </html>

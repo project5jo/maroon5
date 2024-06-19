@@ -2,6 +2,7 @@ package com.spring.mood.projectmvc.service;
 
 
 import com.spring.mood.projectmvc.entity.ChatEntity;
+import com.spring.mood.projectmvc.mapper.ChatMapper;
 import com.spring.mood.projectmvc.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class ChatService {
     }
 
     public List<ChatEntity> getAllMessages() {
-
         return repository.findAll();
     }
 }

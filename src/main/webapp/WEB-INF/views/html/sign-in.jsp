@@ -19,7 +19,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <a href="../../main/html/main.html">나의 애착 페이지</a>
           </div>
           <ul class="gnb">
-            <li class="login point"><a href="./sign-in.html">LOGIN</a></li>
+            <li class="login point"><a href="#">LOGIN</a></li>
             <li><i class="fas fa-bars"></i></li>
           </ul>
         </div>
@@ -52,7 +52,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <a href="">카카오 로그인 / 회원가입</a>
           </button>
           <button class="sign-up-btn">
-            <a href="#l">회원가입</a>
+
+            <a href="/create">회원가입</a>
           </button>
           <div class="find">
             <a class="find-email" href="#">아이디 찾기</a>
@@ -63,6 +64,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </section>
       </form>
     </main>
-    <footer></footer>
+    <footer></footer> 
   </body>
 </html>
