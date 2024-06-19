@@ -13,11 +13,13 @@
     <typeAliases>
 <!--        <typeAlias type="com.study.springStudy.database.chap01.Person" alias="person"/>-->
         <typeAlias type="com.spring.mood.projectmvc.entity.Member" alias="member"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.ShopItem" alias="shopitem"/>
     </typeAliases>
 
     <mappers>
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
         <mapper resource="mapper/MemberMapper.xml" />
+        <mapper resource="mapper/ShopItemMapper.xml" />
 
     </mappers>
 </configuration>
