@@ -29,32 +29,34 @@ public class SignInController {
 
     //  로그인 양식 열기
     @GetMapping("/sign-in")
-    public String signIn(HttpSession session, @RequestParam(required = false) String redirect){
+    public String signIn(HttpSession session, @RequestParam(required = false) String redirect) {
 
-        session.setAttribute("redirect",redirect);
+        session.setAttribute("redirect", redirect);
         log.info("html/sign-in GET : forwarding to sign-in.jsp");
         return "html/sign-in";
     }
 
-@PostMapping("/sign-in")
-public String signIn(SignInDto dto, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response){
+    @PostMapping("/sign-in")
+    public String signIn(SignInDto dto,
+                         RedirectAttributes redirectAttributes,
+                         HttpServletRequest request,
+                         HttpServletResponse response) {
         //세션 얻기
         HttpSession session = request.getSession();
         LoginResult result = service.authenticate(dto, session, response);
 
-        redirectAttributes.addFlashAttribute("result",result);
+        redirectAttributes.addFlashAttribute("result", result);
 
-        if(result == SUCCESS){
+        if (result == SUCCESS) {
 
-
+            String redirect = (String) session.getAttribute("redirect");
+            if (redirect != null) {
+                session.removeAttribute("redirect");
+                return "redirect" + redirect;
+            }
+            return "redirect:/index";
         }
-
-
-
-
-
-return "redirect:/html/sign-in";
-}
-
+        return "redirect:/html/sign-in";
+    }
 
 }

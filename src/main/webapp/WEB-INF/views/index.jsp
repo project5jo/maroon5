@@ -13,41 +13,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   <body>
-<<<<<<< HEAD
-    <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="logo point">나의 애착 페이지</div>
-          <ul class="gnb">
-            <li class="login point">
-              <a href="/sign-in">LOGIN</a>
-            </li>
-
-            <li><i class="fas fa-bars"></i></li>
-          </ul>
-        </div>
-      </nav>
-      <!-- 메뉴바 -->
-      <div class="category-drawer">
-        <button class="cancel_btn">
-          <span></span>
-          <span></span>
-        </button>
-        <ul class="category">
-          <li class="point"><a href="#chat">Chat</a></li>
-          <li class="point"><a href="#shop">Shop</a></li>
-          <li class="point"><a href="#mypage">MyPage</a></li>
-
-          <!-- <i class="fas fa-times"></i> -->
-        </ul>
-      </div>
-    </header>
-=======
     <%@ include file="./include/header.jsp" %>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
->>>>>>> main2
     <!-- main -->
     <main>
       <!-- 마우스 애니메이션 -->
