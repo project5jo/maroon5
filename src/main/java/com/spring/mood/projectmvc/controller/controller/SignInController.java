@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SignInController {
     @GetMapping("/signIn")
     public String signIn(){
-        System.out.println("gd");
         return "html/sign-in";
     }
 

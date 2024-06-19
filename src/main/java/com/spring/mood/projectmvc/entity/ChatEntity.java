@@ -1,13 +1,9 @@
 package com.spring.mood.projectmvc.entity;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -17,19 +13,28 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "chatmessages")
 public class ChatEntity {
-    @javax.persistence.Id
-    @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+
+
+    @Column(name = "user_account")
     private String sender;
+
+    @Column(name = "chat_message")
     private String content;
-    private String timestamp;
 
-    public ChatEntity(String sender, String content, String timestamp) {
-        this.sender = sender;
-        this.content = content;
-        this.timestamp = timestamp;
+    @Column(name = "chat_sent_at")
+    private LocalDateTime timestamp;
+
+    @Column(name = "room_id")
+    private int roomId;
+
+    @PrePersist
+    protected void onCreate() {
+        this.timestamp = LocalDateTime.now();
+            this.roomId = 1; // 기본 값 설정, 필요에 따라 수정
     }
-
 }
