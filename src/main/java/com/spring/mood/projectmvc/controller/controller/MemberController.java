@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class MemberController {
     }
 
     // 회원가입 입력정보 저장
-    @PostMapping("/create")
+    @PostMapping("/createe")
     public String inputMember (@Validated RequestMemberDto dto) {
 
 //        System.out.println("dto = " + dto);
@@ -32,6 +33,18 @@ public class MemberController {
         boolean flag = memberService.memberServiceSave(dto);
 
         return flag ? "redirect:/login" : "redirect:/create";
+    }
+
+    // // 회원가입시 이름 & 이메일 중복확인
+    @ResponseBody
+    @PostMapping("/create")
+    public int checkId (RequestMemberDto dto, String userAccount) {
+
+        int checkId = memberService.ServiceCheckId(userAccount);
+
+        System.out.println("checkId = " + checkId);
+
+        return checkId;
     }
 
     // 로그인 페이지 열기
