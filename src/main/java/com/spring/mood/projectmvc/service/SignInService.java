@@ -22,7 +22,8 @@ public class SignInService {
     private final PasswordEncoder encoder;
 
     //로그인 검증 처리
-    public LoginResult authenticate(SignInDto dto, HttpSession session, HttpServletResponse response){
+// HttpSession session, HttpServletResponse response
+    public LoginResult authenticate(SignInDto dto){
 
         //회원가입 유무 확인
         String account = dto.getAccount();
@@ -36,18 +37,22 @@ public class SignInService {
         //비밀번호 확인 결과
         String inputPassword = dto.getPassword();//찾은 비번
         String userPassword = foundMember.getUserPassword();//데이터베이스에 저장된 비번
+        log.info("inputPassword:{}",inputPassword);
+        log.info("userPassword:{}",userPassword);
 
-        if(!encoder.matches(inputPassword, userPassword)){
+//        if(!encoder.matches(inputPassword, userPassword))
+        if(!inputPassword.equals(userPassword)){
             log.info("비밀번호가 일치하지 않습니다");
             return NO_PW;
         }
 
-        maintainLoginState(session, foundMember);
+//        maintainLoginState(session, foundMember);
         return SUCCESS;
     }
 
-    public static void maintainLoginState(HttpSession session, Member foundmember){
-
-    }
+//    public static void maintainLoginState(HttpSession session, Member foundmember){
+//
+//        log.info("{}님 로그인 성공",foundmember.getUserName());
+//    }
 
 }

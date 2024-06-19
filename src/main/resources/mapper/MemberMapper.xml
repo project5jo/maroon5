@@ -22,7 +22,7 @@
         , user_address
         , user_birth
         , user_role
-        , create_at
+        , created_at
         , user_point
         FROM Users
         WHERE user_account = #{account}

@@ -28,6 +28,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- main -->
     <main>
+    <form action="/sign-in" method="post">
       <section class="sign-in">
         <div class="inner">
           <div class="sign-in-title">
@@ -36,7 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <input type="text" class="email" placeholder="email" />
           <input type="text" class="pw" placeholder="password" />
 
-          <form action="#">
+
             <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
             <label for="chk">
               <input type="checkbox" id="chk" />
@@ -44,14 +45,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <i class="circle"></i>
               <span class="text">자동 로그인</span>
             </label>
-          </form>
 
-          <button class="sign-in-btn"><a href="#">SIGN IN</a></button>
+
+          <button class="sign-in-btn" ><a href="#" type="submit">SIGN IN</a></button>
           <button class="kakao-btn">
             <a href="">카카오 로그인 / 회원가입</a>
           </button>
           <button class="sign-up-btn">
-            <a href="../../sign-up/html/sign-up.html">회원가입</a>
+            <a href="#l">회원가입</a>
           </button>
           <div class="find">
             <a class="find-email" href="#">아이디 찾기</a>
@@ -60,6 +61,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
         </div>
       </section>
+      </form>
     </main>
     <footer></footer>
   </body>

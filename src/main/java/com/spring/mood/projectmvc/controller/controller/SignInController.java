@@ -43,7 +43,7 @@ public class SignInController {
                          HttpServletResponse response) {
         //세션 얻기
         HttpSession session = request.getSession();
-        LoginResult result = service.authenticate(dto, session, response);
+        LoginResult result = service.authenticate(dto);
 
         redirectAttributes.addFlashAttribute("result", result);
 
@@ -54,9 +54,10 @@ public class SignInController {
                 session.removeAttribute("redirect");
                 return "redirect" + redirect;
             }
-            return "redirect:/index";
+            log.info("로그인 성공!!!");
+            return "redirect:/";
         }
-        return "redirect:/html/sign-in";
+        return "redirect:/";
     }
 
 }
