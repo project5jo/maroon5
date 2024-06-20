@@ -32,6 +32,8 @@ public class SignInController {
     @GetMapping("/sign-in")
     public String signIn(HttpSession session, @RequestParam(required = false) String redirect) {
 
+
+
         session.setAttribute("redirect", redirect);
         log.info("html/sign-in GET : forwarding to sign-in.jsp");
 
@@ -43,22 +45,32 @@ public class SignInController {
                          RedirectAttributes redirectAttributes,
                          HttpServletRequest request,
                          HttpServletResponse response) {
-        //세션 얻기
+        log.info("html/sign-in Post");
+        log.debug("dto:{}",dto);
+
+        //세션 얻기(사용자를 기억해줌)
         HttpSession session = request.getSession();
-        LoginResult result = service.authenticate(dto);
+        LoginResult result = service.authenticate(dto, session,response);
+        //, session,response
 
         redirectAttributes.addFlashAttribute("result", result);
 
         if (result == SUCCESS) {
-
             String redirect = (String) session.getAttribute("redirect");
             if (redirect != null) {
                 session.removeAttribute("redirect");
                 return "redirect" + redirect;
             }
-            log.info("로그인 성공!!!");
             return "redirect:/";
         }
+        return "redirect:/sign-in";
+    }
+
+//    로그아웃
+    @GetMapping("/sign-out")
+    public String signOut(HttpSession session){
+        session.removeAttribute("loginUser");
+        session.invalidate();
         return "redirect:/";
     }
 

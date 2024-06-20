@@ -2,6 +2,7 @@ package com.spring.mood.projectmvc.dto.requestDto;
 
 import lombok.*;
 
+@Setter
 @Getter
 @ToString
 @NoArgsConstructor

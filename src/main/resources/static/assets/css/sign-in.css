@@ -187,3 +187,10 @@ span.text {
   position: absolute;
   left: -999em;
 }
+
+.result {
+  color: #ff003e;
+  margin: 30px 0 0 0;
+  line-height: 160%;
+  font-size: 15px;
+}
