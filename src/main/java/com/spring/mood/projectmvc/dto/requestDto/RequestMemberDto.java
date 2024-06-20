@@ -38,7 +38,7 @@ public class RequestMemberDto {
     @NotBlank(message = "생년월일은 필수입력정보입니다.")
     private LocalDateTime birth; // 유저 생년월일
 
-//    private MultipartFile profileImage; // 유저 프로필사진
+//    private MultipartFile profileImage;  // 유저 프로필사진
 
     // RequestMemberDto 를 MemberEntity 로 변환
     public Member toMemberEntity() {
