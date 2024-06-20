@@ -8,7 +8,7 @@ public interface MemberMapper {
 
     boolean save(Member member);
 
-    Member findOne(String userAccount);
+    Member findOne(String account);
 
     boolean delete(String userAccount);
 
