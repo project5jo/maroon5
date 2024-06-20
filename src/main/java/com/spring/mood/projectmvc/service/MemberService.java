@@ -33,19 +33,16 @@ public class MemberService {
         return flag;
     }
 
-    // 회원가입시 이름 & 이메일 중복확인 중간처리
-    public int ServiceCheckId (String userAccount) {
-        int checkIdNum = memberMapper.checkEmail(userAccount);
-        return checkIdNum;
+    // 아이디 중복체크하기
+    public boolean serviceCheckId(String account) {
+        return memberMapper.checkId(account);
     }
 
-    // 회원가입시 이름 & 이메일 중복확인 중간처리
-    public int ServiceCheckEmail (RequestMemberDto dto, String email) {
-
-
-        int checkEmailNum = memberMapper.checkEmail(email);
-        return checkEmailNum;
+    // 이메일 중복체크하기
+    public boolean serviceCheckEmail(String email) { return memberMapper.checkEmail(email);
     }
+
+
 
     // 회원가입 중간처리
     public void joinInServiceProcess (RequestMemberDto dto){
@@ -65,8 +62,4 @@ public class MemberService {
         // 3. 입력 이메일 중복검사
 
     }
-
-
-
-
 }

@@ -126,9 +126,14 @@ input::placeholder {
   font-size: 14px;
 }
 
-.focus {
+.falsefocus {
   border: 5px solid #ff0000;
 }
+
+.truefocus {
+  border: 5px solid #0077ff;
+}
+
 .nowfocus {
   box-shadow: 0 0 5px rgb(216, 216, 73);
 }

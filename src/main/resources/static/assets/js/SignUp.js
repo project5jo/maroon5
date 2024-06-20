@@ -1,179 +1,296 @@
 
-// 회원가입 입력 검증처리
+// 1. account 조건 검증하기
+let idFlag = false; // 아이디 조건확인
+const $inputAccount = document.querySelector(".account"); // 아이디 입력창 변수설정
+const $accountSub = document.querySelector(".th-accountSub"); // 아이디 조건태그 변수설정
+const accountValid = /^[a-z0-9]{4,14}$/; // 아이디에 입력가능한 문자열
 
-// export const checkAvailability = async (type, keyword) => {
-//   const response = await fetch(`http://localhost:8383/members/check?type=${type}&keyword=${keyword}`);
-//   const flag = await response.json();
-//   return !flag;
-// };
+$inputAccount.addEventListener('keyup', e => {
 
-const checkId = async(value) => {
-  const response = await fetch(`http://localhost:8383/create?account=${value}`);
-  const flag = await response.json();
-  console.log("json", flag);
-  console.log("json", json);
-}
+    setTimeout (() => {
+        // 아이디 공백체크
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $accountSub.style.color = 'red';
+            $accountSub.textContent = "아이디는 필수 입력정보입니다.";
 
-// const checkId = async () {
-//   const url = 'http://localhost:8383/create';  // 실제 API 엔드포인트 URL로 변경 필요
-//   const userAccount = document.querySelector(".account").value; // 아이디 입력창의 값
+            // 아이디 조건체크
+        } else if (!accountValid.test(e.target.value)) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $accountSub.style.color = 'red';
+            $accountSub.textContent = "아이디는 영문 소문자/숫자 조합 (4~16자)";
+        } else {
+            // 아이디 중복체크
+            // fetch 사용
+            const $inputAccountValue = $inputAccount.value;
+            let encodedAccount = encodeURIComponent($inputAccountValue);
+            const URL = `http://localhost:8383/checkid?account=${encodedAccount}`;
+            fetch(URL, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({ account: $inputAccount.value })
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json === false) {
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $accountSub.style.color = 'blue';
+                    $accountSub.textContent = '사용가능한 아이디입니다';
 
-//   try {
-//       const response = await fetch(url, {
-//           method: 'POST',
-//           headers: {
-//               'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify({ userAccount: userAccount }),
-//       });
+                    idFlag = true;
 
-//       console.log("Response:", response);  // 응답 확인
+                } else {
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+                    $accountSub.style.color = 'red';
+                    $accountSub.textContent = "중복되는 아이디입니다. 다른 아이디를 입력해주세요.";
+                }
+            })
+        }
+        
+    }, 500) // setTimeout end
 
-//       // 응답 데이터를 JSON으로 파싱하여 사용할 경우
-//       const responseData = await response.json();
-//       console.log("Response Data:", responseData);  // 파싱된 데이터 확인
+}); // keyup end
 
-//   } catch (error) {
-//       console.error('Error:', error);
-//       // 오류 처리
-//   }
-// }
 
-// input 태그 공통 효과
-// 해당 창을 클릭했을 때 창에 클래스 추가해서 스타일 변경하기
-const $trs = document.querySelectorAll(".tr input");
-$trs.forEach(tr => {
-  tr.addEventListener('focus', e => {
-    e.target.classList.add("nowfocus");
-  });
+// 2. password 조건 검증하기
+let firstPasswordFlag = false; // 첫번째 비밀번호 조건확인
+let secondPasswordFlag = false; // 두번째 비밀번호 조건확인
 
-  tr.addEventListener('blur', e => {
-    e.target.classList.remove("nowfocus");
-  });
-});
+let firstPasswordValue = '';
+let secondPasswordValue = '';
 
-// 1. 아이디 입력 검증 처리
-const $account = document.querySelector(".account"); // 아이디 입력창
-const $accountSub = document.querySelector(".th-accountSub"); // 아이디 조건위치
-const $inputAccount = $account.value.trim(); // 공백제외 입력된 아이디값
+const $inputFirstPassword = document.querySelector(".pw1"); // 첫번째 비밀번호 입력창 변수설정
+const $inputSecondPassword = document.querySelector(".pw2"); // 두번째 비밀번호 입력창 변수설정
+const $firstPasswordSub = document.querySelector(".th-passwordSub1"); // 첫번째 비밀번호 조건태그 변수설정
+const $secondPasswordSub = document.querySelector(".th-passwordSub2"); // 두번째 비밀번호 조건태그 변수설정
+const passwordValid = /^(?=.*[a-zA-Z!@#$%^&*()\-_=+{};:,<.>])(?=.*\d).{8,16}$/; //비밀번호에 입력가능한 문자열
 
-$account.addEventListener('focus', e => {
+$inputFirstPassword.addEventListener('input', e => {
 
-  // 해당 창을 클릭했을 때 창에 클래스 추가해서 스타일 변경하기
-  if ($account.value === '') {
-    e.target.classList.add("focus");
-    $accountSub.style.color = 'red';
-    $accountSub.textContent = "아이디를 입력해주세요.";
-  }
+    setTimeout (() => {
+        // 비밀번호 공백체크
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $firstPasswordSub.style.color = 'red';
+            $firstPasswordSub.textContent = "비밀번호는 필수 입력정보입니다.";
 
-  const accountValid = /^[a-z0-9]{4,14}$/; // 아이디에 입력가능한 문자열
+            // 비밀번호 조건체크
+        } else if (!passwordValid.test(e.target.value)) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $firstPasswordSub.style.color = 'red';
+            $firstPasswordSub.textContent = "비밀번호는 영문/숫자/특수문자 2가지 이상 조합 (8~16자)";
+        } else {
+            $firstPasswordSub.textContent = "";
+            $secondPasswordSub.textContent = "";
+            e.target.classList.remove("falsefocus");
+            e.target.classList.add("truefocus");
 
-  $account.addEventListener('keyup', e => {
+            if ($inputSecondPassword.value !== '' || $inputSecondPassword.value.length !== 0) {
+
+                if ($inputSecondPassword.value !== $inputFirstPassword.value) {
+                    $inputSecondPassword.classList.remove("truefocus");
+                    $inputSecondPassword.classList.add("falsefocus");
+
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+    
+                    $secondPasswordSub.style.color = 'red';
+                    $secondPasswordSub.textContent = "입력하신 비밀번호가 일치하지 않습니다.";
+                } else {
+                    $inputFirstPassword.classList.remove("falsefocus");
+                    $inputFirstPassword.classList.add("truefocus");
+                    $firstPasswordSub.textContent = "";
+    
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $secondPasswordSub.style.color = 'blue';
+                    $secondPasswordSub.textContent = "사용가능한 비밀번호입니다.";
+    
+                    firstPasswordFlag = true;
+                    secondPasswordFlag = true;
+                }
+            }
+        }
+    }, 500) // setTimeout end
+
+}); // keyup end
+
+$inputSecondPassword.addEventListener('input', e => {
+
     setTimeout (() => {
 
-      if($account.value === '') {
-        $accountSub.style.color = 'red';
-        $accountSub.textContent = "아이디는 필수입력정보입니다.";
-      } else if (!accountValid.test($account.value)) {
-        $accountSub.style.color = 'red';
-        $accountSub.textContent = "아이디는 영문 소문자/숫자 조합 (4~16자)";
-      }else {
-        checkId($inputAccount);
-        $accountSub.textContent = '사용가능한 아이디입니다';
-        e.target.classList.remove("focus");
-      }}, 500);
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $secondPasswordSub.style.color = 'red';
+            $secondPasswordSub.textContent = "비밀번호는 필수 입력정보입니다.";
 
-  });
+            // 비밀번호 조건체크
+        } else if (!passwordValid.test(e.target.value)) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $secondPasswordSub.style.color = 'red';
+            $secondPasswordSub.textContent = "비밀번호는 영문/숫자/특수문자 2가지 이상 조합 (8~16자)";
+        } else {
+            $firstPasswordSub.textContent = "";
+            $secondPasswordSub.textContent = "";
+            e.target.classList.remove("falsefocus");
+            e.target.classList.add("truefocus");
 
-});
+            if ($inputFirstPassword.value !== '' || $inputFirstPassword.value.length !== 0) {
 
-$account.addEventListener('blur', e => {
-  if ($account.value === '') {
-    $accountSub.style.color = 'red';
-    $accountSub.textContent = "아이디는 필수입력정보입니다."
-  }
-});
+                if ($inputSecondPassword.value !== $inputFirstPassword.value) {
+                    $inputFirstPassword.classList.remove("truefocus");
+                    $inputFirstPassword.classList.add("falsefocus");
 
-// function checkId (account) {
-//   $.ajax({
-//     url: "/create",
-//     type: "post",
-//     dataType: "json",
-//     data: {account: account},
-//     success: function(response) {
-//       if(response === 'exists') {
-//           $accountSub.textContent = "중복되는 아이디입니다."
-//       } else {
-//           $accountSub.textContent = "사용가능한 아이디입니다."
-//       }
-//     }
-//   });
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+    
+                    $secondPasswordSub.style.color = 'red';
+                    $secondPasswordSub.textContent = "입력하신 비밀번호가 일치하지 않습니다.";
+                } else {
+                    $inputFirstPassword.classList.remove("falsefocus");
+                    $inputFirstPassword.classList.add("truefocus");
+                    $firstPasswordSub.textContent = "";
+    
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $secondPasswordSub.style.color = 'blue';
+                    $secondPasswordSub.textContent = "사용가능한 비밀번호입니다.";
+    
+                    firstPasswordFlag = true;
+                    secondPasswordFlag = true;
+                }
+            }
+        }
+        
+    }, 500) // setTimeout end
 
-  // // 서버 URL
-  // const url = 'http://localhost:8383/create';
-
-
-
-// postData 함수 호출 예시
-
-  // // fetch api 를 사용하여 서버에 post 요청을 보내기
-  // const Response = await fetch(url, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({ account: $account.value }),
-  // });
-  // console.log("rr ", Response);
+}); // keyup end
 
 
-// 2. 비밀번호 입력 검증 처리
-const $firstPassword = document.querySelector(".pw1"); // 비밀번호 입력창 1
-const $secondPassword = document.querySelector(".pw2"); // 비밀번호 입력창 2
-const $passwordSub1 = document.querySelector(".th-passwordSub1");// 비밀번호 조건위치 1
-const $passwordSub2 = document.querySelector(".th-passwordSub2");// 비밀번호 조건위치 2
+// 3. name 조건 검증하기
+let nameFlag = false; // 이름 조건확인
+const $inputName = document.querySelector(".name"); // 이름 입력창 변수설정
+const $nameSub = document.querySelector(".th-nameSub"); // 이름 조건태그 변수설정
+const nameValid = /^[가-힣]+$/; // 이름에 입력가능한 문자열
 
-$firstPassword.addEventListener('focus', e => {
+$inputName.addEventListener('keyup', e => {
 
-  // 해당 창을 클릭했을 때 창에 클래스 추가해서 스타일 변경하기
-  e.target.classList.add("focus");
-  $passwordSub1.style.color = 'red';
-  $passwordSub1.textContent = "비밀번호를 입력해주세요.";
-
-  const passwordValid = /^(?=.*[a-zA-Z!@#$%^&*()\-_=+{};:,<.>])(?=.*\d).{8,16}$/; // 비밀번호에 입력가능한 문자열
-
-  $firstPassword.addEventListener('keyup', e => {
     setTimeout (() => {
+        // 이름 공백체크
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $nameSub.style.color = 'red';
+            $nameSub.textContent = "이름은 필수 입력정보입니다.";
 
-      if($firstPassword.value === '') {
-        $passwordSub1.style.color = 'red';
-        $passwordSub1.textContent = "비밀번호는 필수입력정보입니다.";
-      } else if (!passwordValid.test($firstPassword.value)) {
-        $passwordSub1.style.color = 'red';
-        $passwordSub1.textContent = "비밀번호는 영문/숫자/특수문자 2가지 이상 조합 (8~16자)";
-      } else {
-        $passwordSub1.textContent = '';
-        e.target.classList.remove("focus");
-      }}, 500);
-  });
+            // 이름 조건체크
+        } else if (!nameValid.test(e.target.value)) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $nameSub.style.color = 'red';
+            $nameSub.textContent = "이름은 한글만 입력 (2자 이상)";
+        } else if (e.target.value.length > 1){
+            e.target.classList.remove("falsefocus");
+            e.target.classList.add("truefocus");
+            $nameSub.style.color = 'blue';
+            $nameSub.textContent = "";
 
-});
+            nameFlag = true;
+        }
+    }, 500) // setTimeout end
 
-$firstPassword.addEventListener('blur', e => {
-  if ($firstPassword.value === '') {
-    $passwordSub1.style.color = 'red';
-    $passwordSub1.textContent = "비밀번호는 필수입력정보입니다."
-  }
-});
+}); // keyup end
 
 
-// 3. 이름 입력 검증 처리
-const $name = document.querySelector(".name");
+// 4. birth 조건 검증하기
+let birthFlag = false; // 생일 조건확인
+const $chooseBirth = document.querySelector(".birth"); // 생일선택창 변수설정
+const $birthSub = document.querySelector(".th-birthSub"); // 이름 조건태그 변수설정
 
-// 4. 생일 입력 검증 처리
-const $birth = document.querySelector(".birth");
+$chooseBirth.addEventListener('blur', e => {
 
-// 5. 이메일 입력 검증 처리
-const $email = document.querySelector(".email");
+    setTimeout (() => {
+        // 생일 공백체크
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $birthSub.style.color = 'red';
+            $birthSub.textContent = "생년월일은 필수 입력정보입니다.";
 
-console.log("하이하이");
+            // 이름 조건체크
+        } else {
+            e.target.classList.remove("falsefocus");
+            e.target.classList.add("truefocus");
+            $birthSub.style.color = 'blue';
+            $birthSub.textContent = "";
+
+            birthFlag = true;
+        }
+    }, 500) // setTimeout end
+
+}); // keyup end
+
+
+// 5. email 조건 검증하기
+let emailFlag = false; // 이메일 조건확인
+const $inputEmail = document.querySelector(".email"); // 이메일 입력창 변수설정
+const $emailSub = document.querySelector(".th-emailSub"); // 이메일 조건태그 변수설정
+const emailValid = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; // 이메일에 입력가능한 문자열
+
+$inputEmail.addEventListener('keyup', e => {
+
+    setTimeout (() => {
+        // 이메일 공백체크
+        if(e.target.value === '' || e.target.value.length === 0) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $emailSub.style.color = 'red';
+            $emailSub.textContent = "이메일은 필수 입력정보입니다.";
+
+            // 이메일 조건체크
+        } else if (!emailValid.test(e.target.value)) {
+            e.target.classList.remove("truefocus");
+            e.target.classList.add("falsefocus");
+            $emailSub.style.color = 'red';
+            $emailSub.textContent = "올바른 이메일 형식이 아닙니다.";
+        } else {
+            // 이메일 중복체크
+            // fetch 사용
+            const $emailAccountValue = $inputEmail.value;
+            let encodedEmail = encodeURIComponent($emailAccountValue);
+            const URL = `http://localhost:8383/checkemail?email=${encodedEmail}`;
+            fetch(URL, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({ email: $inputEmail.value })
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json === false) {
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $emailSub.style.color = 'blue';
+                    $emailSub.textContent = '사용가능한 이메일입니다';
+
+                    emailFlag = true;
+
+                } else {
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+                    $emailSub.style.color = 'red';
+                    $emailSub.textContent = "중복되는 이메일입니다. 다른 이메일을 입력해주세요.";
+                }
+            })
+        }
+        
+    }, 500) // setTimeout end
+
+}); // keyup end

@@ -29,7 +29,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- main -->
     <main>
       <section class="sign-in">
-        <form action="/createe" method="post">
+        <form action="/create" method="post">
           <div class="inner">
             <div class="sign-in-title">
               <p>회원가입</p>
@@ -38,6 +38,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <p class="th-title">아이디<span></span></p>
               <input
                 type="text"
+                id="account"
                 class="account"
                 placeholder="아이디를 입력하세요"
                 name="account"
@@ -50,17 +51,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <p class="th-passwordSub1"></p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
               <input type="text" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
-              <p class="th-passwordSub2">
-                (영문 대소문자 / 숫자 / 특수문자 중 3가지 이상 조합, 8자~16자)
-              </p>
+              <p class="th-passwordSub2"></p>
             </div>
             <div class="tr">
               <p class="th-title">이름<span></span></p>
               <input type="text" class="name" placeholder="이름을 입력하세요" name="name"/>
+              <p class="th-nameSub"></p>
             </div>
             <div class="tr">
               <p class="th-title">생일<span></span></p>
               <input type="date" class="birth" placeholder="생일을 입력하세요" name="birth"/>
+              <p class="th-birthSub"></p>
             </div>
             <div class="tr">
               <p class="th-title">이메일<span></span></p>
@@ -70,6 +71,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 placeholder="이메일을 입력하세요"
                 name="email"
               />
+              <p class="th-emailSub"></p>
             </div>
             <div class="btn">
               <button class="cancel"><a href="/login">취소</a></button>

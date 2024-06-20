@@ -13,11 +13,7 @@ public interface MemberMapper {
 
     boolean delete(String userAccount);
 
-    int checkId (String userAccount);
+    boolean checkId(String account);
 
-    int checkEmail (String userEmail);
-
-
-
-
+    boolean checkEmail(String email);
 }
