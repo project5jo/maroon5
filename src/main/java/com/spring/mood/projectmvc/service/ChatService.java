@@ -21,6 +21,9 @@ public class ChatService {
     }
 
     public List<ChatEntity> getAllMessages() {
-        return repository.findAll();
+
+        List<ChatEntity> all = repository.findAllCustom();
+        System.out.println("all = " + all);
+        return all;
     }
 }

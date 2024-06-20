@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "chatmessages")
+@Table(name = "ChatMessages")
 public class ChatEntity {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "chat_message_id")
+    private Long id;
 
     @Column(name = "user_account")
     private String sender;
