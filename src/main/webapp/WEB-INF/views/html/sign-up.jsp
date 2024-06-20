@@ -37,6 +37,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <p>회원가입</p>
             </div>
             <div class="tr">
+              <p class="th-title">프로필사진<span></span></p>
+              <div class="upload-container">
+                <div class="upload-imgbox">p</div>
+              </div>
+
+              <div class="upload-imgbtn">
+                <button class="upload-img" type="button"><a href="#">사진 업로드</a></button>
+                <button class="upload-delete"><a href="#">취소</a></button>
+              </div>
+            </div>
+
+            <div class="tr">
               <p class="th-title">아이디<span></span></p>
               <input
                 type="text"
@@ -49,10 +61,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="tr">
               <p class="th-title">비밀번호<span></span></p>
-              <input type="text" class="pw1" placeholder="비밀번호를 입력하세요" name="password"/>
+              <input type="password" class="pw1" placeholder="비밀번호를 입력하세요" name="password"/>
               <p class="th-passwordSub1"></p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
-              <input type="text" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
+              <input type="password" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
               <p class="th-passwordSub2"></p>
             </div>
             <div class="tr">

@@ -138,6 +138,27 @@ input::placeholder {
   box-shadow: 0 0 5px rgb(216, 216, 73);
 }
 
+.upload-container {
+  border: 1px solid #432626;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-imgbox {
+  border: 1px solid #432626;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: url(../img/profile.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn {
   display: flex;
 }

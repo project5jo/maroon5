@@ -28,7 +28,7 @@ public class MemberController {
     @PostMapping("/create")
     public String inputMember (@Validated RequestMemberDto dto) {
 
-//        System.out.println("dto = " + dto);
+        System.out.println("dto = " + dto);
         // account=뽀로로&password=1234&email=aa@gmail.com&birth=2024-06-10
 
         boolean flag = memberService.memberServiceSave(dto);

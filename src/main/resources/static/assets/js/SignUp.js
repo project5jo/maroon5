@@ -27,7 +27,8 @@ $inputAccount.addEventListener('keyup', e => {
             const $inputAccountValue = $inputAccount.value;
             let encodedAccount = encodeURIComponent($inputAccountValue);
             const URL = `http://localhost:8383/checkid?account=${encodedAccount}`;
-            fetch(URL, {
+            const IPURL = `http://172.30.1.60:8383/checkid?account=${encodedAccount}`;
+            fetch(URL && IPURL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ account: $inputAccount.value })
@@ -103,8 +104,8 @@ $inputFirstPassword.addEventListener('input', e => {
                     $secondPasswordSub.style.color = 'red';
                     $secondPasswordSub.textContent = "입력하신 비밀번호가 일치하지 않습니다.";
                 } else {
-                    $inputFirstPassword.classList.remove("falsefocus");
-                    $inputFirstPassword.classList.add("truefocus");
+                    $inputSecondPassword.classList.remove("falsefocus");
+                    $inputSecondPassword.classList.add("truefocus");
                     $firstPasswordSub.textContent = "";
     
                     e.target.classList.remove("falsefocus");
@@ -267,7 +268,8 @@ $inputEmail.addEventListener('keyup', e => {
             const $emailAccountValue = $inputEmail.value;
             let encodedEmail = encodeURIComponent($emailAccountValue);
             const URL = `http://localhost:8383/checkemail?email=${encodedEmail}`;
-            fetch(URL, {
+            const IPURL = `http://172.30.1.60:8383/checkemail?email=${encodedEmail}`;
+            fetch(URL && IPURL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ email: $inputEmail.value })
