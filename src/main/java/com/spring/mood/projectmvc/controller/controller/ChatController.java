@@ -26,10 +26,13 @@ public class ChatController {
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public ChatEntity sendMessage(ChatEntity message) {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a HH:mm");
-        String formattedDate = now.format(formatter);
-        message.setTimestamp(formattedDate);
+        System.out.println(message);
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a HH:mm");
+//        String formattedDate = now.format(formatter);
+//        message.setTimestamp(formattedDate);
+
+        message.setTimestamp(LocalDateTime.now());
         chatMessageService.saveMessage(message);
         return message;
     }
