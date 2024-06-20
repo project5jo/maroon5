@@ -110,8 +110,7 @@ main .inner {
   background-color: #432626;
 }
 
-input.email,
-input.pw {
+input {
   border: 1px solid #432626;
   display: block;
   width: 100%;
@@ -125,6 +124,18 @@ input.pw {
 
 input::placeholder {
   font-size: 14px;
+}
+
+.falsefocus {
+  border: 5px solid #ff0000;
+}
+
+.truefocus {
+  border: 5px solid #0077ff;
+}
+
+.nowfocus {
+  box-shadow: 0 0 5px rgb(216, 216, 73);
 }
 
 .btn {

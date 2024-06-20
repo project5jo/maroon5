@@ -28,13 +28,21 @@ public class MemberService {
         String encodedPassword = encoder.encode(dto.getPassword());
         memberEntity.setUserPassword(encodedPassword);
 
-        // 중복확인
-
-        
         // memberMapper 에서 dto 저장
         boolean flag = memberMapper.save(memberEntity);
         return flag;
     }
+
+    // 아이디 중복체크하기
+    public boolean serviceCheckId(String account) {
+        return memberMapper.checkId(account);
+    }
+
+    // 이메일 중복체크하기
+    public boolean serviceCheckEmail(String email) { return memberMapper.checkEmail(email);
+    }
+
+
 
     // 회원가입 중간처리
     public void joinInServiceProcess (RequestMemberDto dto){
@@ -54,8 +62,4 @@ public class MemberService {
         // 3. 입력 이메일 중복검사
 
     }
-
-
-
-
 }

@@ -2,6 +2,7 @@ package com.spring.mood.projectmvc.mapper;
 
 import com.spring.mood.projectmvc.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -12,6 +13,7 @@ public interface MemberMapper {
 
     boolean delete(String userAccount);
 
+    boolean checkId(String account);
 
-
+    boolean checkEmail(String email);
 }
