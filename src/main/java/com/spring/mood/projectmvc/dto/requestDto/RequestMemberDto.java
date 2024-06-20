@@ -38,7 +38,7 @@ public class RequestMemberDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth; // 유저 생년월일
 
-//    private MultipartFile profileImage; // 유저 프로필사진
+//    private MultipartFile profileImage;  // 유저 프로필사진
 
     // RequestMemberDto 를 MemberEntity 로 변환
     public Member toMemberEntity() {
