@@ -23,7 +23,7 @@
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
         <mapper resource="mapper/MemberMapper.xml" />
         <mapper resource="mapper/ShopItemMapper.xml" />
-        <mapper resource="mapper/OrderMapper.xml" />
+        <mapper resource="mapper/OrdersMapper.xml" />
         <mapper resource="mapper/OrderDetailMapper.xml" />
         <mapper resource="mapper/ChatMapper.xml" />
     </mappers>
