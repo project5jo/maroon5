@@ -26,5 +26,7 @@ public class Member {
     private String userAddress;
     private String userProfile;
     private int userPoint;
+    private String sessionId; //자동로그인 쿠키값
+    private LocalDateTime limitTime; //만료시간
 
 }

@@ -2,7 +2,9 @@ package com.spring.mood.projectmvc.controller.controller;
 
 import com.spring.mood.projectmvc.dto.requestDto.SignInDto;
 import com.spring.mood.projectmvc.service.LoginResult;
+import com.spring.mood.projectmvc.service.MemberService;
 import com.spring.mood.projectmvc.service.SignInService;
+import com.spring.mood.projectmvc.util.SignInUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
@@ -68,7 +70,14 @@ public class SignInController {
 
 //    로그아웃
     @GetMapping("/sign-out")
-    public String signOut(HttpSession session){
+    public String signOut(HttpServletRequest request,HttpServletResponse response){
+
+//        자동 로그인
+        if (SignInUtil.isAutoLoggedIn(request)) {
+            // 쿠키를 제거하고, DB에도 자동로그인 관련데이터를 원래대로 해놓음
+            service.autoLoginClear(request, response);
+        }
+        HttpSession session = request.getSession();
         session.removeAttribute("loginUser");
         session.invalidate();
         return "redirect:/";
