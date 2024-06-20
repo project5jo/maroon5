@@ -40,6 +40,23 @@
         WHERE user_email = #{email}
     </select>
 
+<!--    자동 로그인      -->
+    <update id="updateAutoLogin">
+        UPDATE Users
+        SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE user_account = #{account}
+    </update>
+
+    <select id="findUserBySessionId" resultType="member">
+        SELECT
+        user_account
+        , user_name
+        , user_email
+        ,limit_time
+        FROM Users
+        WHERE session_id = #{sessionId}
+    </select>
+
 <!--    <select id="existsById" resultType="boolean">-->
 <!--        SELECT COUNT(*)-->
 <!--        FROM tbl_member-->
