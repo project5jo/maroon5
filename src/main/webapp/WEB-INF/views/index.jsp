@@ -91,6 +91,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <footer></footer>
 
     <script>
+      const loginUser = "<c:out value='${loginUser.account}' />";
       let sendere = document.querySelector(".send");
       sendere.addEventListener("click", () => {
         sendMessage();
@@ -114,7 +115,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         // 값을 입력하고 버튼을 누르면 /app/sendMessage라는 경로로 서버에 요청을 함
         // let sender = document.querySelector('.send').value;
         let content = document.querySelector(".my-chat-input").value;
-        let sender = "wlstkdgns";
+        let sender = loginUser;
+
 
         // 1. "/app/sendMessage":
         // •	메시지를 보낼 서버의 경로임~
@@ -132,9 +134,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       }
 
       function showMessage(message) {
-        console.log('msg: ', message.sender)
         let messageElement = document.createElement('li');
-        if (message.sender === 'wlstkdgns1') {
+        if (message.sender === loginUser) {
           messageElement.className = 'my-msg';
           messageElement.innerHTML = `
             <div class="my-msg-writing-time"><p>\${message.timestamp}</p></div>
@@ -157,6 +158,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }
 
         let firstMessage = document.querySelector(".chatting");
+        firstMessage.scrollTop = firstMessage.scrollHeight;
 
         firstMessage.appendChild(messageElement);
       }
@@ -168,6 +170,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             messages.forEach((message) => {
               showMessage(message);
             });
+            let chatContainer = document.querySelector(".chatting");
+            chatContainer.scrollTop = chatContainer.scrollHeight;
           });
       }
 
