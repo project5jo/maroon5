@@ -9,10 +9,14 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
-  <%@ include file="../include/shop-header.jsp" %>
+  <%@ include file="../include/header.jsp" %>
+
   <div class="container">
+    <p>User Role: ${userRole}</p>
     <div class="search-container">
-      <button class="item-add">Add Item</button>
+      <c:if test="${userRole == 'ROLE_admin'}">
+        <button class="item-add">Add Item</button>
+      </c:if>
       <form action="/shop" method="get">
         <input type="text" name="keyword" class="search-bar">
         <button type="submit" class="item-search">Search</button>

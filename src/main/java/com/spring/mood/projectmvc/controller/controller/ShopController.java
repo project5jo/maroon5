@@ -1,9 +1,13 @@
 package com.spring.mood.projectmvc.controller.controller;
-
 import com.spring.mood.projectmvc.dto.responseDto.ShopItemResponseDto;
 import com.spring.mood.projectmvc.entity.ShopItem;
 import com.spring.mood.projectmvc.service.ShopItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +30,27 @@ public class ShopController {
         } else {
             items = shopItemService.getAllItems();
         }
+
+        // 사용자 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userRole = "guest"; // 기본값을 guest로 설정
+        if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+            System.out.println("Authentication: " + authentication);
+            authentication.getAuthorities().forEach(authority -> System.out.println("Authority: " + authority.getAuthority()));
+
+            userRole = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .filter(role -> role.equals("ROLE_admin") || role.equals("ROLE_user")) // ROLE_admin 또는 ROLE_user로 비교
+                    .findFirst()
+                    .orElse("guest");
+        }
+
         model.addAttribute("items", items);
+        model.addAttribute("userRole", userRole); // 사용자 역할을 모델에 추가
+
+        // Debugging: userRole 값 출력
+        System.out.println("User Role: " + userRole);
+
         return "html/shop-index";
     }
 
@@ -36,4 +60,6 @@ public class ShopController {
         model.addAttribute("item", item);
         return "html/shop-detail";
     }
+
+
 }
