@@ -1,32 +1,41 @@
-package com.spring.mood.projectmvc.service;
-
-import com.spring.mood.projectmvc.dto.responseDto.ShopDetailResponseDTO;
-import com.spring.mood.projectmvc.entity.ShopItem;
-import com.spring.mood.projectmvc.entity.ShoppingCart;
-import com.spring.mood.projectmvc.mapper.OrderDetailMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-@Service
-@RequiredArgsConstructor
-public class ShoppingCartService {
-
-    private final OrderDetailMapper orderDetailMapper;
-
-    // 수정중
+//package com.spring.mood.projectmvc.service;
+//import com.spring.mood.projectmvc.entity.ShoppingCart;
+//import com.spring.mood.projectmvc.mapper.ShoppingCartMapper;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
 //
+//import java.util.List;
 //
-//    public void addToCart(ShopDetailResponseDTO cartDTO) {
-//        ShoppingCart shoppingCart = new ShoppingCart();
-//        shoppingCart.setUserAccount(cartDTO.getUserAccount());
-//        shoppingCart.setShopItemId(cartDTO.getShopItemId());
-//        shoppingCart.setCartTotalCount(cartDTO.getCartTotalCount());
+//@Service
+//public class ShoppingCartService {
 //
-//        // 상품 가격 조회 후 총 금액 계산
-//        ShopItem item = shoppingCartMapper.findShopItemById(cartDTO.getShopItemId());
-//        int totalPrice = item.getItemPrice() * cartDTO.getCartTotalCount();
-//        shoppingCart.setCartTotalPrice(totalPrice);
+//    @Autowired
+//    private ShoppingCartMapper shoppingCartMapper;
 //
-//        shoppingCartMapper.insertShoppingCart(shoppingCart);
+//    public void addItemToCart(String userAccount, int shopItemId, int count) {
+//        ShoppingCart cartItem = shoppingCartMapper.findCartItem(Map.of("userAccount", userAccount, "shopItemId", shopItemId));
+//        if (cartItem != null) {
+//            // 기존 아이템 수량 업데이트
+//            cartItem.setCartTotalCount(cartItem.getCartTotalCount() + count);
+//            cartItem.setCartTotalPrice(cartItem.getCartTotalPrice().add(cartItem.getCartTotalPrice().multiply(BigDecimal.valueOf(count))));
+//            shoppingCartMapper.updateCartItem(cartItem);
+//        } else {
+//            // 새로운 아이템 추가
+//            cartItem = new ShoppingCart();
+//            cartItem.setUserAccount(userAccount);
+//            cartItem.setShopItemId(shopItemId);
+//            cartItem.setCartTotalCount(count);
+//            BigDecimal itemPrice = shoppingCartMapper.findShopItemById(shopItemId).getShopItemPrice();
+//            cartItem.setCartTotalPrice(itemPrice.multiply(BigDecimal.valueOf(count)));
+//            shoppingCartMapper.insertCartItem(cartItem);
+//        }
 //    }
-}
+//
+//    public List<ShoppingCart> getCartItems(String userAccount) {
+//        return shoppingCartMapper.findCartItemsByUser(userAccount);
+//    }
+//
+//    public void removeItemFromCart(String userAccount, int shopItemId) {
+//        shoppingCartMapper.deleteCartItem(Map.of("userAccount", userAccount, "shopItemId", shopItemId));
+//    }
+//}
