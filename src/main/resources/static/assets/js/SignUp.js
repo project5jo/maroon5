@@ -1,4 +1,50 @@
+// 1. 프로필 사진 업로드하기
+const $profileImg = document.querySelector(".upload-imgbox"); // 사진창
+const $profileUploadBtn = document.querySelector(".upload-uploadbtn") // 사진 업로드 버튼
 
+const $realUploadBtn = document.querySelector(".upload-img") // 실제 업로드 버튼
+
+const $img = document.querySelector(".upload-imgbox img") // 사진업로드창
+
+// 사진창 클릭시 파일열기 이벤트
+$profileImg.addEventListener('click', e => {
+    $realUploadBtn.click();
+})
+// 사진업로드버튼 클릭시 파일열기 이벤트
+$profileUploadBtn.addEventListener('click', e => {
+    $realUploadBtn.click();
+})
+
+// 파일열기를 했을 때 이벤트
+$realUploadBtn.addEventListener('change', e => {
+
+    // 유저가 올린 파일
+    const profileDate = $realUploadBtn.files[0];
+    console.log(profileDate);
+
+    // 이미지파일의 로우데이터(바이트) 를 읽는 객체 생성
+    const reader = new FileReader();
+
+    // 파일을 img 태그의 src 속성에 넣기 위해 URL 형태로 변경
+    reader.readAsDataURL(profileDate);
+
+    // 파일이 등록되는 순간 img태그에 이미지 넣기
+    reader.onloadend = e => {
+        $img.src = reader.result;
+    }
+})
+
+// 2. 업로드한 프로필사진 삭제하기
+const $profileDeleteBtn = document.querySelector(".upload-deletebtn"); // 사진 삭제 버튼
+
+// 사진 삭제 버튼을 클릭했을 때 이벤트
+$profileDeleteBtn.addEventListener('click', e => {
+    $img.src = "/assets/img/profile.jpg";
+})
+
+
+
+// 회원가입 조건 검증하기
 // 1. account 조건 검증하기
 let idFlag = false; // 아이디 조건확인
 const $inputAccount = document.querySelector(".account"); // 아이디 입력창 변수설정
@@ -28,7 +74,31 @@ $inputAccount.addEventListener('keyup', e => {
             let encodedAccount = encodeURIComponent($inputAccountValue);
             const URL = `http://localhost:8383/checkid?account=${encodedAccount}`;
             const IPURL = `http://172.30.1.60:8383/checkid?account=${encodedAccount}`;
-            fetch(URL && IPURL, {
+            // URL 로 중복검증할 때
+            fetch(URL, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({ account: $inputAccount.value })
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json === false) {
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $accountSub.style.color = 'blue';
+                    $accountSub.textContent = '사용가능한 아이디입니다';
+
+                    idFlag = true;
+
+                } else {
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+                    $accountSub.style.color = 'red';
+                    $accountSub.textContent = "중복되는 아이디입니다. 다른 아이디를 입력해주세요.";
+                }
+            })
+            // IPURL 로 중복검증할 때
+            fetch(IPURL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ account: $inputAccount.value })
@@ -226,7 +296,7 @@ $chooseBirth.addEventListener('blur', e => {
             $birthSub.style.color = 'red';
             $birthSub.textContent = "생년월일은 필수 입력정보입니다.";
 
-            // 이름 조건체크
+            // 생일 조건체크
         } else {
             e.target.classList.remove("falsefocus");
             e.target.classList.add("truefocus");
@@ -269,7 +339,31 @@ $inputEmail.addEventListener('keyup', e => {
             let encodedEmail = encodeURIComponent($emailAccountValue);
             const URL = `http://localhost:8383/checkemail?email=${encodedEmail}`;
             const IPURL = `http://172.30.1.60:8383/checkemail?email=${encodedEmail}`;
-            fetch(URL && IPURL, {
+            // URL 로 중복검증할 때
+            fetch(URL, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({ email: $inputEmail.value })
+            })
+            .then(res => res.json())
+            .then(json => {
+                if (json === false) {
+                    e.target.classList.remove("falsefocus");
+                    e.target.classList.add("truefocus");
+                    $emailSub.style.color = 'blue';
+                    $emailSub.textContent = '사용가능한 이메일입니다';
+
+                    emailFlag = true;
+
+                } else {
+                    e.target.classList.remove("truefocus");
+                    e.target.classList.add("falsefocus");
+                    $emailSub.style.color = 'red';
+                    $emailSub.textContent = "중복되는 이메일입니다. 다른 이메일을 입력해주세요.";
+                }
+            })
+            // IPURL 로 중복검증할 때
+            fetch(IPURL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ email: $inputEmail.value })

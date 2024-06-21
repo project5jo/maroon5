@@ -30,21 +30,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- main -->
     <main>
-      <section class="sign-in">
-        <form action="/create" method="post">
+      <section class="sign-up">
+        <form action="/create" method="post" enctype="multipart/form-data">
           <div class="inner">
             <div class="sign-in-title">
               <p>회원가입</p>
             </div>
+            
             <div class="tr">
               <p class="th-title">프로필사진<span></span></p>
-              <div class="upload-container">
-                <div class="upload-imgbox">p</div>
+              <div class="upload-imgbox">
+                <img src="/assets/img/profile.jpg" alt="profile">
               </div>
-
               <div class="upload-imgbtn">
-                <button class="upload-img" type="button"><a href="#">사진 업로드</a></button>
-                <button class="upload-delete"><a href="#">취소</a></button>
+                <div class="upload-uploadbtn">
+                  <p>사진업로드
+                    <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
+                  </p>
+                </div>
+                <div class="upload-deletebtn">
+                  <p>취소</p>
+                </div>
               </div>
             </div>
 
