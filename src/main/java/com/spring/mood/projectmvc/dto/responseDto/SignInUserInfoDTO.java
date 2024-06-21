@@ -19,7 +19,5 @@ public class SignInUserInfoDTO {
         this.account = member.getUserAccount();
         this.nickName = member.getUserName();
         this.email = member.getUserEmail();
-
-
     }
 }

@@ -26,5 +26,6 @@
         <mapper resource="mapper/OrdersMapper.xml" />
         <mapper resource="mapper/OrderDetailMapper.xml" />
         <mapper resource="mapper/ChatMapper.xml" />
+        <mapper resource="mapper/ShopDetailMapper.xml" />
     </mappers>
 </configuration>

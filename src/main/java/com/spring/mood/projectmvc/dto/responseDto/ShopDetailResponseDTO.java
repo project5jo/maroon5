@@ -1,21 +1,15 @@
-
-package com.spring.mood.projectmvc.entity;
+package com.spring.mood.projectmvc.dto.responseDto;
 
 import lombok.*;
 
-
-
-@Getter
-@Setter
-@ToString
+@Getter @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ShoppingCart {
-    // pk
+public class ShopDetailResponseDTO {
+
     private Long cartId;
-    // fk
     private String userAccount;
     private Long shopItemId;
 

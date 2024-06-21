@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.ShopDetailMapper">
+    <insert id="save">
+        INSERT INTO ShoppingCart
+        (user_account, shop_item_id, cart_total_price, cart_total_count)
+        VALUES
+        (#{userAccount}, #{shopItemId},
+        (SELECT SUM(shop_item_price)
+        FROM ShopItem
+        WHERE shop_item_id = #{shopItemId}),
+        (SELECT COUNT(*)
+        FROM ShoppingCart
+        WHERE shop_item_id = #{shopItemId}
+        AND user_account = #{userAccount}))
+    </insert>
+
+</mapper>
