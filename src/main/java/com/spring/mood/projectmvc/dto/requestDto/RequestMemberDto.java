@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 public class RequestMemberDto {
 
     @NotBlank(message = "아이디는 필수입력정보입니다.")
-    @Size(min = 2, max = 15, message = "아이디는 5~20자 사이로 입력해야 합니다.")
-    @Pattern(regexp ="^[a-z][a-z0-9_-]{4,14}$", message = "영문 소문자, 숫자, 특수문자(_),(-)만 사용가능합니다.")
+    @Size(min = 4, max = 16, message = "아이디는 4~16자 사이로 입력해야 합니다.")
+    @Pattern(regexp ="^[a-z][a-z0-9_-]{3,15}$", message = "영문 소문자, 숫자, 특수문자(_),(-)만 사용가능합니다.")
     private String account; // 유저 계정
 
     @NotBlank(message = "이름은 필수입력정보입니다.")
@@ -27,7 +27,7 @@ public class RequestMemberDto {
     private String name; // 유저 이름
 
     @NotBlank(message = "비밀번호는 필수입력정보입니다.")
-    @Size(min = 8, max = 20, message = "비밀번호는 8~20자 사이로 입력해주세요.")
+    @Size(min = 8, max = 16, message = "비밀번호는 8~16자 사이로 입력해주세요.")
     private String password; // 유저 비밀번호
 
     @NotBlank(message = "이메일은 필수입력정보입니다.")
@@ -38,7 +38,7 @@ public class RequestMemberDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth; // 유저 생년월일
 
-//    private MultipartFile profileImage;  // 유저 프로필사진
+    private MultipartFile profileImage;  // 유저 프로필사진
 
     // RequestMemberDto 를 MemberEntity 로 변환
     public Member toMemberEntity() {

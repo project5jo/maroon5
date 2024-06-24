@@ -24,6 +24,7 @@ public class Member {
     private LocalDateTime createAt;
     private LocalDate userBirth;
     private String userAddress;
+    @Setter
     private String userProfile;
     private int userPoint;
 

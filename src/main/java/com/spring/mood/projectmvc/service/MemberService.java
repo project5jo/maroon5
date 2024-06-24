@@ -19,10 +19,12 @@ public class MemberService {
     private final PasswordEncoder encoder;
 
     // JSP 문서에서 받은 유저정보 변환 & 저장
-    public boolean memberServiceSave (RequestMemberDto dto) {
+    public boolean memberServiceSave (RequestMemberDto dto, String profilePath) {
 
         // RequestMemberDto 를 MemberEntity 로 변환
         Member memberEntity = dto.toMemberEntity();
+        // memberEntity 에 프로필 사진 경로 추가
+        memberEntity.setUserProfile(profilePath);
 
         // 비밀번호 암호화
         String encodedPassword = encoder.encode(dto.getPassword());

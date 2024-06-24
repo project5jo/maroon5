@@ -80,7 +80,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="tr">
               <p class="th-title">생일<span></span></p>
-              <input type="date" class="birth" placeholder="생일을 입력하세요" name="birth"/>
+              <input type="date" class="birth" placeholder="생일을 입력하세요" name="birth" />
               <p class="th-birthSub"></p>
             </div>
             <div class="tr">
@@ -95,7 +95,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="btn">
               <button class="cancel"><a href="/login">취소</a></button>
-              <button class="sign-up" type="submit"><a href="#">가입하기</a></button>
+              <button class="success"><p>가입하기</p></button>
             </div>
           </div>
         </form>
