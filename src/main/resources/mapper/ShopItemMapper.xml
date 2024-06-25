@@ -25,6 +25,11 @@
         FROM ShopItems
     </select>
 
+    <delete id="delete">
+        DELETE FROM ShopItems
+        WHERE shop_item_id = #{shopItemId}
+    </delete>
+
     <insert id="save" parameterType="com.spring.mood.projectmvc.entity.ShopItem">
         INSERT INTO ShopItems
         (shop_item_name, shop_item_desc, shop_item_price, shop_item_img, shop_item_date, shop_item_stock)

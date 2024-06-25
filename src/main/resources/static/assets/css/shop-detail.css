@@ -1,0 +1,134 @@
+body{
+  background-color: #EBEAE3;
+
+}
+.main-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.img-box{
+  border: 1.5px solid #000;
+  width: 50%;
+  height: 800px;
+  flex: 0 1 auto;
+  gap: 0.1px;
+}
+.details{
+  border: 1.5px solid #000;
+  width: 50%;
+  height: 800px;
+  flex: 0 1 auto;
+  gap: 0.1px;
+}
+.details .description {
+  border: 1.5px solid #000;
+  width: 100%;
+  flex: 0 1 auto;
+  height: 300px;
+  margin-top: 150px;
+  text-align: center;
+  padding: 30px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+}
+.details .description p{
+  border-top: 1.5px solid #000;
+  width: 100%;
+  margin-top: 50px;
+  text-align: left;
+  padding: 10px;
+
+}
+
+.quantity {
+  border: 1.5px solid #000;
+
+  width: 100%;
+  flex: 0 1 auto;
+  height: 50px;
+  text-align: center;
+  padding: 30px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quantity button {
+  width: 33%;
+  height: 50px;
+  background-color: #EBEAE3;
+  transition: background-color 0.3s ease;
+}
+
+.quantity button:hover {
+  background-color: #422626;
+  color: white;
+}
+
+.quantity input {
+  width: 33%;
+  height: 50px;
+  background-color: #EBEAE3;
+}
+.addBtn{
+  border: 1.5px solid #000;
+  width: 100%;
+  flex: 0 1 auto;
+  height: 50px;
+  text-align: center;
+  padding: 30px;
+  margin-top: 30px;
+  transition: background-color 0.3s ease
+}
+.addBtn:hover{
+  background-color: #422626;
+}
+.price{
+  border: 1.5px solid #000;
+  width: 100%;
+  flex: 0 1 auto;
+  height: 50px;
+  text-align: center;
+  padding: 30px;
+  color: #fff;
+  background-color: #422626;
+  margin-top: 30px;
+}
+
+
+
+.what {
+  border-bottom: 1.5px solid #CCC5BB;
+  position: absolute;
+  width: 933px;
+  height: 203px;
+  right: 0px;
+  top: 1009px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 33px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.3em;
+
+  color: #CCC5BB;
+
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.suggestion{
+  border: 1px solid #000000; float: left; width: 33%;
+  height: 479px;
+}
