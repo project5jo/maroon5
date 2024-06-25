@@ -5,5 +5,5 @@ import com.spring.mood.projectmvc.entity.ChatEntity;
 import java.util.List;
 
 public interface ChatRepositoryCustom {
-    List<ChatEntity> findAllCustom();
+    List<ChatEntity> findAllCustom(int topicId, int roomId);
 }
