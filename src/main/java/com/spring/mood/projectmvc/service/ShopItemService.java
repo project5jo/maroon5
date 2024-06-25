@@ -58,4 +58,10 @@ public class ShopItemService {
                 shopItem.getShopItemView()
         );
     }
+
+
+    // 삭제 요청 중간처리
+    public boolean deleteItem(Long shopItemId) {
+        return shopItemMapper.delete(shopItemId);
+    }
 }

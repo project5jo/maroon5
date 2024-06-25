@@ -1,26 +1,38 @@
 package com.spring.mood.projectmvc.controller.controller;
+
 import com.spring.mood.projectmvc.dto.responseDto.ShopItemResponseDto;
 import com.spring.mood.projectmvc.entity.ShopItem;
+import com.spring.mood.projectmvc.service.AddItemService;
 import com.spring.mood.projectmvc.service.ShopItemService;
+import com.spring.mood.projectmvc.util.FileUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ShopController {
 
     private final ShopItemService shopItemService;
+    private final AddItemService addItemService;
 
     @GetMapping("/shop")
     public String getAllItems(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
@@ -61,5 +73,51 @@ public class ShopController {
         return "html/shop-detail";
     }
 
+    @GetMapping("/shop/add")
+    public String showAddItemPage() {
+        return "html/shop-addItem";  //
+    }
 
+    private String rootPath = "/Users/jehoon/spring-prj/upload";
+
+    @PostMapping("/shop/add")
+    public String uploadFile(
+            @RequestParam("shop_item_name") String name,
+            @RequestParam("shop_item_desc") String description,
+            @RequestParam("shop_item_price") Double price,
+            @RequestParam("shop_item_stock") Long stock,
+            @RequestParam("shop_item_img") MultipartFile file,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
+        log.info("file-name: {}", file.getOriginalFilename());
+        log.info("file-size: {}MB", file.getSize() / 1024.0 / 1024.0);
+        log.info("file-type: {}", file.getContentType());
+
+        File root = new File(rootPath);
+        if (!root.exists()) root.mkdirs();
+
+        String filePath = FileUtil.uploadFile(rootPath, file);
+        log.info("File saved at: {}", filePath);
+
+        ShopItem shopItem = ShopItem.builder()
+                .shopItemName(name)
+                .shopItemDesc(description)
+                .shopItemPrice(price)
+                .shopItemStock(stock)
+                .shopItemImg(filePath)
+                .shopItemDate(LocalDateTime.now())
+                .shopItemView(0L)
+                .build();
+
+        addItemService.addItem(shopItem);
+
+        return "redirect:/shop/add";
+    }
+
+    @GetMapping("/shop/delete/{itemId}")
+    public String deleteItem(@PathVariable("itemId") String itemId, RedirectAttributes redirectAttributes) {
+        shopItemService.deleteItem(Long.valueOf(itemId));  // itemService에서 실제 삭제 처리
+        redirectAttributes.addFlashAttribute("message", "상품이 삭제되었습니다.");
+        return "redirect:/shop";
+    }
 }

@@ -5,64 +5,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Product</title>
-  <style>
-    .container {
-      margin: 0 auto;
-      padding: 20px;
-      max-width: 600px;
-    }
-    .page-title {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .main-container {
-      border: 1px solid #ddd;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-    .title-container, .desc-container, .upload-file {
-      margin-bottom: 20px;
-    }
-    .upload-file input[type="file"] {
-      display: none;
-    }
-    .upload-file label {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #444;
-      color: white;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background-color: #444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+  <link rel="stylesheet" href="/assets/css/shop-addItem.css"/>
 </head>
 <body>
   <%@ include file="../include/shop-header.jsp" %>
   <div class="container">
     <div class="page-title">Add product</div>
     <div class="main-container">
-      <form action="/uploadProduct" method="post" enctype="multipart/form-data">
+      <form action="/shop/add" method="post" enctype="multipart/form-data">
         <div class="title-container">
           <p>Title</p>
-          <input type="text" name="title">
+          <input type="text" name="shop_item_name" required>
         </div>
         <div class="desc-container">
           <p>Description</p>
-          <textarea name="description" rows="10" cols="50"></textarea>
+          <textarea name="shop_item_desc" rows="10" cols="50" required></textarea>
+        </div>
+        <div class="price-stock-container">
+          <div class="price-container">
+            <p>Price</p>
+            <input type="number" name="shop_item_price" step="0.01" required>
+          </div>
+          <div class="stock-container">
+            <p>Stock</p>
+            <input type="number" name="shop_item_stock" required>
+          </div>
         </div>
         <div class="upload-file">
-          <p>업로드할 파일 경로 :</p>
-          <input type="file" id="file" name="file">
+          <p>업로드할 사진 파일 경로 :</p>
+          <input type="file" id="file" name="shop_item_img" required>
           <label for="file">파일 선택</label>
         </div>
         <button type="submit">UPLOAD</button>
@@ -70,5 +42,7 @@
     </div>
   </div>
   <%@ include file="../include/footer.jsp" %>
+  <script src="/assets/js/category.js"></script>
+  <script src="/assets/js/shop-addItem.js"></script>
 </body>
 </html>

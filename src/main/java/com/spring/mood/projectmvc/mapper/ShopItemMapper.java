@@ -45,4 +45,7 @@ public interface ShopItemMapper {
 
     // 키워드로 아이템 검색
     List<ShopItem> findShopItemsByKeyword(@Param("keyword") String keyword);
+
+    // 게시물 삭제
+    boolean delete(Long shopItemId);
 }

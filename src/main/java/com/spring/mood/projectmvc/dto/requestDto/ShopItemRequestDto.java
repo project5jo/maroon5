@@ -6,6 +6,7 @@ import com.spring.mood.projectmvc.entity.ShopItem;
 import java.time.LocalDateTime;
 
 @Getter @ToString
+@Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
