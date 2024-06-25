@@ -16,7 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(afterLoginInterceptor)
-//                동작을 실행할 url
+//                동작을 실행할 url4
                 .addPathPatterns("/sign-in");
         registry.addInterceptor(autoLoginInterceptor)
                 .addPathPatterns("/**");

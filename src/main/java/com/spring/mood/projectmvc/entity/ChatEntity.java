@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "ChatMessages")
+@Table(name = "chat_messages")
 public class ChatEntity {
 
     @Id
@@ -21,21 +21,36 @@ public class ChatEntity {
     @Column(name = "chat_message_id")
     private Long id;
 
-    @Column(name = "user_account")
-    private String sender;
+    @ManyToOne
+    @JoinColumn(name = "user_account")
+    private User user;
 
-    @Column(name = "chat_message")
+    @Column(name = "chat_message", columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "chat_sent_at")
     private LocalDateTime timestamp;
 
-    @Column(name = "room_id")
+    @Column(name = "user_profile", length = 255)
+    private String userProfile;
+
+    @Column(name = "chat_join")
+    private Boolean chatJoin = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private ChatRoom chatRoom;
+
+    @Transient
     private int roomId;
+
+    @Transient
+    private int topicId;
+
+
 
     @PrePersist
     protected void onCreate() {
         this.timestamp = LocalDateTime.now();
-            this.roomId = 1; // 기본 값 설정, 필요에 따라 수정
     }
 }

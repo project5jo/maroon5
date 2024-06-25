@@ -27,6 +27,22 @@
         FROM Users
         WHERE user_account = #{account}
     </select>
+
+    <select id="findChatUser" resultType="User">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , created_at
+        , user_point
+        FROM Users
+        WHERE user_account = #{account}
+    </select>
     
     <select id="checkId" resultType="boolean">
         SELECT COUNT(*)
