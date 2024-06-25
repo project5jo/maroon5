@@ -2,14 +2,20 @@ package com.spring.mood.projectmvc.config.websocketConfig;
 
 
 import com.spring.mood.projectmvc.config.interceptorConfig.ChatInterceptorConfig;
+import com.spring.mood.projectmvc.service.ChatService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.event.EventListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,5 +47,39 @@ public class WebSocketConfig  implements WebSocketMessageBrokerConfigurer {
                 .withSockJS();
 
     }
+
+//    @EventListener
+//    public void handleWebSocketConnectListener(SessionSubscribeEvent event) {
+//        String destination = event.getMessage().getHeaders().get("simpDestination").toString();
+//        if (destination.startsWith("/topic/messages/")) {
+//            String[] split = destination.split("/");
+//            if (split.length == 5) {
+//                try {
+//                    int topicId = Integer.parseInt(split[3]);
+//                    int roomId = Integer.parseInt(split[4]);
+//                    chatService.incrementCurrentUsers(topicId, roomId);
+//                } catch (NumberFormatException e) {
+//                    // Log the error or handle it accordingly
+//                }
+//            }
+//        }
+//    }
+//
+//    @EventListener
+//    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+//        String destination = event.getMessage().getHeaders().get("simpDestination").toString();
+//        if (destination.startsWith("/topic/messages/")) {
+//            String[] split = destination.split("/");
+//            if (split.length == 5) {
+//                try {
+//                    int topicId = Integer.parseInt(split[3]);
+//                    int roomId = Integer.parseInt(split[4]);
+//                    chatService.decrementCurrentUsers(topicId, roomId);
+//                } catch (NumberFormatException e) {
+//                    // Log the error or handle it accordingly
+//                }
+//            }
+//        }
+//    }
 
 }

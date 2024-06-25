@@ -34,4 +34,7 @@ public class ChatRoom {
 
     @OneToMany(mappedBy = "chatRoom")
     private List<ChatEntity> messages;
+
+    @Column(name = "current_users")
+    private int currentUsers; // 현재 인원 수를 저장하는 필드
 }

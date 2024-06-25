@@ -7,6 +7,7 @@ function scrollHandler(e) {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 100){
         console.log('gd')
         const chatBox = document.querySelector('.chat')
+        connect()
         chatBox.classList.remove('slide-down')
         chatBox.classList.add('slide-up')
     }
