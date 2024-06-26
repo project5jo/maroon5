@@ -35,7 +35,6 @@ body {
 .details .description {
   border: 1.5px solid #000;
   width: 100%;
-
   margin-top: 20px; /* 수정 */
   text-align: center;
   padding: 30px;
@@ -62,16 +61,18 @@ body {
   margin-top: 30px;
   display: flex;
   align-items: center;
+  justify-content: center; /* 중앙 정렬 추가 */
   transition: background-color 0.3s ease;
   font-size: 24px;
   font-weight: bold;
 }
 
 .quantity button {
-  width: 33%;
-  height: 50px;
+  width: 50px; /* 버튼 너비 조정 */
+  height: 50px; /* 버튼 높이 조정 */
   background-color: #EBEAE3;
   transition: background-color 0.3s ease;
+  font-size: 24px; /* 글씨 크기 조정 */
 }
 
 .quantity button:hover {
@@ -80,9 +81,22 @@ body {
 }
 
 .quantity input {
-  width: 33%;
-  height: 50px;
+  width: 100px; /* 입력 필드 너비 조정 */
+  height: 50px; /* 입력 필드 높이 조정 */
   background-color: #EBEAE3;
+  text-align: center; /* 중앙 정렬 */
+  font-size: 24px; /* 글씨 크기 조정 */
+  -moz-appearance: textfield; /* Firefox에서 스핀 버튼 제거 */
+}
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge에서 스핀 버튼 제거 */
+  margin: 0;
+}
+
+.quantity input:focus {
+  outline: none; /* 포커스 시 테두리 제거 */
 }
 
 .addBtn {
@@ -121,10 +135,10 @@ body {
   color: #fff;
   background-color: #422626;
   margin-top: 30px;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .what {
@@ -151,7 +165,7 @@ body {
 .suggestion {
   border: 2px solid #000000;
   width: 33.3%;
-  height:600px;
+  height: 600px;
   box-sizing: border-box;
 }
 
@@ -159,5 +173,4 @@ body {
   margin-top: 1%;
   margin-left: 1%;
   font-size: 24px;
-
 }
