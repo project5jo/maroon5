@@ -132,6 +132,11 @@ public class ShopController {
                             @RequestParam("quantity") int quantity,
                             RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 후 이용 바랍니다.");
+            return "redirect:/shop/" + itemId;
+        }
+
         String userAccount = authentication.getName(); // 현재 로그인된 사용자 계정 가져오기
 
         // 로그 추가
@@ -140,7 +145,7 @@ public class ShopController {
 
         try {
             shoppingCartService.addToCart(itemId, itemPrice, quantity, userAccount);
-            redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 성공적으로 추가되었습니다.");
+            redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 담겼습니다!");
         } catch (Exception e) {
             log.error("장바구니 추가 중 오류 발생", e);
             redirectAttributes.addFlashAttribute("errorMessage", "장바구니에 상품을 추가하는 중 오류가 발생했습니다.");

@@ -18,16 +18,10 @@
         </div>
         <div class="details">
             <div class="description">
-                <h1>
-                    ${item.shopItemName}
-                </h1>
+                <h1>${item.shopItemName}</h1>
                 <p><br><br>
                     ${item.shopItemDesc}<br>
-                    <!-- 10ml  <br>
-                    - 100% pure and natural <br>
-                    - For external use only <br>
-                    - Designed in Melbourne</p> -->
-
+                </p>
             </div>
             <form id="addToCartForm" action="/addToCart" method="post">
                 <div class="quantity">
@@ -51,9 +45,7 @@
             that transform your space into a haven of tranquility and style.</p>
     </div>
     <div class="suggestion-title">RELATED PRODUCTS</div>
-    <!-- 밑으로 제훈 수정 -->
     <div class="suggestion-container">
-
         <div class="suggestion">
             <img src="" alt="">
         </div>
@@ -67,7 +59,6 @@
 </div>
 
 <%@ include file="../include/footer.jsp" %>
-</div>
 
 <script src="/assets/js/category.js"></script>
 <script>
@@ -82,6 +73,16 @@
             quantityInput.value = parseInt(quantityInput.value) - 1;
         }
     }
+
+    // 성공 및 에러 메시지가 있을 경우 얼럿 창 표시
+    window.onload = function() {
+        <c:if test="${not empty successMessage}">
+        alert("${successMessage}");
+        </c:if>
+        <c:if test="${not empty errorMessage}">
+        alert("${errorMessage}");
+        </c:if>
+    };
 </script>
 </body>
 </html>
