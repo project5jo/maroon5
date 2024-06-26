@@ -26,19 +26,16 @@
             <form id="addToCartForm" action="/addToCart" method="post">
                 <div class="quantity">
                     <button type="button" onclick="decrementQuantity()">-</button>
-                    <input type="number" name="quantity" id="quantityInput" value="1" min="1" step="1">
+                    <input type="number" name="quantity" id="quantityInput" value="1" min="1" step="1" oninput="updatePrice()">
                     <button type="button" onclick="incrementQuantity()">+</button>
                 </div>
                 <div class="addBtn">
                     <input type="hidden" name="itemId" value="${item.shopItemId}">
-                    <input type="hidden" name="itemPrice" value="${item.shopItemPrice}">
-                    <input type="hidden" name="userAccount" value="${userAccount}"> <!-- 추가된 부분 -->
+                    <input type="hidden" name="itemPrice" id="itemPrice" value="${item.shopItemPrice}">
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
-            <div class="price">
-                <p>가격: ₩ ${item.shopItemPrice}</p>
-            </div>
+            <div class="price" id="totalPrice">가격: ₩${item.shopItemPrice}</div>
         </div>
     </div>
     <div class="what">
@@ -68,16 +65,26 @@
     function incrementQuantity() {
         const quantityInput = document.getElementById('quantityInput');
         quantityInput.value = parseInt(quantityInput.value) + 1;
+        updatePrice();
     }
 
     function decrementQuantity() {
         const quantityInput = document.getElementById('quantityInput');
         if (parseInt(quantityInput.value) > 1) {
             quantityInput.value = parseInt(quantityInput.value) - 1;
+            updatePrice();
         }
     }
 
-    // 성공 및 에러 메시지가 있을 경우 얼럿 창 표시 후 리다이렉션
+    function updatePrice() {
+        const quantityInput = document.getElementById('quantityInput');
+        const itemPrice = document.getElementById('itemPrice').value;
+        const totalPrice = document.getElementById('totalPrice');
+        const newPrice = quantityInput.value * itemPrice;
+        totalPrice.textContent = '가격: ₩' + newPrice.toFixed(2);
+    }
+
+    // 에러 메시지가 있을 경우 얼럿 창 표시
     window.onload = function() {
         <c:if test="${not empty successMessage}">
         alert("${successMessage}");
