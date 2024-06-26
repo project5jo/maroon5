@@ -4,6 +4,7 @@ import com.spring.mood.projectmvc.dto.responseDto.ShopItemResponseDto;
 import com.spring.mood.projectmvc.entity.ShopItem;
 import com.spring.mood.projectmvc.service.AddItemService;
 import com.spring.mood.projectmvc.service.ShopItemService;
+import com.spring.mood.projectmvc.service.ShoppingCartService;
 import com.spring.mood.projectmvc.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class ShopController {
 
     private final ShopItemService shopItemService;
     private final AddItemService addItemService;
+    private final ShoppingCartService shoppingCartService;
 
     @GetMapping("/shop")
     public String getAllItems(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
@@ -63,7 +66,7 @@ public class ShopController {
         // Debugging: userRole 값 출력
         System.out.println("User Role: " + userRole);
 
-        return "html/shop-index";
+        return "html/shop-Index";
     }
 
     @GetMapping("/shop/{id}")
@@ -78,7 +81,7 @@ public class ShopController {
         return "html/shop-addItem";  //
     }
 
-    private String rootPath = "/Users/jehoon/spring-prj/upload";
+    private String rootPath = "/Users/jeongjaehan/Desktop/Developer/upload";
 
     @PostMapping("/shop/add")
     public String uploadFile(
@@ -120,4 +123,34 @@ public class ShopController {
         redirectAttributes.addFlashAttribute("message", "상품이 삭제되었습니다.");
         return "redirect:/shop";
     }
+
+
+
+    @PostMapping("/addToCart")
+    public String addToCart(@RequestParam("itemId") Long itemId,
+                            @RequestParam("itemPrice") BigDecimal itemPrice,
+                            @RequestParam("quantity") int quantity,
+                            RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 후 이용 바랍니다.");
+            return "redirect:/shop/" + itemId;
+        }
+
+        String userAccount = authentication.getName(); // 현재 로그인된 사용자 계정 가져오기
+
+        // 로그 추가
+        log.info("장바구니에 추가 요청 수신: itemId={}, itemPrice={}, quantity={}, userAccount={}",
+                itemId, itemPrice, quantity, userAccount);
+
+        try {
+            shoppingCartService.addToCart(itemId, itemPrice, quantity, userAccount);
+            redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 담겼습니다!");
+        } catch (Exception e) {
+            log.error("장바구니 추가 중 오류 발생", e);
+            redirectAttributes.addFlashAttribute("errorMessage", "장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
+        }
+        return "redirect:/shop/" + itemId;
+    }
+
 }

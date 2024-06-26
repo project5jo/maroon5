@@ -3,6 +3,7 @@ package com.spring.mood.projectmvc.entity;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 
 
 @Getter
@@ -19,7 +20,7 @@ public class ShoppingCart {
     private String userAccount;
     private Long shopItemId;
 
-    private Double cartTotalPrice;
+    private BigDecimal cartTotalPrice;
     private long cartTotalCount;
 
 
