@@ -36,6 +36,9 @@
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
+            <div class="price">
+                <p>가격: ₩ ${item.shopItemPrice}</p>
+            </div>
         </div>
     </div>
     <div class="what">
@@ -74,13 +77,14 @@
         }
     }
 
-    // 성공 및 에러 메시지가 있을 경우 얼럿 창 표시
+    // 성공 및 에러 메시지가 있을 경우 얼럿 창 표시 후 리다이렉션
     window.onload = function() {
         <c:if test="${not empty successMessage}">
         alert("${successMessage}");
         </c:if>
         <c:if test="${not empty errorMessage}">
         alert("${errorMessage}");
+        window.location.href = "/sign-in"; // 로그인 페이지로 리다이렉션
         </c:if>
     };
 </script>
