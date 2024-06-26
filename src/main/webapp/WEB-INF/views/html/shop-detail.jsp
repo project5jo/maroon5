@@ -47,13 +47,13 @@
     <div class="suggestion-title">RELATED PRODUCTS</div>
     <div class="suggestion-container">
         <div class="suggestion">
-            <img src="" alt="">
+            <img src="${randomImages[0]}" alt="추천 상품 1">
         </div>
         <div class="suggestion">
-            <img src="" alt="">
+            <img src="${randomImages[1]}" alt="추천 상품 2">
         </div>
         <div class="suggestion">
-            <img src="" alt="">
+            <img src="${randomImages[2]}" alt="추천 상품 3">
         </div>
     </div>
 </div>
@@ -83,17 +83,6 @@
         const newPrice = quantityInput.value * itemPrice;
         totalPrice.textContent = '가격: ₩' + newPrice.toFixed(2);
     }
-
-    // 에러 메시지가 있을 경우 얼럿 창 표시
-    window.onload = function() {
-        <c:if test="${not empty successMessage}">
-        alert("${successMessage}");
-        </c:if>
-        <c:if test="${not empty errorMessage}">
-        alert("${errorMessage}");
-        window.location.href = "/sign-in"; // 로그인 페이지로 리다이렉션
-        </c:if>
-    };
 </script>
 </body>
 </html>
