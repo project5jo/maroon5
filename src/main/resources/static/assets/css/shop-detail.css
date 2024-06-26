@@ -132,3 +132,12 @@ input[type=number] {
   border: 1px solid #000000; float: left; width: 33%;
   height: 479px;
 }
+
+.suggestion-container {
+  position: absolute;
+  top: 1250px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
