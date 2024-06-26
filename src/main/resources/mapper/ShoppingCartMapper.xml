@@ -4,11 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.example.mapper.ShoppingCartMapper">
-
+<mapper namespace="com.spring.mood.projectmvc.mapper.ShoppingCartMapper">
     <insert id="save" parameterType="com.spring.mood.projectmvc.entity.ShoppingCart">
         INSERT INTO ShoppingCart (user_account, shop_item_id, cart_total_price, cart_total_count)
         VALUES (#{userAccount}, #{shopItemId}, #{cartTotalPrice}, #{cartTotalCount})
     </insert>
-
 </mapper>

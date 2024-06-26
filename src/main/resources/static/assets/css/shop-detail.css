@@ -1,33 +1,42 @@
-body{
+body {
   background-color: #EBEAE3;
-
 }
-.main-container{
+
+.main-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 125px;
 }
 
-.img-box{
+.img-box {
   border: 1.5px solid #000;
   width: 50%;
   height: 800px;
   flex: 0 1 auto;
   gap: 0.1px;
+  overflow: hidden;
 }
-.details{
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details {
   border: 1.5px solid #000;
   width: 50%;
-  height: 800px;
   flex: 0 1 auto;
   gap: 0.1px;
+  position: relative;
+  padding-bottom: 220px; /* what의 높이를 고려하여 패딩 추가 */
 }
+
 .details .description {
   border: 1.5px solid #000;
   width: 100%;
-  flex: 0 1 auto;
-  height: 300px;
-  margin-top: 150px;
+
+  margin-top: 20px; /* 수정 */
   text-align: center;
   padding: 30px;
   font-style: normal;
@@ -35,20 +44,18 @@ body{
   font-size: 15px;
   line-height: 18px;
 }
-.details .description p{
+
+.details .description p {
   border-top: 1.5px solid #000;
   width: 100%;
   margin-top: 50px;
   text-align: left;
   padding: 10px;
-
 }
 
 .quantity {
   border: 1.5px solid #000;
-
   width: 100%;
-  flex: 0 1 auto;
   height: 50px;
   text-align: center;
   padding: 30px;
@@ -77,23 +84,24 @@ body{
   height: 50px;
   background-color: #EBEAE3;
 }
-.addBtn{
+
+.addBtn {
   border: 1.5px solid #000;
   width: 100%;
-  flex: 0 1 auto;
   height: 50px;
   text-align: center;
   padding: 30px;
   margin-top: 30px;
-  transition: background-color 0.3s ease
+  transition: background-color 0.3s ease;
 }
-.addBtn:hover{
+
+.addBtn:hover {
   background-color: #422626;
 }
-.price{
+
+.price {
   border: 1.5px solid #000;
   width: 100%;
-  flex: 0 1 auto;
   height: 50px;
   text-align: center;
   padding: 30px;
@@ -102,42 +110,37 @@ body{
   margin-top: 30px;
 }
 
-
-
 .what {
   border-bottom: 1.5px solid #CCC5BB;
-  position: absolute;
-  width: 933px;
-  height: 203px;
-  right: 0px;
-  top: 1009px;
+  width: 100%;
+  height: 220px;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 33px;
-  display: flex;
-  align-items: center;
   text-align: right;
   letter-spacing: 0.3em;
-
   color: #CCC5BB;
-
-}
-input[type=number] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-.suggestion{
-  border: 1px solid #000000; float: left; width: 33%;
-  height: 479px;
+  margin-top: 30px; /* margin-top 추가 */
+  padding: 20px; /* padding 추가 */
 }
 
 .suggestion-container {
-  position: absolute;
-  top: 1250px;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5%;
+}
+
+.suggestion {
+  border: 2px solid #000000;
+  width: 33.3%;
+  height:600px;
+  box-sizing: border-box;
+}
+
+.suggestion-title {
+  margin-top: 1%;
+  margin-left: 1%;
   font-size: 24px;
+
 }

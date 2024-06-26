@@ -130,14 +130,22 @@ public class ShopController {
     public String addToCart(@RequestParam("itemId") Long itemId,
                             @RequestParam("itemPrice") BigDecimal itemPrice,
                             @RequestParam("quantity") int quantity,
-                            @RequestParam("userAccount") String userAccount,
                             RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userAccount = authentication.getName(); // 현재 로그인된 사용자 계정 가져오기
+
+        // 로그 추가
+        log.info("장바구니에 추가 요청 수신: itemId={}, itemPrice={}, quantity={}, userAccount={}",
+                itemId, itemPrice, quantity, userAccount);
+
         try {
             shoppingCartService.addToCart(itemId, itemPrice, quantity, userAccount);
             redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 성공적으로 추가되었습니다.");
         } catch (Exception e) {
+            log.error("장바구니 추가 중 오류 발생", e);
             redirectAttributes.addFlashAttribute("errorMessage", "장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
         }
         return "redirect:/shop/" + itemId;
     }
+
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,20 +9,25 @@
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
-<%@ include file="../include/shop-header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 
 <div class="container">
     <div class="main-container">
         <div class="img-box">
-            <img src="${item.shopItemImg}" alt="${item.shopItemName}">
+            <img src="${item.shopItemImg}" alt="-">
         </div>
         <div class="details">
             <div class="description">
-                <h1>${item.shopItemDesc}</h1>
-                <p>- 10ml <br>
+                <h1>
+                    ${item.shopItemName}
+                </h1>
+                <p><br><br>
+                    ${item.shopItemDesc}<br>
+                    <!-- 10ml  <br>
                     - 100% pure and natural <br>
                     - For external use only <br>
-                    - Designed in Melbourne</p>
+                    - Designed in Melbourne</p> -->
+
             </div>
             <form id="addToCartForm" action="/addToCart" method="post">
                 <div class="quantity">
@@ -33,37 +38,35 @@
                 <div class="addBtn">
                     <input type="hidden" name="itemId" value="${item.shopItemId}">
                     <input type="hidden" name="itemPrice" value="${item.shopItemPrice}">
+                    <input type="hidden" name="userAccount" value="${userAccount}"> <!-- 추가된 부분 -->
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
-            <div class="price">
-                <p>가격: ₩ ${item.shopItemPrice}</p>
-            </div>
         </div>
     </div>
-
     <div class="what">
-        <p>Elevate your home with our thoughtfully curated sensory collection. From artisanal incense holders to
-            aromatic candles,<br>each piece is chosen
+        <p>Elevate your home with our thoughtfully curated sensory collection. From artisanal incense holders to aromatic candles,<br>each piece is chosen
             for its story and the ambiance it creates. Discover
             a range of handcrafted items<br>
             that transform your space into a haven of tranquility and style.</p>
     </div>
-
     <div class="suggestion-title">RELATED PRODUCTS</div>
-
+    <!-- 밑으로 제훈 수정 -->
     <div class="suggestion-container">
+
         <div class="suggestion">
-            <img src="${item.shopItemImg}" alt="이미지왜안뜸?">
+            <img src="" alt="">
         </div>
         <div class="suggestion">
-            <img src="${item.shopItemImg}" alt="이미지왜안뜸?">
+            <img src="" alt="">
         </div>
         <div class="suggestion">
-            <img src="${item.shopItemImg}" alt="이미지왜안뜸?">
+            <img src="" alt="">
         </div>
     </div>
-    <%@ include file="../include/footer.jsp" %>
+</div>
+
+<%@ include file="../include/footer.jsp" %>
 </div>
 
 <script src="/assets/js/category.js"></script>
