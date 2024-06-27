@@ -1,9 +1,93 @@
+// 회원가입 가입하기 조건 만족 전 가입하기 버튼 미활성
+const $success = document.querySelector(".success"); // 가입하기 버튼
+$success.style.backgroundColor = '#7c7979'; // 초기 버튼 색상 회색
+$success.setAttribute("type", "button"); // 초기 버튼 타입 button
 
+// 회원가입 조건을 만족하는지 판별하는 객체 설정
+let flagArray = {
+    idFlag: false,
+    firstPasswordFlag: false,
+    secondPasswordFlag: false,
+    nameFlag: false,
+    birthFlag: false,
+    emailFlag: false
+};
+
+/// 회원가입 가입하기 조건 만족 여부 체크 후 가입하기 버튼 활성화 함수
+function checkAllFlagArray() {
+
+    let checkFlag = false;
+
+    for (let key in flagArray) {
+        if (flagArray[key]) {
+            checkFlag = true;
+        }
+    }
+    if(checkFlag) {
+        // 모든 플래그가 true일 때 실행할 작업
+        console.log("모든 조건이 만족되었습니다.");
+        $success.style.backgroundColor = '#432626'; // 활성화 후 버튼 색상 변경
+        $success.setAttribute("type", "submit"); // 활성화 후 버튼 타입 submit 설정
+        return;
+    } else {console.log("만족되지 않은 조건이 있습니다.");}
+}
+
+
+
+// 프로필 사진 업로드하기
+const $proflieImg = document.querySelector(".upload-imgbox img") // 사진업로드창
+const $profileUploadBtn = document.querySelector(".upload-uploadbtn") // 사진 업로드 버튼
+
+const $realUploadBtn = document.querySelector(".upload-img") // 실제 업로드 버튼
+
+// 1. 사진창 클릭시 파일열기 이벤트
+$proflieImg.addEventListener('click', e => {
+    $realUploadBtn.click();
+})
+// 2. 사진업로드버튼 클릭시 파일열기 이벤트
+$profileUploadBtn.addEventListener('click', e => {
+    $realUploadBtn.click();
+})
+
+// 3. 파일열기를 했을 때 이벤트
+$realUploadBtn.addEventListener('change', e => {
+
+    // 유저가 올린 파일
+    const profileDate = $realUploadBtn.files[0];
+    console.log(profileDate);
+
+    // 이미지파일의 로우데이터(바이트) 를 읽는 객체 생성
+    const reader = new FileReader();
+
+    // 파일을 img 태그의 src 속성에 넣기 위해 URL 형태로 변경
+    reader.readAsDataURL(profileDate);
+
+    // 파일이 등록되는 순간 img태그에 이미지 넣기
+    reader.onloadend = e => {
+        $proflieImg.src = reader.result;
+    }
+})
+
+// 4. 업로드한 프로필사진 삭제하기
+const $profileDeleteBtn = document.querySelector(".upload-deletebtn"); // 사진 삭제 버튼
+
+// 사진 삭제 버튼을 클릭했을 때 이벤트
+$profileDeleteBtn.addEventListener('click', e => {
+
+    // 프로필사진을 기본사진으로 교체하기
+    $proflieImg.src = "/assets/img/profile.jpg";
+    // 파일업로드버튼의 업로드파일정보 초기화하기
+    const profileDate = $realUploadBtn.files[0];
+    $realUploadBtn.value='';
+})
+
+
+
+// 회원가입 조건 검증하기
 // 1. account 조건 검증하기
-let idFlag = false; // 아이디 조건확인
 const $inputAccount = document.querySelector(".account"); // 아이디 입력창 변수설정
 const $accountSub = document.querySelector(".th-accountSub"); // 아이디 조건태그 변수설정
-const accountValid = /^[a-z0-9]{4,14}$/; // 아이디에 입력가능한 문자열
+const accountValid = /^[a-z][a-z0-9_-]{3,15}$/; // 아이디에 입력가능한 문자열
 
 $inputAccount.addEventListener('keyup', e => {
 
@@ -27,11 +111,20 @@ $inputAccount.addEventListener('keyup', e => {
             const $inputAccountValue = $inputAccount.value;
             let encodedAccount = encodeURIComponent($inputAccountValue);
             const URL = `http://localhost:8383/checkid?account=${encodedAccount}`;
-            fetch(URL, {
+            const IPURL = `http://172.30.1.60:8383/checkid?account=${encodedAccount}`;
+
+            Promise.any([
+                fetch(URL, {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ account: $inputAccount.value })
-            })
+                }),
+                fetch(IPURL, {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify({ account: $inputAccount.value })
+                })
+            ])
             .then(res => res.json())
             .then(json => {
                 if (json === false) {
@@ -40,7 +133,8 @@ $inputAccount.addEventListener('keyup', e => {
                     $accountSub.style.color = 'blue';
                     $accountSub.textContent = '사용가능한 아이디입니다';
 
-                    idFlag = true;
+                    flagArray.idFlag = true;
+                    checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
 
                 } else {
                     e.target.classList.remove("truefocus");
@@ -50,24 +144,16 @@ $inputAccount.addEventListener('keyup', e => {
                 }
             })
         }
-        
     }, 500) // setTimeout end
-
 }); // keyup end
 
 
 // 2. password 조건 검증하기
-let firstPasswordFlag = false; // 첫번째 비밀번호 조건확인
-let secondPasswordFlag = false; // 두번째 비밀번호 조건확인
-
-let firstPasswordValue = '';
-let secondPasswordValue = '';
-
 const $inputFirstPassword = document.querySelector(".pw1"); // 첫번째 비밀번호 입력창 변수설정
 const $inputSecondPassword = document.querySelector(".pw2"); // 두번째 비밀번호 입력창 변수설정
 const $firstPasswordSub = document.querySelector(".th-passwordSub1"); // 첫번째 비밀번호 조건태그 변수설정
 const $secondPasswordSub = document.querySelector(".th-passwordSub2"); // 두번째 비밀번호 조건태그 변수설정
-const passwordValid = /^(?=.*[a-zA-Z!@#$%^&*()\-_=+{};:,<.>])(?=.*\d).{8,16}$/; //비밀번호에 입력가능한 문자열
+const passwordValid = /^(?=.*[a-zA-Z!@#$%^&*()\-_=+{};:,<.>])(?=.*\d).{7,15}$/; //비밀번호에 입력가능한 문자열
 
 $inputFirstPassword.addEventListener('input', e => {
 
@@ -103,8 +189,8 @@ $inputFirstPassword.addEventListener('input', e => {
                     $secondPasswordSub.style.color = 'red';
                     $secondPasswordSub.textContent = "입력하신 비밀번호가 일치하지 않습니다.";
                 } else {
-                    $inputFirstPassword.classList.remove("falsefocus");
-                    $inputFirstPassword.classList.add("truefocus");
+                    $inputSecondPassword.classList.remove("falsefocus");
+                    $inputSecondPassword.classList.add("truefocus");
                     $firstPasswordSub.textContent = "";
     
                     e.target.classList.remove("falsefocus");
@@ -112,13 +198,12 @@ $inputFirstPassword.addEventListener('input', e => {
                     $secondPasswordSub.style.color = 'blue';
                     $secondPasswordSub.textContent = "사용가능한 비밀번호입니다.";
     
-                    firstPasswordFlag = true;
-                    secondPasswordFlag = true;
+                    flagArray.firstPasswordFlag = true;
+                    checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
                 }
             }
         }
     }, 500) // setTimeout end
-
 }); // keyup end
 
 $inputSecondPassword.addEventListener('input', e => {
@@ -164,19 +249,16 @@ $inputSecondPassword.addEventListener('input', e => {
                     $secondPasswordSub.style.color = 'blue';
                     $secondPasswordSub.textContent = "사용가능한 비밀번호입니다.";
     
-                    firstPasswordFlag = true;
-                    secondPasswordFlag = true;
+                    flagArray.secondPasswordFlag = true;
+                    checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
                 }
             }
         }
-        
     }, 500) // setTimeout end
-
 }); // keyup end
 
 
 // 3. name 조건 검증하기
-let nameFlag = false; // 이름 조건확인
 const $inputName = document.querySelector(".name"); // 이름 입력창 변수설정
 const $nameSub = document.querySelector(".th-nameSub"); // 이름 조건태그 변수설정
 const nameValid = /^[가-힣]+$/; // 이름에 입력가능한 문자열
@@ -203,15 +285,14 @@ $inputName.addEventListener('keyup', e => {
             $nameSub.style.color = 'blue';
             $nameSub.textContent = "";
 
-            nameFlag = true;
+            flagArray.nameFlag = true;
+            checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
         }
     }, 500) // setTimeout end
-
 }); // keyup end
 
 
 // 4. birth 조건 검증하기
-let birthFlag = false; // 생일 조건확인
 const $chooseBirth = document.querySelector(".birth"); // 생일선택창 변수설정
 const $birthSub = document.querySelector(".th-birthSub"); // 이름 조건태그 변수설정
 
@@ -225,22 +306,33 @@ $chooseBirth.addEventListener('blur', e => {
             $birthSub.style.color = 'red';
             $birthSub.textContent = "생년월일은 필수 입력정보입니다.";
 
-            // 이름 조건체크
         } else {
             e.target.classList.remove("falsefocus");
             e.target.classList.add("truefocus");
             $birthSub.style.color = 'blue';
             $birthSub.textContent = "";
 
-            birthFlag = true;
+            flagArray.birthFlag = true;
+            checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
         }
     }, 500) // setTimeout end
-
 }); // keyup end
+
+// 생일 오늘이후 입력안되는 조건 추가
+let today = new Date(); //현재시간
+
+let year = today.getFullYear(); // 현재 연도
+let month = String(today.getMonth() + 1).padStart(2, '0'); // 현재 월
+let day = String(today.getDate()).padStart(2, '0'); // 현재 일
+
+// 포맷팅한 오늘날짜
+var formattedDate = year + '-' + month + '-' + day;
+
+// 날짜 선택창에 최대선택 오늘 속성추가하기
+$chooseBirth.setAttribute("max", formattedDate);
 
 
 // 5. email 조건 검증하기
-let emailFlag = false; // 이메일 조건확인
 const $inputEmail = document.querySelector(".email"); // 이메일 입력창 변수설정
 const $emailSub = document.querySelector(".th-emailSub"); // 이메일 조건태그 변수설정
 const emailValid = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; // 이메일에 입력가능한 문자열
@@ -267,11 +359,20 @@ $inputEmail.addEventListener('keyup', e => {
             const $emailAccountValue = $inputEmail.value;
             let encodedEmail = encodeURIComponent($emailAccountValue);
             const URL = `http://localhost:8383/checkemail?email=${encodedEmail}`;
-            fetch(URL, {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify({ email: $inputEmail.value })
-            })
+            const IPURL = `http://172.30.1.60:8383/checkemail?email=${encodedEmail}`;
+
+            Promise.any([
+                fetch(URL, {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify({ email: $inputEmail.value })
+                }),
+                fetch(IPURL, {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify({ email: $inputEmail.value })
+                })
+            ])
             .then(res => res.json())
             .then(json => {
                 if (json === false) {
@@ -280,7 +381,8 @@ $inputEmail.addEventListener('keyup', e => {
                     $emailSub.style.color = 'blue';
                     $emailSub.textContent = '사용가능한 이메일입니다';
 
-                    emailFlag = true;
+                    flagArray.emailFlag = true;
+                    checkAllFlagArray(); // 회원가입 가입하기 조건 만족 여부 체크 함수
 
                 } else {
                     e.target.classList.remove("truefocus");
@@ -290,7 +392,5 @@ $inputEmail.addEventListener('keyup', e => {
                 }
             })
         }
-        
     }, 500) // setTimeout end
-
 }); // keyup end

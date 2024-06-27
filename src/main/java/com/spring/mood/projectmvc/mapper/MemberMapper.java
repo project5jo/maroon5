@@ -24,6 +24,10 @@ public interface MemberMapper {
 
     boolean checkEmail(String email);
 
+    Member findId(@Param("name")String name,@Param("email") String email);
+
+    boolean updatePassword(@Param("account") String account,@Param("NewPw") String NewPw);
+
     //자동로그인 쿠키값, 만료시간 업데이트
     void updateAutoLogin(AutoSignInDto dto);
 

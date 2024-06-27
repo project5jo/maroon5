@@ -30,12 +30,30 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- main -->
     <main>
-      <section class="sign-in">
-        <form action="/create" method="post">
+      <section class="sign-up">
+        <form action="/create" method="post" enctype="multipart/form-data">
           <div class="inner">
             <div class="sign-in-title">
               <p>회원가입</p>
             </div>
+            
+            <div class="tr">
+              <p class="th-title">프로필사진<span></span></p>
+              <div class="upload-imgbox">
+                <img src="/assets/img/profile.jpg" alt="profile">
+              </div>
+              <div class="upload-imgbtn">
+                <div class="upload-uploadbtn">
+                  <p>사진업로드
+                    <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
+                  </p>
+                </div>
+                <div class="upload-deletebtn">
+                  <p>취소</p>
+                </div>
+              </div>
+            </div>
+
             <div class="tr">
               <p class="th-title">아이디<span></span></p>
               <input
@@ -49,10 +67,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="tr">
               <p class="th-title">비밀번호<span></span></p>
-              <input type="text" class="pw1" placeholder="비밀번호를 입력하세요" name="password"/>
+              <input type="password" class="pw1" placeholder="비밀번호를 입력하세요" name="password"/>
               <p class="th-passwordSub1"></p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
-              <input type="text" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
+              <input type="password" class="pw2" placeholder="비밀번호를 입력하세요" name="repassword"/>
               <p class="th-passwordSub2"></p>
             </div>
             <div class="tr">
@@ -62,7 +80,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="tr">
               <p class="th-title">생일<span></span></p>
-              <input type="date" class="birth" placeholder="생일을 입력하세요" name="birth"/>
+              <input type="date" class="birth" placeholder="생일을 입력하세요" name="birth" />
               <p class="th-birthSub"></p>
             </div>
             <div class="tr">
@@ -77,7 +95,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
             <div class="btn">
               <button class="cancel"><a href="/login">취소</a></button>
-              <button class="sign-up" type="submit"><a href="#">가입하기</a></button>
+              <button class="success"><p>가입하기</p></button>
             </div>
           </div>
         </form>

@@ -1,6 +1,8 @@
 package com.spring.mood.projectmvc.service;
 
 import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
+import com.spring.mood.projectmvc.dto.requestDto.FindIdDto;
+import com.spring.mood.projectmvc.dto.requestDto.ModifyPwDto;
 import com.spring.mood.projectmvc.dto.requestDto.SignInDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.Member;
@@ -8,6 +10,10 @@ import com.spring.mood.projectmvc.mapper.MemberMapper;
 import com.spring.mood.projectmvc.util.SignInUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
@@ -17,8 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 import static com.spring.mood.projectmvc.service.LoginResult.*;
 import static com.spring.mood.projectmvc.util.SignInUtil.AUTO_LOGIN;
@@ -33,8 +40,9 @@ public class SignInService {
 
 
 
+
     //로그인 검증 처리
-//, HttpSession session, HttpServletResponse response
+    //, HttpSession session, HttpServletResponse response
     public LoginResult authenticate(SignInDto dto , HttpSession session, HttpServletResponse response){
 
         //회원가입 유무 확인
@@ -74,17 +82,27 @@ public class SignInService {
         }
 
         maintainLoginState(session, foundMember);
+        // Spring Security Authentication 설정 추가 시작
+        List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + foundMember.getUserRole()));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(foundMember.getUserAccount(), null, authorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Spring Security Authentication 설정 추가 끝
+
+        // 인증 정보 로그 추가 시작
+        log.info("Authenticated user: " + authentication.getName());
+        authentication.getAuthorities().forEach(authority -> log.info("Authority: " + authority.getAuthority()));
+        // 인증 정보 로그 추가 끝
 
         return SUCCESS;
     }
 
- public static void maintainLoginState(HttpSession session, Member foundmember){
-//        세션의 수명
-     session.setMaxInactiveInterval(60 * 60);
-     //사용자 정보 기억
-     session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
+    public static void maintainLoginState(HttpSession session, Member foundmember){
+        //세션의 수명
+        session.setMaxInactiveInterval(60 * 60);
+        //사용자 정보 기억
+        session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
         log.info("{}님 로그인 성공",foundmember.getUserName());
-  }
+    }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
         // 1. 쿠키 제거하기
@@ -101,5 +119,33 @@ public class SignInService {
                         .account(SignInUtil.getLoggedInUserAccount(request.getSession()))
                         .build()
         );
+    }
+
+    public Member findUser(FindIdDto dto) {
+       String inputUserName =  dto.getName();
+       String inputUserEmail = dto.getEmail();
+       Member findIdUser = memberMapper.findId(inputUserName ,inputUserEmail);
+
+
+        return findIdUser;
+
+    }
+
+    public boolean modifyPw(ModifyPwDto dto){
+
+        String encode = encoder.encode(dto.getNewPassword());
+
+        //DB 암호화하여 저장
+        boolean flag = memberMapper.updatePassword(dto.getAccount(),encode);
+
+        return flag;
+    }
+
+    public static void maintainFindIdState(HttpSession session, Member foundmember){
+        //세션의 수명
+        session.setMaxInactiveInterval(60 * 60);
+        //사용자 정보 기억
+        session.setAttribute("FindIdUser",new FindIdDto(foundmember));
+        log.info("{}님 아이디 찾기 성공: {}",foundmember.getUserName(),foundmember.getUserAccount());
     }
 }

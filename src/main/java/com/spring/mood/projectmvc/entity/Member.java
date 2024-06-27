@@ -41,6 +41,8 @@ public class Member {
     private LocalDate userBirth;
     @Column(name = "user_address")
     private String userAddress;
+
+    @Setter
     @Column(name = "user_profile")
     private String userProfile;
     @Column(name = "user_point")

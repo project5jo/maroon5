@@ -113,9 +113,15 @@ button.kakao-btn {
   /* font-weight: 400; */
 }
 
-button.sign-in-btn a,
-button.kakao-btn a {
+
+button.kakao-btn a,
+button.sign-up-btn a {
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 button.sign-in-btn {
@@ -152,16 +158,19 @@ button.sign-up-btn a {
   margin: 0 5px;
 }
 
+
+
 /* 체크박스 */
 span.text {
   font-size: 15px;
   margin-left: 5px;
+  font-weight: 500;
 }
 
 .circle {
   display: inline-block; /* 영역적용가능해짐 */
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
 
   border: 1px solid #432626;
   box-sizing: border-box;

@@ -2,9 +2,11 @@ package com.spring.mood.projectmvc.entity;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -16,9 +18,10 @@ public class ShopItem {
     private Long shopItemId; // PK
     private String shopItemName;
     private String shopItemDesc;
-    private Double shopItemPrice; // decimal type임 수정검토
+    private BigDecimal shopItemPrice; // decimal type임 수정검토
     private String shopItemImg;
     private LocalDateTime shopItemDate;
     private Long shopItemStock;
     private Long shopItemView;
+    private Integer quantity;
 }

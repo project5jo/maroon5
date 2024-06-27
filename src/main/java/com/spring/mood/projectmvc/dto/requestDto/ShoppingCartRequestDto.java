@@ -3,7 +3,7 @@
 //import com.spring.mood.projectmvc.entity.Member;
 //import com.spring.mood.projectmvc.entity.ShopItem;
 //import com.spring.mood.projectmvc.entity.ShoppingCart;
-
+//
 //import lombok.*;
 //
 //import java.util.List;
@@ -38,7 +38,7 @@
 //                .cartId(this.cartId)
 //                .cartTotalPrice(this.cartTotalPrice)
 //                .cartTotalCount(this.cartTotalCount)
-//                .member(member)
+//                .userAccount(member)
 //                .items(List.of(item))  // assuming each ShoppingCart has multiple items
 //                .build();
 //    }
