@@ -3,6 +3,7 @@ package com.spring.mood.projectmvc.mapper;
 import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
 import com.spring.mood.projectmvc.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -16,6 +17,10 @@ public interface MemberMapper {
     boolean checkId(String account);
 
     boolean checkEmail(String email);
+
+    Member findId(@Param("name")String name,@Param("email") String email);
+
+    boolean updatePassword(@Param("account") String account,@Param("NewPw") String NewPw);
 
     //자동로그인 쿠키값, 만료시간 업데이트
     void updateAutoLogin(AutoSignInDto dto);

@@ -59,19 +59,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <!-- 아이디 비번 오류 태그 -->
             <p class="LoginErrorText">${result}</p>
 
-            <button class="sign-in-btn">
-              <a href="#" type="submit">SIGN IN</a>
-            </button>
-            <button class="kakao-btn">
-              <a href="">카카오 로그인 / 회원가입</a>
-            </button>
+            <button class="sign-in-btn" type="submit">SIGN IN</button>
+
             <button class="sign-up-btn">
               <a href="/create">회원가입</a>
             </button>
             <div class="find">
-              <a class="find-email" href="#">아이디 찾기</a>
+              <a class="find-email" href="/findId">아이디 찾기</a>
               <span>ㅣ</span>
-              <a class="find-pw" href="#">비밀번호 찾기</a>
+              <a class="find-pw" href="/modifyPw">비밀번호 찾기</a>
             </div>
           </div>
         </section>

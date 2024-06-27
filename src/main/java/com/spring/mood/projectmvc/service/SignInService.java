@@ -1,6 +1,8 @@
 package com.spring.mood.projectmvc.service;
 
 import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
+import com.spring.mood.projectmvc.dto.requestDto.FindIdDto;
+import com.spring.mood.projectmvc.dto.requestDto.ModifyPwDto;
 import com.spring.mood.projectmvc.dto.requestDto.SignInDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.Member;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.spring.mood.projectmvc.service.LoginResult.*;
@@ -33,8 +34,9 @@ public class SignInService {
 
 
 
+
     //로그인 검증 처리
-//, HttpSession session, HttpServletResponse response
+    //, HttpSession session, HttpServletResponse response
     public LoginResult authenticate(SignInDto dto , HttpSession session, HttpServletResponse response){
 
         //회원가입 유무 확인
@@ -78,13 +80,13 @@ public class SignInService {
         return SUCCESS;
     }
 
- public static void maintainLoginState(HttpSession session, Member foundmember){
-//        세션의 수명
-     session.setMaxInactiveInterval(60 * 60);
-     //사용자 정보 기억
-     session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
+    public static void maintainLoginState(HttpSession session, Member foundmember){
+        //세션의 수명
+        session.setMaxInactiveInterval(60 * 60);
+        //사용자 정보 기억
+        session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
         log.info("{}님 로그인 성공",foundmember.getUserName());
-  }
+    }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
         // 1. 쿠키 제거하기
@@ -101,5 +103,33 @@ public class SignInService {
                         .account(SignInUtil.getLoggedInUserAccount(request.getSession()))
                         .build()
         );
+    }
+
+    public Member findUser(FindIdDto dto) {
+       String inputUserName =  dto.getName();
+       String inputUserEmail = dto.getEmail();
+       Member findIdUser = memberMapper.findId(inputUserName ,inputUserEmail);
+
+
+        return findIdUser;
+
+    }
+
+    public boolean modifyPw(ModifyPwDto dto){
+
+        String encode = encoder.encode(dto.getNewPassword());
+
+        //DB 암호화하여 저장
+        boolean flag = memberMapper.updatePassword(dto.getAccount(),encode);
+
+        return flag;
+    }
+
+    public static void maintainFindIdState(HttpSession session, Member foundmember){
+        //세션의 수명
+        session.setMaxInactiveInterval(60 * 60);
+        //사용자 정보 기억
+        session.setAttribute("FindIdUser",new FindIdDto(foundmember));
+        log.info("{}님 아이디 찾기 성공: {}",foundmember.getUserName(),foundmember.getUserAccount());
     }
 }

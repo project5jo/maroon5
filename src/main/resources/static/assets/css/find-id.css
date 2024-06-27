@@ -14,9 +14,6 @@ body {
 header {
   width: 100%;
   height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
 
   font-size: 17px;
   border-bottom: 1px solid #432626;
@@ -31,7 +28,7 @@ nav.menu {
   align-items: center;
 }
 
-.menu .inner {
+.menu .wrapper {
   display: flex;
   height: 100%;
   justify-content: space-between;
@@ -61,13 +58,18 @@ i.fa-bars {
 
 /* main */
 main {
-  margin-top: 80px;
+  /* margin-top: 80px; */
   font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
     "malgun gothic", "돋움", "dotum", sans-serif !important;
 }
 
 main .inner {
-  width: 600px;
+  width: 580px;
+}
+
+.sign-in .wrapper {
+  /* margin-top: 180px; */
+  padding-top: 180px;
 }
 
 .sign-in {
@@ -75,7 +77,7 @@ main .inner {
 }
 
 .sign-in-title {
-  margin: 180px 0 60px 0;
+  margin: 0 0 60px 0;
 }
 
 .sign-in-title p {
@@ -85,12 +87,18 @@ main .inner {
   text-align: center;
 }
 
-input.email,
-input.pw {
+.sub-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+input.name,
+input.email {
   border: 1px solid #432626;
   display: block;
   width: 100%;
-  height: 70px;
+  height: 65px;
   padding: 10px;
   margin: 0 auto;
   margin-bottom: 10px;
@@ -98,47 +106,32 @@ input.pw {
   background: none;
 }
 
+input.name {
+  margin-bottom: 30px;
+}
+
 input::placeholder {
   font-size: 17px;
 }
 
-button.sign-in-btn,
-button.kakao-btn {
+button.sign-in-btn {
   background-color: #432626;
   color: #fff;
   width: 100%;
   height: 70px;
   font-size: 17px;
-  margin-top: 10px;
+  margin-top: 40px;
+
   /* font-weight: 400; */
 }
 
-
-button.kakao-btn a,
-button.sign-up-btn a {
+button.sign-in-btn a {
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
-}
-
-button.sign-in-btn {
-  margin-top: 40px;
-}
-
-.sign-up-btn {
-  background: none;
-  border: 1px solid #432626;
-  width: 100%;
-  height: 70px;
-  margin-top: 10px;
-  font-size: 17px;
-}
-
-button.sign-up-btn a {
-  color: #432626;
 }
 
 .find {
@@ -148,9 +141,7 @@ button.sign-up-btn a {
   color: #888888;
 }
 
-.find-email,
-.find-pw,
-.find span {
+.find-pw {
   color: #888888;
 }
 
@@ -158,48 +149,59 @@ button.sign-up-btn a {
   margin: 0 5px;
 }
 
-
-
-/* 체크박스 */
-span.text {
-  font-size: 15px;
-  margin-left: 5px;
-  font-weight: 500;
-}
-
-.circle {
-  display: inline-block; /* 영역적용가능해짐 */
-  width: 17px;
-  height: 17px;
-
-  border: 1px solid #432626;
-  box-sizing: border-box;
-
-  position: relative;
-  top: 4px;
-  cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
-
-  /* background-image: url(https://blog.kakaocdn.net/dn/XTnSL/btrhtUIVtpB/5FungHN6IXVXG8bLbhE9Dk/img.png); */
-  background-size: 70%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-#chk:checked + .circle {
-  background-color: #432626;
-  border-color: #432626;
-  background-image: url(https://blog.kakaocdn.net/dn/t7a2D/btrhtVgLYmG/dUxzAkBy9hIZ4gHmyllQrk/img.png);
-}
-
-/* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-#chk {
-  position: absolute;
-  left: -999em;
-}
-
 .result {
   color: #ff003e;
   margin: 30px 0 0 0;
   line-height: 160%;
   font-size: 15px;
+}
+
+/* 아이디 찾기 */
+.foundUserId {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.foundUserId p {
+  font-size: 17px;
+  text-align: center;
+  line-height: 180%;
+}
+.foundUserId p span {
+  font-size: 19px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 180%;
+}
+
+/* 성공 후 버튼 */
+.btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+button.sign-in,
+button.find-pw {
+  border: 1px solid #432626;
+  background-color: transparent;
+
+  width: 286px;
+  height: 70px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+button.sign-in a,
+button.find-pw a {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 500;
+  color: #432626;
 }
