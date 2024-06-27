@@ -46,8 +46,6 @@
         AND user_name = #{name}
     </select>
 
-
-
     <select id="checkId" resultType="boolean">
         SELECT COUNT(*)
         FROM Users
@@ -64,6 +62,12 @@
     <update id="updateAutoLogin">
         UPDATE Users
         SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="updateRoomId">
+        UPDATE Users
+        SET room_id = #{roomId}
         WHERE user_account = #{account}
     </update>
 

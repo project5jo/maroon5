@@ -13,6 +13,8 @@ public interface MemberMapper {
 
     Member findOne(String account);
 
+    void updateRoomId(@Param("account") String account, @Param("roomId")int roomId);
+
 
     User findChatUser(String account);
 

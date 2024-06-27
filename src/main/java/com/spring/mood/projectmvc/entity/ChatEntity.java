@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "chatRoom")
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +40,7 @@ public class ChatEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
+    @JsonIgnore
     private ChatRoom chatRoom;
 
     @Transient
