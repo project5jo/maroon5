@@ -22,8 +22,10 @@
                 <p><br><br>
                     ${item.shopItemDesc}<br>
                 </p>
+                <%-- 디버깅을 위해 추가 --%>
+<p>Session User Account: ${sessionScope.loginUser.account}</p>
             </div>
-            <form id="addToCartForm" action="/addToCart" method="post">
+            <form id="addToCartForm" action="/cart" method="post" onsubmit="return debugForm()">
                 <div class="quantity">
                     <button type="button" onclick="decrementQuantity()">-</button>
                     <input type="number" name="quantity" id="quantityInput" value="1" min="1" step="1" oninput="updatePrice()">
@@ -32,6 +34,7 @@
                 <div class="addBtn">
                     <input type="hidden" name="itemId" value="${item.shopItemId}">
                     <input type="hidden" name="itemPrice" id="itemPrice" value="${item.shopItemPrice}">
+                    <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
@@ -83,6 +86,33 @@
         const newPrice = quantityInput.value * itemPrice;
         totalPrice.textContent = '가격: ₩' + newPrice.toFixed(2);
     }
+    // 제훈함수
+    function debugForm() {
+        var form = document.getElementById('addToCartForm');
+        var itemId = form.itemId.value;
+        var itemPrice = form.itemPrice.value;
+        var quantity = form.quantity.value;
+        var userAccount = form.userAccount.value;
+
+        // Debug information
+        var debugMessage = 'Debug Form Submission:\n';
+        debugMessage += 'itemId: ' + itemId + '\n';
+        debugMessage += 'itemPrice: ' + itemPrice + '\n';
+        debugMessage += 'quantity: ' + quantity + '\n';
+        debugMessage += 'userAccount: ' + userAccount;
+
+        // Display the debug information in an alert
+        alert(debugMessage);
+
+        // Ensure all required fields are present
+        if (!itemId || !itemPrice || !quantity || !userAccount) {
+            alert('Form submission cancelled: missing required fields.');
+            return false;
+        }
+
+        return true; // Allow form submission if all fields are valid
+    }
+
 </script>
 </body>
 </html>

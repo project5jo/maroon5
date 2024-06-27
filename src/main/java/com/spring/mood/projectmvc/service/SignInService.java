@@ -72,9 +72,9 @@ public class SignInService {
             autoLogin.setMaxAge(60 * 60 * 24 * 90);
             response.addCookie(autoLogin);
             memberMapper.updateAutoLogin(AutoSignInDto.builder()
-                            .sessionId(session.getId())
-                            .account(account)
-                            .limitTime(LocalDateTime.now().plusDays(90))
+                    .sessionId(session.getId())
+                    .account(account)
+                    .limitTime(LocalDateTime.now().plusDays(90))
                     .build());
 
         }
@@ -94,13 +94,13 @@ public class SignInService {
         return SUCCESS;
     }
 
- public static void maintainLoginState(HttpSession session, Member foundmember){
+    public static void maintainLoginState(HttpSession session, Member foundmember){
 //        세션의 수명
-     session.setMaxInactiveInterval(60 * 60);
-     //사용자 정보 기억
-     session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
+        session.setMaxInactiveInterval(60 * 60);
+        //사용자 정보 기억
+        session.setAttribute("loginUser",new SignInUserInfoDTO(foundmember));
         log.info("{}님 로그인 성공",foundmember.getUserName());
-  }
+    }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
         // 1. 쿠키 제거하기

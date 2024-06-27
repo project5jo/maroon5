@@ -13,7 +13,7 @@ public class SignInUtil {
 
     //로그인 여부 확인
     public static boolean isLoggedIn(HttpSession session){
-return session.getAttribute(LoginUser)!= null;
+        return session.getAttribute(LoginUser)!= null;
     }
 
     public static boolean isAutoLoggedIn(HttpServletRequest request) {
