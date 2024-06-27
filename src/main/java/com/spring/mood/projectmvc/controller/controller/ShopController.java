@@ -68,7 +68,7 @@ public class ShopController {
         // Debugging: userRole 값 출력
         System.out.println("User Role: " + userRole);
 
-        return "html/shop-Index";
+        return "html/shop-index";
     }
 
     @GetMapping("/shop/{id}")
@@ -88,13 +88,13 @@ public class ShopController {
         return "html/shop-addItem";  //
     }
 
-    private String rootPath = "/Users/jeongjaehan/Desktop/Developer/upload";
+    private String rootPath = "/Users/jehoon/spring-prj/upload";
 
     @PostMapping("/shop/add")
     public String uploadFile(
             @RequestParam("shop_item_name") String name,
             @RequestParam("shop_item_desc") String description,
-            @RequestParam("shop_item_price") Double price,
+            @RequestParam("shop_item_price") BigDecimal price,
             @RequestParam("shop_item_stock") Long stock,
             @RequestParam("shop_item_img") MultipartFile file,
             HttpSession session,
@@ -129,21 +129,6 @@ public class ShopController {
         shopItemService.deleteItem(Long.valueOf(itemId));  // itemService에서 실제 삭제 처리
         redirectAttributes.addFlashAttribute("message", "상품이 삭제되었습니다.");
         return "redirect:/shop";
-    }
-
-    @PostMapping("/addToCart")
-    public String addToCart(@RequestParam("itemId") Long itemId,
-                            @RequestParam("itemPrice") BigDecimal itemPrice,
-                            @RequestParam("quantity") int quantity,
-                            @RequestParam("userAccount") String userAccount,
-                            RedirectAttributes redirectAttributes) {
-        try {
-            shoppingCartService.addToCart(itemId, itemPrice, quantity, userAccount);
-            redirectAttributes.addFlashAttribute("successMessage", "장바구니에 상품이 성공적으로 추가되었습니다.");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
-        }
-        return "redirect:/shop/" + itemId;
     }
 
     private List<String> getRandomImages() {
