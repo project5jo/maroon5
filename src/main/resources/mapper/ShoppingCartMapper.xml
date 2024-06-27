@@ -1,28 +1,12 @@
-<mapper namespace="com.example.mapper.ShoppingCartMapper">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <select id="findCartItem" parameterType="map" resultType="ShoppingCart">
-        SELECT * FROM ShoppingCart WHERE user_account = #{userAccount} AND shop_item_id = #{shopItemId}
-    </select>
 
-    <select id="findCartItemsByUser" parameterType="String" resultType="ShoppingCart">
-        SELECT sc.*, si.shop_item_name, si.shop_item_price
-        FROM ShoppingCart sc
-        JOIN ShopItems si ON sc.shop_item_id = si.shop_item_id
-        WHERE sc.user_account = #{userAccount}
-    </select>
-
-    <insert id="insertCartItem" parameterType="ShoppingCart">
+<mapper namespace="com.spring.mood.projectmvc.mapper.ShoppingCartMapper">
+    <insert id="save" parameterType="com.spring.mood.projectmvc.entity.ShoppingCart">
         INSERT INTO ShoppingCart (user_account, shop_item_id, cart_total_price, cart_total_count)
         VALUES (#{userAccount}, #{shopItemId}, #{cartTotalPrice}, #{cartTotalCount})
     </insert>
-
-    <update id="updateCartItem" parameterType="ShoppingCart">
-        UPDATE ShoppingCart
-        SET cart_total_price = #{cartTotalPrice}, cart_total_count = #{cartTotalCount}
-        WHERE cart_id = #{cartId}
-    </update>
-
-    <delete id="deleteCartItem" parameterType="map">
-        DELETE FROM ShoppingCart WHERE user_account = #{userAccount} AND shop_item_id = #{shopItemId}
-    </delete>
 </mapper>

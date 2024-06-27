@@ -28,6 +28,7 @@
         WHERE user_account = #{account}
     </select>
 
+
     <select id="findId" resultType="member">
         SELECT
         user_account
@@ -44,6 +45,8 @@
         WHERE user_email = #{email}
         AND user_name = #{name}
     </select>
+
+
 
     <select id="checkId" resultType="boolean">
         SELECT COUNT(*)

@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +60,13 @@ public class SignInController {
         HttpSession session = request.getSession();
         LoginResult result = service.authenticate(dto, session, response);
         //, session,response
+        // 사용자 정보 및 권한 확인 로그 추가 시작
+        if (result == SUCCESS) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            log.info("Authentication: " + authentication);
+            authentication.getAuthorities().forEach(authority -> log.info("Authority: " + authority.getAuthority()));
+        }
+        // 사용자 정보 및 권한 확인 로그 추가 끝
 
         redirectAttributes.addFlashAttribute("result", result);
 

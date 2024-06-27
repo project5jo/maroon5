@@ -10,6 +10,10 @@ import com.spring.mood.projectmvc.mapper.MemberMapper;
 import com.spring.mood.projectmvc.util.SignInUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
@@ -20,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 import static com.spring.mood.projectmvc.service.LoginResult.*;
 import static com.spring.mood.projectmvc.util.SignInUtil.AUTO_LOGIN;
@@ -76,6 +82,16 @@ public class SignInService {
         }
 
         maintainLoginState(session, foundMember);
+        // Spring Security Authentication 설정 추가 시작
+        List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + foundMember.getUserRole()));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(foundMember.getUserAccount(), null, authorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Spring Security Authentication 설정 추가 끝
+
+        // 인증 정보 로그 추가 시작
+        log.info("Authenticated user: " + authentication.getName());
+        authentication.getAuthorities().forEach(authority -> log.info("Authority: " + authority.getAuthority()));
+        // 인증 정보 로그 추가 끝
 
         return SUCCESS;
     }

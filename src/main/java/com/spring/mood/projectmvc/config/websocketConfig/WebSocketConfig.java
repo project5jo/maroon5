@@ -1,6 +1,7 @@
 package com.spring.mood.projectmvc.config.websocketConfig;
 
 
+import com.spring.mood.projectmvc.config.interceptorConfig.ChatInterceptorConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @EnableWebSocketMessageBroker
@@ -33,7 +36,9 @@ public class WebSocketConfig  implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat-websocket").withSockJS();
+        registry.addEndpoint("/chat-websocket")
+                .addInterceptors(new ChatInterceptorConfig()) // 인터셉터 추가
+                .withSockJS();
 
     }
 

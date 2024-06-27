@@ -75,6 +75,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <script>
       const loginUser = "<c:out value='${loginUser.account}' />";
+      const topicId = ${topicId}; // 동적으로 설정된 topicId
+      const roomId = ${roomId}; // 동적으로 설정된 roomId
+
       let sendere = document.querySelector(".send");
       let chat = document.querySelector(".my-chat-input");
 
@@ -86,8 +89,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
       chat.addEventListener('keyup', e => {
         if (e.keyCode === 13) {
-          sendMessage();
-          document.querySelector(".my-chat-input").value = "";
+          sendere.click();
         }
       })
 
@@ -121,21 +123,35 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         // •	서버에 같이 보낼 헤더 정보 > 지금 시간만 보내줌
         //     3.	JSON.stringify({'sender': sender, 'content': content}):
         // •	입력한 메세지 본문을 JSON 으로 변환해서 보내줌
+        if (!sender) return;
+        if (!content) return;
         stompClient.send(
           "/app/sendMessage",
           {
             timestamp: new Date().toString(),
           },
-          JSON.stringify({ sender: sender, content: content })
+                JSON.stringify({ sender: sender, content: content, topicId: topicId, roomId: roomId })
         );
       }
 
       function showMessage(message) {
         let messageElement = document.createElement('li');
+        let timestamp = new Date(message.timestamp);
+        console.log(timestamp)
+
+        // 포맷팅 옵션 설정
+        let options = {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        };
+
+        // 포맷팅 변환
+        let formattedTime = timestamp.toLocaleString('ko-KR', options);
         if (message.sender === loginUser) {
           messageElement.className = 'my-msg';
           messageElement.innerHTML = `
-            <div class="my-msg-writing-time"><p>\${message.timestamp}</p></div>
+            <div class="my-msg-writing-time"><p>\${formattedTime}</p></div>
             <div class="msg-text">
               <p>\${message.content}</p>
             </div>
@@ -150,7 +166,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                    <p>\${message.content}</p>
                   </div>
                 </div>
-             <div class="msg-writing-time"><p>\${message.timestamp}</p></div>
+             <div class="msg-writing-time"><p>\${formattedTime}</p></div>
                 `;
         }
 
@@ -160,15 +176,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         firstMessage.scrollTop = firstMessage.scrollHeight;
       }
       function loadMessages() {
-        //비동기로 메세지 목록 로딩 계속 해주는거
-        fetch("/messages")
-          .then((response) => response.json())
-          .then((messages) => {
-            messages.forEach((message) => {
-              showMessage(message);
-            });
-            let chatContainer = document.querySelector(".chatting");
-            chatContainer.scrollTop = chatContainer.scrollHeight;
+        fetch(`/api/chat/messages?topicId=${topicId}&roomId=${roomId}`)
+                .then((response) => response.json())
+                .then((messages) => {
+                  messages.forEach((message) => {
+                    showMessage(message);
+                  });
+                  let chatContainer = document.querySelector(".chatting");
+                  chatContainer.scrollTop = chatContainer.scrollHeight;
           });
       }
 

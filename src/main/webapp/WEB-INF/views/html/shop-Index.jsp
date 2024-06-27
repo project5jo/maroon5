@@ -9,10 +9,13 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
-  <%@ include file="../include/shop-header.jsp" %>
+  <%@ include file="../include/header.jsp" %>
+
   <div class="container">
     <div class="search-container">
-      <button class="item-add">Add Item</button>
+      <c:if test="${userRole == 'ROLE_admin'}">
+        <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
+      </c:if>
       <form action="/shop" method="get">
         <input type="text" name="keyword" class="search-bar">
         <button type="submit" class="item-search">Search</button>
@@ -23,6 +26,9 @@
       <ul>
         <c:forEach var="item" items="${items}">
           <li>
+            <c:if test="${userRole == 'ROLE_admin'}">
+              <button class="delete-btn" onclick="confirmDeletion('${item.shopItemId}')">X</button>
+            </c:if>
             <p>${item.shopItemDesc}</p>
             <div class="img-box">
               <a href="/shop/${item.shopItemId}">
@@ -39,5 +45,6 @@
     
   </div>
   <script src="/assets/js/category.js"></script>
+  <script src="/assets/js/shop-index.js"></script>
 </body>
 </html>
