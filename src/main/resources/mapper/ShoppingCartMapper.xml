@@ -42,4 +42,9 @@
         LEFT JOIN ShopItems i ON c.shop_item_id = i.shop_item_id
         WHERE c.user_account = #{userAccount}
     </select>
+
+    <insert id="save" parameterType="com.spring.mood.projectmvc.entity.ShoppingCart">
+        INSERT INTO ShoppingCart (user_account, shop_item_id, cart_total_price, cart_total_count)
+        VALUES (#{userAccount}, #{shopItemId}, #{cartTotalPrice}, #{cartTotalCount})
+    </insert>
 </mapper>

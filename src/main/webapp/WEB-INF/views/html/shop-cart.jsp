@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
+    <%@ include file="../include/header.jsp" %>
     <div class="cart-container">
         <div class="cart-header">
             <h2>Cart</h2>
@@ -46,5 +47,6 @@
             <p>Tax included and shipping calculated at checkout</p>
         </div>
     </div>
+    <script src="/assets/js/category.js"></script>
 </body>
 </html>
