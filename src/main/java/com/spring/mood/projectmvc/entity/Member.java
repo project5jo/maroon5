@@ -20,6 +20,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_account")
     private String userAccount; // PK
+
+    @Setter
     @Column(name = "room_id")
     private int roomId; // ChatRooms FK
 

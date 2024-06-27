@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
-    List<ChatEntity> findMessagesByChatRoomTopicTopicIdAndChatRoomRoomId(int topicId, int roomId);
+    List<ChatEntity> findMessagesByChatRoomTopicTopicIdAndChatRoomRoomId(Integer topicId, int roomId);
 }
 
 

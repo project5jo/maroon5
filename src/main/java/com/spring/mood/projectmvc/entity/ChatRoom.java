@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,8 +31,15 @@ public class ChatRoom {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topic_id")
+    @JsonIgnore
     private Topic topic;
 
     @OneToMany(mappedBy = "chatRoom")
+    @JsonIgnore
     private List<ChatEntity> messages;
+
+
+    @Column(name = "current_users")
+    private int currentUsers;
+
 }

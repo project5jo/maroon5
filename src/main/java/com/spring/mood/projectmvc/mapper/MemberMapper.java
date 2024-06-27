@@ -4,6 +4,7 @@ import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -11,6 +12,8 @@ public interface MemberMapper {
     boolean save(Member member);
 
     Member findOne(String account);
+
+    void updateRoomId(@Param("account") String account, @Param("roomId")int roomId);
 
 
     User findChatUser(String account);
