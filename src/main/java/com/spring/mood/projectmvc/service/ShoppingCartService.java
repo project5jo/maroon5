@@ -1,42 +1,36 @@
-//package com.spring.mood.projectmvc.service;
-//
-//import com.spring.mood.projectmvc.dto.requestDto.ShoppingCartRequestDto;
-//import com.spring.mood.projectmvc.dto.responseDto.OrderDetailResponseDto;
-//import com.spring.mood.projectmvc.entity.Orders;
-//import com.spring.mood.projectmvc.entity.ShoppingCart;
-//import com.spring.mood.projectmvc.mapper.ShoppingCartMapper;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//import java.util.stream.Collectors;
-//
-//@Service
-//public class ShoppingCartService {
-//
-//    @Autowired
-//
-//    public OrderDetailResponseDto addToCart(ShoppingCartRequestDto shoppingCartRequestDto) {
-//        Orders order = Orders.builder()
-//                .userAccount(shoppingCartRequestDto.getUserAccount())
-//                .orderDate(java.time.LocalDateTime.now())
-//                .build();
-//        Orders savedOrder = ordersRepository.save(order);
-//        return toResponseDto(savedOrder);
-//    }
-//
-//    public List<OrderDetailResponseDto> getAllOrders() {
-//        return ShoppingCartMapper.findAll().stream()
-//                .map(this::toResponseDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private OrderDetailResponseDto toResponseDto(Orders order) {
-//        return OrderDetailResponseDto.builder()
-//                .orderId(order.getOrderId())
-//                .userAccount(order.getUserAccount())
-//                .orderDetailCount(order.)
-//                .orderDetailStatus("Pending")
-//                .build();
-//    }
-//}
+package com.spring.mood.projectmvc.service;
+
+import com.spring.mood.projectmvc.entity.ShoppingCart;
+import com.spring.mood.projectmvc.mapper.ShoppingCartMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class ShoppingCartService {
+
+    private final ShoppingCartMapper shoppingCartMapper;
+
+    @Transactional
+    public void addToCart(Long itemId, BigDecimal itemPrice, int quantity, String userAccount) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserAccount(userAccount); // 사용자 계정 정보
+        shoppingCart.setShopItemId(itemId); // 상품 ID
+        shoppingCart.setCartTotalPrice(itemPrice.multiply(BigDecimal.valueOf(quantity))); // 총 가격 = 상품 가격 * 수량
+        shoppingCart.setCartTotalCount(quantity); // 총 수량
+
+        // 로그 추가
+        log.info("장바구니에 추가: {}", shoppingCart);
+
+        // 장바구니에 저장
+        boolean saved = shoppingCartMapper.save(shoppingCart);
+        if (!saved) {
+            throw new RuntimeException("장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
+        }
+    }
+}

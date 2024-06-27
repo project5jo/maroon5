@@ -98,7 +98,9 @@ main .inner {
 
 .th-title {
   margin-bottom: 15px;
+
 }
+
 
 .th-sub {
   font-size: 14px;
@@ -198,4 +200,8 @@ button a, button p{
 
 footer {
   height: 100px;
+}
+
+p.th-title{
+font-weight: 600;
 }

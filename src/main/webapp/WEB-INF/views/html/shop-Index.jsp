@@ -4,50 +4,47 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>나의 애착 페이지</title>
+  <title>상품 목록</title>
   <link rel="stylesheet" href="/assets/css/shop-index.css">
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
-  <%@ include file="../include/shop-header.jsp" %>
-  <div class="container">
-    <div class="main-container">
-      <ul>
-        <li>
-          <p>Our curated collection of sensory delights is designed to elevate the atmosphere of any home. Each piece is selected with care, focusing on the story it tells and the mood it evokes.</p>
-          <div class="img-box">
-            <a href="">
-              <img src="" alt="">
-            </a>
-          </div>
-          <span>Onyx Coffee Lab - Monarch 10oz</span>
-          <button id="cart-btn">₩ 30000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
-        </li>
-        <li>
-          <p>A hand-picked range of sensory experiences to transform and uplift the home. Each item within this collection is thoughtfully chosen based on the story it tells and the ambiance it creates. Our selection includes Incausa handmade ceramic incense holders and incense, YIELD glass incense holders and incense and also our favourite Studio Milligram products from their sensory range.</p>
-          <div class="img-box">
-            <a href="">
-              <img src="" alt="">
-            </a>
-          </div>
-          <span>Onyx Coffee Lab - Monarch 10oz</span>
-          <button id="cart-btn">₩ 30000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
-        </li>
-        <li>
-          <p>Immerse yourself in our carefully curated assortment of sensory treasures, crafted to enhance and transform your living space. Each product in this collection is chosen for its unique narrative and the ambiance it creates.</p>
-          <div class="img-box">
-            <a href="">
-              <img src="" alt="">
-            </a>
-          </div>
-          <span>Onyx Coffee Lab - Monarch 10oz</span>
-          <button id="cart-btn">₩ 30000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
-        </li>
+  <%@ include file="../include/header.jsp" %>
 
+  <div class="container">
+    <div class="search-container">
+      <c:if test="${userRole == 'ROLE_admin'}">
+        <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
+      </c:if>
+      <form action="/shop" method="get">
+        <input type="text" name="keyword" class="search-bar">
+        <button type="submit" class="item-search">Search</button>
+      </form>
+    </div>
+    <div class="main-container">
+      
+      <ul>
+        <c:forEach var="item" items="${items}">
+          <li>
+            <c:if test="${userRole == 'ROLE_admin'}">
+              <button class="delete-btn" onclick="confirmDeletion('${item.shopItemId}')">X</button>
+            </c:if>
+            <p>${item.shopItemDesc}</p>
+            <div class="img-box">
+              <a href="/shop/${item.shopItemId}">
+                <img src="${item.shopItemImg}" alt="${item.shopItemName}">
+              </a>
+            </div>
+            <span>${item.shopItemName}</span>
+            <button id="cart-btn">₩ ${item.shopItemPrice}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
+          </li>
+        </c:forEach>
       </ul>
     </div>
     <%@ include file="../include/footer.jsp" %>
+    
   </div>
   <script src="/assets/js/category.js"></script>
+  <script src="/assets/js/shop-index.js"></script>
 </body>
 </html>
