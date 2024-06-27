@@ -76,7 +76,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <script>
       const loginUser = "<c:out value='${loginUser.account}' />";
       <%--const loginUserName = "<c:out value='${loginUser.nickName}' />";--%>
-      console.log(loginUser)
       const topicId = ${topicId};
       let roomId = ${roomId};
 
@@ -112,12 +111,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       }
 
       function subscribeToRoom(roomId) {
+        console.log(roomId)
         if (currentSubscription) {
           currentSubscription.unsubscribe(); // 기존 구독 취소
         }
         currentSubscription = stompClient.subscribe(`/topic/messages/${topicId}/${roomId}`, function (message) {
           showMessage(JSON.parse(message.body));
         });
+        loadMessages(roomId); // 새로운 방의 메시지 로드
       }
 
       function joinRoom() {
@@ -133,10 +134,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   console.log("Joined room:", data);
                   if (data.roomId !== roomId) {
                     roomId = data.roomId;
+                    console.log("새로운 방")
+                    console.log(roomId + "asdasdasd")
+                    updateURL(roomId);
                     subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정
-                    loadMessages(); // 새로운 방의 메시지 로드
-
+                    loadMessages(roomId); // 새로운 방의 메시지 로드
                   } else {
+                    console.log("기존 방")
                     subscribeToRoom(roomId); // 초기 구독 설정
                   }
                 })
@@ -144,10 +148,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   console.error("Error joining room:", error);
                 });
       }
-      <%--function updateURL(newRoomId) {--%>
-      <%--  const newURL = `${window.location.pathname}?topicId=${topicId}&roomId=${newRoomId}`;--%>
-      <%--  history.pushState(null, '', newURL);--%>
-      <%--}--%>
+      function updateURL(newRoomId) {
+        const newURL = `${window.location.pathname}?roomId=\${newRoomId}&topicId=${topicId}`;
+        console.log("Updating URL to:", newURL); // 디버그용 로그 추가
+        history.pushState(null, '', newURL);
+      }
 
 
       function sendMessage() {
@@ -177,7 +182,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function showMessage(message) {
         let messageElement = document.createElement('li');
         let timestamp = new Date(message.timestamp);
-        console.log(timestamp)
 
         // 포맷팅 옵션 설정
         let options = {
@@ -215,7 +219,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         firstMessage.appendChild(messageElement);
         firstMessage.scrollTop = firstMessage.scrollHeight;
       }
-      function loadMessages() {
+      function loadMessages(roomId) {
         fetch(`/api/chat/messages?roomId=${roomId}&topicId=${topicId}`)
                 .then((response) => response.json())
                 .then((messages) => {
@@ -223,6 +227,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   chatContainer.innerHTML = ''; // 기존 메시지 삭제
                   messages.forEach((message) => {
                     showMessage(message);
+                    console.log('gdgd')
                   });
                   chatContainer.scrollTop = chatContainer.scrollHeight;
                 });

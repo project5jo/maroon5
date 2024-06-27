@@ -92,7 +92,7 @@ public class ChatService {
     public ChatRoom incrementCurrentUsers(Integer topicId, int roomId, String username) {
         System.out.println("username 은은은은= " + username);
         ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, roomId);
-        if (chatRoom.getCurrentUsers() >= 50) {
+        if (chatRoom.getCurrentUsers() >= 2) {
             chatRoom = createNewChatRoom(topicId, roomId + 1);
         }
         chatRoom.setCurrentUsers(chatRoom.getCurrentUsers() + 1);
