@@ -18,6 +18,7 @@
         <typeAlias type="com.spring.mood.projectmvc.entity.OrderDetails" alias="orderdetails"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.ChatEntity" alias="chat"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.User" alias="user"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.ShoppingCart" alias="shoppingcart"/>
     </typeAliases>
 
     <mappers>
