@@ -3,19 +3,50 @@
 <html>
 <head>
     <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/assets/css/shop-cart.css">
+    <link rel="stylesheet" href="/assets/css/shop-header.css"/>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
-    <c:forEach var="item" items="${cartItems}">
-        <div>
-            <p>상품명: ${item.shopItemName}</p>
-            <p>수량: ${item.cartTotalCount}</p>
-            <p>가격: ${item.cartTotalPrice}</p>
-            <form action="removeCartItem" method="post">
-                <input type="hidden" name="shopItemId" value="${item.shopItemId}">
-                <button type="submit">삭제</button>
-            </form>
+    <%@ include file="../include/header.jsp" %>
+    <div class="cart-container">
+        <div class="cart-header">
+            <h2>Cart</h2>
         </div>
-    </c:forEach>
+        <c:forEach var="cart" items="${cartItems}">
+            <c:forEach var="item" items="${cart.items}">
+                <div class="cart-item">
+                    <a href="">
+                        <img src="${item.shopItemImg}" alt="name">
+                    </a>
+                    <div class="item-details">
+                        <h3>${item.shopItemName}</h3>
+                        <p>${item.shopItemDesc}</p>
+                    </div>
+                    <div class="item-price">
+                        <span>₩ ${item.shopItemPrice}</span>
+                    </div>
+                    <div class="item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <div class="item-remove">
+                        <button class="remove-btn">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:forEach>
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Subtotal:</span>
+                <span>₩${cartTotalPrice}</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+            <p>Tax included and shipping calculated at checkout</p>
+        </div>
+    </div>
+    <script src="/assets/js/category.js"></script>
 </body>
 </html>

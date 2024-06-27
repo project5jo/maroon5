@@ -1,0 +1,167 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #EBEAE3;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-container {
+  width: 100%;
+  height: 100vh;
+  margin-top: 75px;
+}
+
+.cart-header {
+  width: 100%;
+  height: 75px;
+  border-top: 1.5px solid #000;
+  border-bottom: 1.5px solid #000;
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  text-indent: 30px;
+}
+
+.product {
+  width: 100%;
+  height: 75px;
+  margin-top: 30px;
+  border-top: 1.5px solid #000;
+  border-bottom: 1.5px solid #000;
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  text-indent: 30px;
+}
+
+.price {
+  margin-left:  55.5%;
+}
+
+.QTY {
+  margin-left: 15.5%;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #000000;
+}
+.cart-item a{
+  border-right: 1.5px solid #000;
+  width: 15%;
+}
+
+.cart-item a img {
+  width: 100%;
+  height: auto;
+  padding: 50px;
+  object-fit: cover;
+}
+
+.item-details {
+  width: 45%;
+  height: auto;
+  border-right: 1.5px solid #000;
+  padding: 50px;
+  font-size: 20px;
+}
+
+.item-details h3 {
+  margin: 0;
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.item-details p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.item-price {
+  width: 20%;
+  height: auto;
+  padding: 50px;
+  border-right: 1.5px solid #000;
+}
+
+.item-price span {
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.item-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+.item-quantity .quantity-btn:first-child {
+  margin-right: 30px;
+  margin-left: 30px;
+  
+}
+
+.item-quantity .quantity-btn:last-child {
+  margin-left: 30px;
+}
+
+.quantity-btn {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.item-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  margin-left: 5%;
+  cursor: pointer;
+  color: #d9534f;
+}
+.item-remove button i {
+  font-size: 24px;
+  color: #422626;
+}
+
+.cart-footer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.subtotal {
+  position: relative;
+  right: 1%;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.subtotal span:first-child {
+  margin-right: 9%;
+}
+
+.checkout-btn {
+  position: relative;
+  right: 1%;
+  background-color: #422626;
+  color: #fff;
+  padding: 15px 150px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.cart-footer p {
+  position: relative;
+  right: 1.1%;
+  font-size: 18px;
+}
