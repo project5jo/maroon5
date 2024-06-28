@@ -9,13 +9,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 public class FileUtil {
-
 
     /**
      * 사용자가 클라이언트에서 파일을 전송했을 때
@@ -29,7 +27,6 @@ public class FileUtil {
      *                   ex)  /2024/06/05/djfalsjdflaksjlfdsaj_고양이.jpg
      */
     public static String uploadFile(String rootPath, MultipartFile file) throws UnsupportedEncodingException {
-
         // 원본파일명을 중복이 없는 랜덤 파일명으로 변경
         String newFileName = UUID.randomUUID() + "_" + URLEncoder.encode(file.getOriginalFilename(), "UTF-8");
 
@@ -45,21 +42,15 @@ public class FileUtil {
         }
 
         // 파일 전체 경로
-
-        // fullPath:  D:/spring_prj/upload/2024/06/05/djlfsjdjsf_dog.png
         String fullPath = newUploadPath + "/" + newFileName;
 
-        // url-path: /local/2024/06/05/djlfsjdjsf_dog.png
-        String urlPath = "/local"+fullPath.substring(rootPath.length());
+        // URL 경로 생성
+        String urlPath = "/files" + fullPath.substring(rootPath.length());
 
-        // 업로드가 완료되면 데이터베이스에 파일의 경로 위치를 저장
-        // ex) /local/2024/06/05/dkfjsldjfkslfjlds_dog.jpg
         return urlPath;
     }
 
     private static String makeDateFormatDirectory(String rootPath) {
-
-
         // 오늘 날짜 정보를 추출
         LocalDate now = LocalDate.now();
         int year = now.getYear();
@@ -75,7 +66,7 @@ public class FileUtil {
         for (String s : dateList) {
             newDirectoryPath += "/" + s;
             File f = new File(newDirectoryPath);
-            if (!f.exists()) f.mkdir();
+            if (!f.exists()) f.mkdirs();
         }
 
         return newDirectoryPath;

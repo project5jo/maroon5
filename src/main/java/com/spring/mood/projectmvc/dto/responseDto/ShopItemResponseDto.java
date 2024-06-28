@@ -32,7 +32,10 @@ public class ShopItemResponseDto {
                 .shopItemImg(shopItem.getShopItemImg())
                 .shopItemDate(shopItem.getShopItemDate())
                 .shopItemStock(shopItem.getShopItemStock())
-                .shopItemView(shopItem.getShopItemView())
+                .shopItemView(1L)
                 .build();
+
     }
+
+
 }
