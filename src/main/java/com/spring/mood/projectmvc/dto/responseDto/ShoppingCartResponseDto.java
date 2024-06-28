@@ -1,12 +1,9 @@
 package com.spring.mood.projectmvc.dto.responseDto;
 
-import com.spring.mood.projectmvc.entity.ShopItem;
 import com.spring.mood.projectmvc.entity.ShoppingCart;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @ToString
@@ -18,7 +15,10 @@ public class ShoppingCartResponseDto {
     private BigDecimal cartTotalPrice;
     private long cartTotalCount;
     private String userAccount;
-    private List<ShopItemResponseDto> items;
+    private Long shopItemId;
+    private String shopItemName;
+    private String shopItemDesc;
+    private String shopItemImg;
 
     // ShoppingCart 엔티티로부터 ShoppingCartResponseDto 생성
     public static ShoppingCartResponseDto fromEntity(ShoppingCart cart) {
@@ -27,9 +27,10 @@ public class ShoppingCartResponseDto {
                 .cartTotalPrice(cart.getCartTotalPrice())
                 .cartTotalCount(cart.getCartTotalCount())
                 .userAccount(cart.getUserAccount())
-                .items(cart.getItems().stream()
-                        .map(ShopItemResponseDto::fromEntity)
-                        .collect(Collectors.toList()))
+                .shopItemId(cart.getShopItemId())
+                .shopItemName(cart.getShopItemName())
+                .shopItemDesc(cart.getShopItemDesc())
+                .shopItemImg(cart.getShopItemImg())
                 .build();
     }
 }

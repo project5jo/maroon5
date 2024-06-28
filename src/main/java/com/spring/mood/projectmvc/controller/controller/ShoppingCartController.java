@@ -1,6 +1,6 @@
 package com.spring.mood.projectmvc.controller.controller;
 
-import com.spring.mood.projectmvc.entity.ShoppingCart;
+import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
 import com.spring.mood.projectmvc.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -46,11 +46,11 @@ public class ShoppingCartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userAccount = authentication.getName();
 
-        List<ShoppingCart> cartItems = shoppingCartService.getCartByUser(userAccount);
+        List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(userAccount);
         model.addAttribute("cartItems", cartItems);
 
         BigDecimal cartTotalPrice = cartItems.stream()
-                .map(ShoppingCart::getCartTotalPrice)
+                .map(ShoppingCartResponseDto::getCartTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         model.addAttribute("cartTotalPrice", cartTotalPrice);
