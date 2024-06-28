@@ -49,7 +49,7 @@ public class User {
     @Column(name = "user_point")
     private Integer userPoint;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "room_id")
     private ChatRoom chatRoom;
 

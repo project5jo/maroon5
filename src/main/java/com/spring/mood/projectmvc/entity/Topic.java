@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "topic_id")
-    private int topicId;
+    private Integer topicId;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -29,5 +30,6 @@ public class Topic {
     private String topicContent;
 
     @OneToMany(mappedBy = "topic")
+    @JsonIgnore
     private List<ChatRoom> chatRooms;
 }
