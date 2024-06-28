@@ -24,7 +24,7 @@
     <c:forEach var="cartItem" items="${cartItems}">
         <div class="cart-item">
             <a href="">
-                <img src="${cartItem.shopItemImg}" alt="name">
+                <img src="${cartItem.shopItemImg}" alt="${cartItem.shopItemName}">
             </a>
             <div class="item-details">
                 <h3>${cartItem.shopItemName}</h3>
@@ -34,12 +34,12 @@
                 <span>₩ ${cartItem.cartTotalPrice}</span>
             </div>
             <div class="item-quantity">
-                <button class="quantity-btn" onclick="updateQuantity(${cartItem.shopItemId}, -1)">-</button>
+                <button class="quantity-btn" onclick="updateQuantity(`${cartItem.shopItemId}`, -1)">-</button>
                 <span>${cartItem.cartTotalCount}</span>
-                <button class="quantity-btn" onclick="updateQuantity(${cartItem.shopItemId}, 1)">+</button>
+                <button class="quantity-btn" onclick="updateQuantity(`${cartItem.shopItemId}`, 1)">+</button>
             </div>
             <div class="item-remove">
-                <button class="remove-btn" onclick="removeItem(${cartItem.shopItemId})">
+                <button class="remove-btn" onclick="removeItem(`${cartItem.shopItemId}`)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -58,4 +58,18 @@
 
 <%@ include file="../include/footer.jsp" %>
 
-<script src="https://code.jquery
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script>
+    function updateQuantity(itemId, change) {
+        // TODO: Implement quantity update logic
+        console.log("Updating quantity for item", itemId, "by", change);
+    }
+
+    function removeItem(itemId) {
+        // TODO: Implement item removal logic
+        console.log("Removing item", itemId);
+    }
+</script>
+</body>
+</html>

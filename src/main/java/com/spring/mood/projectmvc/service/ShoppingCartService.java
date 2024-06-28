@@ -20,19 +20,37 @@ public class ShoppingCartService {
 
     @Transactional
     public void addToCart(Long itemId, BigDecimal itemPrice, int quantity, String userAccount) {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setUserAccount(userAccount); // 사용자 계정 정보
-        shoppingCart.setShopItemId(itemId); // 상품 ID
-        shoppingCart.setCartTotalPrice(itemPrice.multiply(BigDecimal.valueOf(quantity))); // 총 가격 = 상품 가격 * 수량
-        shoppingCart.setCartTotalCount(quantity); // 총 수량
+        // 사용자 계정과 아이템 ID로 기존 장바구니 아이템을 찾음
+        ShoppingCart existingCart = shoppingCartMapper.findItemByUserAccountAndItemId(userAccount, itemId);
 
-        // 로그 추가
-        log.info("장바구니에 추가: {}", shoppingCart);
+        if (existingCart != null) {
+            // 기존 아이템이 있으면 수량과 총 가격을 업데이트
+            Long newQuantity = existingCart.getCartTotalCount() + quantity;
+            BigDecimal newTotalPrice = existingCart.getCartTotalPrice().add(itemPrice.multiply(BigDecimal.valueOf(quantity)));
 
-        // 장바구니에 저장
-        boolean saved = shoppingCartMapper.save(shoppingCart);
-        if (!saved) {
-            throw new RuntimeException("장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
+            existingCart.setCartTotalCount(newQuantity);
+            existingCart.setCartTotalPrice(newTotalPrice);
+
+            boolean updated = shoppingCartMapper.update(existingCart);
+            if (!updated) {
+                throw new RuntimeException("장바구니 아이템을 업데이트하는 중 오류가 발생했습니다.");
+            }
+
+            log.info("업데이트된 장바구니 아이템: {}", existingCart);
+        } else {
+            // 기존 아이템이 없으면 새로운 아이템 추가
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setUserAccount(userAccount);
+            shoppingCart.setShopItemId(itemId);
+            shoppingCart.setCartTotalPrice(itemPrice.multiply(BigDecimal.valueOf(quantity)));
+            shoppingCart.setCartTotalCount(quantity);
+
+            log.info("장바구니에 추가: {}", shoppingCart);
+
+            boolean saved = shoppingCartMapper.save(shoppingCart);
+            if (!saved) {
+                throw new RuntimeException("장바구니에 상품을 추가하는 중 오류가 발생했습니다.");
+            }
         }
     }
 
