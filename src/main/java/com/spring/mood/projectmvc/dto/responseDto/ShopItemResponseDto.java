@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,10 +19,9 @@ public class ShopItemResponseDto {
     private BigDecimal shopItemPrice;
     private String shopItemImg;
     private LocalDateTime shopItemDate;
-    private long shopItemStock;
-    private long shopItemView;
+    private Long shopItemStock;
+    private Long shopItemView;
 
-    // ShopItem 엔티티로부터 ShopItemResponseDto 생성
     public static ShopItemResponseDto fromEntity(ShopItem shopItem) {
         return ShopItemResponseDto.builder()
                 .shopItemId(shopItem.getShopItemId())
@@ -34,8 +33,5 @@ public class ShopItemResponseDto {
                 .shopItemStock(shopItem.getShopItemStock())
                 .shopItemView(1L)
                 .build();
-
     }
-
-
 }
