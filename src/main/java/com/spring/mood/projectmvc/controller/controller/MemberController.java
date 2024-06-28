@@ -89,11 +89,4 @@ public class MemberController {
         }
         return new ResponseEntity<>(flag, HttpStatus.OK);
     }
-
-    // 로그인 페이지 열기
-    @GetMapping("/login")
-    public String openLogin () {
-        return "html/sign-in";
-    }
-
 }

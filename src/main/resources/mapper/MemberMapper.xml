@@ -88,29 +88,5 @@
         WHERE user_account = #{account}
     </update>
 
-<!--    <select id="existsById" resultType="boolean">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM tbl_member-->
-<!--        <if test="type == 'account'">-->
-<!--            WHERE account = #{keyword}-->
-<!--        </if>-->
-<!--        <if test="type == 'email'">-->
-<!--            WHERE email = #{keyword}-->
-<!--        </if>-->
-<!--    </select>-->
-    
-<!--    <select id="check" resultType="int">-->
-<!--        SELECT-->
-<!--        COUNT (*)-->
-<!--        FROM Users-->
-<!--        WHERE user_account=#{userAccount}-->
-<!--    </select>-->
-
-<!--    <select id="checkEmail" resultType="int">-->
-<!--        SELECT-->
-<!--        COUNT (*)-->
-<!--        FROM Users-->
-<!--        WHERE user_email=#{email}-->
-<!--    </select>-->
 
 </mapper>

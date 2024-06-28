@@ -19,6 +19,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_account")
+    @Setter
     private String userAccount; // PK
 
     @Setter
