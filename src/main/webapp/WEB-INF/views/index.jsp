@@ -152,6 +152,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         const newURL = `${window.location.pathname}?roomId=\${newRoomId}&topicId=${topicId}`;
         console.log("Updating URL to:", newURL); // 디버그용 로그 추가
         history.pushState(null, '', newURL);
+        window.location.reload()
       }
 
 
