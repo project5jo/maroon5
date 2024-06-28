@@ -88,7 +88,7 @@ public class ShopController {
         return "html/shop-addItem";  //
     }
 
-    private String rootPath = "/Users/jehoon/spring-prj/upload";
+    private String rootPath = "/Users/superstar/spring-prj/upload/";
 
     @PostMapping("/shop/add")
     public String uploadFile(
