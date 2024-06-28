@@ -76,8 +76,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <script>
       const loginUser = "<c:out value='${loginUser.account}' />";
       <%--const loginUserName = "<c:out value='${loginUser.nickName}' />";--%>
-      const topicId = ${topicId};
-      let roomId = ${roomId};
+      const topicId = 1;
+      let roomId = null;
+      <%--let roomId = ${roomId};--%>
 
       let sendere = document.querySelector(".send");
       let chat = document.querySelector(".my-chat-input");
@@ -110,15 +111,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         });
       }
 
-      function subscribeToRoom(roomId) {
-        console.log(roomId)
-        if (currentSubscription) {
-          currentSubscription.unsubscribe(); // 기존 구독 취소
-        }
-        currentSubscription = stompClient.subscribe(`/topic/messages/${topicId}/${roomId}`, function (message) {
+      function subscribeToRoom(roomId1) {
+
+        // if (roomId !== roomId1) {
+        //   console.log("cnㅣ소 시도!!")
+
+        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) {
           showMessage(JSON.parse(message.body));
         });
-        loadMessages(roomId); // 새로운 방의 메시지 로드
+        loadMessages(roomId1); // 새로운 방의 메시지 로드
+          console.log(roomId + "asdasdasd")
       }
 
       function joinRoom() {
@@ -127,22 +129,25 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ topicId: topicId, roomId: roomId, username: loginUser })
+          body: JSON.stringify({ topicId: topicId, username: loginUser })
         })
                 .then(response => response.json())
                 .then(data => {
                   console.log("Joined room:", data);
-                  if (data.roomId !== roomId) {
-                    roomId = data.roomId;
-                    console.log("새로운 방")
-                    console.log(roomId + "asdasdasd")
-                    updateURL(roomId);
+                  roomId = data.roomId;
+                  // if (data.roomId !== roomId) {
+                  //   roomId = data.roomId;
+                  //   console.log("새로운 방")
+                  //   console.log(roomId + "asdasdasd")
+                  //   // updateURL(roomId);
+                  setTimeout(()=> {
                     subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정
-                    loadMessages(roomId); // 새로운 방의 메시지 로드
-                  } else {
-                    console.log("기존 방")
-                    subscribeToRoom(roomId); // 초기 구독 설정
-                  }
+                  }, 2000)
+                    // loadMessages(roomId); // 새로운 방의 메시지 로드
+                  // } else {
+                  //   console.log("기존 방")
+                  //   subscribeToRoom(roomId); // 초기 구독 설정
+                  // }
                 })
                 .catch(error => {
                   console.error("Error joining room:", error);
@@ -221,7 +226,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         firstMessage.scrollTop = firstMessage.scrollHeight;
       }
       function loadMessages(roomId) {
-        fetch(`/api/chat/messages?roomId=${roomId}&topicId=${topicId}`)
+        setTimeout(() => {fetch(`/api/chat/messages?roomId=${roomId}&topicId=${topicId}`)
                 .then((response) => response.json())
                 .then((messages) => {
                   let chatContainer = document.querySelector(".chatting");
@@ -231,14 +236,25 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     console.log('gdgd')
                   });
                   chatContainer.scrollTop = chatContainer.scrollHeight;
-                });
+                });}, 500)
+        <%--fetch(`/api/chat/messages?roomId=${roomId}&topicId=${topicId}`)--%>
+        <%--        .then((response) => response.json())--%>
+        <%--        .then((messages) => {--%>
+        <%--          let chatContainer = document.querySelector(".chatting");--%>
+        <%--          chatContainer.innerHTML = ''; // 기존 메시지 삭제--%>
+        <%--          messages.forEach((message) => {--%>
+        <%--            showMessage(message);--%>
+        <%--            console.log('gdgd')--%>
+        <%--          });--%>
+        <%--          chatContainer.scrollTop = chatContainer.scrollHeight;--%>
+        <%--        });--%>
       }
 
 
       window.onload = function () {
         // 사이트 진입시 일단은 자동으로 연결
         connect()
-        loadMessages()
+        // loadMessages()
         setupInfiniteScroll();
       };
 
