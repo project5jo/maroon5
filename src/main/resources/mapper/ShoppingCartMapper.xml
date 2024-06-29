@@ -11,12 +11,12 @@
         <result property="shopItemId" column="shop_item_id"/>
         <result property="cartTotalPrice" column="cart_total_price"/>
         <result property="cartTotalCount" column="cart_total_count"/>
-        <result property="shopItemName" column="shop_item_name"/> <!-- 수정된 부분 -->
-        <result property="shopItemDesc" column="shop_item_desc"/> <!-- 수정된 부분 -->
-        <result property="shopItemImg" column="shop_item_img"/> <!-- 수정된 부분 -->
+        <result property="shopItemName" column="shop_item_name"/>
+        <result property="shopItemDesc" column="shop_item_desc"/>
+        <result property="shopItemImg" column="shop_item_img"/>
     </resultMap>
 
-    <select id="findByUserAccount" resultMap="shoppingCartResultMap"> <!-- 수정된 부분 -->
+    <select id="findByUserAccount" resultMap="shoppingCartResultMap">
         SELECT c.cart_id, c.user_account, c.shop_item_id, c.cart_total_price, c.cart_total_count,
         i.shop_item_name, i.shop_item_desc, i.shop_item_img
         FROM ShoppingCart c
