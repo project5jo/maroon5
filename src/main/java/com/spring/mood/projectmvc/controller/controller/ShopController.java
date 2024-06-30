@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -39,6 +37,8 @@ public class ShopController {
     private final AddItemService addItemService;
     private final ShoppingCartService shoppingCartService;
 
+    private static final String UPLOAD_DIR = "/Users/jehoon/spring-prj/upload";
+
     @GetMapping("/shop")
     public String getAllItems(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         List<ShopItem> items;
@@ -48,27 +48,20 @@ public class ShopController {
             items = shopItemService.getAllItems();
         }
 
-        // 사용자 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userRole = "guest"; // 기본값을 guest로 설정
+        String userRole = "guest";
         if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
-            System.out.println("Authentication: " + authentication);
-            authentication.getAuthorities().forEach(authority -> System.out.println("Authority: " + authority.getAuthority()));
-
             userRole = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
-                    .filter(role -> role.equals("ROLE_admin") || role.equals("ROLE_user")) // ROLE_admin 또는 ROLE_user로 비교
+                    .filter(role -> role.equals("ROLE_admin") || role.equals("ROLE_user"))
                     .findFirst()
                     .orElse("guest");
         }
 
         model.addAttribute("items", items);
-        model.addAttribute("userRole", userRole); // 사용자 역할을 모델에 추가
+        model.addAttribute("userRole", userRole);
 
-        // Debugging: userRole 값 출력
-        System.out.println("User Role: " + userRole);
-
-        return "html/shop-index";
+        return "html/shop-Index";
     }
 
     @GetMapping("/shop/{id}")
@@ -76,7 +69,6 @@ public class ShopController {
         ShopItemResponseDto item = ShopItemResponseDto.fromEntity(shopItemService.getItemById(id));
         model.addAttribute("item", item);
 
-        // 랜덤으로 세 개의 이미지를 선택하여 모델에 추가
         List<String> randomImages = getRandomImages();
         model.addAttribute("randomImages", randomImages);
 
@@ -85,11 +77,12 @@ public class ShopController {
 
     @GetMapping("/shop/add")
     public String showAddItemPage() {
-        return "html/shop-addItem";  //
+        return "html/shop-addItem";
     }
 
-    private String rootPath = "/Users/superstar/spring-prj/upload/";
 
+    private String rootPath = "/Users/superstar/spring-prj/upload/";
+    
     @PostMapping("/shop/add")
     public String uploadFile(
             @RequestParam("shop_item_name") String name,
@@ -97,36 +90,32 @@ public class ShopController {
             @RequestParam("shop_item_price") BigDecimal price,
             @RequestParam("shop_item_stock") Long stock,
             @RequestParam("shop_item_img") MultipartFile file,
-            HttpSession session,
             RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
         log.info("file-name: {}", file.getOriginalFilename());
         log.info("file-size: {}MB", file.getSize() / 1024.0 / 1024.0);
         log.info("file-type: {}", file.getContentType());
 
-        File root = new File(rootPath);
-        if (!root.exists()) root.mkdirs();
-
-        String filePath = FileUtil.uploadFile(rootPath, file);
-        log.info("File saved at: {}", filePath);
+        String fileUrl = FileUtil.uploadFile(UPLOAD_DIR, file);
+        log.info("File saved at: {}", fileUrl);
 
         ShopItem shopItem = ShopItem.builder()
                 .shopItemName(name)
                 .shopItemDesc(description)
                 .shopItemPrice(price)
                 .shopItemStock(stock)
-                .shopItemImg(filePath)
+                .shopItemImg(fileUrl)
                 .shopItemDate(LocalDateTime.now())
                 .shopItemView(0L)
                 .build();
 
         addItemService.addItem(shopItem);
 
-        return "redirect:/shop/add";
+        return "redirect:/shop";
     }
 
     @GetMapping("/shop/delete/{itemId}")
     public String deleteItem(@PathVariable("itemId") String itemId, RedirectAttributes redirectAttributes) {
-        shopItemService.deleteItem(Long.valueOf(itemId));  // itemService에서 실제 삭제 처리
+        shopItemService.deleteItem(Long.valueOf(itemId));
         redirectAttributes.addFlashAttribute("message", "상품이 삭제되었습니다.");
         return "redirect:/shop";
     }

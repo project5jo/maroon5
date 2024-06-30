@@ -20,7 +20,11 @@ public class ShoppingCart {
     private Long shopItemId;
     private BigDecimal cartTotalPrice;
     private long cartTotalCount;
-    private List<ShopItem> items;
+
+    // 추가 필드 (Join 결과를 위한 필드)
+    private String shopItemName; // 수정된 부분
+    private String shopItemDesc; // 수정된 부분
+    private String shopItemImg; // 수정된 부분
 
 
 }
