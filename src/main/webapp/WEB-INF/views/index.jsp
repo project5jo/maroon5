@@ -7,8 +7,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -44,9 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <!-- <i class="fas fa-times"></i> -->
         </div>
         <!-- 채팅 메세지 창 -->
-        <ul class="chatting">
-
-        </ul>
+        <ul class="chatting"></ul>
 
         <!-- 메세지 input창 -->
         <div class="my-chat">
@@ -241,7 +239,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         loadMessages()
         setupInfiniteScroll();
       };
-
     </script>
     <script defer src="/assets/js/category.js"></script>
     <script defer src="/assets/js/bgChange.js"></script>

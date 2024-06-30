@@ -8,33 +8,29 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <!-- 프리텐다드 웹폰트 -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+
     <link rel="stylesheet" href="/assets/css/modify-pw.css" />
+    <link rel="stylesheet" href="/assets/css/shop-header.css" />
   </head>
   <body>
     <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="wrapper">
-            <div class="logo point">
-              <a href="#">나의 애착 페이지</a>
-            </div>
-            <ul class="gnb">
-              <li class="login point"><a href="#">LOGIN</a></li>
-              <li><i class="fas fa-bars"></i></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <%@ include file="../include/header.jsp" %>
 
     <!-- main -->
     <main>
       <form action="/modifyPw" method="post">
-        <section class="modifyPw">
+        <section class="modify-pw">
           <div class="inner">
             <div class="wrapper">
-              <div class="sign-in-title">
+              <div class="modify-pw-title">
                 <p>비밀번호 변경</p>
               </div>
 
@@ -71,6 +67,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <button class="modify-pw-btn" type="submit">확인</button>
 
               <div class="find">
+                <a class="sign-in" href="/sign-in">로그인</a>
+                <span>ㅣ</span>
                 <a class="find-id" href="/findId">아이디 찾기</a>
               </div>
             </div>
