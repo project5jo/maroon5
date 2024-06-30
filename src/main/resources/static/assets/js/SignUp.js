@@ -64,6 +64,9 @@ $realUploadBtn.addEventListener("change", (e) => {
   reader.onloadend = (e) => {
     $proflieImg.src = reader.result;
   };
+
+  //모달 닫기
+  $modal.classList.add("modal-close");
 });
 
 // 4. 업로드한 프로필사진 삭제하기
@@ -72,11 +75,17 @@ const $profileDeleteBtn = document.querySelector(".upload-deletebtn"); // 사진
 // 사진 삭제 버튼을 클릭했을 때 이벤트
 $profileDeleteBtn.addEventListener("click", (e) => {
   // 프로필사진을 기본사진으로 교체하기
-  $proflieImg.src = "/assets/img/profile.jpg";
+  $proflieImg.src = "/assets/img/profile3.jpg";
   // 파일업로드버튼의 업로드파일정보 초기화하기
   const profileDate = $realUploadBtn.files[0];
   $realUploadBtn.value = "";
+  $modal.classList.add("modal-close");
 });
+
+window.onload = function () {
+  //실행할 내용
+  $proflieImg.src = "/assets/img/profile3.jpg";
+};
 
 // 모달창 닫기
 const $modal = document.querySelector(".update-profile-modal");

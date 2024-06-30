@@ -49,7 +49,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <p class="th-title">프로필사진<span></span></p>
               <div class="prfile-wapper">
                 <div class="upload-imgbox">
-                  <img src="/assets/img/profile2.jpeg" alt="profile" />
+                  <img src="" alt="profile" />
                 </div>
                 <div class="update-img-modal">
                   <button type="button">사진 업로드</button>
