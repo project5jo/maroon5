@@ -1,6 +1,7 @@
 package com.spring.mood.projectmvc.controller.controller;
 
 import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
+import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.service.MyPageService;
@@ -41,22 +42,56 @@ public class MyPageController {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        // 로그인한 회원의 정보에서 아이디 가져오기
-        String account = loginUser.getAccount();
+//        System.out.println("로그인한 회원의 정보 = " + loginUser);
 
-        System.out.println("로그인한아이디 = " + account);
+        // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+        ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
 
-        // 아이디를 통해 해당 회원 한 명의 정보 찾기
-       RequestMyPageMemberInfoDto dto =  service.serviceFindOne(account);
+//        System.out.println("로그인한회원한명의 전체정보 = " + dto);
        
        // JSP 로 dto 보내기
+        model.addAttribute("isUpdated", false);
         model.addAttribute("nowMember", dto);
 
         return "html/mypage-memberInfo";
     }
 
+    // 회원정보 수정하기
+    @PostMapping("/mypage-memberinfo")
+    public String updateMyPageMemberInfo (HttpSession session, RequestMyPageMemberInfoDto dto, Model model) {
+
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        // 로그인한 회원의 정보에서 아이디 가져오기
+        String account = loginUser.getAccount();
+        System.out.println("로그인한 회원의 정보수정수정 = " + loginUser);
+
+        // 로그인 아이디 & 회원정보 수정창에서 받은 데이터를 서비스로 보내 회원정보 수정처리 위임하기
+        int isUpdated = service.serviceUpdateMemberInfo(account, dto);
+
+        model.addAttribute("isUpdated", isUpdated > 0);
+        model.addAttribute("updatedMember", dto);
+
+
+        return "redirect:/mypage-memberinfo";
+    }
+
     @GetMapping("/mypage-password")
     public String openMyPagePassword () {
+        return "html/mypage-password";
+    }
+
+    @PostMapping("/mypage-password")
+    public String updatePassword (HttpSession session, String password, String newPassword) {
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        boolean isUpdated = service.serviceUpdatePassword(loginUser.getAccount(), password, newPassword);
+
+        if (isUpdated) {
+            return "redirect:/mypage-password";
+        }
         return "html/mypage-password";
     }
 
@@ -65,5 +100,13 @@ public class MyPageController {
         return "html/mypage-cancel";
     }
 
+    @PostMapping ("/mypage-cancel")
+    public String deleteMemberInfo (HttpSession session) {
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
+        service.serviceDelete(loginUser.getAccount());
+
+        return "redirect:/";
+    }
 }

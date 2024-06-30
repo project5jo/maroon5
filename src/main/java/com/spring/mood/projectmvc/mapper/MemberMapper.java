@@ -1,10 +1,12 @@
 package com.spring.mood.projectmvc.mapper;
 
 import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
+import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MemberMapper {
@@ -33,4 +35,7 @@ public interface MemberMapper {
 
     //세션아이디로 회원정보 조회
     Member findUserBySessionId (String sessionId);
+
+    // 마이페이지 회원정보 수정
+    int updateMyPageMemberInfo (Member member);
 }
