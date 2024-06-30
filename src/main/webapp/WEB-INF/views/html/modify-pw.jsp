@@ -44,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
               <p class="sub-title">새 비밀번호</p>
               <input
-                type="text"
+                type="password"
                 class="newPassword"
                 name="newPassword"
                 placeholder="새 비밀번호 작성"
@@ -52,7 +52,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
               <p class="sub-title">새 비밀번호 확인</p>
               <input
-                type="text"
+                type="password"
                 class="newPasswordCk"
                 name="newPasswordCk"
                 placeholder="새 비밀번호 확인"

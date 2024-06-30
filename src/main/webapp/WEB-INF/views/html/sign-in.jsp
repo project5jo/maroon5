@@ -33,7 +33,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               placeholder="email"
             />
             <input
-              type="text"
+              type="password"
               class="pw"
               name="password"
               placeholder="password"
