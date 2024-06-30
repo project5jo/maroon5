@@ -14,6 +14,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   <script src="/assets/js/toggleChat.js/" defer></script>
   <script src="/assets/js/showChatBox.js/" defer></script>
+  <script src="/assets/js/category.js/" defer></script>
   <body>
     <%@ include file="./include/header.jsp" %>
     <!-- main -->
