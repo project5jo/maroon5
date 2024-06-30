@@ -60,14 +60,16 @@ i.fa-bars {
 }
 
 /* main */
+/* main */
 main {
   margin-top: 80px;
+  font-size: 16px;
   font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
     "malgun gothic", "돋움", "dotum", sans-serif !important;
 }
 
 main .inner {
-  width: 600px;
+  width: 560px;
 }
 
 .sign-in {
@@ -75,17 +77,33 @@ main .inner {
 }
 
 .sign-in-title {
-  margin: 180px 0 60px 0;
+  padding: 50px 0 50px 0;
 }
 
 .sign-in-title p {
   color: #432626;
-  font-size: 35px;
-  font-weight: 700;
   text-align: center;
+  font-size: 30px;
+  font-weight: 700;
 }
 
-input.email,
+input {
+  border: 1px solid #747474;
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 12px 25px 12px 12px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background: none;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+/* input.email,
 input.pw {
   border: 1px solid #432626;
   display: block;
@@ -96,87 +114,75 @@ input.pw {
   margin-bottom: 10px;
   font-size: 17px;
   background: none;
+} */
+
+button {
+  width: 100%;
+  height: 50px;
+  background-color: #432626;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
 }
 
-input::placeholder {
-  font-size: 17px;
-}
+/*  */
 
 button.sign-in-btn,
 button.kakao-btn {
-  background-color: #432626;
-  color: #fff;
-  width: 100%;
-  height: 70px;
-  font-size: 17px;
   margin-top: 10px;
-  /* font-weight: 400; */
-}
-
-
-button.kakao-btn a,
-button.sign-up-btn a {
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
 }
 
 button.sign-in-btn {
-  margin-top: 40px;
+  margin-top: 50px;
 }
-
 .sign-up-btn {
   background: none;
   border: 1px solid #432626;
-  width: 100%;
-  height: 70px;
   margin-top: 10px;
-  font-size: 17px;
 }
 
 button.sign-up-btn a {
+  display: block;
   color: #432626;
+  height: 50px;
+  line-height: 50px;
 }
 
 .find {
   display: flex;
   justify-content: end;
   margin-top: 10px;
-  color: #888888;
+  color: #747474;
 }
 
 .find-email,
 .find-pw,
 .find span {
-  color: #888888;
+  color: #747474;
+  font-size: 13px;
 }
 
 .find span {
   margin: 0 5px;
 }
 
-
-
 /* 체크박스 */
 span.text {
-  font-size: 15px;
+  font-size: 13px;
   margin-left: 5px;
   font-weight: 500;
 }
 
 .circle {
   display: inline-block; /* 영역적용가능해짐 */
-  width: 17px;
-  height: 17px;
+  width: 14px;
+  height: 14px;
 
   border: 1px solid #432626;
   box-sizing: border-box;
 
   position: relative;
-  top: 4px;
+  top: 1px;
   cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
 
   /* background-image: url(https://blog.kakaocdn.net/dn/XTnSL/btrhtUIVtpB/5FungHN6IXVXG8bLbhE9Dk/img.png); */
