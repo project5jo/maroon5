@@ -104,6 +104,11 @@ button {
   height: 125px;
   background-color: #fff;
 }
+.prd-item .item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 p.prdName {
   font-weight: 700;
@@ -162,7 +167,7 @@ button.btn-point {
 }
 
 /* 최종 결제 버튼 */
-a.btn-pay {
+.btn-pay {
   text-align: center;
   line-height: 50px;
   color: #fff;

@@ -51,7 +51,15 @@
             <span>Subtotal:</span>
             <span>₩ <span id="cartTotalPrice">${cartTotalPrice}</span></span>
         </div>
-        <button class="checkout-btn">CHECKOUT</button>
+        <form action="/checkout" method="post">
+            <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
+            <input type="hidden" name="address1" value="address1"> <!-- 실제 주소 값을 입력받도록 수정 필요 -->
+            <input type="hidden" name="address2" value="address2">
+            <input type="hidden" name="address3" value="address3">
+            <input type="hidden" name="receiverName" value="receiverName">
+            <input type="hidden" name="receiverPhone" value="receiverPhone">
+            <button type="submit" class="checkout-btn">CHECKOUT</button>
+        </form>
         <p>Tax included and shipping calculated at checkout</p>
     </div>
 </div>
@@ -92,23 +100,15 @@
         document.getElementById('cartTotalPrice').textContent = totalPrice.toFixed(2);
     }
 
-    // function removeItem(itemId) {
-    //     const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
-    //     cartItem.remove();
-    //     updateTotalPrice();
-    // }
-
     function removeItem(itemId) {
-    $.post("/cart/remove", { itemId: itemId }, function() {
-        // 화면에서 아이템 제거 후 전체 가격 업데이트
-        const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
-        cartItem.remove();
-        updateTotalPrice();
-    }).fail(function() {
-        alert("장바구니에서 상품을 제거하는 중 오류가 발생했습니다.");
-    });
-}
-
+        $.post("/cart/remove", { itemId: itemId }, function() {
+            const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
+            cartItem.remove();
+            updateTotalPrice();
+        }).fail(function() {
+            alert("장바구니에서 상품을 제거하는 중 오류가 발생했습니다.");
+        });
+    }
 </script>
 <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </body>
