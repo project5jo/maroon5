@@ -4,6 +4,7 @@ $Mypage.addEventListener("click", e => {
   console.log("클릭클릭");
 })
 
+// 입력창 입력 후 확인버튼 누르면 입력내용 재확인 모달창 생성
 const $ok = document.querySelector('.ok');
 const $success = document.querySelector('.modal-box');
 $ok.addEventListener('click', e => {

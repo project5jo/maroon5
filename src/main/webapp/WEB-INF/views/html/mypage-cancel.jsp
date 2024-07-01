@@ -9,7 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-main.css">
+    <link rel="stylesheet" href="/assets/css/mypage-cancel.css">
     <!-- fontawesome css: https://fontawesome.com -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   </head>
@@ -82,7 +82,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <p>회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
               </div>
               <div class="right-content">
-                <h2><i class="fas fa-check"></i>사용하고 계신 아이디 ${isUpdated ? updatedMember.account : nowMember.account}는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h2>
+                <h2><i class="fas fa-check"></i>사용하고 계신 아이디 ${account} 는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h2>
                 <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
               </div>
               <div class="right-content">
@@ -106,12 +106,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
               <form action="/mypage-cancel" method="post">
                 <div class="right-checkContent">
-                  <p>탈퇴 후에는 아이디 ${isUpdated ? updatedMember.account : nowMember.account}로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
-                  <input type="checkbox" name="check"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
-                </div>
-  
-                <div class="right-content">
-                  <button class="btn-gradient yellow large" type="submit">확인</button>
+                  <div class="right-check">
+                    <p>탈퇴 후에는 아이디 ${account} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
+                    <input type="checkbox" name="check"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
+                  </div>
+    
+                  <div class="right-button">
+                    <button class="btn-gradient yellow large" type="submit">확인</button>
+                  </div>
                 </div>
               </form>
 

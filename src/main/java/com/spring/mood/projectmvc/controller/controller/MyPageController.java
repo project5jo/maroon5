@@ -96,7 +96,14 @@ public class MyPageController {
     }
 
     @GetMapping("/mypage-cancel")
-    public String openMyPageCancel () {
+    public String openMyPageCancel (HttpSession session, Model model) {
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        String account = loginUser.getAccount();
+
+        model.addAttribute("account", account);
+
         return "html/mypage-cancel";
     }
 

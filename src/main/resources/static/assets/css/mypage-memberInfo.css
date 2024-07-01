@@ -65,6 +65,14 @@ i.fa-bars {
 
 
 /* main */
+
+/* title */
+.title {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
 main {
   width: 1210px;
   height: 800px;
@@ -125,7 +133,7 @@ section {
 .profile-icon {
   width: 70px;
   height: 70px;
-  background-color: #DBC05B;
+  background-color: #61605f;
   border-radius: 50px;
   position: absolute;
   right: 25px;
