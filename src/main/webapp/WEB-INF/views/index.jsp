@@ -163,8 +163,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function subscribeNewRoom(roomId1) {
         console.log('subscribenewRoom' + roomId1)
         console.log('subscribenewRoom' + roomId)
-        stompClient.unsubscribe('myTopicId');
-        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, { id: 'myTopicId' }, function (message) {
+        // stompClient.unsubscribe('myTopicId');
+        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) {
           showMessage(JSON.parse(message.body));
         });
         loadMessages(roomId1); // 새로운 방의 메시지 로드
