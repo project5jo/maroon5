@@ -31,7 +31,7 @@ public class FileUploadUtil {
         // 4. 업로드 후 DB 에 파일경로 저장
         String fullPath = datePath + "/" + randomName;
 
-        String urlPath = "/file" + fullPath.substring(rootPath.length());
+        String urlPath = "/local" + fullPath.substring(rootPath.length());
 
         return urlPath;
     }

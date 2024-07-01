@@ -120,13 +120,19 @@
   display: flex;
   padding: 15px 0px;
 }
-
 .msg-profile {
   height: 25px;
   width: 25px;
-  background-color: #fff;
-  border-radius: 50px;
-  margin-right: 10px;
+  border-radius: 50%; /* 동그랗게 만들기 */
+  overflow: hidden; /* 넘치는 부분 숨기기 */
+  display: inline-block; /* 인라인 블록으로 설정 */
+  margin-right: 10px; /* 오른쪽 마진 */
+}
+
+.msg-profile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* 이미지가 div를 채우도록 설정 */
 }
 
 .msg-nickname {
