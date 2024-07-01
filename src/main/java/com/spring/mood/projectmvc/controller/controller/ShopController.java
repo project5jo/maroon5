@@ -72,11 +72,12 @@ public class ShopController {
         System.out.println("iteㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇm = " + item);
         model.addAttribute("item", item);
 
-        List<String> randomImages = getRandomImages();
+        List<ShopItem> randomImages = getRandomImages();
         model.addAttribute("randomImages", randomImages);
 
         return "html/shop-detail";
     }
+
 
     @GetMapping("/shop/add")
     public String showAddItemPage() {
@@ -123,13 +124,9 @@ public class ShopController {
         return "redirect:/shop";
     }
 
-    private List<String> getRandomImages() {
+    private List<ShopItem> getRandomImages() {
         List<ShopItem> allItems = shopItemService.getAllItems();
-        List<String> allImages = allItems.stream()
-                .map(ShopItem::getShopItemImg)
-                .collect(Collectors.toList());
-
-        Collections.shuffle(allImages);
-        return allImages.stream().limit(3).collect(Collectors.toList());
+        Collections.shuffle(allItems);
+        return allItems.stream().limit(3).collect(Collectors.toList());
     }
 }
