@@ -39,7 +39,7 @@
                 <button class="quantity-btn" onclick="incrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">+</button>
             </div>
             <div class="item-remove">
-                <button class="remove-btn" onclick="removeItem(${cartItem.shopItemId})">
+                <button class="remove-btn" onclick="removeItem(`${cartItem.shopItemId}`)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -99,6 +99,5 @@
     }
 </script>
 <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
-
 </body>
 </html>
