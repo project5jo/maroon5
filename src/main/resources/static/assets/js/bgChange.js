@@ -72,7 +72,7 @@ function setBackground(weatherData) {
     backgroundUrl = 'url(/assets/img/whiskey.gif)';
   }
 
-  document.body.style.backgroundImage = backgroundUrl;
+  document.querySelector('.main_banner').style.backgroundImage = backgroundUrl;
 }
 
 // 초기화 함수, 사용자 위치를 가져와 날씨 데이터를 설정
