@@ -26,6 +26,7 @@ public class ChatApiController {
     @GetMapping("/messages")
     public List<ChatMessageDto> getMessages(@RequestParam(name = "topicId") Integer topicId,
                                             @RequestParam(name = "roomId") int roomId) {
+
         log.debug("Received request to get messages for topicId: {}, roomId: {}", topicId, roomId);
         return chatService.getAllMessages(topicId, roomId);
     }
@@ -47,6 +48,8 @@ public class ChatApiController {
         Integer topicId = (Integer) payload.get("topicId");
         String username = (String) payload.get("username");
         ChatRoom chatRoom = chatService.findOrCreateAvailableChatRoom(topicId);
+
+        session.removeAttribute("roomId");
         session.setAttribute("topicId", topicId);
         session.setAttribute("roomId", chatRoom.getRoomId());
         return chatService.incrementCurrentUsers(topicId, chatRoom.getRoomId(), username);
