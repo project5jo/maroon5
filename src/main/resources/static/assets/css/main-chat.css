@@ -135,6 +135,24 @@
   object-fit: cover; /* 이미지가 div를 채우도록 설정 */
 }
 
+/* 프로필 사진 스타일 */
+.chat-profile {
+  height: 32px;
+  width: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 10px;
+  border: 2px solid gray;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.chat-profile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* 이미지가 div를 채우도록 설정 */
+}
+
 .msg-nickname {
   margin-bottom: 8px;
 }

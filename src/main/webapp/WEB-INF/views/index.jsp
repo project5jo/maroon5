@@ -58,6 +58,9 @@
                 />
             </c:if>
             <c:if test="${loginUser != null}">
+                <div class="chat-profile">
+                    <img src="${loginUser.profileUrl != null ? loginUser.profileUrl : '/assets/img/profile3.jpg'}" alt="프로필 사진" />
+                </div>
                 <input
                         class="my-chat-input"
                         placeholder="${loginUser.nickName}님 메세지 작성"
@@ -77,7 +80,7 @@
 
     const loginUser = "<c:out value='${loginUser.account}' />";
     <%--const loginUserName = "<c:out value='${loginUser.nickName}' />";--%>
-    const topicId = 1;
+    const topicId = 2;
     let roomId = null;
     <%--let roomId = ${roomId};--%>
 
