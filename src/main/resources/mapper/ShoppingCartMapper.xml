@@ -4,40 +4,21 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.mood.projectmvc.mapper.ShoppingCartMapper">
+
     <resultMap id="shoppingCartResultMap" type="com.spring.mood.projectmvc.entity.ShoppingCart">
         <id property="cartId" column="cart_id"/>
         <result property="userAccount" column="user_account"/>
         <result property="shopItemId" column="shop_item_id"/>
         <result property="cartTotalPrice" column="cart_total_price"/>
         <result property="cartTotalCount" column="cart_total_count"/>
-        <collection property="items" ofType="com.spring.mood.projectmvc.entity.ShopItem">
-            <id property="shopItemId" column="shop_item_id"/>
-            <result property="shopItemName" column="shop_item_name"/>
-            <result property="shopItemPrice" column="shop_item_price"/>
-            <result property="shopItemImg" column="shop_item_img"/>
-            <result property="shopItemDesc" column="shop_item_desc"/>
-        </collection>
+        <result property="shopItemName" column="shop_item_name"/>
+        <result property="shopItemDesc" column="shop_item_desc"/>
+        <result property="shopItemImg" column="shop_item_img"/>
     </resultMap>
 
-    <!-- 추가된 ResultMap 정의 -->
-    <resultMap id="CartWithItemDetails" type="com.spring.mood.projectmvc.entity.ShoppingCart">
-        <id property="cartId" column="cart_id"/>
-        <result property="userAccount" column="user_account"/>
-        <result property="shopItemId" column="shop_item_id"/>
-        <result property="cartTotalPrice" column="cart_total_price"/>
-        <result property="cartTotalCount" column="cart_total_count"/>
-        <collection property="items" ofType="com.spring.mood.projectmvc.entity.ShopItem">
-            <id property="shopItemId" column="shop_item_id"/>
-            <result property="shopItemName" column="shop_item_name"/>
-            <result property="shopItemPrice" column="shop_item_price"/>
-            <result property="shopItemImg" column="shop_item_img"/>
-            <result property="shopItemDesc" column="shop_item_desc"/>
-        </collection>
-    </resultMap>
-
-    <select id="findByUserAccount" resultMap="CartWithItemDetails">
+    <select id="findByUserAccount" resultMap="shoppingCartResultMap">
         SELECT c.cart_id, c.user_account, c.shop_item_id, c.cart_total_price, c.cart_total_count,
-        i.shop_item_id, i.shop_item_name, i.shop_item_price, i.shop_item_img, i.shop_item_desc
+        i.shop_item_name, i.shop_item_desc, i.shop_item_img
         FROM ShoppingCart c
         LEFT JOIN ShopItems i ON c.shop_item_id = i.shop_item_id
         WHERE c.user_account = #{userAccount}

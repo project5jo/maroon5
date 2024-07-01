@@ -87,14 +87,14 @@ public class ChatService {
                 .build();
         return chatRoomRepository.save(newChatRoom);
     }
-
     @Transactional
     public ChatRoom incrementCurrentUsers(Integer topicId, int roomId, String username) {
         System.out.println("username 은은은은= " + username);
         ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, roomId);
-        if (chatRoom.getCurrentUsers() >= 2) {
+        if (chatRoom.getCurrentUsers() >= 50) {
             chatRoom = createNewChatRoom(topicId, roomId + 1);
         }
+
         chatRoom.setCurrentUsers(chatRoom.getCurrentUsers() + 1);
         chatRoomRepository.save(chatRoom);
 
@@ -106,6 +106,21 @@ public class ChatService {
         System.out.println("one = " + one);
 
         return chatRoom;
+    }
+
+    @Transactional
+    public ChatRoom findOrCreateAvailableChatRoom(Integer topicId) {
+        List<ChatRoom> chatRooms = chatRoomRepository.findByTopicTopicIdOrderByRoomIdAsc(topicId);
+
+        for (ChatRoom chatRoom : chatRooms) {
+            if (chatRoom.getCurrentUsers() < 50) {
+                return chatRoom;
+            }
+        }
+
+        // 모든 방이 꽉 찼다면 새로운 방을 생성
+        int newRoomId = chatRooms.isEmpty() ? 1 : chatRooms.get(chatRooms.size() - 1).getRoomId() + 1;
+        return createNewChatRoom(topicId, newRoomId);
     }
 
 }

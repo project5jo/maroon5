@@ -10,6 +10,7 @@ import com.spring.mood.projectmvc.mapper.MemberMapper;
 import com.spring.mood.projectmvc.repository.ChatRoomRepository;
 import com.spring.mood.projectmvc.service.ChatService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -69,9 +70,8 @@ public class ChatController {
 @MessageMapping("/sendMessage/{topicId}/{roomId}")
 @SendTo("/topic/messages/{topicId}/{roomId}")
 public ChatMessageDto sendMessage(@DestinationVariable Integer topicId, @DestinationVariable int roomId, ChatEntity message, SimpMessageHeaderAccessor headerAccessor) {
-    System.out.println("컨트롤러에서 메세지 = " + message);
+    System.out.println("controller topicId = " + topicId);
     Object loginUser = headerAccessor.getSessionAttributes().get("loginUser");
-    System.out.println("컨트롤러에서 로그인유저 메세지 = " + loginUser);
 
     if (loginUser == null) {
         throw new IllegalStateException("로그인 사용자를 찾을 수 없습니다.");

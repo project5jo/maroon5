@@ -8,24 +8,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
     <link rel="stylesheet" href="/assets/css/sign-in.css" />
+    <link rel="stylesheet" href="/assets/css/shop-header.css" />
+
     <script src="/assets/js/SignIn.js" defer></script>
+    <script src="/assets/js/category.js/" defer></script>
   </head>
   <body>
     <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="logo point">
-            <a href="../../main/html/main.html">나의 애착 페이지</a>
-          </div>
-          <ul class="gnb">
-            <li class="login point"><a href="#">LOGIN</a></li>
-            <li><i class="fas fa-bars"></i></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <%@ include file="../include/header.jsp" %>
 
     <!-- main -->
     <main>
@@ -42,7 +34,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               placeholder="email"
             />
             <input
-              type="text"
+              type="password"
               class="pw"
               name="password"
               placeholder="password"

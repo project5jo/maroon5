@@ -10,15 +10,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Racing+Sans+One&display=swap");
 /* font awesome */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
-
 /* pretendard 폰트 */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 
 /* reset */
 a {
   color: inherit;
   text-decoration: none;
 }
+
 button,
 input {
   outline: none;
@@ -32,7 +32,6 @@ input {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans KR", sans-serif;
 }
 
 .clearfix::after {
@@ -40,10 +39,16 @@ input {
   display: block;
   clear: both;
 }
+html,
+body {
+  width: 100%;
+  height: auto;
+}
 
 body {
   font-size: 14px;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
+    "malgun gothic", "돋움", "dotum", sans-serif !important;
 }
 
 ul {
@@ -62,7 +67,9 @@ a {
 }
 
 .point {
-  font-family: "Pretendard-Regular";
-  font-weight: 500;
-  font-style: normal;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 700;
 }

@@ -35,7 +35,7 @@ body {
 }
 
 .price {
-  margin-left:  55.5%;
+  margin-left: 55.5%;
 }
 
 .QTY {
@@ -47,7 +47,7 @@ body {
   flex-direction: row;
   border-bottom: 1px solid #000000;
 }
-.cart-item a{
+.cart-item a {
   border-right: 1.5px solid #000;
   width: 15%;
 }
@@ -86,7 +86,6 @@ body {
 }
 
 .item-price span {
-
   font-size: 20px;
   font-weight: bold;
 }
@@ -102,7 +101,6 @@ body {
 .item-quantity .quantity-btn:first-child {
   margin-right: 30px;
   margin-left: 30px;
-  
 }
 
 .item-quantity .quantity-btn:last-child {
@@ -110,11 +108,37 @@ body {
 }
 
 .quantity-btn {
-  background: none;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  font-size: 20px;
+  background-color: #EBEAE3;
+  border: 1.5px solid #000;
+  padding: 5px 15px;
+  font-size: 24px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #422626;
+  color: white;
+}
+
+.quantity-input {
+  width: 80px;
+  height: 50px;
+  background-color: #EBEAE3;
+  text-align: center;
+  font-size: 24px;
+  border: 1.5px solid #000;
+  -moz-appearance: textfield; /* Firefox에서 스핀 버튼 제거 */
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge에서 스핀 버튼 제거 */
+  margin: 0;
+}
+
+.quantity-input:focus {
+  outline: none; /* 포커스 시 테두리 제거 */
 }
 
 .item-remove {
@@ -123,10 +147,11 @@ body {
   justify-content: center;
   background: none;
   border: none;
-  margin-left: 5%;
+  margin-left: 2%;
   cursor: pointer;
   color: #d9534f;
 }
+
 .item-remove button i {
   font-size: 24px;
   color: #422626;
@@ -144,8 +169,9 @@ body {
   font-weight: 700;
   margin-bottom: 20px;
 }
+
 .subtotal span:first-child {
-  margin-right: 9%;
+  margin-right: 6.3%;
 }
 
 .checkout-btn {
@@ -158,10 +184,18 @@ body {
   cursor: pointer;
   font-size: 18px;
   margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #422626; /* 호버 시 배경 색상 유지 */
+  color: #ffffff; /* 호버 시 글씨 색상 흰색으로 변경 */
+  opacity: 0.9; /* 살짝 어두운 효과 추가 */
 }
 
 .cart-footer p {
   position: relative;
   right: 1.1%;
   font-size: 18px;
+  padding-bottom: 3%;
 }

@@ -45,6 +45,7 @@
         WHERE user_email = #{email}
         AND user_name = #{name}
     </select>
+  
     <!--    회원가입     -->
     <select id="checkId" resultType="boolean">
         SELECT COUNT(*)
@@ -100,5 +101,21 @@
         SET session_id = #{sessionId}, limit_time = #{limitTime}
         WHERE user_account = #{account}
     </update>
+
+    <select id="findChatUser" resultType="User">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , created_at
+        , user_point
+        FROM Users
+        WHERE user_account = #{account}
+    </select>
 
 </mapper>
