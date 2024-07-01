@@ -92,11 +92,23 @@
         document.getElementById('cartTotalPrice').textContent = totalPrice.toFixed(2);
     }
 
+    // function removeItem(itemId) {
+    //     const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
+    //     cartItem.remove();
+    //     updateTotalPrice();
+    // }
+
     function removeItem(itemId) {
+    $.post("/cart/remove", { itemId: itemId }, function() {
+        // 화면에서 아이템 제거 후 전체 가격 업데이트
         const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
         cartItem.remove();
         updateTotalPrice();
-    }
+    }).fail(function() {
+        alert("장바구니에서 상품을 제거하는 중 오류가 발생했습니다.");
+    });
+}
+
 </script>
 <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </body>
