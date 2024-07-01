@@ -7,6 +7,7 @@
     <title>상품 상세 정보</title>
     <link rel="stylesheet" href="/assets/css/shop-detail.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+    
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>
@@ -22,9 +23,8 @@
                 <p><br><br>
                     ${item.shopItemDesc}<br>
                 </p>
-                <%-- 디버깅을 위해 추가 --%>
             </div>
-            <form id="addToCartForm" action="/cart" method="post" onsubmit="return debugForm()">
+            <form id="addToCartForm" action="/cart" method="post" onsubmit="return handleFormSubmit(event)">
                 <div class="quantity">
                     <button type="button" onclick="decrementQuantity()">-</button>
                     <input type="number" name="quantity" id="quantityInput" value="1" min="1" step="1" oninput="updatePrice()">
@@ -63,6 +63,15 @@
             </a>
         </div>
     </div>
+    <!-- 모달 HTML 코드 -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>장바구니에 추가되었습니다.</p>
+            <button onclick="goToCart()">Go to Cart</button>
+            <button onclick="goBack()">Back</button>
+        </div>
+    </div>
 </div>
 
 <%@ include file="../include/footer.jsp" %>
@@ -91,31 +100,46 @@
         const newPrice = quantityInput.value * itemPrice;
         totalPrice.textContent = '₩' + newPrice.toFixed(2);
     }
-    // 제훈함수
-    function debugForm() {
-        var form = document.getElementById('addToCartForm');
-        var itemId = form.itemId.value;
-        var itemPrice = form.itemPrice.value;
-        var quantity = form.quantity.value;
-        var userAccount = form.userAccount.value;
+    function handleFormSubmit(event) {
+        event.preventDefault(); // 폼 제출 막기
 
-        // Debug information
-        var debugMessage = 'Debug Form Submission:\n';
-        debugMessage += 'itemId: ' + itemId + '\n';
-        debugMessage += 'itemPrice: ' + itemPrice + '\n';
-        debugMessage += 'quantity: ' + quantity + '\n';
-        debugMessage += 'userAccount: ' + userAccount;
+        // 장바구니에 추가되는 작업 수행 (여기서는 실제 폼 제출을 가정)
+        const form = document.getElementById('addToCartForm');
+        const formData = new FormData(form);
 
-        // Display the debug information in an alert
-        alert(debugMessage);
+        fetch('/cart', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                showModal();
+            } else {
+                alert('장바구니에 추가하는 데 실패했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('장바구니에 추가하는 도중 오류가 발생했습니다.');
+        });
 
-        // Ensure all required fields are present
-        if (!itemId || !itemPrice || !quantity || !userAccount) {
-            alert('Form submission cancelled: missing required fields.');
-            return false;
-        }
+        return false; // 폼 제출 막기
+    }
 
-        return true; // Allow form submission if all fields are valid
+    function showModal() {
+        document.getElementById("cartModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("cartModal").style.display = "none";
+    }
+
+    function goToCart() {
+        window.location.href = "/cart";
+    }
+
+    function goBack() {
+        window.location.href = "/shop";
     }
 
 </script>
