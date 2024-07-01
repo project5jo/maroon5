@@ -6,60 +6,6 @@ body {
   color: #432626;
 }
 
-.menu .logo a,
-.login a {
-  color: #432626;
-}
-
-header {
-  width: 100%;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  font-size: 17px;
-  border-bottom: 1px solid #432626;
-  background-color: #ebeae3;
-}
-
-nav.menu {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu .inner {
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-  /* background-color: #fff; */
-}
-
-.menu .logo {
-  font-weight: 700;
-}
-
-.gnb {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.login {
-  padding: 0 60px;
-  font-weight: 600;
-}
-
-i.fa-bars {
-  font-size: 20px;
-}
-
 /* main */
 main {
   margin-top: 80px;
@@ -73,135 +19,231 @@ main {
 }
 
 main .inner {
-  width: 600px;
+  width: 560px;
 }
 
-.sign-in {
+.sign-up {
   color: #432626;
 }
 
-.sign-in-title {
-  margin: 180px 0 60px 0;
+.sign-up-title {
+  padding: 50px 0 50px 0;
 }
 
-.sign-in-title p {
+.sign-up-title p {
   color: #432626;
-  font-size: 35px;
-  font-weight: 700;
   text-align: center;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 .tr {
-  padding: 40px 0;
-  border-top: 1px solid #432626;
+  margin-top: 20px;
+  /* border-top: 1px solid #432626; */
 }
 
-.th-title {
-  margin-bottom: 15px;
+/* 공통 input, button */
 
-}
-
-
-.th-sub {
-  font-size: 14px;
-}
-
-.tr > p > {
-  width: 35px;
-  height: 7px;
-  background-color: #432626;
-}
-
-input {
-  border: 1px solid #432626;
+.sign-up input {
+  border: 1px solid #747474;
   display: block;
   width: 100%;
-  height: 70px;
-  padding: 10px;
+  height: 50px;
+  padding: 12px 25px 12px 12px;
   margin: 0 auto;
   margin-bottom: 10px;
-  font-size: 17px;
+  font-size: 14px;
   background: none;
 }
 
-input::placeholder {
+.sign-up input::placeholder {
   font-size: 14px;
 }
 
-.falsefocus {
-  border: 5px solid #ff0000;
+.sign-up input[type="date"]:valid {
+  color: #747474;
 }
 
-.truefocus {
-  border: 5px solid #0077ff;
+.sign-up button {
+  height: 50px;
+  background-color: #432626;
+  color: #fff;
 }
 
-.nowfocus {
-  box-shadow: 0 0 5px rgb(216, 216, 73);
+/* 공통 부분 타이틀, 오류 글 */
+
+.th-title {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.th-sub {
+  font-size: 13px;
+}
+
+/* 프로필 이미지 */
+
+.profile-img {
+  margin-bottom: 80px;
+}
+
+.profile-img > p {
+  padding-bottom: 13px;
+  border-bottom: 1px solid #432626;
+}
+
+.prfile-wapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px; /* 요소 사이의 간격 설정 */
+
+  padding: 15px 0 25px 0;
+  border-bottom: 1px solid #432626;
 }
 
 .upload-imgbox {
   /* border: 1px solid #432626; */
-  width: 100%;
-  height: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  width: 130px;
+  height: 130px;
+  margin-right: 20px;
 
-.upload-imgbox img {
-  border: 1px solid #ffffff;
   border-radius: 50%;
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
 
-.upload-uploadbtn, .upload-deletebtn {
-  background-color: #432626;
-  position: relative;
-
+.upload-imgbox > img {
   width: 100%;
-  height: 70px;
-  font-size: 17px;
-  margin-top: 10px;
-
-  color: #fff;
+  height: 100%;
+  object-fit: cover;
 }
 
-.upload-uploadbtn p, .upload-deletebtn p{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* display: flex;
-  justify-content: center;
-  align-items: center */
+.upload-imgbtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 15px;
+  width: 100%;
 }
+
+.update-img-modal {
+  display: flex;
+  justify-content: end;
+}
+
+.update-img-modal button {
+  font-size: 14px;
+  font-weight: 400;
+  height: 27px;
+  width: 90px;
+  background-color: #747474;
+}
+
+.update-img-modal button:hover {
+  background-color: #432626;
+}
+
+/* 하단 버튼 */
 
 .btn {
   display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  font-weight: 500;
 }
 
-button{
-  background-color: #432626;
-
-  width: 100%;
-  height: 70px;
-  font-size: 17px;
-  margin-top: 10px;
+.btn > button {
+  width: calc((100% - 10px) / 2);
 }
 
-button a, button p{
-  color: #fff;
+button.cancel a {
+  display: block;
+  color: #432626;
+  height: 50px;
+  line-height: 50px;
+  font-weight: 500;
+}
+
+button.cancel {
+  background: none;
+  border: 1px solid #432626;
+}
+
+/*  */
+
+input.falsefocus {
+  border: 1px solid #ff003e;
+  background-color: rgba(255, 0, 62, 0.1);
+}
+
+input.falsefocus::placeholder {
+  color: #ff003e;
+}
+
+input.truefocus {
+  border: 1px solid #1a72ff;
+  background-color: rgba(26, 114, 255, 0.1);
+}
+input.truefocus::placeholder {
+  color: #1a72ff;
+}
+
+input.nowfocus {
+  box-shadow: 0 0 5px rgb(216, 216, 73);
 }
 
 footer {
-  height: 100px;
+  height: 200px;
 }
 
-p.th-title{
-font-weight: 600;
+/* 모달 */
+
+.update-profile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-profile-modal-box {
+  width: 345px;
+  /* height: 245px; */
+  padding: 25px 35px;
+
+  border-radius: 10px;
+
+  /* background-color: rgba(38, 38, 38, 0.9); */
+  background-color: #fff;
+}
+
+.update-profile-modal-box > li {
+  height: 45px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 5px 0;
+  background-color: #ebeae3;
+  /* background-color: #432626; */
+  /* color: #fff; */
+  color: #432626;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.update-profile-modal-box > li:hover {
+  background-color: #4f2b2b;
+  color: #fff;
+}
+
+.modal-close {
+  display: none;
 }

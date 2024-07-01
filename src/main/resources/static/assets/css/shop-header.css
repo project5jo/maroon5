@@ -2,42 +2,48 @@
 @import url("common.css");
 /* 채팅 css */
 @import url("main-chat.css");
+
 header {
   width: 100%;
+  height: 80px;
   overflow: hidden;
-  color: #000000;
-  font-size: 17px;
+  color: #432626;
+
+  font-size: 15px;
+
+  display: flex;
+  align-content: center;
+
   /* 밑에는 스크립트로 추가해야함 */
-  position: fixed;
-  background: #EBEAE3;
-  z-index: 1000;
 }
 
 .menu .inner {
   width: 100%;
-  display: flex;
   height: 100%;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-top: 10px; */
-  
+  padding-top: 10px;
 }
 
 nav.menu {
   width: 100%;
-  height: 90px;
+  height: 80px;
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: inherit;
-  border-bottom: 1.5px solid #000;
+
+  background-color: #ebeae3;
+  border-bottom: 1px solid #432626;
 }
 
-.menu .logo {
+.menu .logo a {
   font-weight: 700;
+  color: #432626;
 }
 
 .gnb {
@@ -48,16 +54,26 @@ nav.menu {
 
 .login {
   padding: 0 60px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .login a {
-  color: #000000;
+  color: #432626;
 }
 
 i.fa-bars {
   font-size: 20px;
   cursor: pointer;
+}
+
+.menu-icon > div {
+  width: 20px;
+  height: 3px;
+  margin: 3px 0;
+  border-radius: 5px;
+
+  background-color: #432626;
+  /* background-color: #432626; */
 }
 
 /* 메뉴 */

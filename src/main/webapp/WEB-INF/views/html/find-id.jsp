@@ -8,33 +8,21 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/find-id.css" />
+    <script src="/assets/js/category.js/" defer></script>
   </head>
   <body>
     <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="wrapper">
-            <div class="logo point">
-              <a href="#">나의 애착 페이지</a>
-            </div>
-            <ul class="gnb">
-              <li class="login point"><a href="#">LOGIN</a></li>
-              <li><i class="fas fa-bars"></i></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <%@ include file="../include/header.jsp" %>
 
     <!-- main -->
     <main>
       <form action="/findId" method="post">
-        <section class="sign-in">
+        <section class="find-id">
           <div class="inner">
             <div class="wrapper">
-              <div class="sign-in-title">
+              <div class="find-id-title">
                 <p>아이디 찾기</p>
               </div>
 
@@ -75,7 +63,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     존재하지 않는 회원입니다. 입력하신 내용을 다시 확인해주세요.
                   </p>
                 </c:if>
-                <button class="sign-in-btn" type="submit">확인</button>
+                <button class="find-id-btn" type="submit">확인</button>
 
                 <div class="find">
                   <a class="find-pw" href="/modifyPw">비밀번호 찾기</a>
