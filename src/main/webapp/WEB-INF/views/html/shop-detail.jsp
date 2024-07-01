@@ -23,7 +23,6 @@
                     ${item.shopItemDesc}<br>
                 </p>
                 <%-- 디버깅을 위해 추가 --%>
-<p>Session User Account: ${sessionScope.loginUser.account}</p>
             </div>
             <form id="addToCartForm" action="/cart" method="post" onsubmit="return debugForm()">
                 <div class="quantity">
@@ -38,7 +37,7 @@
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
-            <div class="price" id="totalPrice">가격: ₩${item.shopItemPrice}</div>
+            <div class="price" id="totalPrice">₩ ${item.shopItemPrice}</div>
         </div>
     </div>
     <div class="what">
@@ -47,16 +46,21 @@
             a range of handcrafted items<br>
             that transform your space into a haven of tranquility and style.</p>
     </div>
-    <div class="suggestion-title">RELATED PRODUCTS</div>
     <div class="suggestion-container">
         <div class="suggestion">
-            <img src="${randomImages[0]}" alt="추천 상품 1">
+            <a href="/shop/${randomImages[0].shopItemId}">
+                <img src="${randomImages[0].shopItemImg}" alt="추천 상품 1">
+            </a>
         </div>
         <div class="suggestion">
-            <img src="${randomImages[1]}" alt="추천 상품 2">
+            <a href="/shop/${randomImages[1].shopItemId}">
+                <img src="${randomImages[1].shopItemImg}" alt="추천 상품 2">
+            </a>
         </div>
         <div class="suggestion">
-            <img src="${randomImages[2]}" alt="추천 상품 3">
+            <a href="/shop/${randomImages[2].shopItemId}">
+                <img src="${randomImages[2].shopItemImg}" alt="추천 상품 3">
+            </a>
         </div>
     </div>
 </div>
@@ -65,6 +69,7 @@
 
 <script src="/assets/js/category.js"></script>
 <script>
+    
     function incrementQuantity() {
         const quantityInput = document.getElementById('quantityInput');
         quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -84,7 +89,7 @@
         const itemPrice = document.getElementById('itemPrice').value;
         const totalPrice = document.getElementById('totalPrice');
         const newPrice = quantityInput.value * itemPrice;
-        totalPrice.textContent = '가격: ₩' + newPrice.toFixed(2);
+        totalPrice.textContent = '₩' + newPrice.toFixed(2);
     }
     // 제훈함수
     function debugForm() {
