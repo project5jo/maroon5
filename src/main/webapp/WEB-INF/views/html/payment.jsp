@@ -70,21 +70,22 @@
               <input
                       type="text"
                       class="postal-code"
-                      value="${order.address1}"
-                      readonly
+                      placeholder="우편번호를 입력하세요"
+                      name="address1"
               />
+              <button type="button" class="postal-code-search">주소검색</button>
             </div>
             <input
                     type="text"
                     class="postal-code"
-                    value="${order.address2}"
-                    readonly
+                    placeholder="기본주소를 입력하세요"
+                    name="address2"
             />
             <input
                     type="text"
                     class="postal-code"
-                    value="${order.address3}"
-                    readonly
+                    placeholder="상세주소를 입력하세요"
+                    name="address3"
             />
           </div>
         </div>
@@ -101,12 +102,12 @@
                       id="account"
                       class="user-name"
                       placeholder="사용할 포인트를 입력하세요"
-                      name="name"
+                      name="point"
               />
-              <button class="btn-point">적용</button>
+              <button type="button" class="btn-point">적용</button>
             </div>
             <p class="user-point-info">
-              <span>보유하신 포인트</span>: 2000
+              <span>보유하신 포인트</span>: ${userPoint}
             </p>
           </div>
         </div>
@@ -116,7 +117,7 @@
           <div class="tr">
             <div class="price-info">
               <p class="th-title">주문상품</p>
-              <p>259,400원</p>
+              <p>${totalPrice}원</p>
             </div>
             <div class="price-info">
               <p class="th-title">포인트 사용</p>
@@ -128,12 +129,12 @@
             </div>
             <div class="price-info">
               <p class="th-title">최종 금액</p>
-              <p class="total-price">259,400원</p>
+              <p class="total-price">${totalPrice}원</p>
             </div>
           </div>
         </div>
 
-        <a class="btn-pay" href="#">12,000원 결제하기</a>
+        <button type="submit" class="btn-pay">${totalPrice}원 결제하기</button>
       </div>
     </form>
   </section>

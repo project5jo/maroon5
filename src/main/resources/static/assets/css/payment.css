@@ -167,7 +167,7 @@ button.btn-point {
 }
 
 /* 최종 결제 버튼 */
-a.btn-pay {
+.btn-pay {
   text-align: center;
   line-height: 50px;
   color: #fff;
