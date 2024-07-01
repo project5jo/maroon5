@@ -305,11 +305,17 @@ th {
 .right-checkContent {
   font-weight: 700;
   font-size: 20px;
+  text-align: center;
 }
 .right-checkContent p {
   color: rgb(255, 0, 0);
   margin-bottom: 10px;
 }
+
+.right-button {
+  margin: 10px 0px auto;
+}
+
 
 
 /* footer */

@@ -95,24 +95,24 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <p>비밀번호 글자수가 8자미만 또는 16자 초과인 경우</p>
               </div>
 
-              <form>
+              <form action="/mypage-password" method="post">
                 <div class="right-input">
                   <h2>현재 비밀번호 </h2>
-                  <input type="text" placeholder="이름">
+                  <input type="text" name="password" placeholder="현재 비밀번호">
                   <p>아이디는 5글자 이상 입력해야 합니다.</p>
                 </div>
                 <div class="right-input">
                   <h2>새 비밀번호</h2>
-                  <input type="text" placeholder="이름">
+                  <input type="text" name="newPassword" placeholder="새 비밀번호">
                   <p>아이디는 5글자 이상 입력해야 합니다.</p>
                 </div>
                 <div class="right-input">
                   <h2>새 비밀번호 확인</h2>
-                  <input type="text" placeholder="이름">
+                  <input type="text" name="checkNewPassword" placeholder="새 비밀번호 확인">
                   <p>아이디는 5글자 이상 입력해야 합니다.</p>
                 </div>
                 <div class="input-check">
-                  <button class="btn-gradient yellow large">확인</button>
+                  <button class="btn-gradient yellow large" type="submit">확인</button>
                 </div>
               </form>
 

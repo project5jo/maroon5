@@ -45,7 +45,8 @@
         WHERE user_email = #{email}
         AND user_name = #{name}
     </select>
-
+  
+    <!--    회원가입     -->
     <select id="checkId" resultType="boolean">
         SELECT COUNT(*)
         FROM Users
@@ -58,12 +59,18 @@
         WHERE user_email = #{email}
     </select>
 
-<!--    자동 로그인      -->
-    <update id="updateAutoLogin">
+    <!--    마이페이지      -->
+    <update id="updateMyPageMemberInfo">
         UPDATE Users
-        SET session_id = #{sessionId}, limit_time = #{limitTime}
-        WHERE user_account = #{account}
+        SET
+        user_name = #{userName}, user_email = #{userEmail}, user_birth = #{userBirth}
+        WHERE user_account = #{userAccount}
     </update>
+
+    <delete id="delete">
+        DELETE FROM Users
+        WHERE user_account = #{account}
+    </delete>
 
     <update id="updateRoomId">
         UPDATE Users
@@ -88,6 +95,13 @@
         WHERE user_account = #{account}
     </update>
 
+    <!--    자동 로그인      -->
+    <update id="updateAutoLogin">
+        UPDATE Users
+        SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE user_account = #{account}
+    </update>
+
     <select id="findChatUser" resultType="User">
         SELECT
         user_account
@@ -103,29 +117,5 @@
         FROM Users
         WHERE user_account = #{account}
     </select>
-<!--    <select id="existsById" resultType="boolean">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM tbl_member-->
-<!--        <if test="type == 'account'">-->
-<!--            WHERE account = #{keyword}-->
-<!--        </if>-->
-<!--        <if test="type == 'email'">-->
-<!--            WHERE email = #{keyword}-->
-<!--        </if>-->
-<!--    </select>-->
-    
-<!--    <select id="check" resultType="int">-->
-<!--        SELECT-->
-<!--        COUNT (*)-->
-<!--        FROM Users-->
-<!--        WHERE user_account=#{userAccount}-->
-<!--    </select>-->
-
-<!--    <select id="checkEmail" resultType="int">-->
-<!--        SELECT-->
-<!--        COUNT (*)-->
-<!--        FROM Users-->
-<!--        WHERE user_email=#{email}-->
-<!--    </select>-->
 
 </mapper>

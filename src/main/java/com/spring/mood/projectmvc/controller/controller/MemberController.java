@@ -53,7 +53,7 @@ public class MemberController {
         // service 에 DB 저장처리 위임
         boolean flag = memberService.memberServiceSave(dto, profilePath);
 
-        return flag ? "redirect:/login" : "redirect:/create";
+        return flag ? "redirect:/sign-in" : "redirect:/create";
     }
 
     // 아이디, 이메일 중복검사 비동기 요청 처리
@@ -89,11 +89,4 @@ public class MemberController {
         }
         return new ResponseEntity<>(flag, HttpStatus.OK);
     }
-
-    // 로그인 페이지 열기
-    @GetMapping("/login")
-    public String openLogin () {
-        return "html/sign-in";
-    }
-
 }

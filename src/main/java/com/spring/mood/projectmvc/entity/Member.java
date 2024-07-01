@@ -19,6 +19,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_account")
+    @Setter
     private String userAccount; // PK
 
     @Setter
@@ -27,16 +28,19 @@ public class Member {
 
     @Column(name = "user_role")
     private String userRole;
+    @Setter
     @Column(name = "user_name")
     private String userName;
 
     @Setter
     @Column(name = "user_password")
     private String userPassword;
+    @Setter
     @Column(name = "user_email")
     private String userEmail;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Setter
     @Column(name = "user_birth")
     private LocalDate userBirth;
     @Column(name = "user_address")

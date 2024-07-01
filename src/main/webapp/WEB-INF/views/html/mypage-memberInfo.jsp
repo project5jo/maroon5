@@ -32,6 +32,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   
     <!-- main -->
     <main>
+      <!-- title -->
+      <section class="title">
+        <a href="/mypage"><h1>마이페이지</h1></a>
+      </section>
+
       <section class="mainpage">
         <div class="tr">
 
@@ -41,7 +46,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="/assets/img/profile.jpg" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -49,7 +54,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
                 </div>
               </div>
-              <p class="profile-name">키티 님</p>
+              <p class="profile-name">${isUpdated ? updatedMember.name : nowMember.name} 님</p>
             </div>
 
             <div class="left-Menu">
@@ -65,10 +70,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
             </div>
             <div class="left-logout">
-              <a href="#" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
             </div>
 
           </div>
+          <!-- left end -->
 
           <!-- right -->
           <div class="tr-right">
@@ -83,42 +89,66 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <p>소중한 개인정보를 최신으로 관리하세요.</p>
               </div>
 
-              <form action="/memberInfo" method="post">
+              <form action="/mypage-memberinfo" method="post">
                 <div class="right-input id">
-                  <h2>아이디* </h2>
-                  <input type="text" placeholder="아이디" readonly>
+                  <h2><i class="fas fa-user"></i> 아이디* </h2>
+                  <input type="text" name="account" value="${isUpdated ? updatedMember.account : nowMember.account}">
                   <p>"아이디는 변경할 수 없습니다."</p>
                 </div>
-                <div class="right-input">
-                  <h2>이름*</h2>
-                  <input type="text" placeholder="이름">
+                <div class="right-input name">
+                  <h2><i class="far fa-address-card"></i> 이름*</h2>
+                  <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}">
+                  <!-- <input type="text" name="userName" value="${isUpdated ? updatedMember.name : nowMember.name}"> -->
                   <p>"이름은 한글만 입력할 수 있습니다. (2자 이상)"</p>
                 </div>
-                <div class="right-input">
-                  <h2>이메일*</h2>
-                  <input type="text" placeholder="이메일">
+                <div class="right-input birth">
+                  <h2><i class="fas fa-birthday-cake"></i> 생년월일*</h2>
+                  <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}">
+                  <!-- <input type="date" name="userBirth" value="${isUpdated ? updatedMember.birth : nowMember.birth}"> -->
                   <p></p>
                 </div>
-                <div class="right-input">
-                  <h2>생년월일*</h2>
-                  <input type="date" placeholder="생년월일">
+                <div class="right-input email">
+                  <h2><i class="far fa-envelope"></i> 이메일*</h2>
+                  <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}">
+                  <!-- <input type="text" name="userEmail" value="${isUpdated ? updatedMember.email : nowMember.email}"> -->
                   <p></p>
                 </div>
                 <div class="input-check">
-                  <button class="btn-gradient yellow large">확인</button>
+                  <button class="btn-gradient large yellow ok" type="button">확인</button>
                 </div>
-              </form>
+
+                <!-- modal -->
+                <div class="modal-box">
+                  <div class="modal">
+                    <div class="modal-header">
+                      <span>X</span>
+                    </div>
+                    <div class="modal-text">
+                      <p>진짜 수정하시겠습니까?</p>
+                    </div>
+                    <div class="modal-content">
+                      <button class="btn-gradient large yellow cancel" type="button">취소</button>
+                      <button class="btn-gradient large success yellow" type="submit">확인</button>
+                    </div>
+                  </div>
+                </div>
+
+              </form> 
+              <!-- form end -->
 
             </div>
           </div>
+          <!-- right end -->
 
         </div>
+
       </section>
     </main>
 
+
     <footer></footer>
     
-    <script src="/assets/js/Mypage.js"></script>
+    <script src="/assets/js/Mypage-memberInfo.js"></script>
   
 </body>
 </html>
