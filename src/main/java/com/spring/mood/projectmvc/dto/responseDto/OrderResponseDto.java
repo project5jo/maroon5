@@ -1,18 +1,17 @@
 package com.spring.mood.projectmvc.dto.responseDto;
 
-import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.Orders;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter @ToString
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class OrderResponseDto {
-    private long orderId;
+    private Long orderId;
     private String userAccount;
     private LocalDateTime orderDate;
     private String address1;
@@ -21,17 +20,16 @@ public class OrderResponseDto {
     private String receiverName;
     private String receiverPhone;
 
-    // Orders 엔티티로부터 OrderResponseDto 생성
-    public static OrderResponseDto fromEntity(Orders order) {
+    public static OrderResponseDto fromEntity(Orders orders) {
         return OrderResponseDto.builder()
-                .orderId(order.getOrderId())
-                .userAccount(order.getUserAccount())
-                .orderDate(order.getOrderDate())
-                .address1(order.getAddress1())
-                .address2(order.getAddress2())
-                .address3(order.getAddress3())
-                .receiverName(order.getReceiverName())
-                .receiverPhone(order.getReceiverPhone())
+                .orderId(orders.getOrderId())
+                .userAccount(orders.getUserAccount())
+                .orderDate(orders.getOrderDate())
+                .address1(orders.getAddress1())
+                .address2(orders.getAddress2())
+                .address3(orders.getAddress3())
+                .receiverName(orders.getReceiverName())
+                .receiverPhone(orders.getReceiverPhone())
                 .build();
     }
 }

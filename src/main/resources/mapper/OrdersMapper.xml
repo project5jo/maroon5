@@ -21,14 +21,8 @@
     </select>
 
     <insert id="save">
-        INSERT INTO Orders
-        (address1,
-        address2,
-        address3,
-        receiver_name,
-        receiver_phone)
-        VALUE
-        (#{address1}),(#{address2}),(#{address3}),(#{receiverName}),(#{receiverPhone})
+        INSERT INTO Orders (user_account, order_date, address1, address2, address3, receiver_name, receiver_phone)
+        VALUES (#{userAccount}, #{orderDate}, #{address1}, #{address2}, #{address3}, #{receiverName}, #{receiverPhone})
     </insert>
 
 </mapper>
