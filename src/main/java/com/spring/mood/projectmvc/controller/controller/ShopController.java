@@ -66,7 +66,10 @@ public class ShopController {
 
     @GetMapping("/shop/{id}")
     public String getItemById(@PathVariable Long id, Model model) {
-        ShopItemResponseDto item = ShopItemResponseDto.fromEntity(shopItemService.getItemById(id));
+        ShopItem itemById = shopItemService.getItemById(id);
+        System.out.println("itemById = " + itemById);
+        ShopItemResponseDto item = ShopItemResponseDto.fromEntity(itemById);
+        System.out.println("iteㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇm = " + item);
         model.addAttribute("item", item);
 
         List<String> randomImages = getRandomImages();

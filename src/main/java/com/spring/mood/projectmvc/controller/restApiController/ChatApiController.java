@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -25,12 +26,15 @@ public class ChatApiController {
     @GetMapping("/messages")
     public List<ChatMessageDto> getMessages(@RequestParam(name = "topicId") Integer topicId,
                                             @RequestParam(name = "roomId") int roomId) {
+
+        log.debug("Received request to get messages for topicId: {}, roomId: {}", topicId, roomId);
         return chatService.getAllMessages(topicId, roomId);
     }
 
     @PostMapping("/message")
     public ChatEntity sendMessage(@RequestBody ChatEntity message,
                                   @RequestParam(name = "topicId") Integer topicId) {
+        log.debug("Received request to post messages for topicId: {}, roomId: {}", topicId);
         return chatService.saveMessage(message, topicId);
     }
     @GetMapping("/findOrCreateRoom")
@@ -40,10 +44,14 @@ public class ChatApiController {
     }
 
     @PostMapping("/joinRoom")
-    public ChatRoom joinRoom(@RequestBody Map<String, Object> payload) {
+    public ChatRoom joinRoom(@RequestBody Map<String, Object> payload, HttpSession session) {
         Integer topicId = (Integer) payload.get("topicId");
-        int roomId = (int) payload.get("roomId");
         String username = (String) payload.get("username");
-        return chatService.incrementCurrentUsers(topicId, roomId, username);
+        ChatRoom chatRoom = chatService.findOrCreateAvailableChatRoom(topicId);
+
+        session.removeAttribute("roomId");
+        session.setAttribute("topicId", topicId);
+        session.setAttribute("roomId", chatRoom.getRoomId());
+        return chatService.incrementCurrentUsers(topicId, chatRoom.getRoomId(), username);
     }
 }
