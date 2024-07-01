@@ -110,7 +110,7 @@ body {
 .quantity-btn {
   background-color: #EBEAE3;
   border: 1.5px solid #000;
-  padding: 10px 20px;
+  padding: 5px 15px;
   font-size: 24px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -122,7 +122,7 @@ body {
 }
 
 .quantity-input {
-  width: 100px;
+  width: 80px;
   height: 50px;
   background-color: #EBEAE3;
   text-align: center;
@@ -147,7 +147,7 @@ body {
   justify-content: center;
   background: none;
   border: none;
-  margin-left: 5%;
+  margin-left: 2%;
   cursor: pointer;
   color: #d9534f;
 }
@@ -171,7 +171,7 @@ body {
 }
 
 .subtotal span:first-child {
-  margin-right: 9%;
+  margin-right: 6.3%;
 }
 
 .checkout-btn {
