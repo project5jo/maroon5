@@ -21,6 +21,8 @@ public class ChatMessageDto {
     private LocalDateTime timestamp;
     private Long topicId;
     private Long roomId;
+    private String profileUrl;
+    private String senderName;
 
     @PrePersist
     protected void onCreate() {

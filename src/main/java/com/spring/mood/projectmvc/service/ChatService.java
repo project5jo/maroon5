@@ -40,6 +40,10 @@ public class ChatService {
         dto.setTimestamp(chatEntity.getTimestamp());
 //        System.out.println("chatservice 에서 dto 가져오기 = " + dto);
         dto.setSender(chatEntity.getUser().getUserAccount());
+        dto.setSenderName(chatEntity.getUser().getUserName());
+        dto.setTopicId((long) chatEntity.getTopicId());
+        dto.setRoomId((long) chatEntity.getRoomId());
+        dto.setProfileUrl(chatEntity.getUser().getUserProfile()); // 프로필 URL 설정
         return dto;
     }
 
