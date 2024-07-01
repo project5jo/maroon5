@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,7 +22,7 @@
     </div>
     <!-- 아이템 반복 -->
     <c:forEach var="cartItem" items="${cartItems}">
-        <div class="cart-item">
+        <div class="cart-item" data-item-id="${cartItem.shopItemId}">
             <a href="">
                 <img src="${cartItem.shopItemImg}" alt="${cartItem.shopItemName}">
             </a>
@@ -31,12 +31,12 @@
                 <p>${cartItem.shopItemDesc}</p>
             </div>
             <div class="item-price">
-                <span>₩ ${cartItem.cartTotalPrice}</span>
+                <span>₩ <span class="item-price-value">${cartItem.cartTotalPrice}</span></span>
             </div>
             <div class="item-quantity">
-                <button class="quantity-btn" onclick="updateQuantity(`${cartItem.shopItemId}`, -1)">-</button>
-                <span>${cartItem.cartTotalCount}</span>
-                <button class="quantity-btn" onclick="updateQuantity(`${cartItem.shopItemId}`, 1)">+</button>
+                <button class="quantity-btn" onclick="decrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">-</button>
+                <input type="number" class="quantity-input" value="${cartItem.cartTotalCount}" min="1" data-price="${cartItem.unitPrice}" oninput="updatePrice(${cartItem.shopItemId}, ${cartItem.unitPrice})">
+                <button class="quantity-btn" onclick="incrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">+</button>
             </div>
             <div class="item-remove">
                 <button class="remove-btn" onclick="removeItem(`${cartItem.shopItemId}`)">
@@ -49,7 +49,7 @@
     <div class="cart-footer">
         <div class="subtotal">
             <span>Subtotal:</span>
-            <span>₩${cartTotalPrice}</span>
+            <span>₩ <span id="cartTotalPrice">${cartTotalPrice}</span></span>
         </div>
         <button class="checkout-btn">CHECKOUT</button>
         <p>Tax included and shipping calculated at checkout</p>
@@ -61,15 +61,43 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 <script>
-    function updateQuantity(itemId, change) {
-        // TODO: Implement quantity update logic
-        console.log("Updating quantity for item", itemId, "by", change);
+    function incrementQuantity(itemId, itemPrice) {
+        const quantityInput = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .quantity-input');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        updatePrice(itemId, itemPrice);
+    }
+
+    function decrementQuantity(itemId, itemPrice) {
+        const quantityInput = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .quantity-input');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            updatePrice(itemId, itemPrice);
+        }
+    }
+
+    function updatePrice(itemId, itemPrice) {
+        const quantityInput = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .quantity-input');
+        const itemPriceElement = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .item-price-value');
+        const newPrice = quantityInput.value * itemPrice;
+        itemPriceElement.textContent = newPrice.toFixed(2);
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        const priceElements = document.querySelectorAll('.item-price-value');
+        priceElements.forEach(function(priceElement) {
+            totalPrice += parseFloat(priceElement.textContent);
+        });
+        document.getElementById('cartTotalPrice').textContent = totalPrice.toFixed(2);
     }
 
     function removeItem(itemId) {
-        // TODO: Implement item removal logic
-        console.log("Removing item", itemId);
+        const cartItem = document.querySelector('.cart-item[data-item-id="' + itemId + '"]');
+        cartItem.remove();
+        updateTotalPrice();
     }
 </script>
+<script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </body>
 </html>

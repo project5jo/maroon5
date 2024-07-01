@@ -20,11 +20,9 @@ public class ShoppingCartService {
 
     @Transactional
     public void addToCart(Long itemId, BigDecimal itemPrice, int quantity, String userAccount) {
-        // 사용자 계정과 아이템 ID로 기존 장바구니 아이템을 찾음
         ShoppingCart existingCart = shoppingCartMapper.findItemByUserAccountAndItemId(userAccount, itemId);
 
         if (existingCart != null) {
-            // 기존 아이템이 있으면 수량과 총 가격을 업데이트
             Long newQuantity = existingCart.getCartTotalCount() + quantity;
             BigDecimal newTotalPrice = existingCart.getCartTotalPrice().add(itemPrice.multiply(BigDecimal.valueOf(quantity)));
 
@@ -38,7 +36,6 @@ public class ShoppingCartService {
 
             log.info("업데이트된 장바구니 아이템: {}", existingCart);
         } else {
-            // 기존 아이템이 없으면 새로운 아이템 추가
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUserAccount(userAccount);
             shoppingCart.setShopItemId(itemId);
