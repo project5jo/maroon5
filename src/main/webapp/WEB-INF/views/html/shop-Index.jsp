@@ -7,11 +7,15 @@
   <title>상품 목록</title>
   <link rel="stylesheet" href="/assets/css/shop-index.css">
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+  <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%@ include file="../include/header.jsp" %>
 
   <div class="container">
+    <a href="/cart">
+      <i class="fas fa-cart-shopping"></i>
+    </a>
     <div class="search-container">
       <c:if test="${userRole == 'ROLE_admin'}">
         <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
@@ -36,15 +40,39 @@
               </a>
             </div>
             <span>${item.shopItemName}</span>
-            <button id="cart-btn">₩ ${item.shopItemPrice}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
+            <form id="addToCartForm-${item.shopItemId}" action="/cart" method="post" onsubmit="return handleFormSubmit(event, '${item.shopItemId}')">
+              <div class="addBtn">
+                <input type="hidden" name="itemId" value="${item.shopItemId}">
+                <input type="hidden" name="itemPrice" id="itemPrice-${item.shopItemId}" value="${item.shopItemPrice}">
+                <c:choose>
+                  <c:when test="${sessionScope.loginUser != null}">
+                    <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
+                  </c:when>
+                  <c:otherwise>
+                    <input type="hidden" name="userAccount" value="">
+                  </c:otherwise>
+                </c:choose>
+                <input type="hidden" name="quantity" value="1">
+                <button id="cart-btn-${item.shopItemId}">₩ ${item.shopItemPrice}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add to cart</button>
+              </div>
+            </form>
           </li>
         </c:forEach>
       </ul>
     </div>
     <%@ include file="../include/footer.jsp" %>
-    
+    <!-- 모달 HTML 코드 -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <p>장바구니에 추가되었습니다.</p>
+          <button onclick="goToCart()">Go to Cart</button>
+          <button onclick="goBack()">Back</button>
+      </div>
+  </div>
   </div>
   <script src="/assets/js/category.js"></script>
   <script src="/assets/js/shop-index.js"></script>
+  
 </body>
 </html>
