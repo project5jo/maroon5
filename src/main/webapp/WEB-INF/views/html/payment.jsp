@@ -18,7 +18,7 @@
 
 <main>
   <section class="payment">
-    <form action="/payment" method="post" enctype="multipart/form-data">
+    <form action="/checkout" method="post" enctype="multipart/form-data">
       <div class="inner">
         <div class="payment-title">
           <p>주문결제</p>
@@ -55,12 +55,12 @@
             />
           </div>
           <div class="tr">
-            <p class="th-title">이메일<span></span></p>
+            <p class="th-title">수신자 이름<span></span></p>
             <input
                     type="text"
                     class="user-email"
                     placeholder="이메일을 작성하세요"
-                    name="email"
+                    name="receiver_name"
             />
           </div>
           <div class="tr">

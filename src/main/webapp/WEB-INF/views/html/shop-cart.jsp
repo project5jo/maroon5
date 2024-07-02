@@ -53,11 +53,6 @@
         </div>
         <form action="/checkout" method="post">
             <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
-            <input type="hidden" name="address1" value="address1"> <!-- 실제 주소 값을 입력받도록 수정 필요 -->
-            <input type="hidden" name="address2" value="address2">
-            <input type="hidden" name="address3" value="address3">
-            <input type="hidden" name="receiverName" value="receiverName">
-            <input type="hidden" name="receiverPhone" value="receiverPhone">
             <button type="submit" class="checkout-btn">CHECKOUT</button>
         </form>
         <p>Tax included and shipping calculated at checkout</p>
