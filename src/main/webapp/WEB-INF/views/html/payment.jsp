@@ -58,14 +58,22 @@
             <p class="th-title">수신자 이름<span></span></p>
             <input
                     type="text"
-                    class="user-email"
-                    placeholder="이메일을 작성하세요"
-                    name="receiver_name"
+                    class="receiver-name"
+                    placeholder="수신자 이름을 입력하세요"
+                    name="receiverName"
+            />
+          </div>
+          <div class="tr">
+            <p class="th-title">수신자 전화번호<span></span></p>
+            <input
+                    type="text"
+                    class="receiver-phone"
+                    placeholder="수신자 전화번호를 입력하세요"
+                    name="receiverPhone"
             />
           </div>
           <div class="tr">
             <p class="th-title">주소<span></span></p>
-
             <div class="postal-code">
               <input
                       type="text"
