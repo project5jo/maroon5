@@ -1,29 +1,46 @@
 package com.spring.mood.projectmvc.repository;
 
-import com.spring.mood.projectmvc.entity.ChatEntity;
-import com.spring.mood.projectmvc.entity.Member;
+import com.querydsl.core.Tuple;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.spring.mood.projectmvc.entity.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
+
+@Repository
+@RequiredArgsConstructor
 public class ChatRepositoryCustomImpl implements ChatRepositoryCustom {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<ChatEntity> findAllCustom(int topicId, int roomId) {
-        String jpql = "SELECT cm FROM ChatEntity cm " +
-                "JOIN cm.chatRoom cr " +
-                "JOIN cr.topic t " +
-                "WHERE t.topicId = :topicId " +
-                "AND cr.roomId = :roomId";
+    public List<Tuple> findAllCustom(int topicId, int roomId) {
+        QUser users = QUser.user;
+        QChatEntity chatMessages = QChatEntity.chatEntity;
+        QChatRoom chatRooms = QChatRoom.chatRoom;
+        QTopic topic = QTopic.topic;
 
-        TypedQuery<ChatEntity> query = entityManager.createQuery(jpql, ChatEntity.class);
-        query.setParameter("topicId", topicId);
-        query.setParameter("roomId", roomId);
-        return query.getResultList();
+        return jpaQueryFactory.select(
+                        users.userAccount,
+                        users.userName,
+                        chatMessages.content,
+                        chatRooms.roomName,
+                        topic.topicContent,
+                        chatMessages.timestamp,
+                        topic.topicId
+                )
+                .from(users)
+                .join(chatMessages).on(users.userAccount.eq(chatMessages.user.userAccount))
+                .join(chatRooms).on(chatMessages.chatRoom.roomId.eq(chatRooms.roomId))
+                .join(topic).on(chatRooms.topic.topicId.eq(topic.topicId))
+                .where(topic.topicId.eq(topicId).and(chatRooms.roomId.eq(roomId)))
+                .fetch();
     }
+
+//    //조건을 처리하는 메서드
+//    private OrderSpecifier<?> specifier (Integer topicId, int roomId) {
+//
+//    }
 }
