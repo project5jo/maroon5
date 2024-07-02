@@ -33,7 +33,14 @@
                 <div class="addBtn">
                     <input type="hidden" name="itemId" value="${item.shopItemId}">
                     <input type="hidden" name="itemPrice" id="itemPrice" value="${item.shopItemPrice}">
-                    <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
+                    <c:choose>
+                        <c:when test="${sessionScope.loginUser != null}">
+                            <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="hidden" name="userAccount" value="">
+                        </c:otherwise>
+                    </c:choose>
                     <button type="submit">Add to cart</button>
                 </div>
             </form>
@@ -67,8 +74,8 @@
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <p>장바구니에 추가되었습니다.</p>
-            <button onclick="goToCart()">Go to Cart</button>
+            <p id="modalMessage">장바구니에 추가되었습니다.</p>
+            <button id="modalButton" onclick="goToCart()">Go to Cart</button>
             <button onclick="goBack()">Back</button>
         </div>
     </div>
@@ -103,7 +110,13 @@
     function handleFormSubmit(event) {
         event.preventDefault(); // 폼 제출 막기
 
-        // 장바구니에 추가되는 작업 수행 (여기서는 실제 폼 제출을 가정)
+        const userAccount = document.querySelector(`#addToCartForm input[name="userAccount"]`).value;
+
+        if (!userAccount) {
+            showFailModal();
+            return false;
+        }
+
         const form = document.getElementById('addToCartForm');
         const formData = new FormData(form);
 
@@ -126,6 +139,18 @@
         return false; // 폼 제출 막기
     }
 
+    function showFailModal() {
+        document.getElementById('modalMessage').textContent = "로그인 후 이용해주세요.";
+        const modalButton = document.getElementById('modalButton');
+        modalButton.textContent = "Login";
+        modalButton.setAttribute("onclick", "goToSignIn()");
+        document.getElementById("cartModal").style.display = "block";
+    }
+
+    function goToSignIn() {
+        window.location.href = "/sign-in";
+    }
+
     function showModal() {
         document.getElementById("cartModal").style.display = "block";
     }
@@ -141,7 +166,6 @@
     function goBack() {
         window.location.href = "/shop";
     }
-
 </script>
 </body>
 </html>
