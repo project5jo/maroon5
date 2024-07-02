@@ -93,30 +93,22 @@
         <div class="payment-Delivery">
           <p class="payment-sub-title">배송지<span></span></p>
           <div class="tr">
-            <p class="th-title">주문자<span class="icoRequired"></span></p>
-            <input
-                    type="text"
-                    id="account"
-                    class="user-name"
-                    value="${order.userAccount}"
-                    readonly
-            />
-          </div>
-          <div class="tr">
-            <p class="th-title">수신자 이름<span></span></p>
+            <p class="th-title">받는분<span class="icoRequired"></span></p>
             <input
                     type="text"
                     class="receiver-name"
-                    placeholder="수신자 이름을 입력하세요"
+                    value="${loginUser.nickName}"
                     name="receiverName"
+                    
             />
           </div>
+        
           <div class="tr">
-            <p class="th-title">수신자 전화번호<span></span></p>
+            <p class="th-title">받는분 휴대번호<span></span></p>
             <input
                     type="text"
                     class="receiver-phone"
-                    placeholder="수신자 전화번호를 입력하세요"
+                    placeholder="받으실분 전화번호를 입력하세요"
                     name="receiverPhone"
             />
           </div>
@@ -128,7 +120,7 @@
             </div>
             <input type="text" id="sample6_address" placeholder="주소" name="address2">
             <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3">
-            <input type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
+            <input class="sample6-extraAddress" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
           </div>
         </div>
 
@@ -149,7 +141,7 @@
               <button type="button" class="btn-point">적용</button>
             </div>
             <p class="user-point-info">
-              <span>보유하신 포인트</span>: ${userPoint}
+              <span>보유하신 포인트</span>: ${loginUser.point}
             </p>
           </div>
         </div>

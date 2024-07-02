@@ -61,7 +61,7 @@ public class ShopController {
         model.addAttribute("items", items);
         model.addAttribute("userRole", userRole);
 
-        return "html/shop-index";
+        return "html/shop-Index";
     }
 
     @GetMapping("/shop/{id}")
@@ -85,7 +85,7 @@ public class ShopController {
     }
 
 
-    private String rootPath = "/Users/superstar/spring-prj/upload/";
+    private String rootPath = "/Users/yejin/Desktop/backand/miniProject/spring/sample-image";
 
     @PostMapping("/shop/add")
     public String uploadFile(
