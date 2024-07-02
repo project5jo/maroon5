@@ -61,7 +61,7 @@ public class ShopController {
         model.addAttribute("items", items);
         model.addAttribute("userRole", userRole);
 
-        return "html/shop-Index";
+        return "html/shop-index";
     }
 
     @GetMapping("/shop/{id}")
