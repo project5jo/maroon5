@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 
 
+
 //////////////////////////////////////////////////////////// TEST 시연용 ///////////
 // // 현시간에 맞춰 배경화면 변경 (임시로 3초설정 해놈)
 // let counter = 0;
