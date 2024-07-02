@@ -2,6 +2,9 @@ body {
   background-color: #EBEAE3;
 }
 
+.container {
+  margin-top: 4.2%;
+}
 .main-container {
   display: flex;
   flex-direction: row;

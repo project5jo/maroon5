@@ -21,7 +21,7 @@
         <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
       </c:if>
       <form action="/shop" method="get">
-        <input type="text" name="keyword" class="search-bar">
+        <input placeholder="Title" type="text" name="keyword" class="search-bar">
         <button type="submit" class="item-search">Search</button>
       </form>
     </div>
@@ -65,8 +65,8 @@
     <div id="cartModal" class="modal">
       <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <p>장바구니에 추가되었습니다.</p>
-          <button onclick="goToCart()">Go to Cart</button>
+          <p id="modalMessage">장바구니에 추가되었습니다.</p>
+          <button id="modalButton" onclick="goToCart()">Go to Cart</button>
           <button onclick="goBack()">Back</button>
       </div>
   </div>

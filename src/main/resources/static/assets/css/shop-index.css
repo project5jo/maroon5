@@ -39,13 +39,14 @@ body {
 
 ul li button.delete-btn {
   width: 50px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
-  background: #fff;
-  border: 1px solid #000;
+  color: #432626;
+  background: #ebeae3;
   cursor: pointer;
 }
 ul li button.delete-btn:hover {
