@@ -22,4 +22,5 @@ public class Orders {
     private String receiverName;
     private String receiverPhone;
 
+//    private int point;
 }

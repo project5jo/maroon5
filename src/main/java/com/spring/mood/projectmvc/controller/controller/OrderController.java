@@ -34,6 +34,7 @@ public class OrderController {
                 .address3(orderRequestDto.getAddress3())
                 .receiverName(orderRequestDto.getReceiverName())
                 .receiverPhone(orderRequestDto.getReceiverPhone())
+//                .point(orderRequestDto.getPoint())
                 .build();
 
         orderService.createOrder(order);
@@ -45,8 +46,9 @@ public class OrderController {
         model.addAttribute("order", orderResponseDto);
         model.addAttribute("cartItems", shoppingCartService.getCartByUser(orderRequestDto.getUserAccount()));
         model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("userPoint", user.getUserPoint());
+//        model.addAttribute("userPoint", user.getUserPoint());
 
         return "html/payment";
     }
+
 }
