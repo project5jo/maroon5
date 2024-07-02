@@ -5,7 +5,7 @@
 
 header {
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
   overflow: hidden;
   color: #fff;
   font-size: 15px;
@@ -37,6 +37,7 @@ nav.menu {
 
 .menu .logo a {
   font-weight: 700;
+  font-size: 15px;
   color: #fff;
 }
 
@@ -52,6 +53,7 @@ nav.menu {
 }
 
 .login a {
+  font-size: 15px;
   color: #fff;
 }
 
