@@ -31,6 +31,7 @@ public class ChatApiController {
         return chatService.getAllMessages(topicId, roomId);
     }
 
+
     @PostMapping("/message")
     public ChatEntity sendMessage(@RequestBody ChatEntity message,
                                   @RequestParam(name = "topicId") Integer topicId) {
@@ -47,10 +48,11 @@ public class ChatApiController {
     public ChatRoom joinRoom(@RequestBody Map<String, Object> payload, HttpSession session) {
         Integer topicId = (Integer) payload.get("topicId");
         String username = (String) payload.get("username");
-        ChatRoom chatRoom = chatService.findOrCreateAvailableChatRoom(topicId);
+        ChatRoom chatRoom = chatService.allocateRoomForUser(topicId);
 
         session.removeAttribute("roomId");
-        session.setAttribute("topicId", topicId);
+        session.setAttribute("topicId", chatRoom.getTopic().getTopicId());
+        log.debug("topic Id is: {}", chatRoom.getTopic().getTopicId());
         session.setAttribute("roomId", chatRoom.getRoomId());
         return chatService.incrementCurrentUsers(topicId, chatRoom.getRoomId(), username);
     }

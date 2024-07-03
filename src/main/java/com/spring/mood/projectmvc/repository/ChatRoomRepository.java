@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
+public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long>,  ChatRoomRepositoryCustom {
     Optional<ChatRoom> findByTopicTopicIdAndRoomId(Integer topicId, int roomId);
 
     List<ChatRoom> findByTopicTopicIdOrderByRoomIdAsc(Integer topicId);

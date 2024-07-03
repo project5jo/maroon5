@@ -19,8 +19,8 @@ public class ChatMessageDto {
     private String sender;
     private String content;
     private LocalDateTime timestamp;
-    private Long topicId;
-    private Long roomId;
+    private Integer topicId;
+    private Integer roomId;
     private String profileUrl;
     private String senderName;
 

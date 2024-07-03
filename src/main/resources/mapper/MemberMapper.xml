@@ -26,6 +26,7 @@
         , user_point
         FROM Users
         WHERE user_account = #{account}
+        AND user_deleted = #{deleted}
     </select>
 
 
