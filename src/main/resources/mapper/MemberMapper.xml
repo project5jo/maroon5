@@ -73,6 +73,12 @@
         WHERE user_account = #{account}
     </update>
 
+    <update id="deleteMyPageAccount">
+        UPDATE Users
+        SET user_deleted = #{deleteFlag}
+        WHERE user_account = #{account}
+    </update>
+
     <delete id="delete">
         DELETE FROM Users
         WHERE user_account = #{account}

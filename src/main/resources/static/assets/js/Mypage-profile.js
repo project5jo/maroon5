@@ -6,7 +6,7 @@
 const $leftProfileBtn = document.querySelector('.profile-icon'); // 왼쪽메뉴 프로필 수정 버튼
 
 const $profileInput = document.querySelector('.profileInput'); // 프로필사진 인풋태그
-const $profileImg = document.querySelector('.right-input img'); // 프로필사진 이미지태그
+const $profileImg = document.querySelector('.form-content img'); // 프로필사진 이미지태그
 const $profileInputStatus =  document.querySelector('.profileInputStatus'); // 프로필사진 인풋태그 상태
 
 const $profileDB = document.getElementById("profileSRC"); // 서버로부터 받아온 기존 프로필사진
@@ -17,8 +17,8 @@ const $profileBasicBtn = document.querySelector('.basic'); // 기본 이미지 �
 const $profileDeleteBtn = document.querySelector('.delete'); // 취소 버튼
 const $profileCheckBtn = document.querySelector('.check'); // 적용 버튼
 
-const $modal = document.querySelector('.modal-box'); // 모달창
-const $modalBack = document.querySelector('.modalBack'); // 모달창 배경
+const $modal = document.querySelector('.form-modals'); // 모달창
+const $modalBack = document.querySelector('.form-modalback'); // 모달창 배경
 
 const $modalCancelBtn = document.querySelector('.cancel');// 모달 취소 버튼
 const $modalXButton = document.querySelector('.modal-header span'); // 모달창의 X버튼
@@ -33,6 +33,7 @@ $profileUploadBtn.addEventListener('click', e => {
     // 프로필사진 업로드버튼을 누르면 인풋태그 클릭하기
     $profileInput.click();
 })
+
 
 // 2-1. 인풋태그로 이미지파일 첨부한 경우 첨부파일 데이터 저장 & 클라이언트 처리
 $profileInput.addEventListener("change", (e) => {
@@ -58,6 +59,7 @@ $profileInput.addEventListener("change", (e) => {
     } 
 })
 
+
 // 2-2. 기본 이미지 적용 버튼을 클릭한 경우 클라이언트 처리
 $profileBasicBtn.addEventListener('click', e => {
     // 기본사진 버튼 클릭시 프로필 기본이미지로 변경
@@ -66,6 +68,7 @@ $profileBasicBtn.addEventListener('click', e => {
     $profileInputStatus.value = "deleteProfile";
     // console.log("인풋저장상태", $profileInputStatus.value);
 })
+
 
 // 2-3. 취소 버튼을 클릭한 경우 기존에 저장된 프로필이미지 유지 클라이언트 처리
 $profileDeleteBtn.addEventListener('click', e => {
@@ -76,6 +79,27 @@ $profileDeleteBtn.addEventListener('click', e => {
     $profileInputStatus.value = "nowProfile";
     // console.log("인풋저장상태", $profileInputStatus.value);
 })
+
+// 3-1. 적용 버튼을 누르면 재확인 모달창 생성하기
+$profileCheckBtn.addEventListener('click', e => {
+  $modal.style.display = 'block';
+  $modalBack.style.display = 'block';
+  // console.log("인풋저장상태", $profileInputStatus.value);
+})
+
+// 3-2. 모달창의 취소버튼을 클릭할 경우 모달창 사라지기
+$modalCancelBtn.addEventListener('click', e => {
+  // 모달창의 취소버튼
+  $modal.style.display = 'none';
+  $modalBack.style.display = 'none';
+})
+
+$modalXButton.addEventListener('click', e => {
+  // 모달창의 X버튼
+  $modal.style.display = 'none';
+  $modalBack.style.display = 'none';
+})
+
 
 
 

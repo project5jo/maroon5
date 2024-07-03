@@ -145,13 +145,13 @@ public class MyPageController {
     }
 
     @PostMapping ("/mypage-cancel")
-    public String deleteMemberInfo (HttpSession session) {
+    public String deleteMemberInfo (HttpSession session, boolean deleteFlag) {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        boolean flag = service.serviceDelete(loginUser.getAccount());
+        boolean isDeleted = service.serviceDelete(loginUser.getAccount(), deleteFlag);
 
-        if (flag) {
+        if (isDeleted) {
             return "redirect:/";
         } else {
             return "/mypage-cancel";

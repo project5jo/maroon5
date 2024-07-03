@@ -52,11 +52,11 @@ public class MyPageService {
         return isUpdated;
     }
 
-    public boolean serviceDelete(String account) {
+    public boolean serviceDelete(String account, boolean deleteFlag) {
 
-        boolean flag = membermapper.delete(account);
+        boolean isDeleted = membermapper.deleteMyPageAccount(account, deleteFlag);
 
-        return flag;
+        return isDeleted;
     }
 
     public boolean serviceUpdatePassword(String account, String password, String newPassword) {

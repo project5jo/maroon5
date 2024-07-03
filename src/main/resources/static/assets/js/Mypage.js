@@ -16,7 +16,7 @@ $leftProfileBtn.addEventListener("click", e => {
 // 폼 태그 모달창
 const $CheckBtn = document.querySelector('.check'); // 적용 버튼
 
-const $modal = document.querySelector('.modal-box'); // 모달창
+const $modal = document.querySelector('.form-modals'); // 모달창
 const $modalBack = document.querySelector('.modalBack'); // 모달창 배경
 
 const $modalCancelBtn = document.querySelector('.cancel');// 모달 취소 버튼

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/assets/css/mypage-profile.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
-    <script src="/assets/js/Mypage.js" defer></script>
+    <!-- <script src="/assets/js/Mypage.js" defer></script> -->
     <script src="/assets/js/Mypage-profile.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
@@ -37,7 +37,7 @@
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -67,7 +67,7 @@
               <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
             </div>
             <div class="left-logout">
-              <a href="#" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
             </div>
 
           </div>
@@ -94,7 +94,7 @@
 
                   <div class="form-content profile">
                     <h2><i class="fas fa-user"></i> 프로필사진*</h2>
-                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                     <input type="file" class="profileInput" accept="image/*" style="display: none" name="profile" />
                     <input type="hidden" class="profileInputStatus" value="false" name="profileStatus" >
                   </div>

@@ -67,7 +67,7 @@
               <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
             </div>
             <div class="left-logout">
-              <a href="#" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
             </div>
 
           </div>
@@ -122,7 +122,7 @@
                   
                   <div class="form-content">
                     <p>탈퇴 후에는 아이디 ${account} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
-                    <input type="checkbox" class="cancelInput" name="check" value="" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
+                    <input type="checkbox" class="cancelInput" name="deleteFlag" value="" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
                   </div>
     
                   <div class="form-content button">

@@ -67,7 +67,7 @@
               <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
             </div>
             <div class="left-logout">
-              <a href="#" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
             </div>
 
           </div>

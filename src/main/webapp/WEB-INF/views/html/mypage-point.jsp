@@ -67,7 +67,7 @@
               <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
             </div>
             <div class="left-logout">
-              <a href="#" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
             </div>
 
           </div>
@@ -83,12 +83,12 @@
 
             <div class="right-contents">
 
-              <div class="point-content">
+              <div class="right-content">
                 <h2><i class="fas fa-check"></i>현재 포인트</h2>
                 <p>${isUpdated ? updatedMember.point : nowMember.point}원</p>
               </div>
 
-              <div class="point-content">
+              <div class="right-content">
                 <h2><i class="fas fa-check"></i>충전하실 포인트를 선택해주세요.</h2>
               </div>
 
@@ -97,7 +97,7 @@
                   <div class="form-contents">
 
                     <div class="form-content">
-                      <h3>충전할 금액을 입력해주세요</h3>
+                      <h2>충전할 금액을 입력해주세요</h2>
                       <input type="text">
                       <button>확인</button>
                     </div>

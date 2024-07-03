@@ -23,13 +23,10 @@ $myPageName.addEventListener('keyup', e => {
       } else if (!nameValid.test(e.target.value)) {
           $nameSub.style.color = 'red';
           $nameSub.textContent = "이름은 한글만 입력 (2자 이상)";
-          flagArray.nameFlag = false;
           checkAllFlagArray();
       } else if (e.target.value.length > 1){
           $nameSub.style.color = 'blue';
           $nameSub.textContent = "";
-          flagArray.nameFlag = true;
-          checkAllFlagArray();
       }
   }, 500) // setTimeout end
 }); // keyup end
@@ -49,9 +46,6 @@ $myPageBirth.addEventListener('blur', e => {
       } else {
           $birthSub.style.color = 'blue';
           $birthSub.textContent = "";
-
-          flagArray.birthFlag = true;
-          checkAllFlagArray();
       }
   }, 500) // setTimeout end
 }); // keyup end
@@ -76,8 +70,6 @@ $myPageEmail.addEventListener('keyup', e => {
       } else if (!emailValid.test(e.target.value)) {
           $emailSub.style.color = 'red';
           $emailSub.textContent = "올바른 이메일 형식이 아닙니다.";
-          flagArray.emailFlag = false;
-          checkAllFlagArray();
       } else {
           // 이메일 중복체크
           // fetch 사용
@@ -104,13 +96,9 @@ $myPageEmail.addEventListener('keyup', e => {
                   $emailSub.style.color = 'blue';
                   $emailSub.textContent = '사용가능한 이메일입니다';
 
-                  flagArray.emailFlag = true;
-                  checkAllFlagArray();
               } else {
                   $emailSub.style.color = 'red';
                   $emailSub.textContent = "중복되는 이메일입니다. 다른 이메일을 입력해주세요.";
-                  flagArray.emailFlag = false;
-                  checkAllFlagArray();
               }
           })
       }
