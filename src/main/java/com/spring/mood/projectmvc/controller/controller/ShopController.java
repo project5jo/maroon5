@@ -37,7 +37,9 @@ public class ShopController {
     private final AddItemService addItemService;
     private final ShoppingCartService shoppingCartService;
 
-    private static final String UPLOAD_DIR = "/Users/jehoon/spring-prj/upload/";
+
+    private static final String UPLOAD_DIR = "/Users/yejin/Desktop/backand/miniProject/spring/sample-image";
+
 
     @GetMapping("/shop")
     public String getAllItems(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
@@ -85,7 +87,7 @@ public class ShopController {
     }
 
 
-    private String rootPath = "/Users/superstar/spring-prj/upload/";
+//    private String rootPath = "/Users/yejin/Desktop/backand/miniProject/spring/sample-image";
 
     @PostMapping("/shop/add")
     public String uploadFile(

@@ -30,6 +30,8 @@ public interface MemberMapper {
 
     boolean updatePassword(@Param("account") String account,@Param("NewPw") String NewPw);
 
+    boolean updatePoint(@Param("point") Integer point,@Param("account") String account);
+
     //자동로그인 쿠키값, 만료시간 업데이트
     void updateAutoLogin(AutoSignInDto dto);
 

@@ -149,6 +149,10 @@ button.btn-point {
   margin-left: 10px;
 }
 
+.sample6-extraAddress {
+  display: none;
+}
+
 /* 결제정보 */
 
 .price-info {

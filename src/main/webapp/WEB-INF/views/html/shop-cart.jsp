@@ -52,10 +52,10 @@
             <span>Subtotal:</span>
             <span>₩ <span id="cartTotalPrice">${cartTotalPrice}</span></span>
         </div>
-        <form action="/checkout" method="post">
-            <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}">
-            <button type="submit" class="checkout-btn">CHECKOUT</button>
-        </form>
+        <!-- <form action="/checkout" method="post"> -->
+            <!-- <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}"> -->
+            <button  class="checkout-btn"><a href="/checkout">CHECKOUT</a></button>
+        <!-- </form> -->
         <p>Tax included and shipping calculated at checkout</p>
     </div>
 </div>

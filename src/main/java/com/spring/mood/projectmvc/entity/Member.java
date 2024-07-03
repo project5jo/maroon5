@@ -50,6 +50,8 @@ public class Member {
     @Column(name = "user_profile")
     private String userProfile;
     @Column(name = "user_point")
+
+    @Setter
     private int userPoint;
     @Column(name = "session_id")
     private String sessionId; //자동로그인 쿠키값

@@ -14,6 +14,7 @@ public class OrderRequestDto {
     private String address3;
     private String receiverName;
     private String receiverPhone;
+    private Integer usesPoint;
 
 //    private int point;
 }
