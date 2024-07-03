@@ -7,21 +7,31 @@
   <title>상품 목록</title>
   <link rel="stylesheet" href="/assets/css/shop-index.css">
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+  <link rel="stylesheet" href="/assets/css/footer.css"/>
   <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%@ include file="../include/header.jsp" %>
 
   <div class="container">
-    <a href="/cart">
-      <i class="fas fa-cart-shopping"></i>
-    </a>
+    <c:choose>
+      <c:when test="${sessionScope.loginUser != null}">
+        <a href="/cart">
+          <i class="fas fa-cart-shopping"></i>
+        </a>
+      </c:when>
+      <c:otherwise>
+        <a href="javascript:void(0);" onclick="showFailModal()">
+          <i class="fas fa-cart-shopping"></i>
+        </a>
+      </c:otherwise>
+    </c:choose>
     <div class="search-container">
       <c:if test="${userRole == 'ROLE_admin'}">
         <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
       </c:if>
       <form action="/shop" method="get">
-        <input type="text" name="keyword" class="search-bar">
+        <input placeholder="Title" type="text" name="keyword" class="search-bar">
         <button type="submit" class="item-search">Search</button>
       </form>
     </div>
@@ -65,8 +75,8 @@
     <div id="cartModal" class="modal">
       <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <p>장바구니에 추가되었습니다.</p>
-          <button onclick="goToCart()">Go to Cart</button>
+          <p id="modalMessage">장바구니에 추가되었습니다.</p>
+          <button id="modalButton" onclick="goToCart()">Go to Cart</button>
           <button onclick="goBack()">Back</button>
       </div>
   </div>

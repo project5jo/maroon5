@@ -70,7 +70,7 @@ i.fa-bars {
   height: 3px;
   margin: 3px 0;
   border-radius: 5px;
-
+  cursor: pointer;
   background-color: #432626;
   /* background-color: #432626; */
 }
@@ -129,8 +129,8 @@ i.fa-bars {
 .category-drawer > .cancel_btn {
   background: none;
   position: absolute;
-  top: 30px;
-  left: 520px;
+  top: 23px;
+  left: 512px;
 }
 
 .category-drawer > .cancel_btn span {
@@ -138,16 +138,18 @@ i.fa-bars {
   width: 30px;
   height: 3px;
   border-radius: 20px;
-
+  cursor: pointer;
   left: 22px;
   top: 15px;
 }
 .category-drawer > .cancel_btn span:nth-child(1) {
   transform: rotate(45deg);
   background-color: #fff;
+  cursor: pointer;
 }
 
 .category-drawer > .cancel_btn span:nth-child(2) {
   transform: rotate(-45deg);
   background-color: #fff;
+  cursor: pointer;
 }

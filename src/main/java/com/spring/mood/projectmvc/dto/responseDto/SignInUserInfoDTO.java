@@ -13,8 +13,12 @@ public class SignInUserInfoDTO {
     private String account;
     private String nickName;
     private String email;
+
     private String name;
     private Integer point;
+
+
+    private String profileUrl;
 
 //    private String auth; //권한
 
@@ -22,7 +26,11 @@ public class SignInUserInfoDTO {
         this.account = member.getUserAccount();
         this.nickName = member.getUserName();
         this.email = member.getUserEmail();
+
         this.point = member.getUserPoint();
+
+
+        this.profileUrl = member.getUserProfile();
 
     }
 }

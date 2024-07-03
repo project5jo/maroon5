@@ -1,9 +1,9 @@
 package com.spring.mood.projectmvc.repository;
 
-import com.spring.mood.projectmvc.entity.ChatEntity;
+import com.querydsl.core.Tuple;
 
 import java.util.List;
 
 public interface ChatRepositoryCustom {
-    List<ChatEntity> findAllCustom(int topicId, int roomId);
+    List<Tuple> findAllCustom(int topicId, int roomId);
 }

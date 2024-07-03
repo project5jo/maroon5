@@ -9,7 +9,7 @@ function handleFormSubmit(event, itemId) {
   const userAccount = document.querySelector(`#addToCartForm-${itemId} input[name="userAccount"]`).value;
   
   if (!userAccount) {
-    alert('로그인 후 이용해주세요.');
+    showFailModal();
     return false;
   }
 
@@ -36,6 +36,18 @@ function handleFormSubmit(event, itemId) {
   });
 
   return false; // 폼 제출 막기
+}
+
+function showFailModal() {
+  document.getElementById('modalMessage').textContent = "로그인 후 이용해주세요.";
+  modalButton.textContent = "Login";
+  modalButton.setAttribute("onclick", "goToSignIn()");
+  document.getElementById("cartModal").style.display = "block";
+  
+}
+
+function goToSignIn() {
+  window.location.href = "/sign-in";
 }
 
 function showModal() {
