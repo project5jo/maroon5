@@ -50,7 +50,9 @@ public class ChatService {
 
     @Transactional
     public ChatEntity saveMessage(ChatEntity message, Integer topicId) {
-        ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, message.getRoomId());
+        ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, message.getRoomId()).orElseThrow(()
+                ->new RuntimeException("chatroom not found임 ㅋㅋ"));
+//                .orElseThrow(() -> new RuntimeException("ChatRoom not found")); // (수정)
         message.setChatRoom(chatRoom);
         return repository.save(message);
     }
@@ -68,16 +70,15 @@ public class ChatService {
     }
 
     @Transactional(readOnly = true)
-    public ChatRoom findChatRoomByTopicAndRoomId(Integer topicId, int roomId) {
-        return chatRoomRepository.findByTopicTopicIdAndRoomId( topicId, roomId)
-                .orElseThrow(() -> new RuntimeException("ChatRoom not found"));
+    public Optional<ChatRoom> findChatRoomByTopicAndRoomId(Integer topicId, int roomId) {
+        return chatRoomRepository.findChatRoom(topicId, roomId); // (수정)
     }
 
     @Transactional
     public ChatRoom findOrCreateChatRoom(Integer topicId, int roomId) {
-        Optional<ChatRoom> chatRoomOpt = chatRoomRepository.findByTopicTopicIdAndRoomId(topicId,  roomId);
-        if (chatRoomOpt.isPresent()) {
-            ChatRoom chatRoom = chatRoomOpt.get();
+        Optional<ChatRoom> chatRoomOpt = findChatRoomByTopicAndRoomId(topicId, roomId); // (수정)
+        if (chatRoomOpt.isPresent()) { // (수정)
+            ChatRoom chatRoom = chatRoomOpt.get(); //
             if (chatRoom.getCurrentUsers() < 50) {
                 return chatRoom;
             } else {
@@ -99,24 +100,15 @@ public class ChatService {
                 .build();
         return chatRoomRepository.save(newChatRoom);
     }
-
     @Transactional
     public ChatRoom incrementCurrentUsers(Integer topicId, int roomId, String username) { // (수정)
         System.out.println("username 은은은은= " + username);
 
-        List<Tuple> topicRooms = chatRoomRepository.findTopicRooms(topicId);
-        ChatRoom chatRoom = null;
-
-        for (Tuple tuple : topicRooms) {
-            ChatRoom room = tuple.get(QChatRoom.chatRoom);
-            if (room.getRoomId() == roomId) {
-                chatRoom = room;
-                break;
-            }
-        }
+        Optional<ChatRoom> chatRoomOpt = findChatRoomByTopicAndRoomId(topicId, roomId); // (수정)
+        ChatRoom chatRoom = chatRoomOpt.orElse(null); // (수정)
 
         if (chatRoom == null || chatRoom.getCurrentUsers() >= 50) {
-            chatRoom = findOrCreateAvailableChatRoom(topicId);
+            chatRoom = findOrCreateAvailableChatRoom(topicId); // (수정)
         }
 
         chatRoom.setCurrentUsers(chatRoom.getCurrentUsers() + 1);
@@ -131,39 +123,39 @@ public class ChatService {
 
         return chatRoom;
     }
-
     @Transactional
     public ChatRoom findOrCreateAvailableChatRoom(Integer topicId) { // (수정)
-        List<ChatRoom> chatRooms = chatRoomRepository.findByTopicTopicIdOrderByRoomIdAsc(topicId);
+        List<ChatRoom> chatRooms = chatRoomRepository.findByTopicTopicIdOrderByRoomIdAsc(topicId); // (수정)
 
-        for (ChatRoom chatRoom : chatRooms) {
-            if (chatRoom.getCurrentUsers() < 50) {
-                return chatRoom;
+        for (ChatRoom chatRoom : chatRooms) { // (수정)
+            if (chatRoom.getCurrentUsers() < 50) { // (수정)
+                return chatRoom; // (수정)
             }
         }
 
-        int newRoomId = chatRooms.isEmpty() ? 1 : chatRooms.get(chatRooms.size() - 1).getRoomId() + 1;
-        return createNewChatRoom(topicId, newRoomId);
+        int newRoomId = chatRooms.isEmpty() ? 1 : chatRooms.get(chatRooms.size() - 1).getRoomId() + 1; // (수정)
+        return createNewChatRoom(topicId, newRoomId); // (수정)
     }
 
     @Transactional
     public ChatRoom findOrCreateAvailableChatRoomForTopic(Integer topicId) { // (수정)
-        // 주어진 topicId의 1번 방이 존재하는지 확인
-        Optional<ChatRoom> chatRoomOpt = chatRoomRepository.findByTopicTopicIdAndRoomId(topicId, 1);
-        if (chatRoomOpt.isPresent()) {
-            System.out.println("존재");
-            // 존재하면 해당 방 반환
-            return chatRoomOpt.get();
-        } else {
-            // 존재하지 않으면 새로 방 생성
-            System.out.println("없음");
-            return createNewChatRoom(topicId, 1); // (수정)
+        List<ChatRoom> chatRooms = chatRoomRepository.findByTopicTopicIdOrderByRoomIdAsc(topicId); // (수정)
+
+        for (ChatRoom chatRoom : chatRooms) { // (수정)
+            if (chatRoom.getCurrentUsers() < 50) { // (수정)
+                System.out.println("존재");
+                return chatRoom; // (수정)
+            }
         }
+
+        System.out.println("없음");
+        int newRoomId = chatRooms.isEmpty() ? 1 : chatRooms.get(chatRooms.size() - 1).getRoomId() + 1; // (수정)
+        return createNewChatRoom(topicId, newRoomId); // (수정)
     }
 
-    // 새로운 메소드 - 컨트롤러나 다른 서비스에서 호출하여 사용
-    public ChatRoom allocateRoomForUser(Integer topicId) { // (수정)
-        return findOrCreateAvailableChatRoomForTopic(topicId); // (수정)
+
+    public ChatRoom allocateRoomForUser(Integer topicId) {
+        return findOrCreateAvailableChatRoomForTopic(topicId);
     }
 
 

@@ -4,8 +4,9 @@ import com.querydsl.core.Tuple;
 import com.spring.mood.projectmvc.entity.ChatRoom;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ChatRoomRepositoryCustom {
     List<Tuple> findTopicRooms(Integer topicId);
-    ChatRoom findChatRoomByTopicIdAndRoomId(Integer topicId, int roomId);
+    Optional<ChatRoom> findChatRoom(Integer topicId, int roomId);
 }
