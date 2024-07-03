@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.service;
 
+import com.querydsl.core.Tuple;
 import com.spring.mood.projectmvc.dto.responseDto.ChatMessageDto;
 import com.spring.mood.projectmvc.entity.*;
 import com.spring.mood.projectmvc.mapper.MemberMapper;
@@ -27,32 +28,43 @@ public class ChatService {
     private final TopicRepository topicRepository;
     private final MemberMapper memberMapper;
 
+
     public List<ChatMessageDto> getAllMessages(Integer topicId, int roomId) {
-        return repository.findMessagesByChatRoomTopicTopicIdAndChatRoomRoomId(topicId, roomId).stream()
-                .map(this::convertToDTO)
+        return repository.findAllCustom(topicId, roomId).stream()
+                .map(this::convertTupleToDTO)
                 .collect(Collectors.toList());
     }
 
-    public ChatMessageDto convertToDTO(ChatEntity chatEntity) {
+    private ChatMessageDto convertTupleToDTO(Tuple tuple) {
         ChatMessageDto dto = new ChatMessageDto();
-        dto.setChatMessageId(chatEntity.getId());
-        dto.setContent(chatEntity.getContent());
-        dto.setTimestamp(chatEntity.getTimestamp());
-//        System.out.println("chatservice 에서 dto 가져오기 = " + dto);
-        dto.setSender(chatEntity.getUser().getUserAccount());
-        dto.setSenderName(chatEntity.getUser().getUserName());
-        dto.setTopicId((long) chatEntity.getTopicId());
-        dto.setRoomId((long) chatEntity.getRoomId());
-        dto.setProfileUrl(chatEntity.getUser().getUserProfile()); // 프로필 URL 설정
+        dto.setChatMessageId(tuple.get(QChatEntity.chatEntity.id));
+        dto.setContent(tuple.get(QChatEntity.chatEntity.content));
+        dto.setTimestamp(tuple.get(QChatEntity.chatEntity.timestamp));
+        dto.setSender(tuple.get(QUser.user.userAccount));
+        dto.setSenderName(tuple.get(QUser.user.userName));
+        dto.setTopicId(tuple.get(QTopic.topic.topicId));
+        dto.setRoomId(tuple.get(QChatRoom.chatRoom.roomId));
+        dto.setProfileUrl(tuple.get(QUser.user.userProfile)); // 프로필 URL 설정
         return dto;
     }
 
     @Transactional
     public ChatEntity saveMessage(ChatEntity message, Integer topicId) {
-        System.out.println("message = " + message);
         ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, message.getRoomId());
         message.setChatRoom(chatRoom);
         return repository.save(message);
+    }
+    public ChatMessageDto convertToDTO(ChatEntity chatEntity) {
+        ChatMessageDto dto = new ChatMessageDto();
+        dto.setChatMessageId(chatEntity.getId());
+        dto.setContent(chatEntity.getContent());
+        dto.setTimestamp(chatEntity.getTimestamp());
+        dto.setSender(chatEntity.getUser().getUserAccount());
+        dto.setSenderName(chatEntity.getUser().getUserName());
+        dto.setTopicId(chatEntity.getChatRoom().getTopic().getTopicId());
+        dto.setRoomId(chatEntity.getChatRoom().getRoomId());
+        dto.setProfileUrl(chatEntity.getUser().getUserProfile());
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -77,20 +89,14 @@ public class ChatService {
     }
 
     private ChatRoom createNewChatRoom(Integer topicId, int newRoomId) { // (수정)
-        System.out.println("chatService에서!! = " + topicId);
-        Optional<Topic> topicOpt = topicRepository.findById(topicId);
-        if (topicOpt.isEmpty()) {
-            throw new RuntimeException("Topic not found");
-        }
-        Topic topic = topicOpt.get();
-
+        System.out.println("새 채팅방 생성 - topicId: " + topicId + ", newRoomId: " + newRoomId);
+        Topic topic = topicRepository.findById(topicId)
+                .orElseThrow(() -> new RuntimeException("Topic not found"));
         ChatRoom newChatRoom = ChatRoom.builder()
                 .topic(topic)
                 .roomName("Room " + newRoomId)
-                .roomId(newRoomId)
                 .currentUsers(0)
                 .build();
-        System.out.println("newChatRoom123123213123123123 = " + newChatRoom);
         return chatRoomRepository.save(newChatRoom);
     }
 
@@ -98,8 +104,18 @@ public class ChatService {
     public ChatRoom incrementCurrentUsers(Integer topicId, int roomId, String username) { // (수정)
         System.out.println("username 은은은은= " + username);
 
-        ChatRoom chatRoom = findChatRoomByTopicAndRoomId(topicId, roomId);
-        if (chatRoom.getCurrentUsers() >= 50) {
+        List<Tuple> topicRooms = chatRoomRepository.findTopicRooms(topicId);
+        ChatRoom chatRoom = null;
+
+        for (Tuple tuple : topicRooms) {
+            ChatRoom room = tuple.get(QChatRoom.chatRoom);
+            if (room.getRoomId() == roomId) {
+                chatRoom = room;
+                break;
+            }
+        }
+
+        if (chatRoom == null || chatRoom.getCurrentUsers() >= 50) {
             chatRoom = findOrCreateAvailableChatRoom(topicId);
         }
 
@@ -120,20 +136,14 @@ public class ChatService {
     public ChatRoom findOrCreateAvailableChatRoom(Integer topicId) { // (수정)
         List<ChatRoom> chatRooms = chatRoomRepository.findByTopicTopicIdOrderByRoomIdAsc(topicId);
 
-        // 모든 방이 꽉 찼다면 새로운 방을 생성
-        if (chatRooms.isEmpty()) {
-            return createNewChatRoom(topicId, 1); // (수정)
-        }
-
         for (ChatRoom chatRoom : chatRooms) {
             if (chatRoom.getCurrentUsers() < 50) {
-                System.out.println("topicId = " + topicId);
                 return chatRoom;
             }
         }
 
-        int newRoomId = chatRooms.get(chatRooms.size() - 1).getRoomId() + 1; // (수정)
-        return createNewChatRoom(topicId, newRoomId); // (수정)
+        int newRoomId = chatRooms.isEmpty() ? 1 : chatRooms.get(chatRooms.size() - 1).getRoomId() + 1;
+        return createNewChatRoom(topicId, newRoomId);
     }
 
     @Transactional
@@ -146,6 +156,7 @@ public class ChatService {
             return chatRoomOpt.get();
         } else {
             // 존재하지 않으면 새로 방 생성
+            System.out.println("없음");
             return createNewChatRoom(topicId, 1); // (수정)
         }
     }

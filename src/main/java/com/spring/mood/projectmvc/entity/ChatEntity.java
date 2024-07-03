@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString(exclude = "chatRoom")
+@ToString(exclude ={"chatRoom", "user"})
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

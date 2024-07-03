@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude ={"topic", "messages"})
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

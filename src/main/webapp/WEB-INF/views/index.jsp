@@ -80,7 +80,7 @@
 
     const loginUser = "<c:out value='${loginUser.account}' />";
     <%--const loginUserName = "<c:out value='${loginUser.nickName}' />";--%>
-    const topicId = 2;
+    const topicId = 1;
     let roomId = null;
     <%--let roomId = ${roomId};--%>
 

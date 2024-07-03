@@ -52,6 +52,7 @@ public class ChatApiController {
 
         session.removeAttribute("roomId");
         session.setAttribute("topicId", chatRoom.getTopic().getTopicId());
+        log.debug("topic Id is: {}", chatRoom.getTopic().getTopicId());
         session.setAttribute("roomId", chatRoom.getRoomId());
         return chatService.incrementCurrentUsers(topicId, chatRoom.getRoomId(), username);
     }

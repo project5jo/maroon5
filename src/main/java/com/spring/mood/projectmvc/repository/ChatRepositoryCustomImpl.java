@@ -25,8 +25,10 @@ public class ChatRepositoryCustomImpl implements ChatRepositoryCustom {
         return jpaQueryFactory.select(
                         users.userAccount,
                         users.userName,
+                        users.userProfile,
                         chatMessages.content,
                         chatRooms.roomName,
+                        chatRooms.roomId,
                         topic.topicContent,
                         chatMessages.timestamp,
                         topic.topicId
