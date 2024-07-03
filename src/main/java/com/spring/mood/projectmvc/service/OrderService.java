@@ -1,12 +1,17 @@
 package com.spring.mood.projectmvc.service;
 
 import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
+import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.Orders;
+import com.spring.mood.projectmvc.mapper.MemberMapper;
 import com.spring.mood.projectmvc.mapper.OrderMapper;
-import com.spring.mood.projectmvc.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +19,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private final OrderMapper orderMapper;
+
+    private final MemberMapper memberMapper;
     private final ShoppingCartService shoppingCartService;
 
     @Transactional
@@ -28,4 +36,36 @@ public class OrderService {
                 .map(ShoppingCartResponseDto::getCartTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+
+
+    //포인트 처리
+    public void DeductionPoint(Integer usesPoint, String account , RedirectAttributes redirectAttributes) {
+
+        //멤버 찾기
+        Member user = memberMapper.findOne(account);
+        //디비 멤버 포인트
+        Integer userPoint = user.getUserPoint();
+
+
+        if (usesPoint > userPoint){
+            redirectAttributes.addAttribute("error", "Insufficient points");
+        }
+
+
+        Integer deductionPoint = userPoint - usesPoint;
+        log.info("deductionPoint : {}", deductionPoint);
+//
+        user.setUserPoint(deductionPoint);
+        log.info("setUser : {}", user);
+        memberMapper.updatePoint(deductionPoint, account);
+        redirectAttributes.addFlashAttribute("loginUser",user);
+    }//DeductionPoint end
+
+    public Member findUser(String account) {
+        Member user = memberMapper.findOne(account);
+        return user;
+    }
+
+
 }

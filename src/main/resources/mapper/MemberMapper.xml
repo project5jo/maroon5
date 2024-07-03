@@ -59,6 +59,14 @@
         WHERE user_email = #{email}
     </select>
 
+    <!--   포인트 차감 업데이트     -->
+    <update id="updatePoint">
+        UPDATE Users
+        SET
+        user_point = #{point}
+        WHERE user_account = #{account}
+    </update>
+
     <!--    마이페이지      -->
     <update id="updateMyPageMemberInfo">
         UPDATE Users

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/payment.css" />
   <script src="/assets/js/category.js/" defer></script>
+  <script src="/assets/js/payment.js/" defer></script>
   <!-- 카카오 주소 검색 API 스크립트 -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
@@ -133,15 +134,15 @@
             <div class="user-point-input">
               <input
                       type="text"
-                      id="account"
-                      class="user-name"
+                      id="usesPoint"
+                      class="usesPoint"
                       placeholder="사용할 포인트를 입력하세요"
-                      name="point"
+                      name="usesPoint"
               />
               <button type="button" class="btn-point">적용</button>
             </div>
             <p class="user-point-info">
-              <span>보유하신 포인트</span>: ${loginUser.point}
+              <span>보유하신 포인트</span>: ${userPoint}
             </p>
           </div>
         </div>

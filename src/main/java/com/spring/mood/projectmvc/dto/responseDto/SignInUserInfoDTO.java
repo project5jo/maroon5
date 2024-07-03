@@ -14,7 +14,7 @@ public class SignInUserInfoDTO {
     private String nickName;
     private String email;
     private String name;
-    private int point;
+    private Integer point;
 
 //    private String auth; //권한
 
