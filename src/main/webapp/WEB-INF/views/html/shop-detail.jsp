@@ -7,7 +7,7 @@
     <title>상품 상세 정보</title>
     <link rel="stylesheet" href="/assets/css/shop-detail.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
-    
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>
