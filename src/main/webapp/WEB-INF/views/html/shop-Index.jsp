@@ -14,9 +14,18 @@
   <%@ include file="../include/header.jsp" %>
 
   <div class="container">
-    <a href="/cart">
-      <i class="fas fa-cart-shopping"></i>
-    </a>
+    <c:choose>
+      <c:when test="${sessionScope.loginUser != null}">
+        <a href="/cart">
+          <i class="fas fa-cart-shopping"></i>
+        </a>
+      </c:when>
+      <c:otherwise>
+        <a href="javascript:void(0);" onclick="showFailModal()">
+          <i class="fas fa-cart-shopping"></i>
+        </a>
+      </c:otherwise>
+    </c:choose>
     <div class="search-container">
       <c:if test="${userRole == 'ROLE_admin'}">
         <button class="item-add" onclick="location.href='/shop/add'">Add Item</button>
