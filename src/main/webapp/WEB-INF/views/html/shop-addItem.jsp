@@ -7,6 +7,7 @@
   <title>Add Product</title>
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
   <link rel="stylesheet" href="/assets/css/shop-addItem.css"/>
+  <link rel="stylesheet" href="/assets/css/footer.css"/>
 </head>
 <body>
   <%@ include file="../include/shop-header.jsp" %>
