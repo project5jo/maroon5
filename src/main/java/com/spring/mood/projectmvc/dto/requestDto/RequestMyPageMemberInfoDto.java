@@ -31,19 +31,24 @@ public class RequestMyPageMemberInfoDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth; // 유저 생년월일
 
-    private String profileImage;  // 유저 프로필사진
+    private MultipartFile profileImage;  // 유저 프로필사진
 
     public RequestMyPageMemberInfoDto(Member member) {
         this.account = member.getUserAccount();
         this.name = member.getUserName();
         this.email = member.getUserEmail();
         this.birth = member.getUserBirth();
-        this.profileImage = member.getUserProfile();
     }
 
     // RequestMyPageMemberInfoDto 를 MemberEntity 로 변환
     public Member toMemberEntity(String account) {
         return Member.builder().userAccount(account).userName(this.name)
                 .userEmail(this.email).userBirth(this.birth).build();
+    }
+
+    // RequestMyPageMemberInfoDto 를 MemberEntity 로 변환
+    public Member toMemberEntity(String account, String profile) {
+        return Member.builder().userAccount(account).userName(this.name)
+                .userEmail(this.email).userBirth(this.birth).userProfile(profile).build();
     }
 }

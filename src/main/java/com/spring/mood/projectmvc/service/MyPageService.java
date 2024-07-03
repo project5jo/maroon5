@@ -4,10 +4,14 @@ import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.mapper.MemberMapper;
+import com.spring.mood.projectmvc.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
@@ -16,6 +20,8 @@ public class MyPageService {
 
     private final MemberMapper membermapper;
     private final PasswordEncoder encoder;
+    @Value("${maroon5upload.root-path}")
+    private String rootPath;
 
     public ResponseMyPageMemberInfoDto serviceFindOne (String account) {
 
@@ -37,7 +43,7 @@ public class MyPageService {
 
         Member modifyMember = dto.toMemberEntity(account);
 
-        System.out.println("수정할내용이담긴멤버 = " + modifyMember);
+//        System.out.println("수정할내용이담긴멤버 = " + modifyMember);
 
         int isUpdated = membermapper.updateMyPageMemberInfo(modifyMember);
 
@@ -46,9 +52,11 @@ public class MyPageService {
         return isUpdated;
     }
 
-    public void serviceDelete(String account) {
+    public boolean serviceDelete(String account, boolean deleteFlag) {
 
-        membermapper.delete(account);
+        boolean isDeleted = membermapper.deleteMyPageAccount(account, deleteFlag);
+
+        return isDeleted;
     }
 
     public boolean serviceUpdatePassword(String account, String password, String newPassword) {
@@ -68,5 +76,39 @@ public class MyPageService {
         }
 
         return false;
+    }
+
+    public int serviceUpdateProfile(String account, MultipartFile profile, String profileStatus) {
+
+        // 프로필의 상태를 통해 처리과정 선택하기
+
+        if (profileStatus.equals("true")) {
+
+            String profilePath = "";
+            profilePath = FileUploadUtil.uploadFile(rootPath, profile);
+
+            int isUpdated = membermapper.updateMyPageProfile(account, profilePath);
+
+            return isUpdated;
+
+        } else if (profileStatus.equals("deleteProfile")) {
+
+            Member mofidyMember = new Member();
+            mofidyMember.setUserAccount(account);
+
+            int isUpdated = membermapper.updateMyPageProfile(account, null);
+
+            return isUpdated;
+
+        } else if (profileStatus.equals("nowProfile")) {
+
+            int isUpdated = 0;
+
+            return isUpdated;
+        } else {
+
+            // 프로필 상태로 조건문에 적지 않은 것이 나올 경우
+            throw new IllegalArgumentException("프로필 상태: " + profileStatus);
+        }
     }
 }

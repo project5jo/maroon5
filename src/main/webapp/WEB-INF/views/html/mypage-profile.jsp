@@ -8,18 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-memberinfo.css">
+    <link rel="stylesheet" href="/assets/css/mypage-profile.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
-    <script src="/assets/js/Mypage.js" defer></script>
-    <script src="/assets/js/Mypage-memberInfo.js" defer></script>
+    <!-- <script src="/assets/js/Mypage.js" defer></script> -->
+    <script src="/assets/js/Mypage-profile.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
   </head>
   <body>
 
     <!-- modalBack -->
-    <div class="modalBack"></div>
+    <div class="form-modalback"></div>
 
     <!-- header  -->
     <%@ include file="../include/header.jsp" %>
@@ -37,7 +37,7 @@
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -79,47 +79,34 @@
             <!-- title -->
             <div class="right-title">
               <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>회원정보수정</p>
+              <p>프로필사진수정</p>
             </div>
 
             <div class="right-contents">
 
               <div class="right-content">
-                <p>소중한 개인정보를 최신으로 관리하세요.</p>
+                <p>나만의 이미지로 프로필 사진을 넣어보세요.</p>
               </div>
 
-              <form action="/mypage-memberinfo" method="post">
+              <form action="/mypage-profile" method="post" enctype="multipart/form-data" class="profileForm">
 
                 <div class="form-contents">
 
-                  <div class="form-content">
-                    <h2><i class="fas fa-user"></i> 아이디* </h2>
-                    <input type="text" name="account" value="${isUpdated ? updatedMember.account : nowMember.account}">
-                    <p>"아이디는 변경할 수 없습니다."</p>
-                  </div>
-                
-                  <div class="form-content name">
-                    <h2><i class="far fa-address-card"></i> 이름*</h2>
-                    <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}">
-                    <p>"이름은 한글만 입력할 수 있습니다. (2자 이상)"</p>
-                  </div>
-                
-                  <div class="form-content birth">
-                    <h2><i class="fas fa-birthday-cake"></i> 생년월일*</h2>
-                    <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}">
-                    <p></p>
-                  </div>
-                
-                  <div class="form-content email">
-                    <h2><i class="far fa-envelope"></i> 이메일*</h2>
-                    <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}">
-                    <p></p>
-                  </div>
-                
-                  <div class="form-content button">
-                    <button class="btn-gradient large yellow check" type="button">확인</button>
+                  <div class="form-content profile">
+                    <h2><i class="fas fa-user"></i> 프로필사진*</h2>
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
+                    <input type="file" class="profileInput" accept="image/*" style="display: none" name="profile" />
+                    <input type="hidden" class="profileInputStatus" value="false" name="profileStatus" >
                   </div>
 
+                  <div class="form-content button">
+                    <button class="btn-gradient large yellow upload" type="button">프로필사진 선택</button>
+                    <button class="btn-gradient large yellow basic" type="button">기본 이미지 적용</button>
+  
+                    <button class="btn-gradient large yellow delete" type="button">취소</button>
+                    <button class="btn-gradient large yellow check" type="button">적용</button>
+                  </div>
+                  
                 </div>
 
                 <!-- modal -->
@@ -140,14 +127,15 @@
                     </div>
 
                   </div>
-
                 </div>
 
               </form> 
               <!-- form end -->
 
+              <input type="hidden" id="profileSRC" value="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" >
+
             </div>
-            <!-- right-contents end -->
+            <!-- right-contents -->
 
           </div>
           <!-- right end -->

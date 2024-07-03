@@ -20,7 +20,7 @@ public interface MemberMapper {
 
     User findChatUser(String account);
 
-    boolean delete(String userAccount);
+    boolean deleteMyPageAccount(@Param("account") String account, @Param("deleteFlag") boolean deleteFlag);
 
     boolean checkId(String account);
 
@@ -40,4 +40,7 @@ public interface MemberMapper {
 
     // 마이페이지 회원정보 수정
     int updateMyPageMemberInfo (Member member);
+
+    int updateMyPageProfile (@Param("account") String account, @Param("profile") String profile);
+
 }
