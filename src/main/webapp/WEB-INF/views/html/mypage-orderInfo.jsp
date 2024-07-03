@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-main.css">
+    <link rel="stylesheet" href="/assets/css/mypage-orderInfo.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
     <script src="/assets/js/Mypage.js" defer></script>
@@ -78,7 +78,7 @@
             <!-- title -->
             <div class="right-title">
               <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>마이페이지 메인</p>
+              <p>주문내역</p>
             </div>
 
             <div class="right-contents">
@@ -112,7 +112,7 @@
                 </table>
               </div>
 
-              <form action="/mypage-cancel" method="post">
+              <form action="/mypage-orderInfo" method="post">
 
                 <div class="form-contents">
                   

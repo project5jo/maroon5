@@ -8,18 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-main.css">
+    <link rel="stylesheet" href="/assets/css/mypage-profile.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
     <script src="/assets/js/Mypage.js" defer></script>
-    <!-- <script src="/assets/js/Mypage-cancel.js" defer></script> -->
+    <script src="/assets/js/Mypage-profile.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
   </head>
   <body>
 
     <!-- modalBack -->
-    <div class="modalBack"></div>
+    <div class="form-modalback"></div>
 
     <!-- header  -->
     <%@ include file="../include/header.jsp" %>
@@ -37,7 +37,7 @@
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="/assets/img/profile.jpg" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -45,7 +45,7 @@
                   <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
                 </div>
               </div>
-              <p class="profile-name">키티 님</p>
+              <p class="profile-name">${isUpdated ? updatedMember.name : nowMember.name} 님</p>
             </div>
 
             <div class="left-Menu">
@@ -71,98 +71,82 @@
             </div>
 
           </div>
-          
+          <!-- left end -->
+
           <!-- right -->
           <div class="tr-right">
 
             <!-- title -->
             <div class="right-title">
               <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>마이페이지 메인</p>
+              <p>프로필사진수정</p>
             </div>
 
             <div class="right-contents">
 
               <div class="right-content">
-                <p>회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
+                <p>나만의 이미지로 프로필 사진을 넣어보세요.</p>
               </div>
 
-              <div class="right-content">
-                <h2><i class="fas fa-check"></i>사용하고 계신 아이디 ${account} 는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h2>
-                <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
-              </div>
-
-              <div class="right-content">
-                <h2><i class="fas fa-check"></i>탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.</h2>
-                <p>회원정보 및 구매기록 등 서비스 이용기록은 모두 삭제되며 삭제된 데이터는 복구되지 않습니다. 
-                  <br>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.
-                </p>
-              </div>
-
-              <div class="right-content">
-                <table>
-                  <tr>
-                      <td>회원정보</td>
-                      <td>회원가입시 저장된 개인정보 삭제</td>
-                  </tr>
-                  <tr>
-                      <td>구매정보</td>
-                      <td>구매기록 삭제</td>
-                  </tr>
-                </table>
-              </div>
-
-              <form action="/mypage-cancel" method="post">
+              <form action="/mypage-profile" method="post" enctype="multipart/form-data" class="profileForm">
 
                 <div class="form-contents">
-                  
-                  <div class="form-content">
-                    <p>탈퇴 후에는 아이디 ${account} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
-                    <input type="checkbox" class="cancelInput" name="check" value="" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
+
+                  <div class="form-content profile">
+                    <h2><i class="fas fa-user"></i> 프로필사진*</h2>
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
+                    <input type="file" class="profileInput" accept="image/*" style="display: none" name="profile" />
+                    <input type="hidden" class="profileInputStatus" value="false" name="profileStatus" >
                   </div>
-    
+
                   <div class="form-content button">
-                    <button class="btn-gradient large check" type="reset">확인</button>
+                    <button class="btn-gradient large yellow upload" type="button">프로필사진 선택</button>
+                    <button class="btn-gradient large yellow basic" type="button">기본 이미지 적용</button>
+  
+                    <button class="btn-gradient large yellow delete" type="button">취소</button>
+                    <button class="btn-gradient large yellow check" type="button">적용</button>
                   </div>
-
-                  <!-- modal -->
-                  <div class="form-modals">
-                    <div class="form-modal">
-
-                      <div class="modal-header">
-                        <span>X</span>
-                      </div>
-
-                      <div class="modal-content">
-                        <p>진짜 수정하시겠습니까?</p>
-                      </div>
-
-                      <div class="modal-button">
-                        <button class="btn-gradient large yellow cancel" type="button">취소</button>
-                        <button class="btn-gradient large yellow recheck" type="submit">확인</button>
-                      </div>
-
-                    </div>
-                  </div>
-
+                  
                 </div>
 
-              </form>
+                <!-- modal -->
+                <div class="form-modals">
+                  <div class="form-modal">
+
+                    <div class="modal-header">
+                      <span>X</span>
+                    </div>
+
+                    <div class="modal-content">
+                      <p>진짜 수정하시겠습니까?</p>
+                    </div>
+
+                    <div class="modal-button">
+                      <button class="btn-gradient large yellow cancel" type="button">취소</button>
+                      <button class="btn-gradient large yellow recheck" type="submit">확인</button>
+                    </div>
+
+                  </div>
+                </div>
+
+              </form> 
               <!-- form end -->
 
+              <input type="hidden" id="profileSRC" value="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" >
+
             </div>
-            <!-- right-contents end -->
+            <!-- right-contents -->
 
           </div>
           <!-- right end -->
 
         </div>
         <!-- tr end -->
-         
+
       </section>
     </main>
 
     <footer></footer>
-    
-  </body>
+  
+</body>
 </html>

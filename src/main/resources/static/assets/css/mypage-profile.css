@@ -169,7 +169,16 @@ section {
   font-size: 15px;
 }
 
-.btn-gradient.yellow {
+.btn-gradient.large {
+  padding: 4px 12px;  
+  font-size: 20px;
+}
+
+.gray {
+  background: rgb(88, 88, 88);
+}
+
+.yellow {
   background: rgba(240,210,100,1);
   background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(240,210,100,1)), to(rgba(229,201,96,1)));
   background: -webkit-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
@@ -179,7 +188,7 @@ section {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0d264', endColorstr='#e5c960', GradientType=0 );
 }
 
-.btn-gradient.yellow:active {
+.yellow:active {
   background: #DBC05B;
 }
 

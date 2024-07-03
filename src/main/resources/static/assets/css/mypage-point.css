@@ -169,6 +169,11 @@ section {
   font-size: 15px;
 }
 
+.btn-gradient.large {
+  padding: 4px 12px;  
+  font-size: 20px;
+}
+
 .btn-gradient.yellow {
   background: rgba(240,210,100,1);
   background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(240,210,100,1)), to(rgba(229,201,96,1)));
@@ -227,6 +232,10 @@ section {
 
 .right-content p {
   margin-bottom: 10px;
+}
+
+.center {
+  margin: 0 auto;
 }
 
 .right-content table {
@@ -317,3 +326,4 @@ section {
 footer {
   height: 100px;
 } 
+
