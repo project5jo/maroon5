@@ -10,6 +10,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/header.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/bgChange.css">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -27,6 +28,10 @@
 
     <!-- 메인 배너 -->
     <section class="main_banner">
+        <video id="backgroundVideo" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+            <source id="videoSource" src="" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
         <div class="inner"></div>
     </section>
 
@@ -36,17 +41,13 @@
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
                 <p class="point">${topicContent}</p>
-                <c:if test="${loginUser.userRole == 'ADMIN'}">
-                    <a href="/zzz">LOGIN</a>
-                </c:if>
+                <a href="/zzz">LOGIN</a>
             </div>
 
             <button class="cancelBtn">
                 <span></span>
                 <span></span>
             </button>
-
-            <!-- <i class="fas fa-times"></i> -->
         </div>
         <!-- 채팅 메세지 창 -->
         <ul class="chatting"></ul>
@@ -81,16 +82,13 @@
 <footer></footer>
 
 <script>
-
     const loginUser = "<c:out value='${loginUser.account}' />";
-    let topicId = null; // 주제
-    let roomId = null; //방 번호
+    let topicId = null;
+    let roomId = null;
     let currentSubscription = null;
-
 
     let sendere = document.querySelector(".send");
     let chat = document.querySelector(".my-chat-input");
-
 
     sendere.addEventListener("click", () => {
         sendMessage();
@@ -103,99 +101,97 @@
         }
     })
 
+    // WebSocket을 사용하여 topicId 변경 알림을 받기 위한 설정 (수정)
+    function setupTopicIdListener() {
+        const socket = new SockJS('/chat-websocket'); // (수정)
+        const stompClient = Stomp.over(socket); // (수정)
+        stompClient.connect({}, function () { // (수정)
+            stompClient.subscribe('/topic/currentTopic', function (message) { // (수정)
+                const data = JSON.parse(message.body); // (수정)
+                console.log("asdasd" + data.topicId)
+                console.log("topic Id " + topicId)
+                topicId = data.topicId; // (수정)
+                console.log("Updated Topic ID:", topicId); // (수정)
+                // 새로운 topicId에 대한 구독 및 채팅방 재설정 (수정)
+                joinRoom(); // (수정)ㄱ
+
+            }); // (수정)
+        }); // (수정)
+    }
+
+    // 초기화 함수 (수정)
     function initialize() {
-        fetch('/api/admin/currentTopic')
-            /**
-             * 접속하면 initialize 실행
-             * currentTopic 페칭한 후, topicId 불러옴. 불러온 후 connect 시도
-             */
-            .then(response => response.json())
-            .then(data => {
-                topicId = data.topicId;
-                connect(); // WEB_SOCKET 채팅 접속 시도
-                setupTopicIdListener(); // admin이 topic 바뀌는 거 감지하기 위한 웹소켓 접속 시도
+        fetch('/api/admin/currentTopic') // (수정)
+            .then(response => response.json()) // (수정)
+            .then(data => { // (수정)
+                topicId = data.topicId; // (수정)
+                console.log("Current Topic ID:", topicId); // (수정)
+                connect(); // (수정)
+                setupTopicIdListener(); // topicId 변경 리스너 설정 (수정)
             }) // (수정)
-            .catch(error => console.error("토픽 에러!!!", error));
+            .catch(error => console.error("Error fetching current topic:", error)); // (수정)
     }
 
     function connect() {
-        const socket = new SockJS("/chat-websocket");  // 채팅 접속 소켓임. 실시간 채팅을 위한 소켓
-        stompClient = Stomp.over(socket); // 다른 브라우저도 사용하기 위해서 stompClient 사용
-        stompClient.connect({}, function (frame) { // 연결 시킨 후 joinRoom 실행
+        const socket = new SockJS("/chat-websocket"); // (수정)
+        stompClient = Stomp.over(socket); // (수정)
+        stompClient.connect({}, function (frame) { // (수정)
+            console.log("Connected: " + frame); // (수정)
             joinRoom(); // 방 구독 및 참여 (수정)
         }); // (수정)
     }
 
-    function setupTopicIdListener() {
-        const socket = new SockJS('/chat-websocket');
-        const stompClient = Stomp.over(socket);
-        stompClient.connect({}, function () {
-            stompClient.subscribe('/topic/currentTopic', function (message) {
-                /**
-                 * /topic/currentTopic 을 구독하고 있다가 바뀌면 파싱한다음 data로 변환해줌.
-                 * 변환하고 topicId 수정해줌.
-                 */
-                const data = JSON.parse(message.body);
-                topicId = data.topicId;
-                joinRoom();
-
-            });
-        });
-    }
-
-
     function joinRoom() {
-        /**
-         * join 하면 방금 업데이트한 topicId와 로그인한 유저의 정보를 가지고 post mapping 날림.
-         * post mapping 날리면 메세지에는 자동으로 roomId와 지금 방의 주제를 가지고 옴.
-         */
-        if (!topicId || !loginUser) return;
-        fetch(`/api/chat/joinRoom`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({topicId: topicId, username: loginUser})
-        })
-            .then(response => response.json())
-            .then(data => {
-                roomId = data.roomId;
+        if (!topicId || !loginUser) return; // (수정)
+        fetch(`/api/chat/joinRoom`, { // (수정)
+            method: 'POST', // (수정)
+            headers: { // (수정)
+                'Content-Type': 'application/json' // (수정)
+            }, // (수정)
+            body: JSON.stringify({topicId: topicId, username: loginUser}) // (수정)
+        }) // (수정)
+            .then(response => response.json()) // (수정)
+            .then(data => { // (수정)
+                console.log("Joined room:", data); // (수정)
+                roomId = data.roomId; // (수정)
                 document.querySelector('.chat-title .point').textContent = data.topicContent;
-                setTimeout(() => {
-                    subscribeToRoom(roomId);
-                }, 1000);
-            })
-            .catch(error => {
-                console.error("채팅방 입장 실패함:", error);
-            });
+                setTimeout(() => { // (수정)
+                    subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정 (수정)
+                }, 2000); // (수정)
+            }) // (수정)
+            .catch(error => { // (수정)
+                console.error("Error joining room:", error); // (수정)
+            }); // (수정)
     }
 
-
-    /**
-     * 구독중인 곳이 있다면 구독해제를 하고 다시 시도함.
-     * 구독한 다음 showmessage 실행해서 태그를 그려줌
-     * 원래 있던 채팅들 태그 그려줌.
-     *
-     * @param roomId1 - 들어갈 방 번호임.
-     *
-     */
     function subscribeToRoom(roomId1) {
+        console.log('subscribeToRoom' + roomId1);
+
         if (currentSubscription) {
             currentSubscription.unsubscribe();
+            console.log("Successfully unsubscribed from previous room.");
         }
 
         currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) {
+            console.log("Received message:", message.body);
             showMessage(JSON.parse(message.body));
         });
 
         loadMessages(roomId1);
+        console.log("Subscribed to room: " + roomId1);
     }
 
 
-    /**
-     * 내가 보낸 채팅이면 오른쪽, 상대가 보낸 채팅은 왼쪽으로 태그 그림.
-     * @param message - 기존 채팅방에 있던 메세지들으ㄹ JSON으로 파싱한 데이터임.
-     */
+    function subscribeNewRoom(roomId1) { // (수정)
+        console.log('subscribenewRoom' + roomId1); // (수정)
+        console.log('subscribenewRoom' + roomId); // (수정)
+        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) { // (수정)
+            showMessage(JSON.parse(message.body)); // (수정)
+        }); // (수정)
+        loadMessages(roomId1); // 새로운 방의 메시지 로드 (수정)
+        console.log("Subscribed to room: " + roomId1); // (수정)
+    }
+
     function showMessage(message) {
         let messageElement = document.createElement('li');
         let timestamp = new Date(message.timestamp);
@@ -214,6 +210,7 @@
             profile = `/assets/img/profile3.jpg`
         }
 
+        console.log(profile)
 
         // 포맷팅 변환
         let formattedTime = timestamp.toLocaleString('ko-KR', options);
@@ -248,11 +245,6 @@
         firstMessage.scrollTop = firstMessage.scrollHeight;
     }
 
-
-    /**
-     * 비동기로 패칭 시도후 새로운 채팅방의 메세지를 로드시킴.
-     * @param roomId - 새로운 채팅방의 방 번호
-     */
     function loadMessages(roomId) {
 
         fetch(`/api/chat/messages?roomId=\${roomId}&topicId=\${topicId}`)
@@ -270,19 +262,11 @@
             });
     }
 
-
     function sendMessage() {
         // 값을 입력하고 버튼을 누르면 /app/sendMessage라는 경로로 서버에 요청을 함
         let content = document.querySelector(".my-chat-input").value;
         let sender = loginUser;
 
-
-        // 1. "/app/sendMessage":
-        // •	메시지를 보낼 서버의 경로임~
-        //     2.	{}:
-        // •	서버에 같이 보낼 헤더 정보 > 지금 시간만 보내줌
-        //     3.	JSON.stringify({'sender': sender, 'content': content}):
-        // •	입력한 메세지 본문을 JSON 으로 변환해서 보내줌
         if (!sender) return;
         if (!content) return;
         stompClient.send(
@@ -294,11 +278,9 @@
         );
     }
 
-
     window.onload = function () {
         // 사이트 진입시 일단은 자동으로 연결
         initialize(); // 초기화 함수 호출 (수정)
-        // loadMessages()
         setupInfiniteScroll();
     };
 </script>
