@@ -88,6 +88,12 @@
         WHERE user_account = #{account}
     </update>
 
+    <update id="chargePoint">
+        UPDATE Users
+        SET user_point = user_point + #{point}
+        WHERE user_account = #{account}
+    </update>
+
     <delete id="delete">
         DELETE FROM Users
         WHERE user_account = #{account}

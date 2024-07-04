@@ -43,4 +43,6 @@ public interface MemberMapper {
 
     int updateMyPageProfile (@Param("account") String account, @Param("profile") String profile);
 
+    boolean chargePoint (@Param("account") String account, @Param("point") int point);
+
 }
