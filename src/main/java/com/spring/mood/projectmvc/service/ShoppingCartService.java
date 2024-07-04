@@ -51,6 +51,25 @@ public class ShoppingCartService {
         }
     }
 
+    @Transactional
+    public void updateCartItem(String userAccount, Long itemId, int quantity, BigDecimal totalPrice) {
+        ShoppingCart existingCart = shoppingCartMapper.findItemByUserAccountAndItemId(userAccount, itemId);
+
+        if (existingCart != null) {
+            existingCart.setCartTotalCount(quantity);
+            existingCart.setCartTotalPrice(totalPrice);
+
+            boolean updated = shoppingCartMapper.update(existingCart);
+            if (!updated) {
+                throw new RuntimeException("장바구니 아이템을 업데이트하는 중 오류가 발생했습니다.");
+            }
+
+            log.info("업데이트된 장바구니 아이템: {}", existingCart);
+        } else {
+            throw new RuntimeException("장바구니 아이템이 존재하지 않습니다.");
+        }
+    }
+
     public List<ShoppingCartResponseDto> getCartByUser(String userAccount) {
         return shoppingCartMapper.findByUserAccount(userAccount).stream()
                 .map(ShoppingCartResponseDto::fromEntity)

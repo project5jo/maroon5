@@ -37,35 +37,35 @@ public class OrderService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-
-
     //포인트 처리
     public void DeductionPoint(Integer usesPoint, String account , RedirectAttributes redirectAttributes) {
 
-        //멤버 찾기
+        // 멤버 찾기
         Member user = memberMapper.findOne(account);
-        //디비 멤버 포인트
-        Integer userPoint = user.getUserPoint();
-
-
-        if (usesPoint > userPoint){
-            redirectAttributes.addAttribute("error", "Insufficient points");
+        if (user == null) {
+            log.error("User not found: {}", account);
+            redirectAttributes.addAttribute("error", "User not found");
+            return;
         }
 
+        // 디비 멤버 포인트
+        Integer userPoint = user.getUserPoint();
+
+        if (usesPoint > userPoint) {
+            redirectAttributes.addAttribute("error", "Insufficient points");
+            return;
+        }
 
         Integer deductionPoint = userPoint - usesPoint;
         log.info("deductionPoint : {}", deductionPoint);
-//
+
         user.setUserPoint(deductionPoint);
         log.info("setUser : {}", user);
         memberMapper.updatePoint(deductionPoint, account);
-        redirectAttributes.addFlashAttribute("loginUser",user);
-    }//DeductionPoint end
-
-    public Member findUser(String account) {
-        Member user = memberMapper.findOne(account);
-        return user;
+        redirectAttributes.addFlashAttribute("loginUser", user);
     }
 
-
+    public Member findUser(String account) {
+        return memberMapper.findOne(account);
+    }
 }

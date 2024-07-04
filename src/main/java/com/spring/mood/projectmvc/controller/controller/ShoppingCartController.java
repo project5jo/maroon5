@@ -2,27 +2,24 @@ package com.spring.mood.projectmvc.controller.controller;
 
 import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
 import com.spring.mood.projectmvc.service.ShoppingCartService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
-
-    public ShoppingCartController(ShoppingCartService shoppingCartService) {
-        this.shoppingCartService = shoppingCartService;
-    }
 
     @PostMapping("/cart")
     public String addToCart(@RequestParam("itemId") Long itemId,
@@ -60,6 +57,27 @@ public class ShoppingCartController {
         log.info("Cart Total Price: {}", cartTotalPrice);
 
         return "html/shop-cart";
+    }
+
+    @PostMapping("/cart/update")
+    @ResponseBody
+    public String updateCart(@RequestBody Map<String, Object> requestData) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userAccount = authentication.getName();
+
+        List<Map<String, Object>> cartItems = (List<Map<String, Object>>) requestData.get("cartItems");
+
+        try {
+            for (Map<String, Object> item : cartItems) {
+                Long itemId = Long.valueOf((String) item.get("itemId"));
+                int quantity = Integer.parseInt((String) item.get("quantity"));
+                BigDecimal totalPrice = new BigDecimal((String) item.get("totalPrice"));
+                shoppingCartService.updateCartItem(userAccount, itemId, quantity, totalPrice);
+            }
+            return "success";
+        } catch (Exception e) {
+            return "error";
+        }
     }
 
     @PostMapping("/cart/remove")
