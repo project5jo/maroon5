@@ -60,7 +60,8 @@
             </c:if>
             <c:if test="${loginUser != null}">
                 <div class="chat-profile">
-                    <img src="${loginUser.profileUrl != null ? loginUser.profileUrl : '/assets/img/profile3.jpg'}" alt="프로필 사진" />
+                    <img src="${loginUser.profileUrl != null ? loginUser.profileUrl : '/assets/img/profile3.jpg'}"
+                         alt="프로필 사진"/>
                 </div>
                 <input
                         class="my-chat-input"
@@ -102,6 +103,7 @@
             sendere.click();
         }
     })
+
     // WebSocket을 사용하여 topicId 변경 알림을 받기 위한 설정 (수정)
     function setupTopicIdListener() {
         const socket = new SockJS('/chat-websocket'); // (수정)
@@ -110,10 +112,12 @@
             stompClient.subscribe('/topic/currentTopic', function (message) { // (수정)
                 const data = JSON.parse(message.body); // (수정)
                 console.log("asdasd" + data.topicId)
+                console.log("topic Id " + topicId)
                 topicId = data.topicId; // (수정)
                 console.log("Updated Topic ID:", topicId); // (수정)
                 // 새로운 topicId에 대한 구독 및 채팅방 재설정 (수정)
-                joinRoom(); // (수정)
+                joinRoom(); // (수정)ㄱ
+
             }); // (수정)
         }); // (수정)
     }
@@ -162,21 +166,21 @@
             }); // (수정)
     }
 
-    function subscribeToRoom(roomId1) { // (수정)
-        console.log('subscribeToRoom' + roomId1); // (수정)
-        console.log('subscribeToRoom' + roomId); // (수정)
+    function subscribeToRoom(roomId1) {
+        console.log('subscribeToRoom' + roomId1);
 
-        if (currentSubscription) { // (수정)
-            stompClient.unsubscribe(currentSubscription.id, () => { // (수정)
-                console.log("Successfully unsubscribed from previous room."); // (수정)
-                subscribeNewRoom(roomId1); // 새로운 방 구독 (수정)
-            }, (error) => { // (수정)
-                console.error("Failed to unsubscribe: ", error); // (수정)
-                subscribeNewRoom(roomId1); // 오류 발생 시에도 새로운 방 구독 시도 (수정)
-            }); // (수정)
-        } else { // (수정)
-            subscribeNewRoom(roomId1); // 초기 구독 설정 (수정)
-        } // (수정)
+        if (currentSubscription) {
+            currentSubscription.unsubscribe();
+            console.log("Successfully unsubscribed from previous room.");
+        }
+
+        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) {
+            console.log("Received message:", message.body);
+            showMessage(JSON.parse(message.body));
+        });
+
+        loadMessages(roomId1);
+        console.log("Subscribed to room: " + roomId1);
     }
 
 
@@ -244,18 +248,20 @@
     }
 
     function loadMessages(roomId) {
-        setTimeout(() => {
-            fetch(`/api/chat/messages?roomId=\${roomId}&topicId=\${topicId}`)
-                .then((response) => response.json())
-                .then((messages) => {
-                    let chatContainer = document.querySelector(".chatting");
-                    chatContainer.innerHTML = ''; // 기존 메시지 삭제
+
+        fetch(`/api/chat/messages?roomId=\${roomId}&topicId=\${topicId}`)
+            .then((response) => response.json())
+            .then((messages) => {
+                let chatContainer = document.querySelector(".chatting");
+                chatContainer.innerHTML = ''; // 기존 메시지 삭제
+                setTimeout(() => {
                     messages.forEach((message) => {
                         showMessage(message);
                     });
-                    chatContainer.scrollTop = chatContainer.scrollHeight;
-                });
-        }, 500)
+                }, 500)
+
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            });
     }
 
     <%--function updateURL(newRoomId) {--%>
