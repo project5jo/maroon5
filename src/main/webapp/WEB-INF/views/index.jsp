@@ -35,7 +35,7 @@
         <div class="chat-title">
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
-                <p class="point">고민을 이야기해주세요</p>
+                <p class="point">${topicContent}</p>
                 <a href="/zzz">LOGIN</a>
             </div>
 
@@ -157,6 +157,7 @@
             .then(data => { // (수정)
                 console.log("Joined room:", data); // (수정)
                 roomId = data.roomId; // (수정)
+                document.querySelector('.chat-title .point').textContent = data.topicContent;
                 setTimeout(() => { // (수정)
                     subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정 (수정)
                 }, 2000); // (수정)
