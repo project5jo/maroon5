@@ -164,6 +164,7 @@
 
     <!-- footer -->
     <%@ include file="../include/footer.jsp" %>
+    
     <script src="/assets/js/Mypage-point.js"></script>
   </body>
 </html>

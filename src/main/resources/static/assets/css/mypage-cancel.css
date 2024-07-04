@@ -4,13 +4,12 @@
 body {
   background-color: #ebeae3;
   color: #432626;
-  overflow: hidden;
 }
 
 /* main */
 main {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   font-size: 20px;
   font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
     "malgun gothic", "돋움", "dotum", sans-serif !important;
@@ -23,10 +22,9 @@ section {
 }
 
 .tr {
-  margin-top: 20px;
   width: 1210px;
   height: 830px;
-  margin: 20px auto;
+  margin: 95px auto;
   display: flex;
   border: 1px solid #432626;
   border-radius: 15px;

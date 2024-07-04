@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-profile.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 
     <!-- <script src="/assets/js/Mypage.js" defer></script> -->
     <script src="/assets/js/Mypage-profile.js" defer></script>
@@ -146,7 +147,8 @@
       </section>
     </main>
 
-    <footer></footer>
+    <!-- footer -->
+    <%@ include file="../include/footer.jsp" %>
   
 </body>
 </html>

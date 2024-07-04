@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-main.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 
     <script src="/assets/js/Mypage.js" defer></script>
     <!-- <script src="/assets/js/Mypage-cancel.js" defer></script> -->
@@ -81,7 +82,7 @@
               <p>마이페이지 메인</p>
             </div>
 
-            <div class="right-contents">
+            <!-- <div class="right-contents">
 
               <div class="right-content">
                 <p>회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
@@ -150,7 +151,7 @@
               </form>
               <!-- form end -->
 
-            </div>
+            </div> -->
             <!-- right-contents end -->
 
           </div>
@@ -162,7 +163,8 @@
       </section>
     </main>
 
-    <footer></footer>
+    <!-- footer -->
+    <%@ include file="../include/footer.jsp" %>
     
   </body>
 </html>
