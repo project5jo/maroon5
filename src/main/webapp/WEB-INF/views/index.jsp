@@ -86,6 +86,7 @@
     let topicId = null; // 주제
     let roomId = null; //방 번호
     let currentSubscription = null;
+    let delay = true;
 
 
     let sendere = document.querySelector(".send");
@@ -102,6 +103,10 @@
             sendere.click();
         }
     })
+    function chatHide() {
+        const chatBox = document.querySelector('.chat');
+        chatBox.classList.add('slide-down');
+    }
 
     function initialize() {
         fetch('/api/admin/currentTopic')
@@ -285,6 +290,7 @@
         // •	입력한 메세지 본문을 JSON 으로 변환해서 보내줌
         if (!sender) return;
         if (!content) return;
+        if (!delay) return;
         stompClient.send(
             `/app/sendMessage/\${topicId}/\${roomId}`,
             {
@@ -292,11 +298,16 @@
             },
             JSON.stringify({sender: sender, content: content, topicId: topicId, roomId: roomId})
         );
+        delay = false;
+        setTimeout(() => {
+            delay = true;
+        }, 500);
     }
 
 
     window.onload = function () {
         // 사이트 진입시 일단은 자동으로 연결
+        chatHide()
         initialize(); // 초기화 함수 호출 (수정)
         // loadMessages()
         setupInfiniteScroll();
