@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-cancel.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 
     <script src="/assets/js/Mypage.js" defer></script>
     <script src="/assets/js/Mypage-cancel.js" defer></script>
@@ -37,7 +38,7 @@
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="/assets/img/profile.jpg" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -166,7 +167,7 @@
       </section>
     </main>
 
-    <footer></footer>
-    
+    <%@ include file="../include/footer.jsp" %>
+
   </body>
 </html>

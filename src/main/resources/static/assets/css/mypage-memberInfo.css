@@ -192,6 +192,12 @@ section {
   background: #DBC05B;
 }
 
+/* checkIcon */
+.fa-check {
+  color: rgb(255, 0, 0);
+  padding-right: 15px;
+}
+
 
 /* right */
 .tr-right {
@@ -214,6 +220,13 @@ section {
 
 
 /* right-content */
+h2 {
+  font-weight: 700;
+  font-size: 25px;
+  padding: 10px;
+  margin-top: 50px;
+}
+
 .right-contents, .form-contents {
   text-align: left;
   padding: 30px;
@@ -223,19 +236,8 @@ section {
   margin-bottom: 20px;
 }
 
-.right-content h2 {
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.right-content i {
-  color: rgb(255, 0, 0);
-  padding-right: 10px;
-}
-
 .right-content p {
-  margin-bottom: 10px;
+  margin: 10px 0 0 30px;
 }
 
 .right-content table {
