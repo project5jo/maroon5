@@ -19,6 +19,7 @@
         <typeAlias type="com.spring.mood.projectmvc.entity.ChatEntity" alias="chat"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.User" alias="user"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.ShoppingCart" alias="shoppingcart"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.CartArchive" alias="cartarchive"/>
     </typeAliases>
 
     <mappers>
@@ -26,9 +27,10 @@
         <mapper resource="mapper/MemberMapper.xml" />
         <mapper resource="mapper/ShopItemMapper.xml" />
         <mapper resource="mapper/OrdersMapper.xml" />
-        <mapper resource="mapper/OrderDetailMapper.xml" />
+        <mapper resource="mapper/OrderDetailsMapper.xml" />
         <mapper resource="mapper/ChatMapper.xml" />
         <mapper resource="mapper/ShopDetailMapper.xml" />
         <mapper resource="mapper/ShoppingCartMapper.xml" />
+        <mapper resource="mapper/CartArchiveMapper.xml" />
     </mappers>
 </configuration>

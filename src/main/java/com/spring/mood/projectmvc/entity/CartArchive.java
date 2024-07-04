@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 @Builder
 @ToString
 public class CartArchive {
+
+    private Long orderId; // fk
     private Long cartArchiveId; // PK
     private String userAccount; // FK (Users)
     private Long shopItemId; // FK (ShopItems)

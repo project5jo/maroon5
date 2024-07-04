@@ -17,16 +17,15 @@ public class CartArchiveService {
     private static final Logger log = LoggerFactory.getLogger(CartArchiveService.class);
 
     @Transactional
-    public void copyCartToArchive(String userAccount) {
+    public void copyCartToArchive(String userAccount, Long orderId) {
         log.info("Copying cart items to archive for userAccount: {}", userAccount);
-        cartArchiveMapper.copyToCartArchive(userAccount);
+        cartArchiveMapper.copyCartToArchive(userAccount, orderId);
     }
 
     public List<Long> getCartArchiveIds(String userAccount) {
         log.info("Getting cart archive IDs for userAccount: {}", userAccount);
         return cartArchiveMapper.getCartArchiveIds(userAccount);
     }
-
     public List<Map<String, Object>> getOrderHistory(String userAccount) {
         return cartArchiveMapper.getOrderHistory(userAccount);
     }

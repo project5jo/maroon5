@@ -1,6 +1,7 @@
 package com.spring.mood.projectmvc.controller.controller;
 
 import com.spring.mood.projectmvc.dto.requestDto.OrderRequestDto;
+import com.spring.mood.projectmvc.dto.responseDto.OrderDetailResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.OrderResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -58,6 +60,7 @@ public class OrderController {
     @PostMapping("/checkout")
     public String checkout(OrderRequestDto orderRequestDto, RedirectAttributes redirectAttributes, HttpSession session) {
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        System.out.println("orderRequestDto = " + orderRequestDto.getAddress3());
         if (loginUser == null) {
             return "redirect:/login";
         }
@@ -85,8 +88,11 @@ public class OrderController {
 
         orderService.createOrder(order);
 
+        log.info("Created Order ID: {}", order.getOrderId());
+
+        if (order.getOrderId() != null) {
         // 장바구니 항목을 아카이브로 복사
-        cartArchiveService.copyCartToArchive(account);
+        cartArchiveService.copyCartToArchive(account, order.getOrderId());
 
         // 장바구니 아카이브 ID 가져오기
         List<Long> cartArchiveIds = cartArchiveService.getCartArchiveIds(account);
@@ -96,11 +102,15 @@ public class OrderController {
 
         // 장바구니 비우기
         shoppingCartService.clearCart(account);
-
+        } else {
+            log.error("Order ID is null. Order creation failed.");
+            redirectAttributes.addFlashAttribute("error", "Order creation failed.");
+            return "redirect:/checkout";
+        }
         return "redirect:/complete";
     }
 
-    @GetMapping("/order/history")
+    @GetMapping("/complete")
     public String getOrderHistory(Model model, HttpSession session) {
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
         String userAccount = loginUser.getAccount();
@@ -118,41 +128,9 @@ public class OrderController {
         return "html/order-history"; // JSP 파일 경로
     }
 
-//    @PostMapping("/complete")
-//    public String completeOrder() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String userAccount = authentication.getName();
-//
-//        // 1. 장바구니 내용을 CartArchive로 복사
-//        cartArchiveService.copyCartToArchive(userAccount);
-//
-//        // 2. 새로운 주문 생성
-//        Orders order = Orders.builder()
-//                .userAccount(userAccount)
-//                .orderDate(LocalDateTime.now())
-//                .address1("address1")
-//                .address2("address2")
-//                .address3("address3")
-//                .receiverName("receiver")
-//                .receiverPhone("phone")
-//                .orderStatus("completed") // 추가된 필드
-//                .build();
-//        orderService.createOrder(order);
-//
-//        Long orderId = order.getOrderId();  // insert 후 ID를 가져오기 위해서 order 객체에서 가져옴
-//
-//        // 3. CartArchive의 ID를 가져와서 OrderDetails에 저장
-//        List<Long> cartArchiveIds = cartArchiveService.getCartArchiveIds(userAccount);
-//        orderDetailsService.saveOrderDetails(orderId, cartArchiveIds);
-//
-//        // 4. 장바구니 내용 삭제
-//        shoppingCartService.clearCart(userAccount);  // clearCart 호출
-//
-//        return "redirect:/shop";
-//    }
-
-    @GetMapping("/complete")
-    public String completeOrderGet() {
-        return "html/order-history"; // 주문 완료 페이지로 리다이렉트
+    @GetMapping("/{orderId}/details")
+    public List<OrderDetailResponseDto> getOrderDetails(@PathVariable Long orderId) {
+        return orderService.getOrderDetailsByOrderId(orderId);
     }
+
 }

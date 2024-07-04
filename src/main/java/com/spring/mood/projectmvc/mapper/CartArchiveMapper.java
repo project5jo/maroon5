@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Mapper
 public interface CartArchiveMapper {
-    void copyToCartArchive(@Param("userAccount") String userAccount);
+    void copyCartToArchive(@Param("userAccount") String userAccount, @Param("orderId") Long orderId);
     List<Long> getCartArchiveIds(@Param("userAccount") String userAccount);
 
     List<Map<String, Object>> getOrderHistory(@Param("userAccount") String userAccount);

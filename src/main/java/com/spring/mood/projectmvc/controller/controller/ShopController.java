@@ -38,7 +38,7 @@ public class ShopController {
     private final ShoppingCartService shoppingCartService;
 
 
-    private static final String UPLOAD_DIR = "/Users/jeongjaehan/Desktop/Developer/upload/";
+    private static final String UPLOAD_DIR = "/Users/jehoon/spring-prj/upload/";
 
 
     @GetMapping("/shop")
