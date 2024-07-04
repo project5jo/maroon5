@@ -21,4 +21,8 @@ public interface ShoppingCartMapper {
 
     @Delete("DELETE FROM ShoppingCart WHERE cart_id = #{cartId}")
     boolean delete(@Param("cartId") Long cartId);
+
+    @Delete("DELETE FROM ShoppingCart WHERE user_account = #{userAccount}")
+    void deleteByUserAccount(@Param("userAccount") String userAccount);  // 추가된 메서드
+
 }

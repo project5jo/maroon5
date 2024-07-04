@@ -89,4 +89,9 @@ public class ShoppingCartService {
             throw new RuntimeException("제거할 장바구니 아이템이 존재하지 않습니다.");
         }
     }
+
+    public void clearCart(String userAccount) {
+        shoppingCartMapper.deleteByUserAccount(userAccount);
+    }
 }
+
