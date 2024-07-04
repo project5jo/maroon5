@@ -23,5 +23,5 @@
 /* 헤더가 비디오 위에 위치하도록 설정 */
 header {
     position: relative;
-    z-index: 2; /* 비디오 위에 위치 */
+    z-index: 9999; /* 비디오 위에 위치 */
 }
