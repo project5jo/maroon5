@@ -260,6 +260,7 @@
                 setTimeout(() => {
                     messages.forEach((message) => {
                         showMessage(message);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
                     });
                 }, 500)
 
