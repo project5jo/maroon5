@@ -36,6 +36,7 @@
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
                 <p class="point">고민을 이야기해주세요</p>
+                <a href="/zzz">LOGIN</a>
             </div>
 
             <button class="cancelBtn">
@@ -80,8 +81,11 @@
 
     const loginUser = "<c:out value='${loginUser.account}' />";
     <%--const loginUserName = "<c:out value='${loginUser.nickName}' />";--%>
-    const topicId = 2;
+    let topicId = null;
     let roomId = null;
+    let currentSubscription = null;
+    // let stompClient = null;
+
     <%--let roomId = ${roomId};--%>
 
     let sendere = document.querySelector(".send");
@@ -98,81 +102,92 @@
             sendere.click();
         }
     })
+    // WebSocket을 사용하여 topicId 변경 알림을 받기 위한 설정 (수정)
+    function setupTopicIdListener() {
+        const socket = new SockJS('/chat-websocket'); // (수정)
+        const stompClient = Stomp.over(socket); // (수정)
+        stompClient.connect({}, function () { // (수정)
+            stompClient.subscribe('/topic/currentTopic', function (message) { // (수정)
+                const data = JSON.parse(message.body); // (수정)
+                console.log("asdasd" + data.topicId)
+                topicId = data.topicId; // (수정)
+                console.log("Updated Topic ID:", topicId); // (수정)
+                // 새로운 topicId에 대한 구독 및 채팅방 재설정 (수정)
+                joinRoom(); // (수정)
+            }); // (수정)
+        }); // (수정)
+    }
 
-
-    let currentSubscription = null;
-    let stompClient = null;
-    let socket = null;
+    // 초기화 함수 (수정)
+    function initialize() {
+        fetch('/api/admin/currentTopic') // (수정)
+            .then(response => response.json()) // (수정)
+            .then(data => { // (수정)
+                topicId = data.topicId; // (수정)
+                console.log("Current Topic ID:", topicId); // (수정)
+                connect(); // (수정)
+                setupTopicIdListener(); // topicId 변경 리스너 설정 (수정)
+            }) // (수정)
+            .catch(error => console.error("Error fetching current topic:", error)); // (수정)
+    }
 
     function connect() {
-        socket = new SockJS("/chat-websocket");
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            console.log("Connected: " + frame);
-
-            joinRoom(); // 방 구독 및 참여
-        });
+        const socket = new SockJS("/chat-websocket"); // (수정)
+        stompClient = Stomp.over(socket); // (수정)
+        stompClient.connect({}, function (frame) { // (수정)
+            console.log("Connected: " + frame); // (수정)
+            joinRoom(); // 방 구독 및 참여 (수정)
+        }); // (수정)
     }
 
     function joinRoom() {
-        fetch(`/api/chat/joinRoom`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({topicId: topicId, username: loginUser})
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Joined room:", data);
-                roomId = data.roomId;
-                // if (data.roomId !== roomId) {
-                //   roomId = data.roomId;
-                //   console.log("새로운 방")
-                //   console.log(roomId + "asdasdasd")
-                //   // updateURL(roomId);
-                setTimeout(() => {
-                    subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정
-                }, 2000)
-                // loadMessages(roomId); // 새로운 방의 메시지 로드
-                // } else {
-                //   console.log("기존 방")
-                //   subscribeToRoom(roomId); // 초기 구독 설정
-                // }
-            })
-            .catch(error => {
-                console.error("Error joining room:", error);
-            });
+        if (!topicId || !loginUser) return; // (수정)
+        fetch(`/api/chat/joinRoom`, { // (수정)
+            method: 'POST', // (수정)
+            headers: { // (수정)
+                'Content-Type': 'application/json' // (수정)
+            }, // (수정)
+            body: JSON.stringify({topicId: topicId, username: loginUser}) // (수정)
+        }) // (수정)
+            .then(response => response.json()) // (수정)
+            .then(data => { // (수정)
+                console.log("Joined room:", data); // (수정)
+                roomId = data.roomId; // (수정)
+                setTimeout(() => { // (수정)
+                    subscribeToRoom(roomId); // 새로운 방에 대한 구독 설정 (수정)
+                }, 2000); // (수정)
+            }) // (수정)
+            .catch(error => { // (수정)
+                console.error("Error joining room:", error); // (수정)
+            }); // (수정)
     }
 
-    // subscribeToRoom 함수 수정
-    function subscribeToRoom(roomId1) {
-        console.log('subscribeToRoom' + roomId1)
-        console.log('subscribeToRoom' + roomId)
+    function subscribeToRoom(roomId1) { // (수정)
+        console.log('subscribeToRoom' + roomId1); // (수정)
+        console.log('subscribeToRoom' + roomId); // (수정)
 
-        if (currentSubscription) {
-            // 구독 취소 및 오류 처리 추가
-            stompClient.unsubscribe(() => {
-                console.log("Successfully unsubscribed from previous room.");
-                subscribeNewRoom(roomId1); // 새로운 방 구독
-            }, (error) => {
-                console.error("Failed to unsubscribe: ", error);
-                subscribeNewRoom(roomId1); // 오류 발생 시에도 새로운 방 구독 시도
-            });
-        } else {
-            subscribeNewRoom(roomId1); // 초기 구독 설정
-        }
+        if (currentSubscription) { // (수정)
+            stompClient.unsubscribe(currentSubscription.id, () => { // (수정)
+                console.log("Successfully unsubscribed from previous room."); // (수정)
+                subscribeNewRoom(roomId1); // 새로운 방 구독 (수정)
+            }, (error) => { // (수정)
+                console.error("Failed to unsubscribe: ", error); // (수정)
+                subscribeNewRoom(roomId1); // 오류 발생 시에도 새로운 방 구독 시도 (수정)
+            }); // (수정)
+        } else { // (수정)
+            subscribeNewRoom(roomId1); // 초기 구독 설정 (수정)
+        } // (수정)
     }
 
-    function subscribeNewRoom(roomId1) {
-        console.log('subscribenewRoom' + roomId1)
-        console.log('subscribenewRoom' + roomId)
-        // stompClient.unsubscribe('myTopicId');
-        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) {
-            showMessage(JSON.parse(message.body));
-        });
-        loadMessages(roomId1); // 새로운 방의 메시지 로드
-        console.log("Subscribed to room: " + roomId1);
+
+    function subscribeNewRoom(roomId1) { // (수정)
+        console.log('subscribenewRoom' + roomId1); // (수정)
+        console.log('subscribenewRoom' + roomId); // (수정)
+        currentSubscription = stompClient.subscribe(`/topic/messages/\${topicId}/\${roomId1}`, function (message) { // (수정)
+            showMessage(JSON.parse(message.body)); // (수정)
+        }); // (수정)
+        loadMessages(roomId1); // 새로운 방의 메시지 로드 (수정)
+        console.log("Subscribed to room: " + roomId1); // (수정)
     }
 
     function showMessage(message) {
@@ -230,7 +245,7 @@
 
     function loadMessages(roomId) {
         setTimeout(() => {
-            fetch(`/api/chat/messages?roomId=${roomId}&topicId=${topicId}`)
+            fetch(`/api/chat/messages?roomId=\${roomId}&topicId=\${topicId}`)
                 .then((response) => response.json())
                 .then((messages) => {
                     let chatContainer = document.querySelector(".chatting");
@@ -243,12 +258,12 @@
         }, 500)
     }
 
-    function updateURL(newRoomId) {
-        const newURL = `${window.location.pathname}?roomId=\${newRoomId}&topicId=${topicId}`;
-        console.log("Updating URL to:", newURL); // 디버그용 로그 추가
-        history.pushState(null, '', newURL);
-        window.location.reload()
-    }
+    <%--function updateURL(newRoomId) {--%>
+    <%--    const newURL = `${window.location.pathname}?roomId=\${newRoomId}&topicId=${topicId}`;--%>
+    <%--    console.log("Updating URL to:", newURL); // 디버그용 로그 추가--%>
+    <%--    history.pushState(null, '', newURL);--%>
+    <%--    window.location.reload()--%>
+    <%--}--%>
 
 
     function sendMessage() {
@@ -267,7 +282,7 @@
         if (!sender) return;
         if (!content) return;
         stompClient.send(
-            `/app/sendMessage/${topicId}/${roomId}`,
+            `/app/sendMessage/\${topicId}/\${roomId}`,
             {
                 timestamp: new Date().toString(),
             },
@@ -278,7 +293,7 @@
 
     window.onload = function () {
         // 사이트 진입시 일단은 자동으로 연결
-        connect()
+        initialize(); // 초기화 함수 호출 (수정)
         // loadMessages()
         setupInfiniteScroll();
     };
