@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.service;
 
+import com.spring.mood.projectmvc.dto.requestDto.RequestMemberDto;
 import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
@@ -110,5 +111,12 @@ public class MyPageService {
             // 프로필 상태로 조건문에 적지 않은 것이 나올 경우
             throw new IllegalArgumentException("프로필 상태: " + profileStatus);
         }
+    }
+
+    public boolean serviceChargePoint(String account, int point) {
+
+        boolean isUpdated = membermapper.chargePoint(account, point);
+
+        return isUpdated;
     }
 }

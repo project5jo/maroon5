@@ -37,7 +37,7 @@
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="/assets/img/profile.jpg" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>

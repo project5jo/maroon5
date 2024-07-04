@@ -178,6 +178,27 @@ public class MyPageController {
         return "html/mypage-point";
     }
 
+    @PostMapping ("/mypage-point")
+    public String chargePoint (HttpSession session, int point, Model model) {
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        String account = loginUser.getAccount();
+
+        boolean isUpdated = service.serviceChargePoint(account, point);
+
+        if (isUpdated) {
+            ResponseMyPageMemberInfoDto dto =  service.serviceFindOne(account);
+
+            // JSP 로 dto 보내기
+            model.addAttribute("updatedMember", dto);
+            return "redirect:/mypage-point";
+
+        } else {
+            throw new RuntimeException ("업데이트에 실패하였습니다.");
+        }
+    }
+
     @GetMapping("/mypage-orderInfo")
     public String openMyPagePaymentInfo (HttpSession session, Model model) {
         // 세션에서 로그인한 회원의 정보를 가져오기
