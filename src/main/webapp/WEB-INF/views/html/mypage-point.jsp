@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css"/>
 
-    <!-- <script src="/assets/js/Mypage.js" defer></script> -->
+    <script src="/assets/js/Mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
   </head>
@@ -85,7 +85,7 @@
 
               <div class="right-content">
                 <h2><i class="fas fa-check"></i>현재 포인트</h2>
-                <p>${isUpdated ? updatedMember.point : nowMember.point}원</p>
+                <p id="pointSRC">${isUpdated ? updatedMember.point : nowMember.point}</p>
               </div>
 
               <!-- <div class="right-content">
@@ -149,8 +149,6 @@
 
                 </form>
                 <!-- form end -->
-
-                <input type="hidden" id="pointSRC" value="${isUpdated ? updatedMember.point : nowMember.point}" >
 
             </div>
             <!-- right-contents end -->

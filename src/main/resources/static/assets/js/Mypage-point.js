@@ -1,60 +1,51 @@
-
-const $Inputpoint = document.querySelector('.inputPoint'); // 금액 입력 input 태그
-
+// 충전할 포인트 변수
+const $Inputpoint = document.querySelector('.inputPoint'); // 충전할 포인트 입력 input 태그
 let totalInputPoint = 0; // 충전할 포인트 누적 초기값
 
-// 금액 버튼 클릭시 포인트 누적해주는 함수
+// 예상 포인트 변수 (기존포인트 + 충전할 포인트)
+let $pointDB = document.getElementById("pointSRC"); // DB 의 기존 포인트 태그
+let originalPoint = parseInt($pointDB.textContent); // DB 의 기존 포인트 태그 의 값 추출
+
+const $expectPoint = document.querySelector('.expectPoint');  // 충전후 예상 포인트 입력 input 태그
+let totalExpectPoint = 0; // 충전후 예상 포인트 누적 초기값
+
+
 function addPoint (point) {
 
+    // 1-1. 금액버튼의 포인트를 숫자타입으로 변환하기
     let addPoint = parseInt(point.value);
-    // console.log("더해줄금액", addPoint);
 
-    // 버튼 클릭시 금액 누적해서 더해주기
+    // 1-2. 버튼 클릭시 금액 누적해서 더해주기
     totalInputPoint += addPoint;
-    // console.log("누적금액", totalPoint);
 
+    // 1-3. input태그에 누적금액 적용하기
     $Inputpoint.setAttribute("value", totalInputPoint);
+    $Inputpoint.value = totalInputPoint;
 
-    // console.log("최종금액", $Inputpoint);
+    // 2-1. DB 의 포인트 금액 + 충전할 포인트 더해주기
+    totalExpectPoint = originalPoint + totalInputPoint;
+
+    // 2-2. input태그에 예상포인트 적용하기
+    $expectPoint.setAttribute("value", totalExpectPoint);
+    $expectPoint.value = totalExpectPoint;
 }
 
 
-
-// 정정버튼 클릭시 금액 입력 input 태그값 초기화 함수
+// 정정버튼 클릭시 금액 초기화하기
 function removePoint () {
 
-    $Inputpoint.removeAttribute("value");
-}
+    totalInputPoint = 0;
+    totalExpectPoint = 0;
 
+    $Inputpoint.setAttribute("value", 0);
+    $Inputpoint.value = 0;
 
-// 기존 포인트 + 충전할 포인트를 더한 예상포인트를 입력
-let $pointDB = document.getElementById("pointSRC"); // DB 의 기존포인트 태그
-let $expectPoint = document.querySelector('.expectPoint'); // 예상 최종 포인트 태그
-
-let originalPoint = parseInt($pointDB.getAttribute('value')); // DB 의 기존포인트 값 추출
-let chargePoint = parseInt($Inputpoint.getAttribute('value')); // input 태그의 누적포인트 추출
-
-let totalExpectPoint = 0; // 예상 포인트 누적 초기값
-
-console.log("DB 의 기존포인트", originalPoint);
-console.log("input 태그의 누적포인트", chargePoint);
-
-
-
-if (!chargePoint) {
     $expectPoint.setAttribute("value", originalPoint);
-} else {
-    totalExpectPoint = originalPoint + chargePoint;
-    $expectPoint.setAttribute("value", addPoint);
+    $expectPoint.value = originalPoint;
 }
 
 
 
-
-$Inputpoint.addEventListener('click', e => {
-    expectedPoint();
-    console.log('클릭클릭');
-})
 
 
 
