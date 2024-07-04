@@ -10,7 +10,7 @@
 <body>
 <h1>관리자 페이지</h1>
 <div>
-    <label for="newTopicId">새로운 Topic ID: </label>
+    <label for="newTopicId">새로운 주제 아이디: </label>
     <input type="text" id="newTopicId">
     <button onclick="updateTopicId()">Update Topic ID</button>
 </div>
@@ -27,13 +27,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Topic ID updated successfully');
+                    alert('토픽 바뀜~');
                 } else {
-                    alert('Failed to update Topic ID');
+                    alert('오류');
                 }
             })
             .catch(error => {
-                console.error('Error updating Topic ID:', error);
+                console.error('Error:', error);
             });
     }
 </script>

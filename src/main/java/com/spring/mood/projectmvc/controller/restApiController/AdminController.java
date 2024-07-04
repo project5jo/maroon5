@@ -15,27 +15,38 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private Integer currentTopicId = 1; // 기본 값 설정 (필요에 따라 변경 가능)
+    private Integer currentTopicId = 1; // 기본 값 설정
     private final SimpMessagingTemplate messagingTemplate;
 
+
+    /**
+     *
+     * @param request - 새로 바뀔 주제의 번호
+     * @return - 성공하면 success를 boolean 형태로 보내줌.
+     */
     @PostMapping("/updateTopic")
     public Map<String, Object> updateTopic(@RequestBody Map<String, Integer> request) {
         Integer newTopicId = request.get("topicId");
-        System.out.println("newTopicId = " + newTopicId);
 
-        // 새로운 Topic ID를 저장
+
         if (newTopicId != null) {
-            currentTopicId = newTopicId; // 현재 토픽 ID 업데이트
+            currentTopicId = newTopicId; // 현재 토픽
             messagingTemplate.convertAndSend("/topic/currentTopic", Collections.singletonMap("topicId", newTopicId));
-            System.out.println("Broadcasting new topicId: " + newTopicId);
         } else {
-            throw new IllegalArgumentException("Topic ID is null");
+            throw new IllegalArgumentException("빈 토픽 ㄴㄴ");
         }
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         return response;
     }
+
+
+    /**
+     * currentTopicId가 위에서 바꿔준 현재 토픽 번호임.
+     * response 객체에 담아서 가져오기
+     * @return - 현재 토픽 번호
+     */
     @GetMapping("/currentTopic")
     public Map<String, Object> getCurrentTopic() {
         Map<String, Object> response = new HashMap<>();
