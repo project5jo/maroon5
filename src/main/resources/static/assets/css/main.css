@@ -1,10 +1,9 @@
 /* common css  */
 @import url("common.css");
-
 /* 채팅 css */
 @import url("main-chat.css");
 
-/*main 시작*/
+/* main 시작 */
 body {
   overflow: hidden;
 }
@@ -32,7 +31,6 @@ main {
 
 /* 마우스 애니메이션 */
 .mouse {
-  /* display: none; */
   z-index: 9;
   position: absolute; /* 변경: 절대 위치 지정 */
   bottom: 10%; /* 원하는 위치로 설정 (예: 가운데) */
