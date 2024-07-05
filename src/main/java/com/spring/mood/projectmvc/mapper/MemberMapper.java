@@ -1,12 +1,10 @@
 package com.spring.mood.projectmvc.mapper;
 
 import com.spring.mood.projectmvc.dto.requestDto.AutoSignInDto;
-import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MemberMapper {
@@ -26,6 +24,9 @@ public interface MemberMapper {
 
     boolean checkEmail(String email);
 
+    //포인트 찾기
+//    Integer existsByPoint(Integer point);
+
     Member findId(@Param("name")String name,@Param("email") String email);
 
     boolean updatePassword(@Param("account") String account,@Param("NewPw") String NewPw);
@@ -41,8 +42,10 @@ public interface MemberMapper {
     // 마이페이지 회원정보 수정
     int updateMyPageMemberInfo (Member member);
 
+
     int updateMyPageProfile (@Param("account") String account, @Param("profile") String profile);
 
     boolean chargePoint (@Param("account") String account, @Param("point") int point);
+
 
 }

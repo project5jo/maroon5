@@ -68,7 +68,7 @@
 
 <main>
   <section class="payment">
-    <form action="/checkout" method="post" enctype="multipart/form-data">
+    <form class="form-pay" action="/checkout" method="post" enctype="multipart/form-data">
       <div class="inner">
         <div class="payment-title">
           <p>주문결제</p>
@@ -143,7 +143,7 @@
               <button type="button" class="btn-point">적용</button>
             </div>
             <p class="user-point-info">
-              <span>보유하신 포인트</span>: ${userPoint}
+              <span>보유하신 포인트: </span>${userPoint}
             </p>
           </div>
         </div>
@@ -153,24 +153,25 @@
           <div class="tr">
             <div class="price-info">
               <p class="th-title">주문상품</p>
-              <p>${totalPrice}원</p>
+              <p>${totalItemsPrice}원</p>
             </div>
-            <div class="price-info">
-              <p class="th-title">포인트 사용</p>
-              <p>0원</p>
-            </div>
+          
             <div class="price-info">
               <p class="th-title">배송비</p>
-              <p>+ 0원</p>
+              <p>+ 3,000원</p>
             </div>
             <div class="price-info">
               <p class="th-title">최종 금액</p>
-              <p class="total-price">${totalPrice}원</p>
+              <p class="total-price">${totalOrderPrice}원</p>
+            </div>
+            <div class="price-info">
+              <p class="th-title">포인트 결제</p>
+              <p class="total-point">0원</p>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn-pay">${totalPrice}원 결제하기</button>
+        <button type="submit" class="btn-pay">${totalOrderPrice}원 결제</button>
       </div>
     </form>
   </section>
