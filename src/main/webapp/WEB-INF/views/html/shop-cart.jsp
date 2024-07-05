@@ -80,7 +80,7 @@
         const quantityInput = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .quantity-input');
         const itemPriceElement = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .item-price-value');
         const newPrice = quantityInput.value * itemPrice;
-        itemPriceElement.textContent = newPrice.toFixed(2);
+        itemPriceElement.textContent = newPrice;
         updateTotalPrice();
     }
 
@@ -88,9 +88,9 @@
         let totalPrice = 0;
         const priceElements = document.querySelectorAll('.item-price-value');
         priceElements.forEach(function(priceElement) {
-            totalPrice += parseFloat(priceElement.textContent);
+            totalPrice += parseInt(priceElement.textContent);
         });
-        document.getElementById('cartTotalPrice').textContent = totalPrice.toFixed(2);
+        document.getElementById('cartTotalPrice').textContent = totalPrice;
     }
 
     function removeItem(itemId) {
