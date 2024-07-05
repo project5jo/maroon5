@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+
 import java.util.List;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
@@ -26,7 +28,10 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderMapper orderMapper;
+
+
     private final OrderDetailsMapper orderDetailsMapper;
+
     private final MemberMapper memberMapper;
     private final ShoppingCartService shoppingCartService;
 
@@ -36,6 +41,7 @@ public class OrderService {
         orderMapper.saveOrder(order);
     }
 
+
     public String loginUserAccount(HttpSession session) {
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
         String account = loginUser.getAccount();
@@ -43,17 +49,17 @@ public class OrderService {
     }
 
     //  장바구니 아이템 합산 금액
-    public BigDecimal TotalItemsPrice(String userAccount) {
+    public int TotalItemsPrice(String userAccount) {
         List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(userAccount);
         return cartItems.stream()
-                .map(ShoppingCartResponseDto::getCartTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .mapToInt(ShoppingCartResponseDto::getCartTotalPrice)
+                .sum();
     }
 
     //  배송비 추가 합산 금액
-    public BigDecimal calculateTotalPrice(BigDecimal totalPrice) {
-        BigDecimal deliveryPrice = new BigDecimal("3000");
-        BigDecimal orderTotalPrice = totalPrice.add(deliveryPrice);
+    public int calculateTotalPrice(int totalPrice) {
+        int deliveryPrice = 3000;
+        int orderTotalPrice = totalPrice + deliveryPrice;
         return orderTotalPrice;
 
     }
@@ -103,16 +109,16 @@ public class OrderService {
 
         String message = "";
         //input 한 포인트
-        BigDecimal inputPoint = new BigDecimal(point);
+
 
         //물건 합산 금액 찾기
-        BigDecimal totalItemsPrice = TotalItemsPrice(account);
-        BigDecimal totalPrice = calculateTotalPrice(totalItemsPrice);
+        int totalItemsPrice = TotalItemsPrice(account);
+        int totalPrice = calculateTotalPrice(totalItemsPrice);
 
 
-        if (totalPrice.compareTo(inputPoint) < 0) {
+        if (totalPrice < point) {
             message = "입력하신 포인트가 결제 금액을 초과했습니다.";
-        } else if (totalPrice.compareTo(inputPoint) > 0) {
+        } else if (totalPrice > point) {
             message = "포인트가 부족합니다.";
 
         } else {

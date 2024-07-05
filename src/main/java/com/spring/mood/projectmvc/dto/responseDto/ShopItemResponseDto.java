@@ -3,7 +3,6 @@ package com.spring.mood.projectmvc.dto.responseDto;
 import com.spring.mood.projectmvc.entity.ShopItem;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +15,7 @@ public class ShopItemResponseDto {
     private Long shopItemId;
     private String shopItemName;
     private String shopItemDesc;
-    private BigDecimal shopItemPrice;
+    private int shopItemPrice;
     private String shopItemImg;
     private LocalDateTime shopItemDate;
     private Long shopItemStock;

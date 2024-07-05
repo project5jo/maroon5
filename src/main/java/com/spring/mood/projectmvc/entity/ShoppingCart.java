@@ -18,7 +18,7 @@ public class ShoppingCart {
     private Long cartId;
     private String userAccount;
     private Long shopItemId;
-    private BigDecimal cartTotalPrice;
+    private int cartTotalPrice;
     private long cartTotalCount;
 
     // 추가 필드 (Join 결과를 위한 필드)

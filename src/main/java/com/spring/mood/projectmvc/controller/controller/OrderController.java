@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -53,13 +52,18 @@ public class OrderController {
         // 카트 정보
         model.addAttribute("cartItems", shoppingCartService.getCartByUser(account));
 
+
         //장바구니 아이템 총 금액
-        BigDecimal totalItemsPrice = orderService.TotalItemsPrice(account);
+        int totalItemsPrice = orderService.TotalItemsPrice(account);
         model.addAttribute("totalItemsPrice", totalItemsPrice);
 
         //배송 3,000 금액을 총 합산한 금액
-        BigDecimal totalOrderPrice = orderService.calculateTotalPrice(totalItemsPrice);
+        int totalOrderPrice = orderService.calculateTotalPrice(totalItemsPrice);
         model.addAttribute("totalOrderPrice", totalOrderPrice);
+        // 총 금액
+//        int totalPrice = orderService.calculateTotalPrice(account);
+//        model.addAttribute("totalPrice", totalPrice);
+
 
         // 포인트 넣기
         log.info("getPoint!!!!!! : {}", user.getUserPoint());
