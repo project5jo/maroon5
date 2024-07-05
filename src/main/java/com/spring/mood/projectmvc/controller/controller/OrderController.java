@@ -14,15 +14,19 @@ import com.spring.mood.projectmvc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,16 +40,19 @@ public class OrderController {
 
     @GetMapping("/checkout")
     public String checkout(HttpSession session,Model model){
-        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
-        String account = loginUser.getAccount();
+        String account = orderService.loginUserAccount(session);
         Member user = orderService.findUser(account);
 
         //카트 정보
         model.addAttribute("cartItems", shoppingCartService.getCartByUser(account));
 
-        //총 금액
-        BigDecimal totalPrice = orderService.calculateTotalPrice(account);
-        model.addAttribute("totalPrice", totalPrice);
+        //장바구니 아이템 총 금액
+        BigDecimal totalItemsPrice = orderService.TotalItemsPrice(account);
+        model.addAttribute("totalItemsPrice", totalItemsPrice);
+
+        //배송 3,000 금액을 총 합산한 금액
+        BigDecimal totalOrderPrice = orderService.calculateTotalPrice(totalItemsPrice);
+        model.addAttribute("totalOrderPrice", totalOrderPrice);
 
 
         //포인트 넣기
@@ -60,8 +67,7 @@ public class OrderController {
     public String checkout(OrderRequestDto orderRequestDto,  RedirectAttributes redirectAttributes, HttpSession session) {
 
 
-        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
-        String account = loginUser.getAccount();
+        String account = orderService.loginUserAccount(session);
 
         log.info("account: {}", account);
 
@@ -69,7 +75,7 @@ public class OrderController {
 
 
         Orders order = Orders.builder()
-                .userAccount(loginUser.getAccount())
+                .userAccount(account)
                 .orderDate(LocalDateTime.now())
                 .address1(orderRequestDto.getAddress1())
                 .address2(orderRequestDto.getAddress2())
@@ -86,17 +92,44 @@ public class OrderController {
 
         orderService.createOrder(order);
 
-//        OrderResponseDto orderResponseDto = OrderResponseDto.fromEntity(order);
-//        BigDecimal totalPrice = orderService.calculateTotalPrice(orderRequestDto.getUserAccount());
-//        User user = userService.getUserByAccount(orderRequestDto.getUserAccount());
-
-
-//        model.addAttribute("order", orderResponseDto);
-//        model.addAttribute("cartItems", shoppingCartService.getCartByUser(orderRequestDto.getUserAccount()));
-//        model.addAttribute("totalPrice", totalPrice);
-//        model.addAttribute("userPoint", user.getUserPoint());
-
         return "redirect:/shop";
     }
+
+
+    // 비동기 처리 : 유저 포인트 값 처리
+    @ResponseBody
+    @GetMapping("/checkPoint")
+    public ResponseEntity<?> checkPoint(HttpSession session,@RequestParam(required = false) Integer point){
+        String account = orderService.loginUserAccount(session);
+
+        if (point == null) {
+            // point가 null일 때 처리
+            return ResponseEntity.badRequest().body("point 매개변수가 필요합니다.");
+        }
+
+        //포인트 체크
+        boolean flag = orderService.pointCk(account, point);
+        log.info("포인트 확인 결과: {}",point);
+        log.info("포인트 flag: {}",flag);
+        return ResponseEntity.ok().body(flag);
+    }
+
+    //비동기 처리 : 포인트 결제 확인
+    @ResponseBody
+    @GetMapping("/payPoint")
+    public ResponseEntity<?> pointPaymentCk(HttpSession session,Integer point){
+        String account = orderService.loginUserAccount(session);
+        String message = orderService.PaymentCk(point, account);
+
+        log.info("payPoint message : {}",message);
+        //message 를 Json 형태로 변경
+        HashMap<String, String> response = new HashMap<>();
+        response.put("message",message);
+        log.info("payPoint response : {}",response);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+
 
 }

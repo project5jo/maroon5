@@ -127,4 +127,21 @@
         WHERE user_account = #{account}
     </select>
 
+<!-- 포인트 검색   -->
+<!--    <select id="existsByPoint" resultType="int">-->
+<!--        SELECT-->
+<!--        user_account-->
+<!--        , user_password-->
+<!--        , user_name-->
+<!--        , user_email-->
+<!--        , user_profile-->
+<!--        , user_address-->
+<!--        , user_birth-->
+<!--        , user_role-->
+<!--        , created_at-->
+<!--        , user_point-->
+<!--        FROM Users-->
+<!--        WHERE user_point = #{point}-->
+<!--    </select>-->
+
 </mapper>
