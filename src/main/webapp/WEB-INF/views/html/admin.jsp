@@ -6,80 +6,64 @@
     <meta charset="UTF-8">
     <title>Admin Page</title>
     <link rel="stylesheet" href="/assets/css/admin.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            margin-top: 20px;
-            color: #333;
-        }
-
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px 15px;
-            color: #fff;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-bottom: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .topicList {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 </head>
 <body>
-<h1>관리자 페이지</h1>
-<div class="container">
-    <label for="newTopicId">변경할 주제 번호: </label>
-    <input type="text" id="newTopicId">
-    <button onclick="updateTopicId()">변경할 토픽 아이디</button>
+<!-- header  -->
+<%@ include file="../include/header.jsp" %>
+<%--<h1>관리자 페이지</h1>--%>
+<%--<div class="container">--%>
+<%--    <label for="newTopicId">변경할 주제 번호: </label>--%>
+<%--&lt;%&ndash;    <input type="text" id="newTopicId">&ndash;%&gt;--%>
+<%--    <button onclick="updateTopicId()">변경할 토픽 아이디</button>--%>
 
-    <label for="newTopicContent">새로운 주제 선정하기: </label>
-    <input type="text" id="newTopicContent">
-    <button onclick="insertTopicContent()">추가할 주제 선정하기</button>
+<%--    <label for="newTopicContent">새로운 주제 선정하기: </label>--%>
+<%--&lt;%&ndash;    <input type="text" id="newTopicContent">&ndash;%&gt;--%>
+<%--    <button onclick="insertTopicContent()">추가할 주제 선정하기</button>--%>
 
-    <div class="topicList"></div>
-</div>
+<%--    <div class="topicList"></div>--%>
+<%--</div>--%>
+<main>
+    <section class="sign-in">
+        <div class="inner">
+            <div class="sign-in-title">
+                <p>관리자 페이지</p>
+            </div>
+            <input
+                    type="text"
+                    class="email"
+                    id="newTopicId"
+                    name="account"
+                    placeholder="변경할 주제의 아이디를 입력하세요."
+            />
+            <button onclick="updateTopicId()">서버 주제 변경시키기</button>
+            <input
+                    type="text"
+                    class="pw"
+                    id="newTopicContent"
+                    name="password"
+                    placeholder="새로 추가할 주제를 입력해주세요."
+            />
+            <button onclick="insertTopicContent()">주제 새로 추가하기</button>
+
+
+            <div class="topics-grid">
+                <ol class="olcards">
+<%--                    <li style="--cardColor:#86530A">--%>
+<%--                        <div class="content">--%>
+<%--                            <div class="title">토픽 아이디</div>--%>
+<%--                            <div class="text">토픽 주제</div>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+                </ol>
+            </div>
+
+
+        </div>
+    </section>
+</main>
+<%@ include file="../include/footer.jsp" %>
 <script>
     function updateTopicId() {
         const newTopicId = document.getElementById('newTopicId').value;
@@ -88,7 +72,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ topicId: newTopicId })
+            body: JSON.stringify({topicId: newTopicId})
         })
             .then(response => response.json())
             .then(data => {
@@ -104,13 +88,15 @@
     }
 
     function insertTopicContent() {
+
         const newTopicContent = document.getElementById('newTopicContent').value;
+        if (newTopicContent.trim() === "") return
         fetch('/api/admin/updateTopicContent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({topicContent : newTopicContent })
+            body: JSON.stringify({topicContent: newTopicContent})
         })
             .then(response => response.json())
             .then(data => {
@@ -129,13 +115,19 @@
 
     async function viewAllTopic() {
         const res = await fetch(`/api/admin/findAll`);
-        const replies = await res.json();
-        const topicListDiv = document.querySelector('.topicList');
+        const topic = await res.json();
+        const topicListDiv = document.querySelector('.olcards');
         topicListDiv.innerHTML = '';
-        replies.forEach(({topicId, createdAt, topicContent}) => {
-            const topicDiv = document.createElement('div');
-            topicDiv.innerHTML = `<strong>ID:</strong> \${topicId}, <strong>생성일:</strong> \${createdAt}, <strong>내용:</strong> \${topicContent}`;
-            topicListDiv.appendChild(topicDiv);
+        topic.forEach(({ topicId, createdAt, topicContent }) => {
+            const topicLi = document.createElement('li');
+            topicLi.style.setProperty('--cardColor', '#86530A'); // 카드 색상 설정
+            topicLi.innerHTML = `
+            <div class="content">
+                <div class="title">ID: \${topicId} , 생성일 : \${createdAt}</div>
+                <div class="text">주제 내용: \${topicContent}</div>
+            </div>
+        `;
+            topicListDiv.appendChild(topicLi);
         });
     }
 
