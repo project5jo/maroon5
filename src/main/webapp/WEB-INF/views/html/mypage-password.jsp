@@ -79,8 +79,12 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>비밀번호변경</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>비밀번호 변경</h1>
+              </div>
             </div>
 
             <div class="right-contents">

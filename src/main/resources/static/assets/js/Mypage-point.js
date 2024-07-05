@@ -6,7 +6,8 @@ let totalInputPoint = 0; // 충전할 포인트 누적 초기값
 let $pointDB = document.getElementById("pointSRC"); // DB 의 기존 포인트 태그
 let originalPoint = parseInt($pointDB.textContent); // DB 의 기존 포인트 태그 의 값 추출
 
-const $expectPoint = document.querySelector('.expectPoint');  // 충전후 예상 포인트 입력 input 태그
+const $expectPoint = document.querySelector('.expectPoint');  // 충전후 예상 포인트 태그
+$expectPoint.textContent = originalPoint; // 예상 포인트 태그 초기값 설정
 let totalExpectPoint = 0; // 충전후 예상 포인트 누적 초기값
 
 
@@ -26,8 +27,9 @@ function addPoint (point) {
     totalExpectPoint = originalPoint + totalInputPoint;
 
     // 2-2. input태그에 예상포인트 적용하기
-    $expectPoint.setAttribute("value", totalExpectPoint);
-    $expectPoint.value = totalExpectPoint;
+    $expectPoint.textContent = totalExpectPoint;
+    // $expectPoint.setAttribute("value", totalExpectPoint);
+    // $expectPoint.value = totalExpectPoint;
 }
 
 
@@ -40,8 +42,9 @@ function removePoint () {
     $Inputpoint.setAttribute("value", 0);
     $Inputpoint.value = 0;
 
-    $expectPoint.setAttribute("value", originalPoint);
-    $expectPoint.value = originalPoint;
+    // $expectPoint.setAttribute("value", originalPoint);
+    // $expectPoint.value = originalPoint;
+    $expectPoint.textContent = originalPoint;
 }
 
 

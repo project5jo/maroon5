@@ -78,8 +78,12 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>마이페이지 메인</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>마이페이지메인</h1>
+              </div>
             </div>
 
             <!-- <div class="right-contents">

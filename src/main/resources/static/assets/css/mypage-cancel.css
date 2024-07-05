@@ -57,6 +57,7 @@ section {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
 }
 
 .profile-icon {
@@ -197,17 +198,20 @@ section {
 .tr-right {
   width: 910px;
   /* border: 3px solid black; */
-  text-align: center;
+  /* text-align: center; */
 }
 
 .right-title {
+  /* 수정수정수정 */
   /* background-color: #432626; */
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   height: 150px;
-  color: #000000;
-  font-size: 40px;
+  color: #432626;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
   border-bottom: 1px solid black;
   /* border: 1px solid yellow; */
 }
