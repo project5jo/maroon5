@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,7 +20,6 @@ import java.util.List;
 public class OrderService {
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private final OrderMapper orderMapper;
-
     private final MemberMapper memberMapper;
     private final ShoppingCartService shoppingCartService;
 
@@ -30,16 +28,15 @@ public class OrderService {
         orderMapper.saveOrder(order);
     }
 
-    public BigDecimal calculateTotalPrice(String userAccount) {
+    public int calculateTotalPrice(String userAccount) {
         List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(userAccount);
         return cartItems.stream()
-                .map(ShoppingCartResponseDto::getCartTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .mapToInt(ShoppingCartResponseDto::getCartTotalPrice)
+                .sum();
     }
 
     //포인트 처리
-    public void DeductionPoint(Integer usesPoint, String account , RedirectAttributes redirectAttributes) {
-
+    public void DeductionPoint(Integer usesPoint, String account, RedirectAttributes redirectAttributes) {
         // 멤버 찾기
         Member user = memberMapper.findOne(account);
         if (user == null) {

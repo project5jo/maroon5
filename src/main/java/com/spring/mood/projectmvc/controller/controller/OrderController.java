@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Controller
@@ -43,7 +42,7 @@ public class OrderController {
         model.addAttribute("cartItems", shoppingCartService.getCartByUser(account));
 
         // 총 금액
-        BigDecimal totalPrice = orderService.calculateTotalPrice(account);
+        int totalPrice = orderService.calculateTotalPrice(account);
         model.addAttribute("totalPrice", totalPrice);
 
         // 포인트 넣기

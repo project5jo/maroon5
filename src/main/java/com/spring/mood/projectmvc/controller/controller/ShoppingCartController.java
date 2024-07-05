@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ public class ShoppingCartController {
 
     @PostMapping("/cart")
     public String addToCart(@RequestParam("itemId") Long itemId,
-                            @RequestParam("itemPrice") BigDecimal itemPrice,
+                            @RequestParam("itemPrice") int itemPrice,
                             @RequestParam("quantity") int quantity,
                             RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -46,9 +45,9 @@ public class ShoppingCartController {
         List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(userAccount);
         model.addAttribute("cartItems", cartItems);
 
-        BigDecimal cartTotalPrice = cartItems.stream()
-                .map(ShoppingCartResponseDto::getCartTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        int cartTotalPrice = cartItems.stream()
+                .mapToInt(ShoppingCartResponseDto::getCartTotalPrice)
+                .sum();
 
         model.addAttribute("cartTotalPrice", cartTotalPrice);
 
@@ -71,7 +70,7 @@ public class ShoppingCartController {
             for (Map<String, Object> item : cartItems) {
                 Long itemId = Long.valueOf((String) item.get("itemId"));
                 int quantity = Integer.parseInt((String) item.get("quantity"));
-                BigDecimal totalPrice = new BigDecimal((String) item.get("totalPrice"));
+                int totalPrice = Integer.parseInt((String) item.get("totalPrice"));
                 shoppingCartService.updateCartItem(userAccount, itemId, quantity, totalPrice);
             }
             return "success";

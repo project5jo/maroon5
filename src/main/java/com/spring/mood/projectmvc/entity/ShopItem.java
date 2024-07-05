@@ -18,7 +18,7 @@ public class ShopItem {
     private Long shopItemId; // PK
     private String shopItemName;
     private String shopItemDesc;
-    private BigDecimal shopItemPrice; // decimal type임 수정검토
+    private int shopItemPrice;
     private String shopItemImg;
     private LocalDateTime shopItemDate;
     private Long shopItemStock;

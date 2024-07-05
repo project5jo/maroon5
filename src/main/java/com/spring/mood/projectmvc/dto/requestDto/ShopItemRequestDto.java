@@ -3,10 +3,10 @@ package com.spring.mood.projectmvc.dto.requestDto;
 import lombok.*;
 import com.spring.mood.projectmvc.entity.ShopItem;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter @ToString
+@Getter
+@ToString
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -15,13 +15,13 @@ import java.time.LocalDateTime;
 public class ShopItemRequestDto {
     private String shopItemName;
     private String shopItemDesc;
-    private BigDecimal shopItemPrice;
+    private int shopItemPrice;
     private String shopItemImg;
     private LocalDateTime shopItemDate;
     private long shopItemStock;
     private long shopItemView;
 
-    public ShopItem toShopItemEntity () {
+    public ShopItem toShopItemEntity() {
         return ShopItem.builder()
                 .shopItemName(this.shopItemName)
                 .shopItemDesc(this.shopItemDesc)
