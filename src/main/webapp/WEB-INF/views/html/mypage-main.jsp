@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-main.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 
     <script src="/assets/js/Mypage.js" defer></script>
     <!-- <script src="/assets/js/Mypage-cancel.js" defer></script> -->
@@ -77,11 +78,15 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>마이페이지 메인</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>마이페이지메인</h1>
+              </div>
             </div>
 
-            <div class="right-contents">
+            <!-- <div class="right-contents">
 
               <div class="right-content">
                 <p>회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
@@ -150,7 +155,7 @@
               </form>
               <!-- form end -->
 
-            </div>
+            </div> -->
             <!-- right-contents end -->
 
           </div>
@@ -162,7 +167,8 @@
       </section>
     </main>
 
-    <footer></footer>
+    <!-- footer -->
+    <%@ include file="../include/footer.jsp" %>
     
   </body>
 </html>

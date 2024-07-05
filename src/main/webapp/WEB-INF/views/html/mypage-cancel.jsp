@@ -167,6 +167,7 @@
       </section>
     </main>
 
+    <!-- footer -->
     <%@ include file="../include/footer.jsp" %>
 
   </body>
