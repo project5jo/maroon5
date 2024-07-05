@@ -1,12 +1,13 @@
 /* chat */
 
 .chat {
-  /* display: none; */
+   display: none;
   z-index: 99;
   margin: 0 auto;
   padding: 20px 40px;
   width: 750px;
   height: 850px;
+  /*opacity: 20%;*/
 
   position: absolute;
   top: 50%;

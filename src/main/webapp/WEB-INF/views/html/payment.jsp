@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/payment.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css"/>
   <script src="/assets/js/category.js/" defer></script>
   <script src="/assets/js/payment.js/" defer></script>
   <!-- 카카오 주소 검색 API 스크립트 -->

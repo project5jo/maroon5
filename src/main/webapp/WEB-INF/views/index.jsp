@@ -86,6 +86,7 @@
     let topicId = null;
     let roomId = null;
     let currentSubscription = null;
+    let delay = true;
 
     let sendere = document.querySelector(".send");
     let chat = document.querySelector(".my-chat-input");
@@ -100,6 +101,10 @@
             sendere.click();
         }
     })
+    function chatHide() {
+        const chatBox = document.querySelector('.chat');
+        chatBox.classList.add('slide-down');
+    }
 
     // WebSocket을 사용하여 topicId 변경 알림을 받기 위한 설정 (수정)
     function setupTopicIdListener() {
@@ -255,6 +260,7 @@
                 setTimeout(() => {
                     messages.forEach((message) => {
                         showMessage(message);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
                     });
                 }, 500)
 
@@ -269,6 +275,7 @@
 
         if (!sender) return;
         if (!content) return;
+        if (!delay) return;
         stompClient.send(
             `/app/sendMessage/\${topicId}/\${roomId}`,
             {
@@ -276,10 +283,15 @@
             },
             JSON.stringify({sender: sender, content: content, topicId: topicId, roomId: roomId})
         );
+        delay = false;
+        setTimeout(() => {
+            delay = true;
+        }, 500);
     }
 
     window.onload = function () {
         // 사이트 진입시 일단은 자동으로 연결
+        chatHide()
         initialize(); // 초기화 함수 호출 (수정)
         setupInfiniteScroll();
     };
