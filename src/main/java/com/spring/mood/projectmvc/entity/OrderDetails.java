@@ -12,6 +12,7 @@ public class OrderDetails {
     private Long orderDetailId;
 
     // FK
+    @Setter
     private Long orderId;
     private String userAccount;
     private Long shopItemId;

@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +18,12 @@ public class ShoppingCartService {
     private final ShoppingCartMapper shoppingCartMapper;
 
     @Transactional
-    public void addToCart(Long itemId, BigDecimal itemPrice, int quantity, String userAccount) {
+    public void addToCart(Long itemId, int itemPrice, int quantity, String userAccount) {
         ShoppingCart existingCart = shoppingCartMapper.findItemByUserAccountAndItemId(userAccount, itemId);
 
         if (existingCart != null) {
             Long newQuantity = existingCart.getCartTotalCount() + quantity;
-            BigDecimal newTotalPrice = existingCart.getCartTotalPrice().add(itemPrice.multiply(BigDecimal.valueOf(quantity)));
+            int newTotalPrice = existingCart.getCartTotalPrice() + (itemPrice * quantity);
 
             existingCart.setCartTotalCount(newQuantity);
             existingCart.setCartTotalPrice(newTotalPrice);
@@ -39,7 +38,7 @@ public class ShoppingCartService {
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.setUserAccount(userAccount);
             shoppingCart.setShopItemId(itemId);
-            shoppingCart.setCartTotalPrice(itemPrice.multiply(BigDecimal.valueOf(quantity)));
+            shoppingCart.setCartTotalPrice(itemPrice * quantity);
             shoppingCart.setCartTotalCount(quantity);
 
             log.info("장바구니에 추가: {}", shoppingCart);
@@ -52,7 +51,7 @@ public class ShoppingCartService {
     }
 
     @Transactional
-    public void updateCartItem(String userAccount, Long itemId, int quantity, BigDecimal totalPrice) {
+    public void updateCartItem(String userAccount, Long itemId, int quantity, int totalPrice) {
         ShoppingCart existingCart = shoppingCartMapper.findItemByUserAccountAndItemId(userAccount, itemId);
 
         if (existingCart != null) {
@@ -89,4 +88,9 @@ public class ShoppingCartService {
             throw new RuntimeException("제거할 장바구니 아이템이 존재하지 않습니다.");
         }
     }
+
+    public void clearCart(String userAccount) {
+        shoppingCartMapper.deleteByUserAccount(userAccount);
+    }
 }
+

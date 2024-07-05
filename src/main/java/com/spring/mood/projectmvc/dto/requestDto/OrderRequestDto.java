@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class OrderRequestDto {
+    private Long orderId;
     private String userAccount;
     private String address1;
     private String address2;

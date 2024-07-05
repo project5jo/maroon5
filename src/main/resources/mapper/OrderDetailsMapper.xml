@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.OrderDetailsMapper">
+
+    <!-- ResultMap 정의 -->
+    <resultMap id="OrderDetailsResultMap" type="map">
+        <result property="orderId" column="order_id"/>
+        <result property="userAccount" column="user_account"/>
+        <result property="shopItemId" column="shop_item_id"/>
+        <result property="shopItemName" column="shop_item_name"/>
+        <result property="shopItemDesc" column="shop_item_desc"/>
+        <result property="shopItemPrice" column="shop_item_price"/>
+        <result property="shopItemImg" column="shop_item_img"/>
+        <result property="cartTotalCount" column="cart_total_count"/>
+        <result property="cartTotalPrice" column="cart_total_price"/>
+    </resultMap>
+
+    <insert id="saveOrderDetails">
+        INSERT INTO OrderDetails (order_id, user_account, shop_item_id, order_detail_count, order_detail_status, cart_archive_id)
+        SELECT
+        #{orderId},
+        ca.user_account,
+        ca.shop_item_id,
+        ca.cart_total_count,
+        'completed',
+        ca.cart_archive_id
+        FROM CartArchive ca
+        WHERE ca.order_id = #{orderId}
+    </insert>
+
+    <insert id="insertOrderDetails">
+        INSERT INTO OrderDetails (order_id, user_account, shop_item_id, order_detail_count, order_detail_status, cart_archive_id)
+        VALUES
+        <foreach collection="orderDetails" item="details" separator=",">
+            (#{orderId}, #{details.userAccount}, #{details.shopItemId}, #{details.orderDetailCount}, 'completed', #{details.cartArchiveId})
+        </foreach>
+    </insert>
+
+    <select id="getOrderDetails" parameterType="string" resultMap="OrderDetailsResultMap">
+        SELECT
+        od.order_id,
+        ca.user_account,
+        ca.shop_item_id,
+        ca.shop_item_name,
+        ca.shop_item_desc,
+        ca.shop_item_price,
+        ca.shop_item_img,
+        ca.cart_total_count,
+        ca.cart_total_price
+        FROM
+        OrderDetails od
+        JOIN
+        CartArchive ca ON od.cart_archive_id = ca.cart_archive_id
+        WHERE
+        ca.user_account = #{userAccount}
+    </select>
+
+</mapper>

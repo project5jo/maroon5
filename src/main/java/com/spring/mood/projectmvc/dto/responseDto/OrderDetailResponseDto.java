@@ -4,6 +4,7 @@ package com.spring.mood.projectmvc.dto.responseDto;
 import com.spring.mood.projectmvc.entity.Orders;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter @ToString
@@ -24,6 +25,11 @@ public class OrderDetailResponseDto {
     private String receiverPhone;
     private Long orderDetailCount;
     private String orderDetailStatus;
+    private String shopItemName;
+    private String shopItemDesc;
+    private BigDecimal shopItemPrice; // decimal type임 수정검토
+    private String shopItemImg;
+
 
     public OrderDetailResponseDto(String orderDetailStatus, Long orderDetailCount) {
         this.orderDetailStatus = orderDetailStatus;

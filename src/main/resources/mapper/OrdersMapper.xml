@@ -25,4 +25,25 @@
         VALUES (#{userAccount}, #{orderDate}, #{address1}, #{address2}, #{address3}, #{receiverName}, #{receiverPhone})
     </insert>
 
+    <select id="getOrderDetailsByOrderId" parameterType="long" resultType="com.spring.mood.projectmvc.dto.responseDto.OrderDetailResponseDto">
+        SELECT
+        o.order_id AS orderId,
+        o.user_account AS userAccount,
+        o.order_date AS orderDate,
+        o.address1 AS address1,
+        o.address2 AS address2,
+        o.address3 AS address3,
+        o.receiver_name AS receiverName,
+        o.receiver_phone AS receiverPhone,
+        od.order_detail_count AS orderDetailCount,
+        od.order_detail_status AS orderDetailStatus,
+        si.shop_item_name AS shopItemName,
+        si.shop_item_desc AS shopItemDesc,
+        si.shop_item_price AS shopItemPrice,
+        si.shop_item_img AS shopItemImg
+        FROM Orders o
+        JOIN OrderDetails od ON o.order_id = od.order_id
+        JOIN ShopItems si ON od.shop_item_id = si.shop_item_id
+        WHERE o.order_id = #{orderId}
+    </select>
 </mapper>
