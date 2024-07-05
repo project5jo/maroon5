@@ -52,10 +52,7 @@
             <span>Subtotal:</span>
             <span>₩ <span id="cartTotalPrice">${cartTotalPrice}</span></span>
         </div>
-        <!-- <form action="/checkout" method="post"> -->
-            <!-- <input type="hidden" name="userAccount" value="${sessionScope.loginUser.account}"> -->
-            <button  class="checkout-btn"><a href="/checkout">CHECKOUT</a></button>
-        <!-- </form> -->
+        <button onclick="checkout()" class="checkout-btn">CHECKOUT</button>
         <p>Tax included and shipping calculated at checkout</p>
     </div>
 </div>
@@ -103,6 +100,29 @@
             updateTotalPrice();
         }).fail(function() {
             alert("장바구니에서 상품을 제거하는 중 오류가 발생했습니다.");
+        });
+    }
+
+    function checkout() {
+        const cartItems = [];
+        document.querySelectorAll('.cart-item').forEach(item => {
+            const itemId = item.getAttribute('data-item-id');
+            const quantity = item.querySelector('.quantity-input').value;
+            const totalPrice = item.querySelector('.item-price-value').textContent;
+            cartItems.push({ itemId, quantity, totalPrice });
+        });
+
+        $.ajax({
+            url: '/cart/update',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ cartItems: cartItems }),
+            success: function(response) {
+                window.location.href = '/checkout';
+            },
+            error: function(error) {
+                alert('장바구니 업데이트 중 오류가 발생했습니다.');
+            }
         });
     }
 </script>

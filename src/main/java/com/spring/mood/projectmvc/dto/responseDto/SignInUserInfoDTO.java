@@ -16,6 +16,7 @@ public class SignInUserInfoDTO {
 
     private String name;
     private Integer point;
+    private String userRole;
 
 
     private String profileUrl;
@@ -26,6 +27,7 @@ public class SignInUserInfoDTO {
         this.account = member.getUserAccount();
         this.nickName = member.getUserName();
         this.email = member.getUserEmail();
+        this.userRole = member.getUserRole();
 
         this.point = member.getUserPoint();
 

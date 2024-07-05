@@ -7,7 +7,7 @@ header {
   width: 100%;
   overflow: hidden;
   color: #432626;
-
+  height: 80px;
   font-size: 15px;
 
   display: flex;

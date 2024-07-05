@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,35 +8,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-memberInfo.css">
-    <!-- fontawesome css: https://fontawesome.com -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/mypage-memberinfo.css">
+    <link rel="stylesheet" href="/assets/css/shop-header.css" />
+
+    <script src="/assets/js/Mypage.js" defer></script>
+    <script src="/assets/js/Mypage-memberInfo.js" defer></script>
+    <script src="/assets/js/category.js/" defer></script>
+
   </head>
   <body>
 
+    <!-- modalBack -->
+    <div class="modalBack"></div>
+
     <!-- header  -->
-    <header>
-      <nav class="menu">
-        <div class="inner">
-          <div class="logo point">
-            <a href="/">나의 애착 페이지</a>
-          </div>
-          <ul class="gnb">
-            <li class="login point"><a href="/login">LOGIN</a></li>
-            <li><i class="fas fa-bars"></i></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <%@ include file="../include/header.jsp" %>
   
     <!-- main -->
     <main>
-      <!-- title -->
-      <section class="title">
-        <a href="/mypage"><h1>마이페이지</h1></a>
-      </section>
 
       <section class="mainpage">
+
         <div class="tr">
 
           <!-- left -->
@@ -46,7 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="profile-container">
               <div class="profile-box">
                 <div class="profile">
-                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile.jpg'}" alt="profile">
+                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                 </div>
                 <div class="profile-icon">
                   <i class="fas fa-user-cog"></i>
@@ -58,7 +49,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
 
             <div class="left-Menu">
-              <a href="#"><p class="Menu-title">포인트 충전 </p></a>
+              <a  href="/mypage-point"><p class="Menu-title">포인트 충전 </p></a>
+            </div>
+            <div class="left-Menu">
+              <a  href="/mypage-orderInfo"><p class="Menu-title">주문내역</p></a>
+            </div>
+            <div class="left-Menu">
+              <a  href="/mypage-profile"><p class="Menu-title">프로필사진 수정 </p></a>
             </div>
             <div class="left-Menu">
               <a href="/mypage-memberinfo"><p class="Menu-title">회원정보 수정 </p></a>
@@ -79,8 +76,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <!-- right -->
           <div class="tr-right">
 
+            <!-- title -->
             <div class="right-title">
-              <p>회원 정보 수정</p>
+              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              <p>회원정보수정</p>
             </div>
 
             <div class="right-contents">
@@ -90,65 +89,76 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               </div>
 
               <form action="/mypage-memberinfo" method="post">
-                <div class="right-input id">
-                  <h2><i class="fas fa-user"></i> 아이디* </h2>
-                  <input type="text" name="account" value="${isUpdated ? updatedMember.account : nowMember.account}">
-                  <p>"아이디는 변경할 수 없습니다."</p>
-                </div>
-                <div class="right-input name">
-                  <h2><i class="far fa-address-card"></i> 이름*</h2>
-                  <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}">
-                  <!-- <input type="text" name="userName" value="${isUpdated ? updatedMember.name : nowMember.name}"> -->
-                  <p>"이름은 한글만 입력할 수 있습니다. (2자 이상)"</p>
-                </div>
-                <div class="right-input birth">
-                  <h2><i class="fas fa-birthday-cake"></i> 생년월일*</h2>
-                  <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}">
-                  <!-- <input type="date" name="userBirth" value="${isUpdated ? updatedMember.birth : nowMember.birth}"> -->
-                  <p></p>
-                </div>
-                <div class="right-input email">
-                  <h2><i class="far fa-envelope"></i> 이메일*</h2>
-                  <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}">
-                  <!-- <input type="text" name="userEmail" value="${isUpdated ? updatedMember.email : nowMember.email}"> -->
-                  <p></p>
-                </div>
-                <div class="input-check">
-                  <button class="btn-gradient large yellow ok" type="button">확인</button>
+
+                <div class="form-contents">
+
+                  <div class="form-content">
+                    <h2><i class="fas fa-user"></i> 아이디* </h2>
+                    <input type="text" name="account" value="${isUpdated ? updatedMember.account : nowMember.account}">
+                    <p>"아이디는 변경할 수 없습니다."</p>
+                  </div>
+                
+                  <div class="form-content name">
+                    <h2><i class="far fa-address-card"></i> 이름*</h2>
+                    <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}">
+                    <p>"이름은 한글만 입력할 수 있습니다. (2자 이상)"</p>
+                  </div>
+                
+                  <div class="form-content birth">
+                    <h2><i class="fas fa-birthday-cake"></i> 생년월일*</h2>
+                    <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}">
+                    <p></p>
+                  </div>
+                
+                  <div class="form-content email">
+                    <h2><i class="far fa-envelope"></i> 이메일*</h2>
+                    <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}">
+                    <p></p>
+                  </div>
+                
+                  <div class="form-content button">
+                    <button class="btn-gradient large yellow check" type="button">확인</button>
+                  </div>
+
                 </div>
 
                 <!-- modal -->
-                <div class="modal-box">
-                  <div class="modal">
+                <div class="form-modals">
+                  <div class="form-modal">
+
                     <div class="modal-header">
                       <span>X</span>
                     </div>
-                    <div class="modal-text">
+
+                    <div class="modal-content">
                       <p>진짜 수정하시겠습니까?</p>
                     </div>
-                    <div class="modal-content">
+
+                    <div class="modal-button">
                       <button class="btn-gradient large yellow cancel" type="button">취소</button>
-                      <button class="btn-gradient large success yellow" type="submit">확인</button>
+                      <button class="btn-gradient large yellow recheck" type="submit">확인</button>
                     </div>
+
                   </div>
+
                 </div>
 
               </form> 
               <!-- form end -->
 
             </div>
+            <!-- right-contents end -->
+
           </div>
           <!-- right end -->
 
         </div>
+        <!-- tr end -->
 
       </section>
     </main>
 
-
     <footer></footer>
-    
-    <script src="/assets/js/Mypage-memberInfo.js"></script>
   
 </body>
 </html>

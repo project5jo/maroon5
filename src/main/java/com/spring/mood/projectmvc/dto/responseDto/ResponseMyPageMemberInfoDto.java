@@ -4,6 +4,7 @@ import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,9 @@ public class ResponseMyPageMemberInfoDto {
 
     private LocalDate birth; // 유저 생년월일
 
-    private String profileImage;  // 유저 프로필사진
+    private String profileImage; // 유저 프로필사진
+
+    private int point;
 
     public ResponseMyPageMemberInfoDto(Member member) {
         this.account = member.getUserAccount();
@@ -36,11 +39,12 @@ public class ResponseMyPageMemberInfoDto {
         this.email = member.getUserEmail();
         this.birth = member.getUserBirth();
         this.profileImage = member.getUserProfile();
+        this.point = member.getUserPoint();
     }
 
     // RequestMyPageMemberInfoDto 를 MemberEntity 로 변환
     public Member toMemberEntity(String account, RequestMyPageMemberInfoDto dto) {
         return Member.builder().userAccount(account).userName(dto.getName())
-                .userEmail(dto.getEmail()).userBirth(dto.getBirth()).userProfile(dto.getProfileImage()).build();
+                .userEmail(dto.getEmail()).userBirth(dto.getBirth()).build();
     }
 }

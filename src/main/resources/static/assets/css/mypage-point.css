@@ -1,0 +1,345 @@
+/* common css  */
+@import url("common.css");
+
+body {
+  background-color: #ebeae3;
+  color: #432626;
+  overflow: hidden;
+}
+
+/* main */
+main {
+  width: 100vw;
+  height: 100vh;
+  font-size: 20px;
+  font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
+    "malgun gothic", "돋움", "dotum", sans-serif !important;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tr {
+  margin-top: 20px;
+  width: 1210px;
+  height: 830px;
+  margin: 20px auto;
+  display: flex;
+  border: 1px solid #432626;
+  border-radius: 15px;
+}
+
+
+/* left */
+.tr-left {
+  width: 300px;
+  border-right: 1px solid #432626;
+  /* border: 3px solid black; */
+}
+
+.profile-box {
+  width: 300px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.profile {
+  width: 220px;
+  height: 220px;
+  /* border: 3px solid black; */
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.profile-icon {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.9);
+  margin: 5px;
+  border-radius: 50px;
+  position: absolute;
+  right: 27px;
+  bottom: 13px;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #ebeae3;
+}
+
+.profile-icon:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255, 0.3);
+  border: 4px solid #ebeae3;
+}
+
+.profile-name {
+  margin: 10px 0 20px;
+  text-align: center;
+  font-size: 30px;
+  /* background-color: #1179b6; */
+}
+
+
+/* left-content */
+.left-Menu {
+  border-radius: 10px;
+  background-color: #432626;
+  color: #ffffff;
+  padding: 20px 30px 20px;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.left-Menu:hover {
+  background-color: #b39d9d;
+  color: #432626;
+  text-decoration: none;
+
+}
+
+.left-Menu a:link {
+  text-decoration: none;
+  color: white;
+}
+
+.left-Menu a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.left-Menu a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.left-Menu a:active {
+  text-decoration: none;
+  color: white;
+}
+
+.Menu-title {
+  position: relative;
+  text-align: left;
+}
+
+.Menu-title:after {
+  position: absolute;
+  right: 0;
+  content: "\f054"; /* fa-chevron-right 아이콘의 Unicode */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 10px;
+  
+}
+
+
+/* button */
+.left-logout {
+  padding: 5px 5px;
+  text-align: right;
+}
+
+.btn-gradient {
+  text-decoration: none;
+  color: white;
+  padding: 10px 30px;
+  display: inline-block;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.21);
+  border-bottom: 4px solid rgba(0,0,0,0.21);
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  margin: 5px;
+}
+
+.btn-gradient.mini {
+  padding: 4px 12px;  
+  font-size: 15px;
+}
+
+.btn-gradient.large {
+  padding: 4px 12px;  
+  font-size: 20px;
+}
+
+.btn-gradient.yellow {
+  background: rgba(240,210,100,1);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(240,210,100,1)), to(rgba(229,201,96,1)));
+  background: -webkit-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+  background: -moz-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+  background: -o-linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+  background: linear-gradient(rgba(240,210,100,1) 0%, rgba(229,201,96,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0d264', endColorstr='#e5c960', GradientType=0 );
+}
+
+.btn-gradient.yellow:active {
+  background: #DBC05B;
+}
+
+/* checkIcon */
+.fa-check {
+  color: rgb(255, 0, 0);
+  padding-right: 15px;
+}
+
+
+/* right */
+.tr-right {
+  width: 910px;
+  /* border: 3px solid black; */
+  text-align: center;
+}
+
+.right-title {
+  /* background-color: #432626; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  color: #000000;
+  font-size: 40px;
+  border-bottom: 1px solid black;
+  /* border: 1px solid yellow; */
+}
+
+
+/* right-content */
+h2 {
+  font-weight: 700;
+  font-size: 30px;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.right-contents, .form-contents {
+  margin: 50px ;
+  text-align: justify;
+  font-size: 20px;
+}
+
+.right-content, .form-content {
+  margin-bottom: 20px;
+}
+
+.right-content p {
+  margin: 10px 0 0 50px;
+}
+
+.right-content table {
+  margin: 0 auto;
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.right-content tr, .right-content td {
+  border: 1px solid black;
+  padding: 17px;
+  text-align: center;
+}
+
+.form-content input {
+  width: 300px;
+  padding: 10px 10px;
+  margin: 10px;
+}
+
+.point::placeholder
+
+.money {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+}
+
+.form-content button {
+  margin: 10px;
+  font-size: 20px;
+}
+
+
+/* modal */
+.form-modalback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: none;
+  z-index: 1000;
+}
+
+.form-modals {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  width: 400px;
+  height: 209px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  background: #ebeae3;
+  border: 3px solid #4d3333;
+  display: none;
+  z-index: 1001;
+}
+
+.modal-header{
+  /* border-bottom: 3px solid #4d3333; */
+  background: #4d3333;
+  color: #ffffff;
+  font-size: 30px;
+  height: 35px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.modal-header span, .cancel, .check, .recheck {
+  cursor: grab;
+}
+
+.modal-text {
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  /* border: 3px solid yellow; */
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* footer */
+footer {
+  height: 100px;
+} 
+

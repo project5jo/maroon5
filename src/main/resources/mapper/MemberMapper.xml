@@ -72,8 +72,26 @@
     <update id="updateMyPageMemberInfo">
         UPDATE Users
         SET
-        user_name = #{userName}, user_email = #{userEmail}, user_birth = #{userBirth}
+        user_name = #{userName}, user_email = #{userEmail}, user_birth = #{userBirth}, user_profile = #{userProfile}
         WHERE user_account = #{userAccount}
+    </update>
+
+    <update id="updateMyPageProfile">
+        UPDATE Users
+        SET user_profile = #{profile}
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="deleteMyPageAccount">
+        UPDATE Users
+        SET user_deleted = #{deleteFlag}
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="chargePoint">
+        UPDATE Users
+        SET user_point = user_point + #{point}
+        WHERE user_account = #{account}
     </update>
 
     <delete id="delete">

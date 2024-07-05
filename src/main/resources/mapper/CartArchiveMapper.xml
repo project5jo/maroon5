@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.CartArchiveMapper">
+    <insert id="copyCartToArchive" parameterType="map">
+        INSERT INTO CartArchive (user_account, shop_item_id, shop_item_name, shop_item_desc, shop_item_price, shop_item_img, cart_total_count, cart_total_price, order_id)
+        SELECT
+        sc.user_account,
+        sc.shop_item_id,
+        si.shop_item_name,
+        si.shop_item_desc,
+        si.shop_item_price,
+        si.shop_item_img,
+        sc.cart_total_count,
+        sc.cart_total_price,
+        #{orderId}
+        FROM ShoppingCart sc
+        JOIN ShopItems si ON sc.shop_item_id = si.shop_item_id
+        WHERE sc.user_account = #{userAccount}
+    </insert>
+
+    <select id="getCartArchiveIds" parameterType="string" resultType="long">
+        SELECT cart_archive_id FROM CartArchive
+        WHERE user_account = #{userAccount}
+    </select>
+
+    <select id="getOrderHistory" parameterType="string" resultType="map">
+        SELECT
+        ca.cart_archive_id,
+        ca.user_account,
+        ca.shop_item_id,
+        ca.shop_item_name,
+        ca.shop_item_desc,
+        ca.shop_item_price,
+        ca.shop_item_img,
+        ca.cart_total_count,
+        ca.cart_total_price,
+        ca.archived_at
+        FROM
+        CartArchive ca
+        WHERE
+        ca.user_account = #{userAccount}
+        ORDER BY
+        ca.archived_at DESC;
+    </select>
+</mapper>

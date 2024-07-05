@@ -24,55 +24,62 @@ async function fetchWeatherData(lat, lon) {
   }
 }
 
-// 날씨와 시간에 따라 배경 이미지를 설정하는 함수
+// 날씨와 시간에 따라 배경 비디오를 설정하는 함수
 function setBackground(weatherData) {
   const currentTime = new Date();
   console.log(currentTime); // 현재 시간
   const hours = currentTime.getHours();
   const weatherCondition = weatherData.weather[0].main; // 날씨 상태
   console.log(weatherCondition); // 날씨 상태
-  let backgroundUrl = '';
+  let videoSource = '';
 
-  // 날씨 상태와 시간에 따라 배경 지정
+  // 날씨 상태와 시간에 따라 배경 비디오 지정
   if (weatherCondition === 'Clear') {
     if (hours >= 6 && hours < 14) {
       // 맑은 아침
-      backgroundUrl = 'url(/assets/img/sunny.jpeg)';
+      videoSource = '/assets/img/lalalala.mp4';
     } else if (hours >= 14 && hours < 22) {
       // 맑은 오후
-      backgroundUrl = 'url(/assets/img/NorwaySunset.gif)';
+      videoSource = '/assets/img/pm2.mp4';
     } else {
       // 맑은 밤
-      backgroundUrl = 'url(/assets/img/firepit.gif)';
+      videoSource = '/assets/img/night.mp4';
     }
   } else if (weatherCondition === 'Rain') {
     if (hours >= 6 && hours < 14) {
       // 비오는 아침
-      backgroundUrl = 'url(/assets/img/rain.gif)';
+      videoSource = '/assets/img/rainam.mp4';
     } else if (hours >= 14 && hours < 22) {
       // 비오는 오후
-      backgroundUrl = 'url(/assets/img/Cinemagraph.gif)';
+      videoSource = '/assets/img/rainam.mp4';
     } else {
       // 비오는 밤
-      backgroundUrl = 'url(/assets/img/rain.gif)';
+      videoSource = '/assets/img/rainpm.mp4';
     }
   } else if (weatherCondition === 'Clouds') {
     if (hours >= 6 && hours < 14) {
       // 흐린 아침
-      backgroundUrl = 'url(/assets/img/Cinemagraph.gif)';
+      videoSource = '/assets/img/cloud.mp4'; // 아직 없음
     } else if (hours >= 14 && hours < 22) {
       // 흐린 오후
-      backgroundUrl = 'url(/assets/img/Cinemagraph.gif)';
+      videoSource = '/assets/img/cloud.mp4';
     } else {
       // 흐린 밤
-      backgroundUrl = 'url(/assets/img/Cinemagraph.gif)';
+      videoSource = '/assets/img/night.mp4';
     }
   } else {
     // 기본 배경
-    backgroundUrl = 'url(/assets/img/whiskey.gif)';
+    videoSource = '/assets/img/whiskey.mp4';
   }
 
-  document.querySelector('.main_banner').style.backgroundImage = backgroundUrl;
+  const videoElement = document.getElementById('backgroundVideo');
+  const sourceElement = document.getElementById('videoSource');
+  if (videoElement && sourceElement) {
+    sourceElement.src = videoSource;  // 비디오 소스를 설정
+    videoElement.load();  // 비디오를 다시 로드
+  } else {
+    console.error('Video element not found');
+  }
 }
 
 // 초기화 함수, 사용자 위치를 가져와 날씨 데이터를 설정
@@ -80,7 +87,7 @@ async function init() {
   try {
     const position = await getCurrentLocation();
     console.log(position); // 현재 유저 위치
-    
+
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 

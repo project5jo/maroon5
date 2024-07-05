@@ -17,6 +17,13 @@ public class MainController {
         model.addAttribute("roomId", roomId);
         return "index";
     }
+
+
+    @GetMapping("/zzz")
+    public String indexPage() {
+        System.out.println("zz");
+        return "html/admin";
+    }
 }
 
 
