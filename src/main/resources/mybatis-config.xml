@@ -19,11 +19,13 @@
         <typeAlias type="com.spring.mood.projectmvc.entity.ChatEntity" alias="chat"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.User" alias="user"/>
         <typeAlias type="com.spring.mood.projectmvc.entity.ShoppingCart" alias="shoppingcart"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.Topic" alias="topic"/>
     </typeAliases>
 
     <mappers>
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
         <mapper resource="mapper/MemberMapper.xml" />
+        <mapper resource="mapper/TopicMapper.xml" />
         <mapper resource="mapper/ShopItemMapper.xml" />
         <mapper resource="mapper/OrdersMapper.xml" />
         <mapper resource="mapper/OrderDetailMapper.xml" />

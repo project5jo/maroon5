@@ -10,6 +10,7 @@ function scrollHandler(e) {
         // 채팅창이 이미 닫혀 있고 휠을 아래로 스크롤할 때는 아무 작업도 하지 않음
         chatBox.classList.remove('slide-down');
         chatBox.classList.add('slide-up');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
     // if (e.deltaY > 0) {
