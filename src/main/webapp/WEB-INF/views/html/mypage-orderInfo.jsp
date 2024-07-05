@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-orderInfo.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
 
     <script src="/assets/js/Mypage.js" defer></script>
     <!-- <script src="/assets/js/Mypage-cancel.js" defer></script> -->
@@ -77,8 +78,12 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>주문내역</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>주문내역조회</h1>
+              </div>
             </div>
 
             <div class="right-contents">
@@ -161,8 +166,9 @@
          
       </section>
     </main>
-
-    <footer></footer>
+    
+    <!-- footer -->
+    <%@ include file="../include/footer.jsp" %>
     
   </body>
 </html>

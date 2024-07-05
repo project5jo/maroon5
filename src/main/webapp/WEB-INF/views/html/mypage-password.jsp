@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="/assets/css/mypage-password.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css"/>
 
     <script src="/assets/js/Mypage.js" defer></script>
     <!-- <script src="/assets/js/Mypage-password.js" defer></script> -->
@@ -78,8 +79,12 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>비밀번호변경</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>비밀번호 변경</h1>
+              </div>
             </div>
 
             <div class="right-contents">
@@ -163,7 +168,8 @@
       </section>
     </main>
 
-    <footer></footer>
+    <!-- footer -->
+    <%@ include file="../include/footer.jsp" %>
   
 </body>
 </html>

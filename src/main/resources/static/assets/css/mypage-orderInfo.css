@@ -4,13 +4,12 @@
 body {
   background-color: #ebeae3;
   color: #432626;
-  overflow: hidden;
 }
 
 /* main */
 main {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   font-size: 20px;
   font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
     "malgun gothic", "돋움", "dotum", sans-serif !important;
@@ -26,7 +25,7 @@ section {
   margin-top: 20px;
   width: 1210px;
   height: 830px;
-  margin: 20px auto;
+  margin: 95px auto;
   display: flex;
   border: 1px solid #432626;
   border-radius: 15px;
@@ -59,6 +58,7 @@ section {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
 }
 
 .profile-icon {

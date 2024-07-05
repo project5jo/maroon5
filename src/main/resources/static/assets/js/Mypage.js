@@ -42,29 +42,29 @@ $modalXButton.addEventListener('click', e => {
   $modalBack.style.display = 'none';
 })
 
-const allInput = document.querySelectorAll('.right-checkContent input');
+// const allInput = document.querySelectorAll('.right-checkContent input');
 
-allInput.addEventListener('click', e=> {
-  console.log('클릭클릭');
-})
+// allInput.addEventListener('click', e=> {
+//   console.log('클릭클릭');
+// })
 
-function checkInputValue () {
-  let allInputValue = '';
-  allInput.forEach(input => {
-    if(!input.value.trim() === '') {
-      allInputValue = true;
-    }
-  });
+// function checkInputValue () {
+//   let allInputValue = '';
+//   allInput.forEach(input => {
+//     if(!input.value.trim() === '') {
+//       allInputValue = true;
+//     }
+//   });
 
-  if (allInputValue) {
-    $CheckBtn.type = 'button';
-  } else {
-    $CheckBtn.type = 'reset';
-  }
-}
+//   if (allInputValue) {
+//     $CheckBtn.type = 'button';
+//   } else {
+//     $CheckBtn.type = 'reset';
+//   }
+// }
 
-allInput.forEach(input => {
-  input.addEventListener('input', checkInputValue);
-});
+// allInput.forEach(input => {
+//   input.addEventListener('input', checkInputValue);
+// });
 
 

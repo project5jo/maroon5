@@ -77,16 +77,20 @@
 
             <!-- title -->
             <div class="right-title">
-              <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              <p>포인트충전</p>
+              <div class="right-titleLogo">
+                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+              </div>
+              <div class="right-titleContent">
+                <h1>포인트 충전</h1>
+              </div>
             </div>
 
             <div class="right-contents">
 
-              <div class="right-content">
+              <!-- <div class="right-content">
                 <h2><i class="fas fa-check"></i>현재 포인트</h2>
                 <p id="pointSRC">${isUpdated ? updatedMember.point : nowMember.point}</p>
-              </div>
+              </div> -->
 
               <!-- <div class="right-content">
                 <h2><i class="fas fa-check"></i>충전하실 포인트를 선택해주세요.</h2>
@@ -97,22 +101,37 @@
                   <div class="form-contents">
 
                     <div class="form-content">
+                      <h2><i class="fas fa-check"></i>현재 포인트</h2>
+                      <div class="flex">
+                        <p id="pointSRC">${isUpdated ? updatedMember.point : nowMember.point}</p>
+                        <p>원</p>
+                      </div>
+                    </div>
+
+                    <div class="form-content">
                       <h2><i class="fas fa-check"></i>충전하실 포인트를 입력해주세요.</h2>
                       <input type="text" class="inputPoint" name="point" readonly>
                       <button type="button" onclick="removePoint()"><i class="fas fa-times-circle"></i>정정</button>
                     </div>
     
-                    <div class="form-content money">
-                      <button type="button" onclick="addPoint(this)" value="1000"><i class="fas fa-plus-circle"></i>천원</button>
-                      <button type="button" onclick="addPoint(this)" value="5000"><i class="fas fa-plus-circle"></i>오천원</button>
-                      <button type="button" onclick="addPoint(this)" value="10000"><i class="fas fa-plus-circle"></i>1만원</button>
-                      <button type="button" onclick="addPoint(this)" value="50000"><i class="fas fa-plus-circle"></i>5만원</button>
-                      <button type="button" onclick="addPoint(this)" value="100000"><i class="fas fa-plus-circle"></i>10만원</button>
+                    <div class="form-content">
+                      <div class="button-point">
+                        <button type="button" onclick="addPoint(this)" value="1000"><i class="fas fa-plus-circle"></i>천원</button>
+                        <button type="button" onclick="addPoint(this)" value="5000"><i class="fas fa-plus-circle"></i>오천원</button>
+                        <button type="button" onclick="addPoint(this)" value="10000"><i class="fas fa-plus-circle"></i>1만원</button>
+                        <button type="button" onclick="addPoint(this)" value="50000"><i class="fas fa-plus-circle"></i>5만원</button>
+                        <button type="button" onclick="addPoint(this)" value="100000"><i class="fas fa-plus-circle"></i>10만원</button>
+                      </div>
                     </div>
 
                     <div class="form-content">
                       <h2><i class="fas fa-check"></i>예상 충전 후 포인트</h2>
-                      <input type="text" class="expectPoint" readonly>
+                      <div class="flex">
+                        <!-- <input type="text" class="expectPoint" readonly> -->
+                        <p class="expectPoint"></p>
+                        <p>원</p>
+                      </div>
+                      <!-- <input type="text" class="expectPoint" readonly> -->
                     </div>
     
                     <div class="form-content">
@@ -164,6 +183,7 @@
 
     <!-- footer -->
     <%@ include file="../include/footer.jsp" %>
+    
     <script src="/assets/js/Mypage-point.js"></script>
   </body>
 </html>
