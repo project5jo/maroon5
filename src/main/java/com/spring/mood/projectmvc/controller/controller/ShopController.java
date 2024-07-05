@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +37,10 @@ public class ShopController {
     private final ShoppingCartService shoppingCartService;
 
 
-    private static final String UPLOAD_DIR = "/Users/jehoon/spring-prj/upload/";
+    private static final String UPLOAD_DIR = "/Users/jeongjaehan/Desktop/Developer/upload/";
+
+
+
 
 
     @GetMapping("/shop")
@@ -71,7 +73,7 @@ public class ShopController {
         ShopItem itemById = shopItemService.getItemById(id);
         System.out.println("itemById = " + itemById);
         ShopItemResponseDto item = ShopItemResponseDto.fromEntity(itemById);
-        System.out.println("iteㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇm = " + item);
+        System.out.println("item = " + item);
         model.addAttribute("item", item);
 
         List<ShopItem> randomImages = getRandomImages();
@@ -80,20 +82,16 @@ public class ShopController {
         return "html/shop-detail";
     }
 
-
     @GetMapping("/shop/add")
     public String showAddItemPage() {
         return "html/shop-addItem";
     }
 
-
-//    private String rootPath = "/Users/yejin/Desktop/backand/miniProject/spring/sample-image";
-
     @PostMapping("/shop/add")
     public String uploadFile(
             @RequestParam("shop_item_name") String name,
             @RequestParam("shop_item_desc") String description,
-            @RequestParam("shop_item_price") BigDecimal price,
+            @RequestParam("shop_item_price") int price,
             @RequestParam("shop_item_stock") Long stock,
             @RequestParam("shop_item_img") MultipartFile file,
             RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
