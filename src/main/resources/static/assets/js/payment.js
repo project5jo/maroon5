@@ -20,7 +20,7 @@ console.log(InputPlaceholder);
 //포인트 사용 검증
 async function fetchPoint(InputValue) {
   const res = await fetch(
-    `http://localhost:8383/checkPoint?point=${InputValue}`
+    `/checkPoint?point=${InputValue}`
   );
   const flag = await res.json();
   pointFlag = flag;
@@ -29,7 +29,7 @@ async function fetchPoint(InputValue) {
 
 //결제 검증
 async function fetchPayPoint(InputValue) {
-  const res = await fetch(`http://localhost:8383/payPoint?point=${InputValue}`);
+  const res = await fetch(`/payPoint?point=${InputValue}`);
   const message = await res.json();
   return message.message; // 메시지 반환
 }
