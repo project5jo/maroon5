@@ -182,7 +182,21 @@ public class OrderController {
 
         return ResponseEntity.ok().body(response);
     }
+    // / // //// /// / / // /// // / /// / / // // / / / / ///
+    // 새로운 매핑 추가: /order-details 이거 활용해서 주문상세정보 만들면됨
+    // OrderRequestDto 쓰면될듯
+    // / // / / / // ///// /// / ///
+    @GetMapping("/order-details")
+    public String getOrderDetails(Model model, HttpSession session) {
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
+        String userAccount = loginUser.getAccount();
+        log.info("Fetching order history for user: {}", userAccount);
 
+        return "html/order-detail";
+    }
 
 
 }

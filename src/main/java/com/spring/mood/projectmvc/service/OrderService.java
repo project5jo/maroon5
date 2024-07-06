@@ -171,7 +171,7 @@ public class OrderService {
 
     public Map<String, List<Map<String, Object>>> getGroupedOrderHistory(String userAccount) {
         List<Map<String, Object>> orderHistory = cartArchiveService.getOrderHistory(userAccount);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:00");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return orderHistory.stream()
                 .collect(Collectors.groupingBy(order -> {
                     Timestamp archivedAtTimestamp = (Timestamp) order.get("archived_at");
