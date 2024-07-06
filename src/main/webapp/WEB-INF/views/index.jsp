@@ -28,7 +28,8 @@
 
     <!-- 메인 배너 -->
     <section class="main_banner">
-        <video id="backgroundVideo" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+        <video id="backgroundVideo" autoplay muted loop playsinline
+               style="width: 100%; height: 100%; object-fit: cover;">
             <source id="videoSource" src="" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
@@ -41,7 +42,9 @@
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
                 <p class="point">${topicContent}</p>
-                <a href="/zzz">LOGIN</a>
+                <c:if test="${loginUser.userRole == 'ADMIN'}">
+                    <a href="/zzz" id="admin">ADMIN PAGE</a>
+                </c:if>
             </div>
 
             <button class="cancelBtn">
@@ -101,6 +104,7 @@
             sendere.click();
         }
     })
+
     function chatHide() {
         const chatBox = document.querySelector('.chat');
         chatBox.classList.add('slide-down');
