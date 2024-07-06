@@ -128,20 +128,20 @@ public class OrderController {
     @GetMapping("/complete")
     public String getOrderHistory(Model model, HttpSession session) {
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
         String userAccount = loginUser.getAccount();
-
-        // 데이터를 올바르게 가져오는지 로그 추가
         log.info("Fetching order history for user: {}", userAccount);
 
-        List<Map<String, Object>> orderHistory = cartArchiveService.getOrderHistory(userAccount);
+        Map<String, List<Map<String, Object>>> groupedOrderHistory = orderService.getGroupedOrderHistory(userAccount);
+        log.info("Grouped order history: {}", groupedOrderHistory);
 
-        // 가져온 데이터 로그 출력
-        log.info("Order history: {}", orderHistory);
+        model.addAttribute("groupedOrderHistory", groupedOrderHistory);
 
-        model.addAttribute("orderHistory", orderHistory);
-
-        return "html/order-history"; // JSP 파일 경로
+        return "html/order-history";
     }
+
 
     @GetMapping("/{orderId}/details")
     public List<OrderDetailResponseDto> getOrderDetails(@PathVariable Long orderId) {
