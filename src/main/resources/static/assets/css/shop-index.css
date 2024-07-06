@@ -150,9 +150,8 @@ ul li .img-box a {
 /* 관리자 추가버튼 */
 .search-container .item-add {
   cursor: pointer;
-  background-color: #422626;
+  background-color: #aaa;
   color: #ebeae3;
-  height: 100%;
   font-size: 14px;
   font-weight: 500;
   padding: 10px;
@@ -181,7 +180,6 @@ button.delete-btn {
 
 button.delete-btn > i {
   font-size: 25px;
-  
 }
 
 /* 모달 스타일 */
