@@ -16,7 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +31,7 @@ public class OrderService {
 
 
     private final OrderDetailsMapper orderDetailsMapper;
-
+    private final CartArchiveService cartArchiveService;
     private final MemberMapper memberMapper;
     private final ShoppingCartService shoppingCartService;
 
@@ -100,6 +105,17 @@ public class OrderService {
 
     public List<OrderDetailResponseDto> getOrderDetailsByOrderId(Long orderId) {
         return orderMapper.getOrderDetailsByOrderId(orderId);
+    }
+
+    public Map<String, List<Map<String, Object>>> getGroupedOrderHistory(String userAccount) {
+        List<Map<String, Object>> orderHistory = cartArchiveService.getOrderHistory(userAccount);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:00");
+        return orderHistory.stream()
+                .collect(Collectors.groupingBy(order -> {
+                    Timestamp archivedAtTimestamp = (Timestamp) order.get("archived_at");
+                    LocalDateTime archivedAt = archivedAtTimestamp.toLocalDateTime();
+                    return archivedAt.format(formatter);
+                }));
     }
 }
 

@@ -28,6 +28,7 @@
 
     <select id="getOrderHistory" parameterType="string" resultType="map">
         SELECT
+        ca.order_id,
         ca.cart_archive_id,
         ca.user_account,
         ca.shop_item_id,
