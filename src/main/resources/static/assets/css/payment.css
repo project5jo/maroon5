@@ -165,7 +165,8 @@ button.btn-point {
   font-size: 14px;
 }
 
-.price-info > p.total-price {
+.price-info > p.total-price,
+.price-info > p.total-point {
   font-size: 16px;
   font-weight: 700;
 }
@@ -183,6 +184,33 @@ button.btn-point {
   background-color: #432626;
 
   margin-top: 50px;
+}
+
+footer {
+  height: 200px;
+}
+
+/*  */
+
+input.falsefocus {
+  border: 1px solid #ff003e;
+  background-color: rgba(255, 0, 62, 0.1);
+}
+
+input.falsefocus::placeholder {
+  color: #ff003e;
+}
+
+input.truefocus {
+  border: 1px solid #1a72ff;
+  background-color: rgba(26, 114, 255, 0.1);
+}
+input.truefocus::placeholder {
+  color: #1a72ff;
+}
+
+input.nowfocus {
+  box-shadow: 0 0 5px rgb(216, 216, 73);
 }
 
 footer {

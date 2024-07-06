@@ -84,8 +84,9 @@
 <%@ include file="../include/footer.jsp" %>
 
 <script src="/assets/js/category.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 <script>
-    
     function incrementQuantity() {
         const quantityInput = document.getElementById('quantityInput');
         quantityInput.value = parseInt(quantityInput.value) + 1;
@@ -105,8 +106,9 @@
         const itemPrice = document.getElementById('itemPrice').value;
         const totalPrice = document.getElementById('totalPrice');
         const newPrice = quantityInput.value * itemPrice;
-        totalPrice.textContent = '₩' + newPrice.toFixed(2);
+        totalPrice.textContent = '₩' + newPrice;
     }
+
     function handleFormSubmit(event) {
         event.preventDefault(); // 폼 제출 막기
 
@@ -124,17 +126,17 @@
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            if (response.ok) {
-                showModal();
-            } else {
-                alert('장바구니에 추가하는 데 실패했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('장바구니에 추가하는 도중 오류가 발생했습니다.');
-        });
+            .then(response => {
+                if (response.ok) {
+                    showModal();
+                } else {
+                    alert('장바구니에 추가하는 데 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('장바구니에 추가하는 도중 오류가 발생했습니다.');
+            });
 
         return false; // 폼 제출 막기
     }
