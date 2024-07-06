@@ -10,154 +10,184 @@ body {
 .container {
   width: 100%;
   height: 100%;
-  /* position: relative;  */
 }
 
 .main-container {
-  margin-top: 12px;
+  padding-top: 40px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .main-container ul {
-  margin-top: 20px;
   display: flex;
-  flex-direction: row; /* 가로로 정렬 */
+  width: 100%;
   flex-wrap: wrap;
-  justify-content: center; /* 가운데 정렬 */
   gap: 0.1px;
 }
 
 .main-container ul li {
-  width: 25%;
-  height: 800px;
-  border: 1.5px solid #000;
-  margin-bottom: 40px; /* 아래 간격 */
+  width: calc((100% - 0.5px) / 3);
+  border: 1px solid #432626;
+  border-right: none;
+  margin-bottom: 50px;
+  position: relative;
+  line-height: 140%;
+  z-index: 1;
+  flex-wrap: wrap;
 }
 
+.main-container ul li:nth-child(3n) {
+  border-right: 1px solid #432626;
+}
+
+.main-container ul li:nth-last-child(1) {
+  border-right: 1px solid #432626;
+}
+
+/* 관리자 삭제 */
 ul li button.delete-btn {
-  width: 50px;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  font-weight: 700;
-  color: #432626;
-  background: #ebeae3;
   cursor: pointer;
-}
-ul li button.delete-btn:hover {
-  background: #0dff00;
-  color: rgb(0, 0, 0);
+  position: absolute;
 }
 
-ul li p {
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  border-bottom: 1.5px solid #000;
+/* 상품 설명 */
+
+.item-info-wrapper {
+  padding: 20px 20px 30px 20px;
 }
 
+.item-name-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #432626;
+}
+
+.item-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: #432626;
+}
+
+/* 상품 이미지 */
 ul li .img-box {
-  height: 450px;
-  border-bottom: 1.5px solid #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 500px;
+  width: 100%;
 }
 
 ul li .img-box a {
-  background: #000;
-  width: 475px;
+  width: 100%;
   height: 445px;
 }
 
-ul li .img-box a img {
+.img-box a img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지가 박스 내에 꽉 차도록 설정 */
+  object-fit: cover;
 }
 
-ul li span {
+/* 하단  */
+.item-cart-btn {
   width: 100%;
+  height: 50px;
   display: flex;
-  justify-content: center;
-  border-bottom: 1.5px solid #000;
-  padding: 18px;
-}
+  justify-content: space-between;
+  text-align: center;
 
-ul li button:last-child {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: white;
-  font-size: 18px;
-  font-weight: 600;
-  font-family: "Courier New", Courier, monospace;
-  padding: 13px;
+  font-size: 16px;
+  font-weight: 500;
+
   background: #422626;
   cursor: pointer;
 }
-ul li button:last-child:hover {
-  background: #333d64;
+
+.item-cart-btn > p {
+  width: 50%;
+  padding: 15px;
 }
 
-footer {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000;
+.item-cart-btn > p:nth-child(1) {
+  font-weight: 400;
 }
 
+/* 상단 서치 */
 .search-container {
   padding-top: 100px;
   display: flex;
-  align-items: baseline;
+  justify-content: end;
+  align-items: center;
+  height: 45px;
 }
 
+.search-wrapper {
+  display: flex;
+  align-items: center;
+
+  padding: 5px;
+  border: 1px solid #422626;
+  width: 250px;
+  height: 100%;
+}
+
+/* search input */
 .search-container .search-bar {
-  margin-right: 10px;
-  position: absolute;
-  border: 1px solid #000;
-  left: 16.2%;
-  transform: translateX(-50%); /* 가운데 정렬을 위해 추가 */
+  width: 200px;
+  padding: 5px;
+  background-color: transparent;
 }
 
-.search-container .item-add {
-  margin-right: 10px;
-  position: absolute;
-  left: 24%; /* 위치 조정 */
-  cursor: pointer;
-}
-
+/* search btn */
 .search-container .item-search {
   margin-right: 10px;
-  position: absolute;
-  left: 21%; /* 위치 조정 */
   cursor: pointer;
+
+  background-color: transparent;
+  font-size: 14px;
+  color: #422626;
+  font-weight: 500;
+}
+
+/* 관리자 추가버튼 */
+.search-container .item-add {
+  cursor: pointer;
+  background-color: #422626;
+  color: #ebeae3;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+  margin-left: 5px;
 }
 
 .container a .fa-cart-shopping {
   color: #422626;
   opacity: 0.7;
   font-size: 20px;
-  position: relative;
-  top: 125px;
-  left: 86.1%;
   cursor: pointer;
+}
+
+/* 관리자 삭제 */
+button.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+}
+
+button.delete-btn > i {
+  font-size: 25px;
+  
 }
 
 /* 모달 스타일 */
 .modal {
-  display: none; /* 기본적으로 모달을 숨김 */
+  /* 기본적으로 모달을 숨김 */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -167,38 +197,49 @@ footer {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.7);
 }
-
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
-  height: 200px;
-  border: 1px solid #888;
-  width: 30%;
+  margin: 18% auto;
+  padding: 25px 20px;
+  width: 400px;
   font-size: 18px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
+  color: #422626;
 }
-
 .close {
   color: #aaa;
   display: flex;
   flex-direction: row-reverse;
   align-items: baseline;
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 25px;
+  font-size: 25px;
+  font-weight: 500;
   padding-right: 15px;
-  padding-top: 7px;
 }
 .close:hover,
 .close:focus {
-  color: black;
+  color: #422626;
   text-decoration: none;
   cursor: pointer;
 }
-
 .modal-content button {
-  margin: 15px;
-  padding: 15px 30px;
-  font-size: 20px;
+  font-size: 15px;
+  width: calc((100% - 10px) / 2);
+  height: 55px;
+  color: #422626;
+  font-weight: 500;
+}
+
+.modal-content button:hover {
+  color: #fff;
+  background-color: #422626;
+}
+
+#modalMessage {
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.hidden {
+  visibility: hidden;
 }

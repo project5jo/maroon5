@@ -10,6 +10,20 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="logo point" ><a href="/">나의 애착 페이지</a></div>
         <ul class="gnb">
           <li class="login point">
+
+            <c:choose>
+                  <c:when test="${sessionScope.loginUser != null}">
+                      <a class="cart" href="/cart">
+                          CART
+                      </a>
+                  </c:when>
+                  <c:otherwise>
+                      <a class="cart" href="javascript:void(0);" onclick="showFailModal()">
+                        CART
+                      </a>
+                  </c:otherwise>
+              </c:choose>
+
             <c:if test="${loginUser == null}">
             <a href="/sign-in">LOGIN</a>
             </c:if>
