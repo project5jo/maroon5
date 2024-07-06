@@ -12,18 +12,6 @@
 <body>
 <!-- header  -->
 <%@ include file="../include/header.jsp" %>
-<%--<h1>관리자 페이지</h1>--%>
-<%--<div class="container">--%>
-<%--    <label for="newTopicId">변경할 주제 번호: </label>--%>
-<%--&lt;%&ndash;    <input type="text" id="newTopicId">&ndash;%&gt;--%>
-<%--    <button onclick="updateTopicId()">변경할 토픽 아이디</button>--%>
-
-<%--    <label for="newTopicContent">새로운 주제 선정하기: </label>--%>
-<%--&lt;%&ndash;    <input type="text" id="newTopicContent">&ndash;%&gt;--%>
-<%--    <button onclick="insertTopicContent()">추가할 주제 선정하기</button>--%>
-
-<%--    <div class="topicList"></div>--%>
-<%--</div>--%>
 <main>
     <section class="sign-in">
         <div class="inner">
