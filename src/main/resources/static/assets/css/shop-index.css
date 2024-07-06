@@ -10,7 +10,7 @@ body {
 .container {
   width: 100%;
   height: 100%;
-  position: relative; /* 추가 */
+  /* position: relative;  */
 }
 
 .main-container {
