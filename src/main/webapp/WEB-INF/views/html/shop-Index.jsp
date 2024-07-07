@@ -49,7 +49,8 @@
                                   </div>
                                 </a>
 
-                              <form id="addToCartForm-${item.shopItemId}" action="/cart" method="post" onsubmit="return handleFormSubmit(event, '${item.shopItemId}')">
+                              <form id="addToCartForm-${item.shopItemId}" action="/cart" method="post" 
+                              onsubmit="return handleFormSubmit(event, '${item.shopItemId}')">
                                   <div class="addBtn">
                                       <input type="hidden" name="itemId" value="${item.shopItemId}">
                                       <input type="hidden" name="itemPrice" id="itemPrice-${item.shopItemId}" value="${item.shopItemPrice}">
