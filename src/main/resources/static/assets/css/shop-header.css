@@ -22,7 +22,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 
 nav.menu {
@@ -115,16 +114,15 @@ i.fa-bars {
   margin-bottom: 40%;
 } */
 
-.fa-times {
+/* .fa-times {
   position: absolute;
   top: 24px;
   right: 205px;
   cursor: pointer;
   color: white;
-  /* opacity: 0.3; */
   font-size: 40px;
   cursor: pointer;
-}
+} */
 
 .category-drawer > .cancel_btn {
   background: none;
@@ -152,4 +150,8 @@ i.fa-bars {
   transform: rotate(-45deg);
   background-color: #fff;
   cursor: pointer;
+}
+
+.cart {
+  margin-right: 60px;
 }

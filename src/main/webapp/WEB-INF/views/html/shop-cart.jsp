@@ -12,50 +12,74 @@
 <body>
 <%@ include file="../include/header.jsp" %>
 
-<div class="cart-container">
-    <div class="cart-header">
-        <h2>Cart</h2>
-    </div>
-    <div class="product">
-        <h2 class="">Product</h2>
-        <h2 class="price">Price</h2>
-        <h2 class="QTY">QTY</h2>
-    </div>
-    <!-- 아이템 반복 -->
-    <c:forEach var="cartItem" items="${cartItems}">
+<!-- main -->
+<main>
+    <div class="cart-container">
+      <!-- <div class="product">
+        <div class="inner">
+          <div class="product-wrapper">
+            <h2 class="product-title">Product</h2>
+            <h2 class="price">Price</h2>
+            <h2 class="QTY">QTY</h2>
+          </div>
+        </div>
+      </div> -->
+      <!-- 아이템 반복 -->
+      <c:forEach var="cartItem" items="${cartItems}">
         <div class="cart-item" data-item-id="${cartItem.shopItemId}">
-            <a href="">
-                <img src="${cartItem.shopItemImg}" alt="${cartItem.shopItemName}">
-            </a>
-            <div class="item-details">
-                <h3>${cartItem.shopItemName}</h3>
-                <p>${cartItem.shopItemDesc}</p>
+          <div class="inner">
+            <div class="cart-item-wrapper">
+              <!-- img -->
+              <div class="cart-item-img-box">
+                <a href="">
+                  <img src="${cartItem.shopItemImg}" alt="${cartItem.shopItemName}">
+                </a>
+              </div>
+              <!-- 상품 설명 -->
+              <div class="cart-item-details-box">
+                <div class="item-details">
+                  <p class="shop-item-desc">${cartItem.shopItemDesc}</p>
+                  <p class="title point">${cartItem.shopItemName}</p>
+                  <p class="price">얼마인지 불러오기 원</p>
+                </div>
+              </div>
+              <div class="item-price">
+                <p class="item-price-value point">${cartItem.cartTotalPrice}원</p>
+              </div>
+              <div class="item-quantity">
+                <div class="quantity-wrapper">
+                  <div class="item-num-wrapper">
+                    <button class="quantity-btn" onclick="decrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">-</button>
+                    <input type="number" class="quantity-input" value="${cartItem.cartTotalCount}" min="1" data-price="${cartItem.unitPrice}" oninput="updatePrice(${cartItem.shopItemId}, ${cartItem.unitPrice})">
+                    <button class="quantity-btn" onclick="incrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">+</button>
+                  </div>
+                  <div class="item-remove">
+                    <button class="remove-btn" onclick="removeItem(${cartItem.shopItemId})">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="item-price">
-                <span>₩ <span class="item-price-value">${cartItem.cartTotalPrice}</span></span>
-            </div>
-            <div class="item-quantity">
-                <button class="quantity-btn" onclick="decrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">-</button>
-                <input type="number" class="quantity-input" value="${cartItem.cartTotalCount}" min="1" data-price="${cartItem.unitPrice}" oninput="updatePrice(${cartItem.shopItemId}, ${cartItem.unitPrice})">
-                <button class="quantity-btn" onclick="incrementQuantity(${cartItem.shopItemId}, ${cartItem.unitPrice})">+</button>
-            </div>
-            <div class="item-remove">
-                <button class="remove-btn" onclick="removeItem(${cartItem.shopItemId})">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
+          </div>
         </div>
-    </c:forEach>
-    <!-- 아이템 반복 끝 -->
-    <div class="cart-footer">
-        <div class="subtotal">
-            <span>Subtotal:</span>
-            <span>₩ <span id="cartTotalPrice">${cartTotalPrice}</span></span>
+      </c:forEach>
+      <!-- 아이템 반복 끝 -->
+      <div class="inner">
+        <div class="cart-footer">
+          <div class="cart-footer-wrapper">
+            <div class="subtotal">
+              <span class="point">Subtotal:</span>
+              <span id="cartTotalPrice" class="point">${cartTotalPrice}원</span>
+            </div>
+            <button onclick="checkout()" class="checkout-btn point">CHECKOUT</button>
+            <p>Tax included and shipping calculated at checkout</p>
+          </div>
         </div>
-        <button onclick="checkout()" class="checkout-btn">CHECKOUT</button>
-        <p>Tax included and shipping calculated at checkout</p>
+      </div>
     </div>
-</div>
+  </main>
+
 
 <%@ include file="../include/footer.jsp" %>
 <script src="/assets/js/category.js"></script>
@@ -90,7 +114,7 @@
         priceElements.forEach(function(priceElement) {
             totalPrice += parseInt(priceElement.textContent);
         });
-        document.getElementById('cartTotalPrice').textContent = totalPrice;
+        document.getElementById('cartTotalPrice').textContent = totalPrice+"원";
     }
 
     function removeItem(itemId) {

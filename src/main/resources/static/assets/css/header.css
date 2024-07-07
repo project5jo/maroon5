@@ -71,7 +71,6 @@ i.fa-bars {
   cursor: pointer;
   background-color: #fff;
   /* background-color: #432626; */
-  
 }
 
 /* 메뉴 */
@@ -150,4 +149,8 @@ i.fa-bars {
   transform: rotate(-45deg);
   background-color: #fff;
   cursor: pointer;
+}
+
+.cart {
+  visibility: hidden;
 }
