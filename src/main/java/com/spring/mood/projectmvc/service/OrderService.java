@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.service;
 
+import com.spring.mood.projectmvc.dto.requestDto.OrderRequestDto;
 import com.spring.mood.projectmvc.dto.responseDto.OrderDetailResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -169,15 +171,25 @@ public class OrderService {
         return orderMapper.getOrderDetailsByOrderId(orderId);
     }
 
-    public Map<String, List<Map<String, Object>>> getGroupedOrderHistory(String userAccount) {
+    public Map<String, Map<String, Object>> getGroupedOrderHistory(String userAccount) {
         List<Map<String, Object>> orderHistory = cartArchiveService.getOrderHistory(userAccount);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         return orderHistory.stream()
                 .collect(Collectors.groupingBy(order -> {
                     Timestamp archivedAtTimestamp = (Timestamp) order.get("archived_at");
                     LocalDateTime archivedAt = archivedAtTimestamp.toLocalDateTime();
                     return archivedAt.format(formatter);
-                }));
+                }, Collectors.collectingAndThen(Collectors.toList(), orders -> {
+                    BigDecimal totalSum = orders.stream()
+                            .map(order -> (BigDecimal) order.get("cart_total_price"))
+                            .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+                    return Map.of(
+                            "orders", orders,
+                            "totalPrice", totalSum.doubleValue() // 최종 결과를 double 타입으로 변환
+                    );
+                })));
     }
 }
 

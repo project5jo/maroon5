@@ -19,4 +19,5 @@ public interface OrderMapper {
     void insertOrder(Orders order);
 
     List<OrderDetailResponseDto> getOrderDetailsByOrderId(@Param("orderId") Long orderId);
+    List<OrderDetailResponseDto> getAllDetail(@Param("orderId") Long orderId, @Param("userAccount") String userAccount);
 }
