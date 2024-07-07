@@ -1,5 +1,6 @@
 package com.spring.mood.projectmvc.controller.controller;
 
+import com.spring.mood.projectmvc.dto.requestDto.OrderDetailResponseDto2;
 import com.spring.mood.projectmvc.dto.requestDto.OrderRequestDto;
 import com.spring.mood.projectmvc.dto.responseDto.OrderDetailResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.OrderResponseDto;
@@ -7,21 +8,21 @@ import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.entity.Orders;
+import com.spring.mood.projectmvc.mapper.OrderMapper;
 import com.spring.mood.projectmvc.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ public class OrderController {
     private final UserService userService;
     private final CartArchiveService cartArchiveService;
     private final OrderDetailsService orderDetailsService;
+    private final OrderMapper orderMapper;
 
     @GetMapping("/checkout")
 
@@ -134,7 +136,7 @@ public class OrderController {
         String userAccount = loginUser.getAccount();
         log.info("Fetching order history for user: {}", userAccount);
 
-        Map<String, List<Map<String, Object>>> groupedOrderHistory = orderService.getGroupedOrderHistory(userAccount);
+        Map<String, Map<String, Object>> groupedOrderHistory = orderService.getGroupedOrderHistory(userAccount);
         log.info("Grouped order history: {}", groupedOrderHistory);
 
         model.addAttribute("groupedOrderHistory", groupedOrderHistory);
@@ -187,15 +189,20 @@ public class OrderController {
     // OrderRequestDto 쓰면될듯
     // / // / / / // ///// /// / ///
     @GetMapping("/order-details")
-    public String getOrderDetails(Model model, HttpSession session) {
-        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
-        String userAccount = loginUser.getAccount();
-        log.info("Fetching order history for user: {}", userAccount);
-
+    public String getOrderDetails() {
         return "html/order-detail";
+    }
+    @PostMapping("/order-details")
+    public ResponseEntity<?> getOrderDetails(@RequestBody OrderDetailResponseDto2 request, HttpSession session) {
+                SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            return ResponseEntity.badRequest().body("point 매개변수가 필요합니다.");
+        }
+        List<OrderDetailResponseDto> orderDetailsByOrderId = orderMapper.getOrderDetailsByOrderId(request.getOrderId().longValue());
+        System.out.println("orderDetailsByOrderId = " + orderDetailsByOrderId);
+        session.setAttribute("orderDetails", request);
+        session.setAttribute("cartItems", orderDetailsByOrderId);
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/order-details")).build();
     }
 
 
