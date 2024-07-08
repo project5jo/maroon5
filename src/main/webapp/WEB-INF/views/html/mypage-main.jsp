@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/assets/css/mypage-main.css"/>
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>
-
+    <link rel="icon" href="/assets/img/favicon.ico">
     <script src="/assets/js/mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 </head>
@@ -55,17 +55,21 @@
                         <a href="/shop"><img src="/assets/img/shopping.png" alt="shop" /></a>
                     </div>
                     <div class="actions">
+                        <a href="/shop">
                         <button class="manage-btn">이동하기</button>
 <%--                        <button class="more-btn">더보기</button>--%>
+                        </a>
                     </div>
                 </div>
                 <div class="shopping-info">
                     <p>주문상세</p>
                     <div class="shopping-img">
-                        <a href="/order-details"><img src="/assets/img/list.png" alt="order"/></a>
+                        <a href="/complete"><img src="/assets/img/list.png" alt="order"/></a>
                     </div>
                     <div class="actions">
+                        <a href="/complete">
                         <button class="manage-btn">이동하기</button>
+                        </a>
 <%--                        <button class="more-btn">더보기</button>--%>
                     </div>
                 </div>
@@ -75,7 +79,9 @@
                         <a href="/cart"><img src="/assets/img/cart.png" alt="cart"/></a>
                     </div>
                     <div class="actions">
+                        <a href="/cart">
                         <button class="manage-btn">이동하기</button>
+                        </a>
 <%--                        <button class="more-btn">더보기</button>--%>
                     </div>
                 </div>

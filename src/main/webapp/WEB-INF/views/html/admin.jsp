@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/assets/css/admin.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>
+    <link rel="icon" href="/assets/img/favicon.ico">
+
 </head>
 <body>
 <!-- header  -->

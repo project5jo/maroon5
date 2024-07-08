@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/assets/css/mypage-cancel.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css"/>
-
+    <link rel="icon" href="/assets/img/favicon.ico">
     <script src="/assets/js/mypage-cancel.js" defer></script>
     <script src="/assets/js/mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>

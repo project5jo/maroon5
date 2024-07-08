@@ -12,6 +12,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="/assets/css/sign-up.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <script src="/assets/js/category.js/" defer></script>
+    <link rel="icon" href="/assets/img/favicon.ico">
   </head>
   <body>
     <!-- header  -->

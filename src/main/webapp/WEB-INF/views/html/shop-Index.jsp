@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/assets/css/shop-index.css">
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
   <link rel="stylesheet" href="/assets/css/footer.css"/>
+    <link rel="icon" href="/assets/img/favicon.ico">
   <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </head>
 <body>

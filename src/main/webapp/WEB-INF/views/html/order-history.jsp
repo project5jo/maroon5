@@ -12,6 +12,7 @@
   <title>주문 내역 | 애착 페이지</title>
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="icon" href="/assets/img/favicon.ico">
   <link rel="stylesheet" href="/assets/css/order-history.css" />
   <script src="/assets/js/category.js/" defer></script>
 </head>
