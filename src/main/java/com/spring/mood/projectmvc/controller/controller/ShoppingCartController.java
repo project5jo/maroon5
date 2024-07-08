@@ -27,9 +27,10 @@ public class ShoppingCartController {
     public String addToCart(@RequestParam("itemId") Long itemId,
                             @RequestParam("itemPrice") int itemPrice,
                             @RequestParam("quantity") int quantity,
-                            RedirectAttributes redirectAttributes) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userAccount = authentication.getName();
+                            RedirectAttributes redirectAttributes,
+                            HttpSession session) {
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        String userAccount = loginUser.getAccount();
 
         try {
             shoppingCartService.addToCart(itemId, itemPrice, quantity, userAccount);
@@ -60,11 +61,18 @@ public class ShoppingCartController {
         return "html/shop-cart";
     }
 
+
+    /**
+     * 확인 요망
+     * @param requestData
+     * @param session
+     * @return
+     */
     @PostMapping("/cart/update")
     @ResponseBody
-    public String updateCart(@RequestBody Map<String, Object> requestData) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userAccount = authentication.getName();
+    public String updateCart(@RequestBody Map<String, Object> requestData, HttpSession session) {
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        String userAccount = loginUser.getAccount();;
 
         List<Map<String, Object>> cartItems = (List<Map<String, Object>>) requestData.get("cartItems");
 
@@ -84,10 +92,9 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/cart/remove")
-    public String removeFromCart(@RequestParam("itemId") Long itemId, RedirectAttributes redirectAttributes) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userAccount = authentication.getName();
-
+    public String removeFromCart(@RequestParam("itemId") Long itemId, RedirectAttributes redirectAttributes, HttpSession session) {
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+        String userAccount = loginUser.getAccount();
         try {
             shoppingCartService.removeFromCart(itemId, userAccount);
             redirectAttributes.addFlashAttribute("successMessage", "장바구니에서 상품이 성공적으로 제거되었습니다.");
