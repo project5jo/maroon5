@@ -43,6 +43,9 @@ async function fetchPayPoint(InputValue) {
 window.onload = function () {
   const totalOrderPricePoint = totalOrderPrice.slice(0, -1); // 마지막 한 글자 삭제
   $InputPointBtn.value = totalOrderPricePoint;
+
+  document.querySelector(".total-point").innerHTML =
+    $InputPointBtn.value + "원";
 };
 
 //input 작성하면 인식됨
@@ -99,7 +102,7 @@ $payBtn.addEventListener("click", async (event) => {
       // 필수 입력 필드 중 하나라도 비어있으면 경고 메시지 표시
       field.classList.add("falsefocus");
       field.value = "";
-      field.placeholder = "입력 부탁드립니다.";
+      field.placeholder = "필수 항목입니다. 입력 부탁드립니다.";
       scrollToError(field);
     } else {
       field.classList.remove("falsefocus"); // 필드가 채워져 있으면 에러 스타일 제거
