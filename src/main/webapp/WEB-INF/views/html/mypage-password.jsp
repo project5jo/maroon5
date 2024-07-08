@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-password.css">
+    <link rel="stylesheet" href="/assets/css/mypage-password.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css"/>
 
-    <script src="/assets/js/Mypage.js" defer></script>
-    <!-- <script src="/assets/js/Mypage-password.js" defer></script> -->
+    <script src="/assets/js/mypage-password.js" defer></script>
+    <script src="/assets/js/mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
   </head>
@@ -22,154 +22,109 @@
     <!-- modalBack -->
     <div class="modalBack"></div>
 
-    <!-- header  -->
-    <%@ include file="../include/header.jsp" %>
+    <section class="section-header">
+      <%@ include file="../include/header.jsp" %>
+    </section>
+
+    <header class="section-title">
+      <%@ include file="mypage-title.jsp" %>
+    </header>
+
+    <section class="section-container">
   
-    <!-- main -->
-    <main>
+      <nav class="section-leftNav">
+        <%@ include file="mypage-leftNavigation.jsp" %>
+      </nav>
+  
+      <main class="section-main">
+        <div class="middle-box">
+          <form action="/mypage-password" method="post">
 
-      <section class="mainpage">
-        
-        <div class="tr">
+            <div class="middleForm-box">
 
-          <!-- left -->
-          <div class="tr-left">
-
-            <div class="profile-container">
-              <div class="profile-box">
-                <div class="profile">
-                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
-                </div>
-                <div class="profile-icon">
-                  <i class="fas fa-user-cog"></i>
-                  <!-- <a href="#" class="btn-gradient yellow mini">사진수정<i class="fas fa-user-cog"></i></a> -->
-                  <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
-                </div>
-              </div>
-              <p class="profile-name">키티 님</p>
-            </div>
-
-            <div class="left-Menu">
-              <a  href="/mypage-point"><p class="Menu-title">포인트 충전 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a  href="/mypage-orderInfo"><p class="Menu-title">주문내역</p></a>
-            </div>
-            <div class="left-Menu">
-              <a  href="/mypage-profile"><p class="Menu-title">프로필사진 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-memberinfo"><p class="Menu-title">회원정보 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-password"><p class="Menu-title">비밀번호 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
-            </div>
-            <div class="left-logout">
-              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
-            </div>
-
-          </div>
-
-          
-          <!-- right -->
-          <div class="tr-right">
-
-            <!-- title -->
-            <div class="right-title">
-              <div class="right-titleLogo">
-                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
-              </div>
-              <div class="right-titleContent">
-                <h1>비밀번호 변경</h1>
-              </div>
-            </div>
-
-            <div class="right-contents">
-
-              <div class="right-content">
-                <h2><i class="fas fa-tags"></i>꼭 읽어주세요</h2>
+              <div class="middleForm-content">
+                <h2><i class="fas fa-tags"></i>꼭 읽어주세요.</h2>
               </div>
 
-              <div class="right-content">
-                <h2>주기적인 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요.</h2>
-                <p>여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 비밀번호를 주기적으로 변경해 주는 것이 안전합니다.</p>
+              <div class="middleForm-content">
+                <p>주기적인 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요.</p2>
+                <p>여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 <br>비밀번호를 주기적으로 변경해 주는 것이 안전합니다.</p>
               </div>
 
-              <div class="right-content">
+              <div class="middleForm-content">
                 <h2>사용 불가능한 비밀번호</h2>
                 <p>공백이 포함된 경우</p>
                 <p>영문/숫자/특수문자 중 2가지 미만 조합인 경우</p>
                 <p>비밀번호 글자수가 8자미만 또는 16자 초과인 경우</p>
+                <!-- <div class="form-indentation">
+                </div> -->
               </div>
 
-              <form action="/mypage-password" method="post">
-
-                <div class="form-contents">
-
-                  <div class="form-content">
-                    <h2>현재 비밀번호 </h2>
-                    <input type="text" name="password" placeholder="현재 비밀번호">
-                    <p>현재 사용중인 비밀번호를 입력해주세요.</p>
-                  </div>
-
-                  <div class="form-content">
-                    <h2>새 비밀번호</h2>
-                    <input type="text" name="newPassword" placeholder="새 비밀번호">
-                    <p>변경하실 비밀번호를 입력해주세요.</p>
-                  </div>
-
-                  <div class="form-content">
-                    <h2>새 비밀번호 확인</h2>
-                    <input type="text" name="checkNewPassword" placeholder="새 비밀번호 확인">
-                    <p>새 비밀번호를 다시 한번 입력해주세요.</p>
-                  </div>
-                  
-                  <div class="form-content button">
-                    <button class="btn-gradient yellow large check" type="button">확인</button>
-                  </div>
-
+              <div class="middleForm-content">
+                <h2><i class="fas fa-check"></i> 현재 비밀번호</h2>
+                <div class="form-indentation">
+                  <input type="text" name="password" placeholder="현재 비밀번호" class="inputNow" oninput="checkAllMatch()">
+                  <p class="nowSub">현재 사용중인 비밀번호를 입력해주세요.</p>
                 </div>
+              </div>
 
-                <!-- modal -->
-                <div class="form-modals">
-                  <div class="form-modal">
-
-                    <div class="modal-header">
-                      <span>X</span>
-                    </div>
-
-                    <div class="modal-content">
-                      <p>진짜 수정하시겠습니까?</p>
-                    </div>
-
-                    <div class="modal-button">
-                      <button class="btn-gradient large yellow cancel" type="button">취소</button>
-                      <button class="btn-gradient large yellow recheck" type="submit">확인</button>
-                    </div>
-
-                  </div>
+              <div class="middleForm-content">
+                <h2><i class="fas fa-check"></i> 새 비밀번호</h2>
+                <div class="form-indentation">
+                  <input type="text" name="newPassword" placeholder="새 비밀번호" class="inputFirst" oninput="checkAllMatch()">
+                  <p class="firstSub">변경하실 비밀번호를 입력해주세요.</p>
                 </div>
+              </div>
 
-              </form>
-              <!-- form end -->
+              <div class="middleForm-content">
+                <h2><i class="fas fa-check"></i> 새 비밀번호</h2>
+                <div class="form-indentation">
+                  <input type="text" name="checkNewPassword" placeholder="새 비밀번호 확인" class="inputSecond" oninput="checkAllMatch()">
+                  <p class="secondSub">변경하실 비밀번호를 입력해주세요.</p>
+                </div>
+              </div>
+
+              <div class="middleForm-content">
+                <button class="check" type="button" >수정하기</button>
+              </div>
 
             </div>
-            <!-- right-contents end -->
+          
+            <!-- modal -->
+            <div class="middleModal-box">
+              <div class="middleModal-content">
 
-          </div>
-          <!-- right end -->
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+                <p>비밀번호를 변경하시겠습니까?</p>
+                <button type="button" onclick="closeModal()">취소</button>
+                <button type="submit">확인</button>
+              
+              </div>
+            </div>
+            <!-- modal end -->
+
+          </form>
+          <!-- form end -->
+
+          <input type="hidden" id="nameSRC" value="${isUpdated ? updatedMember.name : nowMember.name}">
+          <input type="hidden" id="birthSRC" value="${isUpdated ? updatedMember.birth : nowMember.birth}">
+          <input type="hidden" id="emailSRC" value="${isUpdated ? updatedMember.email : nowMember.email}">
 
         </div>
-        <!-- tr end -->
-
-      </section>
-    </main>
-
-    <!-- footer -->
-    <%@ include file="../include/footer.jsp" %>
+        <!-- middle-box end -->
+      </main>
+      <!-- section-middle end -->
   
-</body>
+      <aside class="section-rightAside">
+        <%@ include file="mypage-rightNavigation.jsp" %>
+      </aside>
+
+    </section>
+    <!-- section-container end -->
+    
+    <section class="section-footer">
+      <%@ include file="../include/footer.jsp" %>
+    </section>
+    
+  </body>
 </html>
