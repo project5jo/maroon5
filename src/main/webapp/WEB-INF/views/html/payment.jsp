@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>결제 페이지</title>
+  <title>주문 결제 | 애착 페이지</title>
 
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/payment.css" />
@@ -102,7 +102,7 @@
                     value="${loginUser.nickName}"
                     name="receiverName"
                     
-            />
+                    required />
           </div>
         
           <div class="tr">
@@ -112,16 +112,17 @@
                     class="receiver-phone"
                     placeholder="받으실분 전화번호를 입력하세요"
                     name="receiverPhone"
+                    required
             />
           </div>
           <div class="tr">
             <p class="th-title">주소<span></span></p>
             <div class="postal-code">
-              <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1">
+              <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1" required>
               <button type="button" class="postal-code-search" onclick="sample6_execDaumPostcode()">주소검색</button>
             </div>
-            <input type="text" id="sample6_address" placeholder="주소" name="address2">
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3">
+            <input type="text" id="sample6_address" placeholder="주소" name="address2" required>
+            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3" required>
             <input class="sample6-extraAddress" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
           </div>
         </div>
@@ -139,8 +140,9 @@
                       class="usesPoint"
                       placeholder="사용할 포인트를 입력하세요"
                       name="usesPoint"
+                      required
               />
-              <button type="button" class="btn-point">적용</button>
+              <!-- <button type="button" class="btn-point">적용</button> -->
             </div>
             <p class="user-point-info">
               <span>보유하신 포인트: </span>${userPoint}
