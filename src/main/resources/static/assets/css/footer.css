@@ -19,6 +19,7 @@ footer {
 .footer-content ul {
   display: flex;
   flex-direction: row;
+  padding-top: 10px;
 }
 
 .footer-content ul li {
