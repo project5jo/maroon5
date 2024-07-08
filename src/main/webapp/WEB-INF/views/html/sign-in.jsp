@@ -7,12 +7,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>나의 애착 페이지</title>
 
     <link rel="stylesheet" href="/assets/css/sign-in.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
     <script src="/assets/js/SignIn.js" defer></script>
+    <link rel="icon" href="/assets/img/favicon.ico">
     <script src="/assets/js/category.js/" defer></script>
   </head>
   <body>

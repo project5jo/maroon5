@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
+    <title>나의 애착 페이지</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <body>
 <div>

@@ -48,4 +48,5 @@ public interface MemberMapper {
     boolean chargePoint (@Param("account") String account, @Param("point") int point);
 
 
+    String checkPassword(@Param("account") String account);
 }

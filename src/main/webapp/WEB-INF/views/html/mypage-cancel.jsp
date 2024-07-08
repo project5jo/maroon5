@@ -6,12 +6,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>회원탈퇴 | 애착 페이지</title>
 
     <link rel="stylesheet" href="/assets/css/mypage-cancel.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css"/>
-
+    <link rel="icon" href="/assets/img/favicon.ico">
     <script src="/assets/js/mypage-cancel.js" defer></script>
     <script src="/assets/js/mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
@@ -26,9 +26,6 @@
       <%@ include file="../include/header.jsp" %>
     </section>
 
-    <header class="section-title">
-      <%@ include file="mypage-title.jsp" %>
-    </header>
 
     <section class="section-container">
   

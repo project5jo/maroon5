@@ -7,10 +7,11 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Document</title>
+    <title>나의 애착 페이지</title>
     <link rel="stylesheet" href="/assets/css/header.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <link rel="stylesheet" href="/assets/css/bgChange.css">
+    <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -42,7 +43,7 @@
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
                 <p class="point">${topicContent}</p>
-                <c:if test="${loginUser.userRole == 'ADMIN'}">
+                <c:if test="${loginUser.userRole == 'admin'}">
                     <a href="/zzz" id="admin">ADMIN PAGE</a>
                 </c:if>
             </div>

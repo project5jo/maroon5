@@ -7,7 +7,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>비밀번호 찾기 | 애착 페이지</title>
 
     <!-- 프리텐다드 웹폰트 -->
     <link
@@ -19,6 +19,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <link rel="stylesheet" href="/assets/css/modify-pw.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
+    <link rel="icon" href="/assets/img/favicon.ico">
     <script src="/assets/js/category.js/" defer></script>
   </head>
   <body>

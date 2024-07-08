@@ -4,10 +4,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>장바구니</title>
+    <title>장바구니 | 애착 페이지</title>
     <link rel="stylesheet" href="/assets/css/shop-cart.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>
+  <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>

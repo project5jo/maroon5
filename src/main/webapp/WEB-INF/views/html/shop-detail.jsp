@@ -4,10 +4,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>상품 상세 정보</title>
+    <title>상품 상세 정보 | 애착 페이지</title>
     <link rel="stylesheet" href="/assets/css/shop-detail.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>
+    <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>
@@ -22,15 +23,9 @@
                     <div class="details">
                         <div class="wrapper">
                             <div class="description">
-                                <p class="item-desc">${item.shopItemDesc}</p>
                                 <p class="item-name point">${item.shopItemName}</p>
                                 <p class="item-price point">
                                     ${item.shopItemPrice}원
-                                </p>
-                                <p class="item-info">
-                                    시원한 향초에 대한 설명입니다. <br />
-                                    시원한 향초에 대한 설명이라구요오옹. <br />
-                                    시원한 향초 구매하면 너머어어무 감사여 <br />
                                 </p>
                             </div>
                             <form id="addToCartForm" action="/cart" method="post" onsubmit="return handleFormSubmit(event)">
