@@ -1,9 +1,11 @@
 package com.spring.mood.projectmvc.controller.controller;
 
 import com.spring.mood.projectmvc.dto.responseDto.ShoppingCartResponseDto;
+import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +41,10 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/cart")
-    public String getCart(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userAccount = authentication.getName();
+    public String getCart(Model model, HttpSession session) {
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(userAccount);
+        List<ShoppingCartResponseDto> cartItems = shoppingCartService.getCartByUser(loginUser.getAccount());
         model.addAttribute("cartItems", cartItems);
 
         int cartTotalPrice = cartItems.stream()
