@@ -23,16 +23,16 @@ body {
   flex-wrap: wrap;
   gap: 0.1px;
 }
-
 .main-container ul li {
   width: calc((100% - 0.5px) / 3);
   border: 1px solid #432626;
   border-right: none;
   margin-bottom: 50px;
-  position: relative;
+  position: relative; /* 추가 */
   line-height: 140%;
   z-index: 1;
   flex-wrap: wrap;
+  padding-bottom: 50px; /* 추가: .item-cart-btn 높이만큼 여백 추가 */
 }
 
 .main-container ul li:nth-child(3n) {
@@ -94,13 +94,14 @@ ul li .img-box {
   display: flex;
   justify-content: space-between;
   text-align: center;
-
   color: white;
   font-size: 16px;
   font-weight: 500;
-
   background: #422626;
   cursor: pointer;
+  position: absolute; /* 추가 */
+  bottom: 0; /* 추가 */
+  left: 0; /* 추가 */
 }
 
 .item-cart-btn > p {
