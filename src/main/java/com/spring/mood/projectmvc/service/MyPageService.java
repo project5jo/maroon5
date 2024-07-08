@@ -115,4 +115,13 @@ public class MyPageService {
 
         return isUpdated;
     }
+
+    public boolean serviceCheckPassword(String account, String password) {
+
+        String foundPassword = membermapper.checkPassword(account);
+
+        if (encoder.matches(password, foundPassword)) {
+            return true;
+        } else {return false;}
+    }
 }

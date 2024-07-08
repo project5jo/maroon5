@@ -10,17 +10,47 @@ const $secondSub = document.querySelector(".secondSub"); // 새 비밀번호 확
 
 const passwordValid = /^(?=.*[a-zA-Z!@#$%^&*()\-_=+{};:,<.>])(?=.*\d).{7,15}$/; //비밀번호에 입력가능한 문자열
 
+// $nowSub.style.color = "blue";
+//             $nowSub.textContent = "";
 $inputNow.addEventListener('input', e => {
-    setTimeout(() => {
-        // 비밀번호 공백체크
-        if (e.target.value.trim() === "" || e.target.value.length === 0) {
-          $nowSub.style.color = "red";
-          $nowSub.textContent = "비밀번호는 필수 입력정보입니다.";
-        } else {
-            $nowSub.style.color = "blue";
-            $nowSub.textContent = "";
-        }
-    })
+  setTimeout(() => {
+      // 비밀번호 공백체크
+      if (e.target.value.trim() === "" || e.target.value.length === 0) {
+        $nowSub.style.color = "red";
+        $nowSub.textContent = "비밀번호는 필수 입력정보입니다.";
+      }else {
+        const $inputNowValue = $inputNow.value;
+        let encodedPassword = encodeURIComponent($inputNowValue);
+        const URL = `/checkpassword?password=${encodedPassword}`;
+        // const URL = `/checkpassword`;
+
+        fetch(URL, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({ password: $inputNowValue })
+            })
+      //   fetch(URL, {
+      //     method: 'POST',
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({
+      //         password: encodedPassword
+      //     })
+      // })
+        .then(res => res.json())
+        .then(json => {
+            if (json === true) {
+              $nowSub.style.color = 'blue';
+              $nowSub.textContent = '현재 비밀번호와 일치합니다';
+
+            } else {
+              $nowSub.style.color = 'red';
+              $nowSub.textContent = "현재 비밀번호와 일치하지 않습니다. 다시입력해주세요.";
+            }
+        })
+      } 
+  })
 });
 
 
@@ -99,7 +129,7 @@ const $check = document.querySelector('.check'); // 확인 버튼
 function checkAllMatch() {
 
     // 현재 비밀번호가 공백이 아니고, 새 비밀번호와 새 비밀번호 확인이 일치하는지 확인
-    if ($inputNow.value.trim() !== '' && $inputFirst.value.trim() !== '' && $$inputSecond.value.trim() !== '' && $inputFirst.value === $inputSecond.value) {
+    if ($inputNow.value.trim() !== '' && $inputFirst.value.trim() !== '' && $inputSecond.value.trim() !== '' && $inputFirst.value === $inputSecond.value) {
         $check.style.backgroundColor = '#4d3333';
         $check.addEventListener('click', openModal);
     } else {
