@@ -34,18 +34,13 @@ public class MyPageController {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        if (loginUser != null) { // 로그인 했을 경우 메인페이지 띄우기
+        // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+        ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
 
-            // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
-            ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
+        // JSP 로 dto 보내기
+        model.addAttribute("nowMember", dto);
 
-            // JSP 로 dto 보내기
-            model.addAttribute("nowMember", dto);
-
-            return "html/mypage-main";
-        }
-
-        return "redirect:/sign-in"; // 로그인 안했을 경우 로그인페이지 띄우기
+        return "html/mypage-main";
     }
 
     // 마이페이지 들어갔을 때 등록된 프로필사진이 있다면 띄우기
