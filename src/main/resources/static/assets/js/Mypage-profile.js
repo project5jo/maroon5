@@ -70,7 +70,9 @@ $defaultBtn.addEventListener('click', e => {
 $backBtn.addEventListener('click', e => {
 
     // JSP 에서 서버에 저장된 이미지 파일 경로 가져오기
+    console.log('서버사진', $profileDB.value);
     $profileImg.src = $profileDB.value;
+    // $profileImg.src = "/assets/img/profile3.jpg";
 
     $profileInputStatus.value = "back";
     // console.log("인풋저장상태", $profileInputStatus.value);

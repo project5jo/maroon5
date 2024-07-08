@@ -3,7 +3,6 @@ package com.spring.mood.projectmvc.controller.controller;
 import com.spring.mood.projectmvc.dto.requestDto.RequestMemberDto;
 import com.spring.mood.projectmvc.service.MemberService;
 import com.spring.mood.projectmvc.util.FileUploadUtil;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
