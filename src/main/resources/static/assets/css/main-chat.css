@@ -100,6 +100,7 @@
 .cancelBtn {
   width: 50px;
   height: 50px;
+  z-index: 100;
   position: relative;
   background: none;
   cursor: pointer;
@@ -109,7 +110,7 @@
   position: absolute;
   width: 20px;
   height: 2px;
-
+  z-index: 100;
   left: 22px;
   top: 20px;
 }

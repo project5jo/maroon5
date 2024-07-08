@@ -13,7 +13,7 @@ header {
   display: flex;
   align-content: center;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 9999;
+  z-index: 55;
 }
 
 .menu .inner {
@@ -34,6 +34,7 @@ nav.menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 55;
 }
 
 .menu .logo a {
