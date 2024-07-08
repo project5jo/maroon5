@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/shop-cart.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>
+  <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>

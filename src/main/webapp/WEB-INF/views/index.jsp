@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/css/header.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <link rel="stylesheet" href="/assets/css/bgChange.css">
+    <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
