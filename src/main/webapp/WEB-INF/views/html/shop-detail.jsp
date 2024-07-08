@@ -27,6 +27,7 @@
                                 <p class="item-price point">
                                     ${item.shopItemPrice}원
                                 </p>
+                                <p class="item-desc">${item.shopItemDesc}</p>
                             </div>
                             <form id="addToCartForm" action="/cart" method="post" onsubmit="return handleFormSubmit(event)">
                                 <div class="quantity">
