@@ -17,7 +17,7 @@ public class myPageWebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 인터셉터를 등록하고 /mypage/** 경로에 대해 적용
         registry.addInterceptor(interceptor)
-                .addPathPatterns("/mypage-**");
+                .addPathPatterns("/mypage**");
     }
 
 }
