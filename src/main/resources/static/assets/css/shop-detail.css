@@ -68,6 +68,9 @@ body {
   padding: 30px 0 50px 0;
   font-style: normal;
 }
+p.item-desc {
+  margin-top: 100px;
+}
 
 p.item-name {
   font-weight: 700;
