@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/css/mypage-main.css">
+    <link rel="stylesheet" href="/assets/css/mypage-main.css" />
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css"/>
 
-    <script src="/assets/js/Mypage.js" defer></script>
-    <!-- <script src="/assets/js/Mypage-cancel.js" defer></script> -->
+    <!-- <script src="/assets/js/mypage-point.js" defer></script> -->
+    <script src="/assets/js/mypage.js" defer></script>
     <script src="/assets/js/category.js/" defer></script>
 
   </head>
@@ -22,153 +22,231 @@
     <!-- modalBack -->
     <div class="modalBack"></div>
 
-    <!-- header  -->
-    <%@ include file="../include/header.jsp" %>
+    <section class="section-header">
+      <%@ include file="../include/header.jsp" %>
+    </section>
+
+    <header class="section-title">
+      <%@ include file="mypage-title.jsp" %>
+    </header>
+
+    <section class="section-container">
   
-    <!-- main -->
-    <main>
+      <nav class="section-leftNav">
+        <%@ include file="mypage-leftNavigation.jsp" %>
+      </nav>
+  
+      <main class="section-main">
+        <div class="middle-box">
+          <div class="memberInfo">
 
-      <section class="mainpage">
+            <div class="profileInfo">
 
-        <div class="tr">
+              <div class="profileInfo-img">
+                <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile" onclick="openProfile ()">
+              </div>
+        
+              <div class="profileInfo-icon" onclick="openProfile ()">
+                <i class="fas fa-user-cog"></i>
+              </div>
 
-          <!-- left -->
-          <div class="tr-left">
+            </div>
 
-            <div class="profile-container">
-              <div class="profile-box">
-                <div class="profile">
-                  <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
+            <div class="nameInfo">
+              <div class="suffix">
+                <p>${nowMember.account}</p>
+                <span>님</span>
+              </div>
+              <div>
+                <p>환영합니다</p>
+              </div>
+
+              <div class="goMember-box">
+                <div class="goMember">
+                  <a  href="/mypage-password"><p>비밀번호 변경</p></a>
                 </div>
-                <div class="profile-icon">
-                  <i class="fas fa-user-cog"></i>
-                  <!-- <a href="#" class="btn-gradient yellow mini">사진수정<i class="fas fa-user-cog"></i></a> -->
-                  <input type="file" class="upload-img" accept="image/*" style="display: none" name="profileImage"/>
+                <div class="goMember">
+                  <a  href="/mypage-memberinfo"><p>회원정보수정</p></a>
                 </div>
               </div>
-              <p class="profile-name">키티 님</p>
+
             </div>
 
-            <div class="left-Menu">
-              <a  href="/mypage-point"><p class="Menu-title">포인트 충전 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a  href="/mypage-orderInfo"><p class="Menu-title">주문내역</p></a>
-            </div>
-            <div class="left-Menu">
-              <a  href="/mypage-profile"><p class="Menu-title">프로필사진 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-memberinfo"><p class="Menu-title">회원정보 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-password"><p class="Menu-title">비밀번호 수정 </p></a>
-            </div>
-            <div class="left-Menu">
-              <a href="/mypage-cancel"><p class="Menu-title">회원탈퇴 </p></a>
-            </div>
-            <div class="left-logout">
-              <a href="/sign-out" class="btn-gradient yellow mini">로그아웃<i class="fas fa-user-cog"></i></a>
+            <div class="pointInfo">
+              <div class="myPoint">
+                <p>내 포인트</p>
+              </div>
+              <div class="suffix">
+                <p>${nowMember.point}</p>
+                <span>원</span>
+              </div>
+              <div class="goPoint">
+                <a  href="/mypage-point"><p>포인트 충전하러가기</p></a>
+              </div>
+
             </div>
 
           </div>
           
-          <!-- right -->
-          <div class="tr-right">
+          <div class="shoppingInfo">
 
-            <!-- title -->
-            <div class="right-title">
-              <div class="right-titleLogo">
-                <a href="/mypage"><i class="fas fa-chalkboard-teacher"></i></a>
+            <div class="homeInfo">
+              <div class="shoppingInfo-img">
+                <a  href="/shop"><img src="/assets/img/shop.jpg" alt="shop"></a>
               </div>
-              <div class="right-titleContent">
-                <h1>마이페이지메인</h1>
+              
+              <div class="goBtn">
+                <a  href="/shop"><p>쇼핑 홈</p></a>
               </div>
             </div>
 
-            <!-- <div class="right-contents">
-
-              <div class="right-content">
-                <p>회원 탈퇴를 신청하기 전에 안내사항을 꼭 확인해주세요.</p>
+            <div class="orderInfo">
+              <div class="shoppingInfo-img">
+                <a  href="/#"><img src="/assets/img/order.jpg" alt="order"></a>
               </div>
-
-              <div class="right-content">
-                <h2><i class="fas fa-check"></i>사용하고 계신 아이디 ${account} 는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h2>
-                <p>탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.</p>
+              <div class="goBtn">
+                <a  href="/#"><p>주문상세</p></a>
               </div>
+            </div>
 
-              <div class="right-content">
-                <h2><i class="fas fa-check"></i>탈퇴 후 회원정보 및 서비스 이용기록은 모두 삭제됩니다.</h2>
-                <p>회원정보 및 구매기록 등 서비스 이용기록은 모두 삭제되며 삭제된 데이터는 복구되지 않습니다. 
-                  <br>삭제되는 내용을 확인하시고 필요한 데이터는 미리 백업을 해주세요.
-                </p>
+            <div class="cartInfo">
+              <div class="shoppingInfo-img">
+                <a  href="/#"><img src="/assets/img/cart.jpg" alt="cart"></a>
               </div>
-
-              <div class="right-content">
-                <table>
-                  <tr>
-                      <td>회원정보</td>
-                      <td>회원가입시 저장된 개인정보 삭제</td>
-                  </tr>
-                  <tr>
-                      <td>구매정보</td>
-                      <td>구매기록 삭제</td>
-                  </tr>
-                </table>
+              <div class="goBtn">
+                <a  href="/#"><p>장바구니</p></a>
               </div>
+            </div>
 
-              <form action="/mypage-cancel" method="post">
+          </div>
 
-                <div class="form-contents">
-                  
-                  <div class="form-content">
-                    <p>탈퇴 후에는 아이디 ${account} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</p>
-                    <input type="checkbox" class="cancelInput" name="check" value="" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.
+          
+
+            <!-- <div class="middleForm-box">
+
+              <div class="middleForm-profile">
+
+                <div class="middleProfile-content">
+
+                  <div class="middleProfile-img">
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile" onclick="openProfile ()">
                   </div>
-    
-                  <div class="form-content button">
-                    <button class="btn-gradient large check" type="reset">확인</button>
-                  </div>
-
-                  <!-- modal -->
-                  <div class="form-modals">
-                    <div class="form-modal">
-
-                      <div class="modal-header">
-                        <span>X</span>
-                      </div>
-
-                      <div class="modal-content">
-                        <p>진짜 수정하시겠습니까?</p>
-                      </div>
-
-                      <div class="modal-button">
-                        <button class="btn-gradient large yellow cancel" type="button">취소</button>
-                        <button class="btn-gradient large yellow recheck" type="submit">확인</button>
-                      </div>
-
-                    </div>
+            
+                  <div class="middleProfile-icon" onclick="openProfile ()">
+                    <i class="fas fa-user-cog"></i>
                   </div>
 
                 </div>
 
-              </form>
-              <!-- form end -->
+                <div class="middleProfile-nameBox">
+
+                  <div class="name-content">
+                    <span class="name">키티키티키티키티</span>
+                    <span class="gray right">님</span>
+                    <div>
+                        <span class="gray">안녕하세요.</span>
+                    </div>
+                  </div>
+
+                  <div class="btn-flex">
+                    <div class="name-infoBtn">
+                      <p>프로필사진수정</p>
+                    </div>
+  
+                    <div class="name-infoBtn">
+                      <p>회원정보수정</p>
+                    </div>
+                  </div>
+
+                </div>
+          
+              </div>
+
+              <div class="middleForm-profile">
+                <div class="middlePoint-content">
+
+                  <div class="middleProfile-point">
+                    <p class="left-point">내 포인트</p>
+                    <div class="right-point">
+                      <span>1000000000</span>
+                      <span class="gray right">원</span>
+                    </div>
+                  </div>
+
+                  <div class="name-infoBtn">
+                    <p>포인트 충전하러가기 ></p>
+                  </div>
+                  
+                </div>
+              </div>
+
+
+              <div class="middleForm-point">
+                <div class="middleProfile-content">
+                  <div class="middleProfile-img">
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile" onclick="openProfile ()">
+                  </div>
+                  <p>쇼핑홈</p>
+                </div>
+
+                <div class="middleProfile-content">
+                  <div class="middleProfile-img">
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile" onclick="openProfile ()">
+                  </div>
+                  <p>주문내역</p>
+                </div>
+
+                <div class="middleProfile-content">
+                  <div class="middleProfile-img">
+                    <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile" onclick="openProfile ()">
+                  </div>
+                  <p>장바구니</p>
+                </div>
+
+              </div>
+        
+          
+              <div class="profile-infoBtn">
+                <a  href="/mypage-memberinfo"><p class="Menu-title">회원정보수정</p></a>
+              </div>
+
+              
+
+              <div class="middleForm-content">
+                <button class="check" type="button" >충전하기</button>
+              </div>
 
             </div> -->
-            <!-- right-contents end -->
+          
+            <!-- modal -->
+            <div class="middleModal-box">
+              <div class="middleModal-content">
 
-          </div>
-          <!-- right end -->
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+                <p>충전하시겠습니까?</p>
+                <button type="button" onclick="closeModal()">취소</button>
+                <button type="submit">확인</button>
+              
+              </div>
+            </div>
+            <!-- modal end -->
+
 
         </div>
-        <!-- tr end -->
-         
-      </section>
-    </main>
+        <!-- middle-box end -->
+      </main>
+      <!-- section-middle end -->
+  
+      <aside class="section-rightAside">
+        <%@ include file="mypage-rightNavigation.jsp" %>
+      </aside>
 
-    <!-- footer -->
-    <%@ include file="../include/footer.jsp" %>
+    </section>
+    <!-- section-container end -->
+    
+    <section class="section-footer">
+      <%@ include file="../include/footer.jsp" %>
+    </section>
     
   </body>
 </html>
