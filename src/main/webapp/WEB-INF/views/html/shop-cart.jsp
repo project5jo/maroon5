@@ -105,7 +105,7 @@
         const quantityInput = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .quantity-input');
         const itemPriceElement = document.querySelector('.cart-item[data-item-id="' + itemId + '"] .item-price-value');
         const newPrice = quantityInput.value * itemPrice;
-        itemPriceElement.textContent = newPrice;
+        itemPriceElement.textContent = newPrice +"원";
         updateTotalPrice();
     }
 
