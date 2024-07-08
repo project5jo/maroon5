@@ -57,9 +57,10 @@
                   <span class="item-total"><fmt:formatNumber value="${order.cart_total_price}" type="number" minFractionDigits="0" maxFractionDigits="0"/></span>
                   <span class="order-time"><fmt:formatDate value="${order.archived_at}" pattern="yyyy-MM-dd HH:mm"/></span>
                 </li>
-              <li class="order-total">주문 총액 : <fmt:formatNumber value="${entry.value.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/></li>
-                <button class="btn" onclick='goToOrderDetails("${order.order_id}", "${entry.value.totalPrice}")'>details</button>
+<%--                <button class="btn" onclick='goToOrderDetails("${order.order_id}", "${entry.value.totalPrice}")'>details</button>--%>
               </c:forEach>
+              <li class="order-total">주문 총액 : <fmt:formatNumber value="${entry.value.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/></li>
+              <button class="btn" onclick='goToOrderDetails("${entry.value.orders[0].order_id}", "${entry.value.totalPrice}")'>details</button>
             </ul>
           </div>
         </c:forEach>

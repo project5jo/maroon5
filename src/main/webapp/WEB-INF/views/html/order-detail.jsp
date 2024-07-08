@@ -36,7 +36,7 @@
                 <div class="prd-item-info">
                   <p class="prdName">${cartItem.shopItemName}</p>
                   <p>수량:${cartItem.orderDetailCount}개</p>
-<%--                  <p class="prdPrice"><span>${cartItem.cartTotalPrice}</span>원</p>--%>
+                  <p class="prdPrice"><span>${cartItem.shopItemPrice}</span>원</p>
                 </div>
               </li>
             </c:forEach>
@@ -45,37 +45,40 @@
 
         <div class="payment-Delivery">
           <p class="payment-sub-title">배송지<span></span></p>
-          <div class="tr">
-            <p class="th-title">받는분<span class="icoRequired"></span></p>
-            <input
-                    type="text"
-                    class="receiver-name"
-                    value="${loginUser.nickName}"
-                    name="receiverName"
-                    disabled
-            />
-          </div>
-
-          <div class="tr">
-            <p class="th-title">받는분 휴대번호<span></span></p>
-            <input
-                    type="text"
-                    class="receiver-phone"
-                    placeholder="받으실분 전화번호를 입력하세요"
-                    name="receiverPhone"
-                    value="\${cartItems.receiverPhone}"
-                    disabled
-            />
-          </div>
-          <div class="tr">
-            <p class="th-title">주소<span></span></p>
-            <div class="postal-code">
-              <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1" value="\${cartItems.address1}" disabled>
+          <c:if test="${not empty cartItems}">
+            <c:set var="firstItem" value="${cartItems[0]}" />
+            <div class="tr">
+              <p class="th-title">받는분<span class="icoRequired"></span></p>
+              <input
+                      type="text"
+                      class="receiver-name"
+                      value="${firstItem.receiverName}"
+                      name="receiverName"
+                      disabled
+              />
             </div>
-            <input type="text" id="sample6_address" placeholder="주소" name="address2" value="\${cartItems.address2} " disabled>
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3" value="\${cartItems.address3}" disabled>
-            <input class="sample6-extraAddress" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
-          </div>
+
+            <div class="tr">
+              <p class="th-title">받는분 휴대번호<span></span></p>
+              <input
+                      type="text"
+                      class="receiver-phone"
+                      placeholder="받으실분 전화번호를 입력하세요"
+                      name="receiverPhone"
+                      value="${firstItem.receiverPhone}"
+                      disabled
+              />
+            </div>
+            <div class="tr">
+              <p class="th-title">주소<span></span></p>
+              <div class="postal-code">
+                <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1" value="${firstItem.address1}" disabled>
+              </div>
+              <input type="text" id="sample6_address" placeholder="주소" name="address2" value="${firstItem.address2}" disabled>
+              <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3" value="${firstItem.address3}" disabled>
+              <input class="sample6-extraAddress" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
+            </div>
+          </c:if>
         </div>
 
         <div class="order-price-info">
