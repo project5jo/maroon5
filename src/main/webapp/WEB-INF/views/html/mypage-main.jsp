@@ -52,31 +52,31 @@
                 <div class="shopping-info">
                     <p>쇼핑 홈</p>
                     <div class="shopping-img">
-                        <a href="/shop"><img src="/assets/img/shop.png" alt="shop" /></a>
+                        <a href="/shop"><img src="/assets/img/shopping.png" alt="shop" /></a>
                     </div>
                     <div class="actions">
-                        <button class="manage-btn">관리</button>
-                        <button class="more-btn">더보기</button>
+                        <button class="manage-btn">이동하기</button>
+<%--                        <button class="more-btn">더보기</button>--%>
                     </div>
                 </div>
                 <div class="shopping-info">
                     <p>주문상세</p>
                     <div class="shopping-img">
-                        <a href="/order-details"><img src="/assets/img/order.jpg" alt="order"/></a>
+                        <a href="/order-details"><img src="/assets/img/list.png" alt="order"/></a>
                     </div>
                     <div class="actions">
-                        <button class="manage-btn">관리</button>
-                        <button class="more-btn">더보기</button>
+                        <button class="manage-btn">이동하기</button>
+<%--                        <button class="more-btn">더보기</button>--%>
                     </div>
                 </div>
                 <div class="shopping-info">
                     <p>장바구니</p>
                     <div class="shopping-img">
-                        <a href="/cart"><img src="/assets/img/cart.jpg" alt="cart"/></a>
+                        <a href="/cart"><img src="/assets/img/cart.png" alt="cart"/></a>
                     </div>
                     <div class="actions">
-                        <button class="manage-btn">관리</button>
-                        <button class="more-btn">더보기</button>
+                        <button class="manage-btn">이동하기</button>
+<%--                        <button class="more-btn">더보기</button>--%>
                     </div>
                 </div>
             </div>

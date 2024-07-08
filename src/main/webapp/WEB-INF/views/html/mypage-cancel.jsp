@@ -26,9 +26,6 @@
       <%@ include file="../include/header.jsp" %>
     </section>
 
-    <header class="section-title">
-      <%@ include file="mypage-title.jsp" %>
-    </header>
 
     <section class="section-container">
   
