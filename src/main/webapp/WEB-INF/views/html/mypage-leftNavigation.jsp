@@ -5,6 +5,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="leftNavi-box">
 
   <div class="leftNavi-content">
+    <a  href="/mypage"><p class="Menu-title">홈 </p></a>
+  </div>
+
+  <div class="leftNavi-content">
     <a  href="/mypage-point"><p class="Menu-title">포인트 충전 </p></a>
   </div>
 
