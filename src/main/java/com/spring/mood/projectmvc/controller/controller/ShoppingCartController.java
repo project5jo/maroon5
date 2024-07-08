@@ -66,6 +66,8 @@ public class ShoppingCartController {
 
         List<Map<String, Object>> cartItems = (List<Map<String, Object>>) requestData.get("cartItems");
 
+
+
         try {
             for (Map<String, Object> item : cartItems) {
                 Long itemId = Long.valueOf((String) item.get("itemId"));
