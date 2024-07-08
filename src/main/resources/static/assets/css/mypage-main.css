@@ -3,6 +3,7 @@ body {
   background-color: #ebeae3;
   margin: 0;
   padding: 0;
+  color: #432626;
 }
 
 .section-header,
@@ -14,6 +15,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  padding-bottom: 80px;
 }
 
 .section-leftNav,
@@ -41,7 +43,7 @@ body {
   align-items: center;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ebeae3;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -70,7 +72,8 @@ body {
 .profile-actions a {
   display: block;
   margin-top: 5px;
-  color: #007bff;
+  color: #432626;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -82,7 +85,7 @@ body {
 .shopping-section {
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ebeae3;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -95,13 +98,15 @@ body {
 .shopping-info {
   width: 32%;
   padding: 10px;
-  background-color: #fff;
+  background-color: #ebeae3;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .shopping-info p {
   margin: 5px 0;
+  font-weight: 700;
+  color: #432626;
 }
 
 .shopping-img {
@@ -127,13 +132,15 @@ body {
 }
 
 .manage-btn {
-  background-color: #007bff;
+  background-color: #3b2a25;
   color: #fff;
+  font-weight: 700;
 }
 
 .more-btn {
   background-color: #f0f0f0;
   color: #333;
+  font-weight: 700;
 }
 
 .free-site {
@@ -144,7 +151,8 @@ body {
 .free-site-btn {
   padding: 15px 30px;
   background-color: #007bff;
-  color: #fff;
+  color: #432626;
+  font-weight: 700;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -163,7 +171,8 @@ body {
 }
 
 .leftNavi-content a, .rightNavi-content a {
-  color: #333;
+  color: #432626;
+  font-weight: 700;
   text-decoration: none;
   display: block;
   padding: 10px;
@@ -173,7 +182,8 @@ body {
 
 .leftNavi-content a:hover, .rightNavi-content a:hover {
   background-color: #5c4033;
-  color: #fff;
+  color: #432626;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -200,6 +210,8 @@ body {
 
 .profile-name {
   margin-top: 10px;
+  font-weight: 700;
+  color: #432626;
 }
 
 .profile-infoBtn a {

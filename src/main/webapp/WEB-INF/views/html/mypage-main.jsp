@@ -20,9 +20,6 @@
     <%@ include file="../include/header.jsp" %>
 </section>
 
-<header class="section-title">
-    <%@ include file="mypage-title.jsp" %>
-</header>
 
 <section class="section-container">
     <nav class="section-leftNav">
@@ -55,7 +52,7 @@
                 <div class="shopping-info">
                     <p>쇼핑 홈</p>
                     <div class="shopping-img">
-                        <a href="/shop"><img src="/assets/img/shop.jpg" alt="shop"/></a>
+                        <a href="/shop"><img src="/assets/img/shop.png" alt="shop" /></a>
                     </div>
                     <div class="actions">
                         <button class="manage-btn">관리</button>
@@ -85,9 +82,6 @@
             </div>
         </div>
 
-        <div class="free-site">
-            <button class="free-site-btn">gdgd</button>
-        </div>
 
         <div class="middleModal-box">
             <div class="middleModal-content">
