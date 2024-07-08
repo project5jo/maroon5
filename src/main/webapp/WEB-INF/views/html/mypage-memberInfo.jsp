@@ -53,7 +53,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 이름</h2>
                 <div class="form-indentation">
-                  <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}" class="inputName">
+                  <input type="text" name="name" value="${isUpdated ? updatedMember.name : nowMember.name}" class="inputName" autocomplete="off">
                   <p class="nameSub"></p>
                 </div>
               </div>
@@ -61,7 +61,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 생년월일</h2>
                 <div class="form-indentation">
-                  <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}" class="inputBirth">
+                  <input type="date" name="birth" value="${isUpdated ? updatedMember.birth : nowMember.birth}" class="inputBirth" autocomplete="off">
                   <p class="birthSub"></p>
                 </div>
               </div>
@@ -69,7 +69,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 이메일</h2>
                 <div class="form-indentation">
-                  <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}" class="inputEmail">
+                  <input type="text" name="email" value="${isUpdated ? updatedMember.email : nowMember.email}" class="inputEmail" autocomplete="off">
                   <p class="emailSub"></p>
                 </div>
               </div>

@@ -63,7 +63,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 현재 비밀번호</h2>
                 <div class="form-indentation">
-                  <input type="text" name="password" placeholder="현재 비밀번호" class="inputNow" oninput="checkAllMatch()">
+                  <input type="text" name="password" placeholder="현재 비밀번호" class="inputNow" oninput="checkAllMatch()" autocomplete="off">
                   <p class="nowSub">현재 사용중인 비밀번호를 입력해주세요.</p>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 새 비밀번호</h2>
                 <div class="form-indentation">
-                  <input type="text" name="newPassword" placeholder="새 비밀번호" class="inputFirst" oninput="checkAllMatch()">
+                  <input type="text" name="newPassword" placeholder="새 비밀번호" class="inputFirst" oninput="checkAllMatch()" autocomplete="off">
                   <p class="firstSub">변경하실 비밀번호를 입력해주세요.</p>
                 </div>
               </div>
@@ -79,7 +79,7 @@
               <div class="middleForm-content">
                 <h2><i class="fas fa-check"></i> 새 비밀번호</h2>
                 <div class="form-indentation">
-                  <input type="text" name="checkNewPassword" placeholder="새 비밀번호 확인" class="inputSecond" oninput="checkAllMatch()">
+                  <input type="text" name="checkNewPassword" placeholder="새 비밀번호 확인" class="inputSecond" oninput="checkAllMatch()" autocomplete="off">
                   <p class="secondSub">변경하실 비밀번호를 입력해주세요.</p>
                 </div>
               </div>

@@ -182,8 +182,8 @@ body {
 }
 
 #drop-area.highlight {
-  border-color: rgba(0, 0, 255, 0.7);
-  background-color: rgba(0, 0, 255, 0.4);
+  border-color: rgba(25, 25, 255, 0.6);
+  background-color: rgba(25, 25, 255, 0.1);
 }
 
 .form-profile img {
