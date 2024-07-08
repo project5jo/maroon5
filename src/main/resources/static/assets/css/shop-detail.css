@@ -74,22 +74,23 @@ p.item-desc {
 
 p.item-name {
   font-weight: 700;
-  font-size: 29px;
+  line-height: 140%;
+  font-size: 26px;
   margin-top: 25px;
   color: #432626;
 }
 
 p.item-price {
   font-weight: 500;
-  font-size: 23px;
-  margin-top: 70px;
+  font-size: 24px;
+  margin-top: 50px;
   color: #432626;
 }
 
 .item-info {
   margin-top: 153px;
   font-size: 15px;
-  line-height: 150%;
+
   color: #432626;
 }
 
@@ -98,8 +99,11 @@ p.item-price {
 .description p.item-desc {
   font-size: 14px;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 16px;
   color: #666666;
+  width: 430px;
+  margin-top: 160px;
+  line-height: 170%;
 }
 
 .quantity {
@@ -129,7 +133,7 @@ p.item-price {
 
 .plus-btn {
   border-left: 1px solid #422626;
-  font-size: 22px;
+  font-size: 20px;
   color: #422626;
 }
 .minus-btn {
