@@ -9,10 +9,14 @@ import com.spring.mood.projectmvc.util.SignInUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -130,6 +134,23 @@ public class MyPageController {
         model.addAttribute("nowMember", dto);
 
         return "html/mypage-password";
+    }
+
+    // 아이디, 이메일 중복검사 비동기 요청 처리
+    @PostMapping("/checkpassword")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkPassword (HttpSession session, @RequestParam("password")String password) {
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        boolean flag = false;
+
+        if (service.serviceCheckPassword (loginUser.getAccount(), password)) {
+            flag = true;
+        } else {
+            flag = false;
+        }
+        return new ResponseEntity<>(flag, HttpStatus.OK);
     }
 
     @PostMapping("/mypage-password")
