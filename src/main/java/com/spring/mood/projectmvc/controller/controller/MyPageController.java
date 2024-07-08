@@ -3,19 +3,14 @@ package com.spring.mood.projectmvc.controller.controller;
 import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
-import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.service.MyPageService;
-import com.spring.mood.projectmvc.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -29,14 +24,22 @@ public class MyPageController {
 
     // MyPage 클릭했을 때 조건에 맞는경우 웹페이지 띄우기
     @GetMapping("/mypage")
-    public String openMyPage (HttpSession session) {
+    public String openMyPage (HttpSession session, Model model) {
 
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
         if (loginUser != null) { // 로그인 했을 경우 메인페이지 띄우기
+
+            // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+            ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
+
+            // JSP 로 dto 보내기
+            model.addAttribute("nowMember", dto);
+
             return "html/mypage-main";
         }
+
         return "redirect:/sign-in"; // 로그인 안했을 경우 로그인페이지 띄우기
     }
 
@@ -115,7 +118,17 @@ public class MyPageController {
     }
 
     @GetMapping("/mypage-password")
-    public String openMyPagePassword () {
+    public String openMyPagePassword (HttpSession session, Model model) {
+
+        // 세션에서 로그인한 회원의 정보를 가져오기
+        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+        // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+        ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
+
+        // JSP 로 dto 보내기
+        model.addAttribute("nowMember", dto);
+
         return "html/mypage-password";
     }
 
@@ -137,9 +150,11 @@ public class MyPageController {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        String account = loginUser.getAccount();
+        // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+        ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
 
-        model.addAttribute("account", account);
+        // JSP 로 dto 보내기
+        model.addAttribute("nowMember", dto);
 
         return "html/mypage-cancel";
     }

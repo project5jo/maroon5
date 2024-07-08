@@ -1,6 +1,5 @@
 package com.spring.mood.projectmvc.service;
 
-import com.spring.mood.projectmvc.dto.requestDto.RequestMemberDto;
 import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.entity.Member;
@@ -11,9 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -83,7 +79,7 @@ public class MyPageService {
 
         // 프로필의 상태를 통해 처리과정 선택하기
 
-        if (profileStatus.equals("true")) {
+        if (profileStatus.equals("upload")) {
 
             String profilePath = "";
             profilePath = FileUploadUtil.uploadFile(rootPath, profile);
@@ -92,7 +88,7 @@ public class MyPageService {
 
             return isUpdated;
 
-        } else if (profileStatus.equals("deleteProfile")) {
+        } else if (profileStatus.equals("default")) {
 
             Member mofidyMember = new Member();
             mofidyMember.setUserAccount(account);
@@ -101,7 +97,7 @@ public class MyPageService {
 
             return isUpdated;
 
-        } else if (profileStatus.equals("nowProfile")) {
+        } else if (profileStatus.equals("back")) {
 
             int isUpdated = 0;
 

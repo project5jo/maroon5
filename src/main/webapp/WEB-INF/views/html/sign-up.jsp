@@ -91,6 +91,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="pw1"
                 placeholder="비밀번호를 입력하세요"
                 name="password"
+                oninput=" checkAllMatch()"
               />
               <p class="th-passwordSub1"></p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
@@ -99,6 +100,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="pw2"
                 placeholder="비밀번호를 입력하세요"
                 name="repassword"
+                oninput=" checkAllMatch()"
               />
               <p class="th-passwordSub2"></p>
             </div>
@@ -140,7 +142,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <!-- 하단 버튼 -->
             <div class="btn">
               <button class="cancel"><a href="/login">취소</a></button>
-              <button class="success">가입하기</button>
+              <button class="check" type="submit" disabled>가입하기</button>
             </div>
           </div>
         </form>
