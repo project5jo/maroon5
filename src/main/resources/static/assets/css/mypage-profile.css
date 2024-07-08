@@ -171,7 +171,7 @@ body {
   font-weight: 900;
 }
 
-.form-profile {
+#drop-area {
   width: 500px;
   height: 500px;
   margin: 0 auto;
@@ -180,12 +180,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+#drop-area.highlight {
+  border-color: rgba(25, 25, 255, 0.6);
+  background-color: rgba(25, 25, 255, 0.1);
+}
+
 .form-profile img {
   width: 400px;
   height: 400px;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.8);
 
 }
 

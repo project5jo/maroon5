@@ -30,10 +30,8 @@ function openProfileInput () {
 
 
 
-// 1-3. 인풋태그로 이미지파일 첨부한 경우 첨부파일 데이터 저장 & 클라이언트 처리
-$profileInput.addEventListener("change", (e) => {
-    // 인풋태그 에서 이미지파일 선택했을 때 
-    // 유저가 올린 파일
+// 1-3. input태그에 첨부한 파일 처리
+function addInputProfile () {
     const profileDate = $profileInput.files[0];
 
     if (profileDate) {
@@ -51,6 +49,13 @@ $profileInput.addEventListener("change", (e) => {
         $profileInputStatus.value = "upload";
         console.log("인풋저장상태", $profileInputStatus.value);
     } 
+}
+
+
+// 1-3. 인풋태그로 이미지파일 첨부한 경우 첨부파일 데이터 저장 & 클라이언트 처리
+$profileInput.addEventListener("change", (e) => {
+
+    addInputProfile ();
 })
 
 
@@ -70,11 +75,58 @@ $defaultBtn.addEventListener('click', e => {
 $backBtn.addEventListener('click', e => {
 
     // JSP 에서 서버에 저장된 이미지 파일 경로 가져오기
+    console.log('서버사진', $profileDB.value);
     $profileImg.src = $profileDB.value;
+    // $profileImg.src = "/assets/img/profile3.jpg";
 
     $profileInputStatus.value = "back";
     // console.log("인풋저장상태", $profileInputStatus.value);
 })
+
+
+
+// 2-1. 드랍변수목록
+
+// dropArea 요소 가져오기
+const $dropArea = document.getElementById('drop-area'); // 프로필 박스 창
+
+// dragenter 이벤트 리스너 등록
+$dropArea.addEventListener('dragenter', function(e) { // 드래그된 항목이 드랍영역에 진입할 때
+    e.preventDefault(); // 이벤트의 기본동작 취소시키고, 파일드롭한 경우 드롭영역에 파일 추가
+    e.stopPropagation(); // 이벤트의 전파를 중지시켜, 이벤트가 상위 요소로 전파되는 것을 막아 이벤트 핸들러가 중복 호출되는 것을 방지
+    $dropArea.classList.add('highlight'); // 드랍완료시 시각효과 제거하기
+}, false);
+
+// dragover 이벤트 리스너 등록
+$dropArea.addEventListener('dragover', function(e) { // 드랍영역 위에서 드래그된 항목이 움직일 때
+    e.preventDefault();
+    e.stopPropagation();
+    $dropArea.classList.add('highlight');
+}, false);
+
+// dragleave 이벤트 리스너 등록
+$dropArea.addEventListener('dragleave', function(e) { // 드랍영역을 드래그한 항목이 드랍영역를 벗어날 때
+    e.preventDefault();
+    e.stopPropagation();
+    $dropArea.classList.remove('highlight');
+}, false);
+
+// drop 이벤트 리스너 등록
+$dropArea.addEventListener('drop', function(e) { // 드래그한 항목을 드랍영역 위에 놓을 때
+    e.preventDefault();
+    e.stopPropagation();
+    $dropArea.classList.remove('highlight');
+
+    // 드롭된 파일 처리 로직 추가
+    const files = e.dataTransfer.files;
+    
+    if (files.length > 0) {
+        $profileInput.files = files;
+        addInputProfile ();
+    }
+}, false);
+
+
 
 
 

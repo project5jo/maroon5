@@ -47,7 +47,7 @@
               </div>
 
               <div class="middleForm-content">
-               <div class="form-profile" onclick="openProfileInput ()">
+               <div id="drop-area" class="form-profile" onclick="openProfileInput ()">
                   <img src="${not empty nowMember.profileImage ? nowMember.profileImage : '/assets/img/profile3.jpg'}" alt="profile">
                   <input type="file" class="formInput" accept="image/*" style="display: none" name="profile"/>
                   <input type="hidden" class="profileInputStatus" value="false" name="profileStatus">
@@ -67,7 +67,7 @@
               </div>
 
               <div class="middleForm-content checkCenter">
-                <button class="check" type="button" >적용하기</button>
+                <button class="check" type="button" onclick="activeCheck()" >적용하기</button>
               </div>
 
             </div>
@@ -79,7 +79,7 @@
                 <span class="modal-close" onclick="closeModal()">&times;</span>
                 <p>프로필사진을 변경하시겠습니까?</p>
                 <button type="button" onclick="closeModal()">취소</button>
-                <button type="submit" onclick="activeCheck ()">확인</button>
+                <button type="submit">확인</button>
               
               </div>
             </div>
