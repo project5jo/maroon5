@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>비밀번호 수정</title>
+  <title>마이페이지 비밀번호 | 애착 페이지</title>
 
   <link rel="stylesheet" href="/assets/css/mypage-password.css" />
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
