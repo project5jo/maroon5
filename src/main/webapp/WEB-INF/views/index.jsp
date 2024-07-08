@@ -42,7 +42,7 @@
             <div class="chat-title-content">
                 <i class="fas fa-bell"></i>
                 <p class="point">${topicContent}</p>
-                <c:if test="${loginUser.userRole == 'ADMIN'}">
+                <c:if test="${loginUser.userRole == 'admin'}">
                     <a href="/zzz" id="admin">ADMIN PAGE</a>
                 </c:if>
             </div>
