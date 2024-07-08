@@ -79,6 +79,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="account"
                 placeholder="아이디를 입력하세요"
                 name="account"
+                autocomplete="off"
               />
               <p class="th-accountSub"></p>
             </div>
@@ -92,6 +93,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 placeholder="비밀번호를 입력하세요"
                 name="password"
                 oninput=" checkAllMatch()"
+                autocomplete="off"
               />
               <p class="th-passwordSub1"></p>
               <p class="th-title margin-top">비밀번호 확인<span></span></p>
@@ -101,6 +103,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 placeholder="비밀번호를 입력하세요"
                 name="repassword"
                 oninput=" checkAllMatch()"
+                autocomplete="off"
               />
               <p class="th-passwordSub2"></p>
             </div>
@@ -113,6 +116,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="name"
                 placeholder="이름을 입력하세요"
                 name="name"
+                autocomplete="off"
               />
               <p class="th-nameSub"></p>
             </div>
@@ -125,6 +129,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="birth"
                 placeholder="생일을 입력하세요"
                 name="birth"
+                autocomplete="off"
               />
               <p class="th-birthSub"></p>
             </div>
@@ -135,6 +140,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 class="email"
                 placeholder="이메일을 입력하세요"
                 name="email"
+                autocomplete="off"
               />
               <p class="th-emailSub"></p>
             </div>

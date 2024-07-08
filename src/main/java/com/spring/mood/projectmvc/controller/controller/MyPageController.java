@@ -4,6 +4,8 @@ import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.service.MyPageService;
+import com.spring.mood.projectmvc.service.SignInService;
+import com.spring.mood.projectmvc.util.SignInUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -21,6 +25,7 @@ public class MyPageController {
 
     private static final Logger log = LoggerFactory.getLogger(MyPageController.class);
     private final MyPageService service;
+    private final SignInService signInService;
 
     // MyPage 클릭했을 때 조건에 맞는경우 웹페이지 띄우기
     @GetMapping("/mypage")
@@ -29,18 +34,13 @@ public class MyPageController {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
-        if (loginUser != null) { // 로그인 했을 경우 메인페이지 띄우기
+        // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
+        ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
 
-            // 로그인한 회원정보의 아이디를 통해 해당 회원 한 명의 정보 찾기
-            ResponseMyPageMemberInfoDto dto = service.serviceFindOne(loginUser.getAccount());
+        // JSP 로 dto 보내기
+        model.addAttribute("nowMember", dto);
 
-            // JSP 로 dto 보내기
-            model.addAttribute("nowMember", dto);
-
-            return "html/mypage-main";
-        }
-
-        return "redirect:/sign-in"; // 로그인 안했을 경우 로그인페이지 띄우기
+        return "html/mypage-main";
     }
 
     // 마이페이지 들어갔을 때 등록된 프로필사진이 있다면 띄우기
@@ -160,13 +160,20 @@ public class MyPageController {
     }
 
     @PostMapping ("/mypage-cancel")
-    public String deleteMemberInfo (HttpSession session, boolean deleteFlag) {
+    public String deleteMemberInfo (HttpSession session, boolean deleteFlag, HttpServletRequest request, HttpServletResponse response) {
         // 세션에서 로그인한 회원의 정보를 가져오기
         SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
 
         boolean isDeleted = service.serviceDelete(loginUser.getAccount(), deleteFlag);
 
         if (isDeleted) {
+            if (SignInUtil.isAutoLoggedIn(request)) {
+                signInService.autoLoginClear(request, response);
+            }
+            HttpSession newSession = request.getSession();
+            newSession.removeAttribute("loginUser");
+            newSession.invalidate();
+
             return "redirect:/";
         } else {
             return "/mypage-cancel";
@@ -212,17 +219,5 @@ public class MyPageController {
         } else {
             throw new RuntimeException ("업데이트에 실패하였습니다.");
         }
-    }
-
-    @GetMapping("/mypage-orderInfo")
-    public String openMyPagePaymentInfo (HttpSession session, Model model) {
-        // 세션에서 로그인한 회원의 정보를 가져오기
-        SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
-
-        String account = loginUser.getAccount();
-
-        model.addAttribute("account", account);
-
-        return "html/mypage-orderInfo";
     }
 }
