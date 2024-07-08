@@ -40,7 +40,7 @@
                 <div class="item-details">
                   <p class="shop-item-desc">${cartItem.shopItemDesc}</p>
                   <p class="title point">${cartItem.shopItemName}</p>
-                  <p class="price">얼마인지 불러오기 원</p>
+                  <p class="price">${cartItem.unitPrice} 원</p>
                 </div>
               </div>
               <div class="item-price">
