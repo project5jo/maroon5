@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>상품 목록</title>
-    <link rel="stylesheet" href="/assets/css/shop-index.css">
-    <link rel="stylesheet" href="/assets/css/shop-header.css"/>
-    <link rel="stylesheet" href="/assets/css/footer.css"/>
-    <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>상품 목록 | 애착 페이지</title>
+  <link rel="stylesheet" href="/assets/css/shop-index.css">
+  <link rel="stylesheet" href="/assets/css/shop-header.css"/>
+  <link rel="stylesheet" href="/assets/css/footer.css"/>
+  <script src="https://kit.fontawesome.com/a9dfb46732.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <%@ include file="../include/header.jsp" %>

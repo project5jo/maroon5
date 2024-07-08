@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Page</title>
+    <title>관리자 페이지 | 애착 페이지</title>
     <link rel="stylesheet" href="/assets/css/admin.css">
     <link rel="stylesheet" href="/assets/css/shop-header.css"/>
     <link rel="stylesheet" href="/assets/css/footer.css"/>

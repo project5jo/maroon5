@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Add Product</title>
+  <title>물품 추가 | 관리자</title>
   <link rel="stylesheet" href="/assets/css/shop-header.css"/>
   <link rel="stylesheet" href="/assets/css/shop-addItem.css"/>
   <link rel="stylesheet" href="/assets/css/footer.css"/>

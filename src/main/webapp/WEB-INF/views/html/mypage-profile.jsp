@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나의 예약 페이지</title>
+  <title>마이페이지 프로필 | 애착 페이지</title>
 
   <link rel="stylesheet" href="/assets/css/mypage-profile.css" />
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
