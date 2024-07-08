@@ -18,11 +18,9 @@ public class AdminChangeInterceptor implements HandlerInterceptor {
 //        String userRole = (String) request.getSession().getAttribute("userRole");
         SignInUserInfoDTO user = (SignInUserInfoDTO) request.getSession().getAttribute("loginUser");
 
-        // userRole 필드를 가져옵니다.
         String userRole = (user != null) ? user.getUserRole() : null;
 
-        // 역할이 ADMIN이 아니면 접근을 막습니다.
-        if (userRole == null || !userRole.equals("ADMIN")) {
+        if (userRole == null || !userRole.equals("admin")) {
             response.sendRedirect("/");
             return false;
         }
