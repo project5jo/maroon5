@@ -59,6 +59,16 @@ body {
   font-weight: 700;
 }
 
+#drop-area {
+  width: 180px;
+  height: 180px;
+}
+
+#drop-area.highlight {
+  border-color: rgba(0, 0, 255, 0.7);
+  background-color: rgba(0, 0, 255, 0.4);
+}
+
 .form-profile {
   width: 150px;
   height: 150px;
