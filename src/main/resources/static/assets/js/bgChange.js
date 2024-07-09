@@ -109,7 +109,6 @@
 const videoSources = [
   '/assets/img/am.mp4',
   '/assets/img/pm2.mp4',
-  '/assets/img/night.mp4',
   '/assets/img/pm1.mp4',
   '/assets/img/rainpm.mp4',
   '/assets/img/cloud.mp4',
