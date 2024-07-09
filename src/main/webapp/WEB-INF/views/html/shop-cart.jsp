@@ -39,8 +39,8 @@
               <!-- 상품 설명 -->
               <div class="cart-item-details-box">
                 <div class="item-details">
-                  <p class="shop-item-desc">${cartItem.shopItemDesc}</p>
                   <p class="title point">${cartItem.shopItemName}</p>
+                  <p class="shop-item-desc">${cartItem.shopItemDesc}</p>
                   <p class="price">${cartItem.unitPrice} 원</p>
                 </div>
               </div>

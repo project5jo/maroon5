@@ -61,11 +61,11 @@ body {
 
 .cart-item-img-box {
   border-right: 1px solid #432626;
-  width: 150px;
+  width: 170px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 }
 
 .cart-item-img-box a {
@@ -86,23 +86,37 @@ body {
   color: #432626;
   display: flex;
   align-items: center;
-  width: 600px;
-  height: 100%;
+  width: 700px;
+  /* height: 100%; */
   padding: 40px;
 }
 
 .item-details > .title {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .item-details p.shop-item-desc,
 .total-price-item {
   color: #666;
-  font-size: 12px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 150%;
+  margin-bottom: 15px;
   font-weight: 500;
+}
+
+.item-details p.shop-item-desc {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
+.item-details {
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
 }
 
 .price {
@@ -111,7 +125,7 @@ body {
 }
 
 .item-price {
-  width: calc((100% - 750px) / 2);
+  width: calc((100% - 870px) / 2);
   padding: 40px;
   border-right: 1px solid #432626;
   display: flex;
@@ -126,7 +140,7 @@ body {
 
 /* 수량 부분 */
 .item-quantity {
-  width: calc((100% - 750px) / 2);
+  width: calc((100% - 920px) / 2);
   padding: 40px;
   padding-right: 0;
   display: flex;
