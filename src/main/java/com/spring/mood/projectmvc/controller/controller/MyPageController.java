@@ -112,8 +112,11 @@ public class MyPageController {
         String account = loginUser.getAccount();
 
         // 로그인 아이디 & 서버에서 받은 프로필데이터를 서비스로 보내 수정처리 위임하기
-        int isUpdated = service.serviceUpdateProfile(account, profile, profileStatus);
-
+        int isUpdated = service.serviceUpdateProfile(account, profile, profileStatus, session);
+        if (isUpdated > 0) {
+            // 프로필 이미지 업데이트가 성공하면 loginUser 객체의 프로필 이미지 필드 갱신
+            session.setAttribute("loginUser", loginUser);
+        }
         model.addAttribute("isUpdated", isUpdated > 0);
         model.addAttribute("updatedMember", profile);
 
