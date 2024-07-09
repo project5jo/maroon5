@@ -11,7 +11,7 @@
   <link rel="icon" href="/assets/img/favicon.ico">
 </head>
 <body>
-  <%@ include file="../include/shop-header.jsp" %>
+  <%@ include file="../include/header.jsp" %>
   <div class="container">
     <div class="page-title">Add product</div>
     <div class="main-container">
