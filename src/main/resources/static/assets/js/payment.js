@@ -80,8 +80,11 @@ $inputPhonNum.addEventListener("keyup", (e) => {
     if ($inputPhonNum.classList.contains("falsefocus")) {
       $inputPhonNum.classList.remove("falsefocus");
     }
+    isPhonNumPatten = true;
   }
 });
+
+console.log(isPhonNumPatten);
 
 // 결제 버튼 이벤트
 $payBtn.addEventListener("click", async (event) => {
