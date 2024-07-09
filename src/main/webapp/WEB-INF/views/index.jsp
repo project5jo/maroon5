@@ -29,11 +29,12 @@
 
     <!-- 메인 배너 -->
     <section class="main_banner">
-        <video id="backgroundVideo" autoplay muted loop playsinline
-               style="width: 100%; height: 100%; object-fit: cover;">
-            <source id="videoSource" src="" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
+        <video id="backgroundVideo1" class="backgroundVideo" autoplay muted loop>
+            <source id="videoSource1" src="/assets/img/am.mp4" type="video/mp4">
+          </video>
+          <video id="backgroundVideo2" class="backgroundVideo hidden" autoplay muted loop>
+            <source id="videoSource2" src="" type="video/mp4">
+          </video>
         <div class="inner"></div>
     </section>
 

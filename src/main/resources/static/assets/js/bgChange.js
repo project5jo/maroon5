@@ -105,7 +105,6 @@
 //
 // // DOMContentLoaded 이벤트가 발생하면 init 함수 실행
 // document.addEventListener('DOMContentLoaded', init);
-
 // 배경 비디오 소스 목록
 const videoSources = [
   '/assets/img/am.mp4',
@@ -118,36 +117,41 @@ const videoSources = [
   '/assets/img/dog.mp4'
 ];
 
+let currentVideo = 1; // 현재 표시 중인 비디오
+
 // 랜덤 배경 비디오 설정 함수
 function setRandomBackground() {
   const randomIndex = Math.floor(Math.random() * videoSources.length);
   const videoSource = videoSources[randomIndex];
 
-  const videoElement = document.getElementById('backgroundVideo');
-  const sourceElement = document.getElementById('videoSource');
+  const videoElement1 = document.getElementById('backgroundVideo1');
+  const videoElement2 = document.getElementById('backgroundVideo2');
+  const sourceElement1 = document.getElementById('videoSource1');
+  const sourceElement2 = document.getElementById('videoSource2');
 
-  if (videoElement && sourceElement) {
-    videoElement.classList.add('hidden'); // 페이드 아웃
-
-    setTimeout(() => {
-      sourceElement.src = videoSource;  // 비디오 소스를 설정
-      videoElement.load();  // 비디오를 다시 로드
-      videoElement.classList.remove('hidden'); // 페이드 인
-    }, 1000); // 1초 후 비디오 소스 변경
+  if (currentVideo === 1) {
+    sourceElement2.src = videoSource;  // 다음 비디오 소스 설정
+    videoElement2.load();  // 다음 비디오 로드
+    videoElement2.classList.remove('hidden'); // 다음 비디오 페이드 인
+    videoElement1.classList.add('hidden'); // 현재 비디오 페이드 아웃
+    currentVideo = 2; // 다음 비디오로 전환
   } else {
-    console.error('Video element not found');
+    sourceElement1.src = videoSource;  // 다음 비디오 소스 설정
+    videoElement1.load();  // 다음 비디오 로드
+    videoElement1.classList.remove('hidden'); // 다음 비디오 페이드 인
+    videoElement2.classList.add('hidden'); // 현재 비디오 페이드 아웃
+    currentVideo = 1; // 다음 비디오로 전환
   }
 }
 
 // 초기화 함수
 function init() {
   setRandomBackground();
-  setInterval(setRandomBackground, 20000); // 20초마다 배경 변경
+  setInterval(setRandomBackground, 10000); // 20초마다 배경 변경
 }
 
 // DOMContentLoaded 이벤트가 발생하면 init 함수 실행
 document.addEventListener('DOMContentLoaded', init);
-
 
 
 
