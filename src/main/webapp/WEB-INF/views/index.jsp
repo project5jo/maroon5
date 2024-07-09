@@ -68,7 +68,7 @@
             </c:if>
             <c:if test="${loginUser != null}">
                 <div class="chat-profile">
-                    <img src="${loginUser.profileUrl != null ? loginUser.profileUrl : '/assets/img/profile3.jpg'}"
+                    <img src="${loginUser.profileUrl.length() > 1 ? loginUser.profileUrl : '/assets/img/profile3.jpg'}"
                          alt="프로필 사진"/>
                 </div>
                 <input

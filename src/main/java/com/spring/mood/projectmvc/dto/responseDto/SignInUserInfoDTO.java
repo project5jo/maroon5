@@ -19,6 +19,7 @@ public class SignInUserInfoDTO {
     private String userRole;
 
 
+    @Setter
     private String profileUrl;
 
 //    private String auth; //권한

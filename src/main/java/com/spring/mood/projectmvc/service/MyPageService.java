@@ -2,6 +2,7 @@ package com.spring.mood.projectmvc.service;
 
 import com.spring.mood.projectmvc.dto.requestDto.RequestMyPageMemberInfoDto;
 import com.spring.mood.projectmvc.dto.responseDto.ResponseMyPageMemberInfoDto;
+import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.Member;
 import com.spring.mood.projectmvc.mapper.MemberMapper;
 import com.spring.mood.projectmvc.util.FileUploadUtil;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
@@ -75,7 +78,7 @@ public class MyPageService {
         return false;
     }
 
-    public int serviceUpdateProfile(String account, MultipartFile profile, String profileStatus) {
+    public int serviceUpdateProfile(String account, MultipartFile profile, String profileStatus, HttpSession session) {
 
         // 프로필의 상태를 통해 처리과정 선택하기
 
@@ -85,6 +88,9 @@ public class MyPageService {
             profilePath = FileUploadUtil.uploadFile(rootPath, profile);
 
             int isUpdated = membermapper.updateMyPageProfile(account, profilePath);
+            SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+            loginUser.setProfileUrl(profilePath);
 
             return isUpdated;
 
@@ -94,6 +100,9 @@ public class MyPageService {
             mofidyMember.setUserAccount(account);
 
             int isUpdated = membermapper.updateMyPageProfile(account, null);
+            SignInUserInfoDTO loginUser = (SignInUserInfoDTO) session.getAttribute("loginUser");
+
+            loginUser.setProfileUrl("");
 
             return isUpdated;
 
