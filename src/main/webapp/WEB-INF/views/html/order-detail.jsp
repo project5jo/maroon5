@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-                                           uri="http://java.sun.com/jsp/jstl/core" %>
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,7 +14,7 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/order-detail.css" />
   <link rel="stylesheet" href="/assets/css/footer.css"/>
-  <link rel="stylesheet" href="/assets/css/common.css">
+<%--  <link rel="stylesheet" href="/assets/css/common.css">--%>
   <link rel="icon" href="/assets/img/favicon.ico">
   <script src="/assets/js/category.js/" defer></script>
 </head>
@@ -88,7 +90,7 @@
           <div class="tr">
             <div class="price-info">
               <p class="th-title">최종 결제 금액</p>
-              <p class="total-price">${orderDetails.totalCount}원</p>
+              <p class="total-price"><fmt:formatNumber value="${orderDetails.totalCount}" type="number" minFractionDigits="0" maxFractionDigits="0"/>원</p>
             </div>
           </div>
         </div>

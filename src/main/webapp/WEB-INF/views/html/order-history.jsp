@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/footer.css" />
   <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/common.css">
   <link rel="stylesheet" href="/assets/css/order-history.css" />
   <script src="/assets/js/category.js/" defer></script>
 </head>
@@ -61,15 +62,17 @@
 <%--                <button class="btn" onclick='goToOrderDetails("${order.order_id}", "${entry.value.totalPrice}")'>details</button>--%>
               </c:forEach>
               <li class="order-total">주문 총액 : <fmt:formatNumber value="${entry.value.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/></li>
-              <button class="btn" onclick='goToOrderDetails("${entry.value.orders[0].order_id}", "${entry.value.totalPrice}")'>details</button>
+              <button class="btn" onclick='goToOrderDetails("${entry.value.orders[0].order_id}", "${entry.value.totalPrice}")'>상세보기</button>
             </ul>
           </div>
         </c:forEach>
       </div>
     </div>
-    <%@ include file="../include/footer.jsp" %>
   </section>
 </main>
+<%--<section>--%>
+  <%@ include file="../include/footer.jsp" %>
+<%--</section>--%>
 <script>
     function goToOrderDetails(orderId, totalCount) {
       fetch(`/order-details`, {
