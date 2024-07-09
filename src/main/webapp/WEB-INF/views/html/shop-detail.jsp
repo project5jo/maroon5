@@ -23,10 +23,12 @@
                     <div class="details">
                         <div class="wrapper">
                             <div class="description">
-                                <p class="item-name point">${item.shopItemName}</p>
-                                <p class="item-price point">
-                                    ${item.shopItemPrice}원
-                                </p>
+                                <div class="item-name-price-wrapper">
+                                    <p class="item-name point">${item.shopItemName}</p>
+                                    <p class="item-price point">
+                                        ${item.shopItemPrice}원
+                                    </p>
+                                </div>
                                 <p class="item-desc">${item.shopItemDesc}</p>
                             </div>
                             <form id="addToCartForm" action="/cart" method="post" onsubmit="return handleFormSubmit(event)">
