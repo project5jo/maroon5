@@ -13,7 +13,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="/assets/css/shop-header.css" />
 
     <script src="/assets/js/SignIn.js" defer></script>
-    <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="icon" href="/assets/img/favicon.ico" />
     <script src="/assets/js/category.js/" defer></script>
   </head>
   <body>
@@ -32,7 +32,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               type="text"
               class="email"
               name="account"
-              placeholder="email"
+              placeholder="account"
             />
             <input
               type="password"
