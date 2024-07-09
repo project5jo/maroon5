@@ -61,7 +61,7 @@
                 </li>
 <%--                <button class="btn" onclick='goToOrderDetails("${order.order_id}", "${entry.value.totalPrice}")'>details</button>--%>
               </c:forEach>
-              <li class="order-total">주문 총액 : <fmt:formatNumber value="${entry.value.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/></li>
+              <li class="order-total">주문 총액 : <fmt:formatNumber value="${entry.value.totalPrice}" type="number" minFractionDigits="0" maxFractionDigits="0"/> 원</li>
               <button class="btn" onclick='goToOrderDetails("${entry.value.orders[0].order_id}", "${entry.value.totalPrice}")'>상세보기</button>
             </ul>
           </div>
