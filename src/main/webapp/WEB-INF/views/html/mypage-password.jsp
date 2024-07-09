@@ -41,11 +41,8 @@
 
           <div class="middleForm-content">
             <h2><i class="fas fa-tags"></i> 꼭 읽어주세요.</h2>
-          </div>
-
-          <div class="middleForm-content">
             <p>주기적인 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요.</p>
-            <p>여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 <br>비밀번호를 주기적으로 변경해 주는 것이 안전합니다.</p>
+            <p>여러 사이트에 동일한 비밀번호를 사용하면 도용되기 쉬우므로 비밀번호를 주기적으로 변경해 주는 것이 안전합니다.</p>
           </div>
 
           <div class="middleForm-content">
