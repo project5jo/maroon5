@@ -22,7 +22,8 @@ section .inner {
 .inner .order-history-title {
   width: 20%;
   font-size: 44px;
-  margin-bottom: 120px;
+  margin-top: 30px;
+
 }
 
 .inner .order-history-list {
@@ -68,10 +69,11 @@ section .inner {
     align-items: center;
     justify-content: space-around;
   font-weight : 500;
+  margin-bottom: 20px;
 }
 
 .order-time-group {
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 50px;
   border-radius: 20px;
   box-shadow: 0 1px 4px rgba(28, 28, 28, 0.1), 
@@ -131,7 +133,7 @@ section .inner {
   margin-right: 30px;
 }
 .order-time {
-  width: 100px;
+  width: 130px;
   padding-left: 30px;
 }
 
@@ -156,9 +158,12 @@ section .inner {
 /*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 10px rgba(0, 0, 0, 0.1);*/
 /*    transition: transform 0.3s, box-shadow 0.3s;*/
 /*}*/
+section .inner {
+  padding:0px;
+}
 
 .btn {
-  background: #9c8781; /* 그라데이션 배경 */
+  background: #432626; /* 그라데이션 배경 */
   border-radius: 10px;
   color: #fff;
   font-size: 18px;
