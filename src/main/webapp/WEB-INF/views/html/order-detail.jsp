@@ -76,7 +76,7 @@
             <div class="tr">
               <p class="th-title">주소<span></span></p>
               <div class="postal-code">
-                <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1" value="${firstItem.address1}" disabled>
+                <input type="text" id="sample6_postcode" placeholder="우편번호" name="address1" value="${firstItem.address1}" disabled>?
               </div>
               <input type="text" id="sample6_address" placeholder="주소" name="address2" value="${firstItem.address2}" disabled>
               <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3" value="${firstItem.address3}" disabled>
