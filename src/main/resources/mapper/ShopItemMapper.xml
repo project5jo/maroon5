@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.ShopItemMapper">
+
+    <select id="findOne" parameterType="long" resultType="com.spring.mood.projectmvc.entity.ShopItem">
+        SELECT
+        shop_item_id, shop_item_name, shop_item_desc, shop_item_price, shop_item_img, shop_item_date, shop_item_stock, shop_item_view
+        FROM ShopItems
+        WHERE shop_item_id = #{id}
+    </select>
+
+    <select id="findShopItemsByKeyword" parameterType="string" resultType="com.spring.mood.projectmvc.entity.ShopItem">
+        SELECT
+        shop_item_id, shop_item_name, shop_item_desc, shop_item_price, shop_item_img, shop_item_date, shop_item_stock, shop_item_view
+        FROM ShopItems
+        WHERE shop_item_name LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="findAll" resultType="com.spring.mood.projectmvc.entity.ShopItem">
+        SELECT
+        shop_item_id, shop_item_name, shop_item_desc, shop_item_price, shop_item_img, shop_item_date, shop_item_stock, shop_item_view
+        FROM ShopItems
+    </select>
+
+    <delete id="delete">
+        DELETE FROM ShopItems
+        WHERE shop_item_id = #{shopItemId}
+    </delete>
+
+    <insert id="save" parameterType="com.spring.mood.projectmvc.entity.ShopItem">
+        INSERT INTO ShopItems
+        (shop_item_name, shop_item_desc, shop_item_price, shop_item_img, shop_item_date, shop_item_stock)
+        VALUES
+        (#{shopItemName}, #{shopItemDesc}, #{shopItemPrice}, #{shopItemImg}, #{shopItemDate}, #{shopItemStock})
+    </insert>
+
+    <update id="upViewCount" parameterType="long">
+        UPDATE ShopItems
+        SET shop_item_view = shop_item_view + 1
+        WHERE shop_item_id = #{id}
+    </update>
+</mapper>

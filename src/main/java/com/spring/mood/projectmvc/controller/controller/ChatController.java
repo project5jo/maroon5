@@ -1,11 +1,20 @@
 package com.spring.mood.projectmvc.controller.controller;
 
 
+import com.spring.mood.projectmvc.dto.responseDto.ChatMessageDto;
+import com.spring.mood.projectmvc.dto.responseDto.SignInUserInfoDTO;
 import com.spring.mood.projectmvc.entity.ChatEntity;
+import com.spring.mood.projectmvc.entity.ChatRoom;
+import com.spring.mood.projectmvc.entity.User;
+import com.spring.mood.projectmvc.mapper.MemberMapper;
+import com.spring.mood.projectmvc.repository.ChatRoomRepository;
 import com.spring.mood.projectmvc.service.ChatService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
@@ -15,18 +24,34 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ChatController {
 
+
+
     private final ChatService chatMessageService;
+    private final MemberMapper memberMapper;
+    private final ChatRoomRepository chatRoomRepository;
 
+@MessageMapping("/sendMessage/{topicId}/{roomId}")
+@SendTo("/topic/messages/{topicId}/{roomId}")
+public ChatMessageDto sendMessage(@DestinationVariable Integer topicId, @DestinationVariable int roomId, ChatEntity message, SimpMessageHeaderAccessor headerAccessor) {
+    System.out.println("controller topicId = " + topicId);
+    Object loginUser = headerAccessor.getSessionAttributes().get("loginUser");
 
-    /** 3번
-     * 브라우저에서 app/sendMessage 라는 요청을 보내면 message 매개변수로 확인 한 다음 메세지 세이브 시키고 리턴시킴.~
-     * sendTo는 클라이언트에서 브라우저로 /topic/messages 로 렌더링을 위한 메세지를 보내줌.
-     */
-    @MessageMapping("/sendMessage")
-    @SendTo("/topic/messages")
-    public ChatEntity sendMessage(ChatEntity message) {
-        message.setTimestamp(LocalDateTime.now());
-        chatMessageService.saveMessage(message);
-        return message;
+    if (loginUser == null) {
+        throw new IllegalStateException("로그인 사용자를 찾을 수 없습니다.");
     }
+    // SignInUserInfoDTO로 캐스팅
+    SignInUserInfoDTO loginUserDto = (SignInUserInfoDTO) loginUser;
+
+    // SignInUserInfoDTO에서 User 객체로 변환
+    User chatUser = memberMapper.findChatUser(loginUserDto.getAccount());
+
+    System.out.println("컨트롤러에서 유저 메세지 = " + chatUser);
+    message.setUser(chatUser);
+    message.setTimestamp(LocalDateTime.now());
+
+    System.out.println("message = " + message);
+    chatMessageService.saveMessage(message, topicId);
+
+    return chatMessageService.convertToDTO(message);
+}
 }

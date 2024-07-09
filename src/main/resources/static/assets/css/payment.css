@@ -1,0 +1,219 @@
+/* common css  */
+@import url("common.css");
+
+body {
+  background-color: #ebeae3;
+  color: #432626;
+}
+
+/* main */
+main {
+  margin-top: 80px;
+  font-size: 16px;
+  font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
+    "malgun gothic", "돋움", "dotum", sans-serif !important;
+}
+
+main .inner {
+  width: 560px;
+}
+
+/* 공통 부분 */
+
+.payment {
+  color: #432626;
+}
+
+.payment-title {
+  padding: 50px 0 50px 0;
+}
+
+.payment-title p {
+  color: #432626;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.tr {
+  margin-top: 20px;
+  /* border-top: 1px solid #432626; */
+}
+
+.payment-sub-title {
+  padding-bottom: 13px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #432626;
+}
+
+.th-title {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input {
+  border: 1px solid #747474;
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 12px 25px 12px 12px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background: none;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+button {
+  height: 50px;
+  background-color: #432626;
+  color: #fff;
+}
+
+/* 주문 상품 */
+
+.prd-box {
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px solid #747474;
+}
+
+/* 함수로 list마지막  */
+/* .prd-box-list li:nth-child(마지막) {
+  border-bottom: none;
+} */
+
+.prd-item-info {
+  margin-left: 20px;
+  width: 100%;
+  padding: 5px;
+}
+
+.prd-item-info > p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.prd-item .item-img {
+  width: 110px;
+  height: 125px;
+  background-color: #fff;
+}
+.prd-item .item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+p.prdName {
+  font-weight: 700;
+}
+
+.prdPrice {
+  margin-top: 20px;
+}
+
+p.user-point-info {
+  font-size: 14px;
+  color: #747474;
+}
+
+p.user-point-info > span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 배송지 */
+
+.payment-Delivery,
+.user-point,
+.order-price-info {
+  margin-top: 80px;
+}
+
+/* 우편번호 */
+
+.postal-code,
+.user-point-input {
+  display: flex;
+}
+
+button.postal-code-search,
+button.btn-point {
+  width: 300px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.sample6-extraAddress {
+  display: none;
+}
+
+/* 결제정보 */
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price-info > p {
+  font-size: 14px;
+}
+
+.price-info > p.total-price,
+.price-info > p.total-point {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* 최종 결제 버튼 */
+.btn-pay {
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: #432626;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+footer {
+  height: 200px;
+}
+
+/*  */
+
+input.falsefocus {
+  border: 1px solid #ff003e;
+  background-color: rgba(255, 0, 62, 0.1);
+}
+
+input.falsefocus::placeholder {
+  color: #ff003e;
+}
+
+input.truefocus {
+  border: 1px solid #1a72ff;
+  background-color: rgba(26, 114, 255, 0.1);
+}
+input.truefocus::placeholder {
+  color: #1a72ff;
+}
+
+input.nowfocus {
+  box-shadow: 0 0 5px rgb(216, 216, 73);
+}
+
+footer {
+  height: 200px;
+}

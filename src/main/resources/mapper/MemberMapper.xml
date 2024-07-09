@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mood.projectmvc.mapper.MemberMapper">
+
+    <insert id="save">
+        INSERT INTO Users
+        (user_account, user_password, user_name, user_email, user_profile, user_address, user_birth)
+        VALUES
+        (#{userAccount}, #{userPassword}, #{userName}, #{userEmail}, #{userProfile}, #{userAddress}, #{userBirth})
+    </insert>
+
+    <select id="findOne" resultType="member">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , created_at
+        , user_point
+        FROM Users
+        WHERE user_account = #{account}
+        AND user_deleted = #{deleted}
+    </select>
+
+
+    <select id="findId" resultType="member">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , created_at
+        , user_point
+        FROM Users
+        WHERE user_email = #{email}
+        AND user_name = #{name}
+    </select>
+  
+    <!--    회원가입     -->
+    <select id="checkId" resultType="boolean">
+        SELECT COUNT(*)
+        FROM Users
+        WHERE user_account = #{account}
+    </select>
+
+    <select id="checkEmail" resultType="boolean">
+        SELECT COUNT(*)
+        FROM Users
+        WHERE user_email = #{email}
+    </select>
+
+    <select id="checkPassword" resultType="string">
+        SELECT user_password
+        FROM Users
+        WHERE user_account = #{account}
+    </select>
+
+    <!--   포인트 차감 업데이트     -->
+    <update id="updatePoint">
+        UPDATE Users
+        SET
+        user_point = #{point}
+        WHERE user_account = #{account}
+    </update>
+
+    <!--    마이페이지      -->
+    <update id="updateMyPageMemberInfo">
+        UPDATE Users
+        SET
+        user_name = #{userName}, user_email = #{userEmail}, user_birth = #{userBirth}, user_profile = #{userProfile}
+        WHERE user_account = #{userAccount}
+    </update>
+
+    <update id="updateMyPageProfile">
+        UPDATE Users
+        SET user_profile = #{profile}
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="deleteMyPageAccount">
+        UPDATE Users
+        SET user_deleted = #{deleteFlag}
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="chargePoint">
+        UPDATE Users
+        SET user_point = user_point + #{point}
+        WHERE user_account = #{account}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM Users
+        WHERE user_account = #{account}
+    </delete>
+
+    <update id="updateRoomId">
+        UPDATE Users
+        SET room_id = #{roomId}
+        WHERE user_account = #{account}
+    </update>
+
+    <select id="findUserBySessionId" resultType="member">
+        SELECT
+        user_account
+        , user_name
+        , user_email
+        ,limit_time
+        FROM Users
+        WHERE session_id = #{sessionId}
+    </select>
+
+
+    <update id="updatePassword">
+        UPDATE Users
+        SET user_password = #{NewPw}
+        WHERE user_account = #{account}
+    </update>
+
+    <!--    자동 로그인      -->
+    <update id="updateAutoLogin">
+        UPDATE Users
+        SET session_id = #{sessionId}, limit_time = #{limitTime}
+        WHERE user_account = #{account}
+    </update>
+
+    <select id="findChatUser" resultType="User">
+        SELECT
+        user_account
+        , user_password
+        , user_name
+        , user_email
+        , user_profile
+        , user_address
+        , user_birth
+        , user_role
+        , created_at
+        , user_point
+        FROM Users
+        WHERE user_account = #{account}
+    </select>
+
+<!-- 포인트 검색   -->
+<!--    <select id="existsByPoint" resultType="int">-->
+<!--        SELECT-->
+<!--        user_account-->
+<!--        , user_password-->
+<!--        , user_name-->
+<!--        , user_email-->
+<!--        , user_profile-->
+<!--        , user_address-->
+<!--        , user_birth-->
+<!--        , user_role-->
+<!--        , created_at-->
+<!--        , user_point-->
+<!--        FROM Users-->
+<!--        WHERE user_point = #{point}-->
+<!--    </select>-->
+
+</mapper>

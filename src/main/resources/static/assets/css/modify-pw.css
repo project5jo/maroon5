@@ -1,0 +1,131 @@
+/* common css  */
+@import url("common.css");
+
+body {
+  background-color: #ebeae3;
+  color: #432626;
+}
+
+/* main */
+main {
+  margin-top: 80px;
+  font-size: 17px;
+  font-family: "SUIT", "Montserrat", Arial, "Apple SD Gothic Neo", "맑은 고딕",
+    "malgun gothic", "돋움", "dotum", sans-serif !important;
+}
+
+main .inner {
+  width: 560px;
+}
+
+.modify-pw {
+  color: #432626;
+}
+
+.modify-pw-title {
+  padding: 50px 0 50px 0;
+}
+
+.modify-pw-title p {
+  color: #432626;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.modify-pw input {
+  border: 1px solid #747474;
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 12px 25px 12px 12px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background: none;
+}
+
+.modify-pw input::placeholder {
+  font-size: 14px;
+}
+
+.modify-pw button {
+  width: 100%;
+  height: 50px;
+  background-color: #432626;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sub-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/*  */
+
+input.account,
+input.newPassword {
+  margin-bottom: 20px;
+}
+
+input::placeholder {
+  font-size: 17px;
+}
+
+button.modify-pw-btn {
+  margin-top: 40px;
+}
+
+.find {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  color: #888888;
+}
+
+.find-id,
+.sign-in {
+  color: #747474;
+  font-size: 13px;
+}
+
+.find span {
+  margin: 0 5px;
+}
+
+.result {
+  color: #ff003e;
+  margin: 30px 0 0 0;
+  line-height: 160%;
+  font-size: 14px;
+}
+
+/* 비동기 처리 */
+
+input.falsefocus {
+  border: 1px solid #ff003e;
+  background-color: rgba(255, 0, 62, 0.1);
+}
+
+input.falsefocus::placeholder {
+  color: #ff003e;
+}
+
+input.truefocus {
+  border: 1px solid #1a72ff;
+  background-color: rgba(26, 114, 255, 0.1);
+}
+input.truefocus::placeholder {
+  color: #1a72ff;
+}
+
+input.nowfocus {
+  box-shadow: 0 0 5px rgb(216, 216, 73);
+}
+
+footer {
+  height: 200px;
+}

@@ -1,0 +1,36 @@
+body {
+    background: black;
+}
+.main_banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .backgroundVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    transition: opacity 1s ease-in-out; /* 페이드 인아웃 애니메이션 */
+    opacity: 1; /* 기본 상태 */
+  }
+  
+  .hidden {
+    opacity: 0; /* 페이드 아웃 상태 */
+  }
+  
+  .main_banner .inner {
+    position: relative;
+    z-index: 1;
+  }
+  
+  header {
+    position: relative;
+    z-index: 9999;
+  }
+  

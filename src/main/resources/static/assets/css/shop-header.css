@@ -1,0 +1,157 @@
+/* common css  */
+@import url("common.css");
+/* 채팅 css */
+@import url("main-chat.css");
+
+header {
+  width: 100%;
+  overflow: hidden;
+  color: #432626;
+  height: 80px;
+  font-size: 15px;
+
+  display: flex;
+  align-content: center;
+
+  /* 밑에는 스크립트로 추가해야함 */
+}
+
+.menu .inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav.menu {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #ebeae3;
+  border-bottom: 1px solid #432626;
+}
+
+.menu .logo a {
+  font-weight: 700;
+  color: #432626;
+}
+
+.gnb {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.login {
+  padding: 0 60px;
+  font-weight: 700;
+}
+
+.login a {
+  color: #432626;
+}
+
+i.fa-bars {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.menu-icon > div {
+  width: 20px;
+  height: 3px;
+  margin: 3px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #432626;
+  /* background-color: #432626; */
+}
+
+/* 메뉴 */
+
+.category-drawer {
+  position: fixed;
+  top: 0;
+  right: -60%;
+  width: 40%;
+  height: 100vh;
+  z-index: 9999;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: baseline; */
+  /* justify-content: center; */
+  transition: right 0.5s ease-in-out;
+}
+
+.category-drawer.show {
+  right: 0;
+}
+
+.category {
+  margin: 200px 0 0 20px;
+}
+
+.category li {
+  margin-bottom: 50px;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.category li a {
+  color: #fff;
+}
+
+/* .category-drawer :nth-child(3) {
+  margin-bottom: 40%;
+} */
+
+/* .fa-times {
+  position: absolute;
+  top: 24px;
+  right: 205px;
+  cursor: pointer;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+} */
+
+.category-drawer > .cancel_btn {
+  background: none;
+  position: absolute;
+  top: 23px;
+  left: 512px;
+}
+
+.category-drawer > .cancel_btn span {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  border-radius: 20px;
+  cursor: pointer;
+  left: 22px;
+  top: 15px;
+}
+.category-drawer > .cancel_btn span:nth-child(1) {
+  transform: rotate(45deg);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.category-drawer > .cancel_btn span:nth-child(2) {
+  transform: rotate(-45deg);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.cart {
+  margin-right: 60px;
+}

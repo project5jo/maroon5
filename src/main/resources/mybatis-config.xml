@@ -12,9 +12,27 @@
 
     <typeAliases>
 <!--        <typeAlias type="com.study.springStudy.database.chap01.Person" alias="person"/>-->
+        <typeAlias type="com.spring.mood.projectmvc.entity.Member" alias="member"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.ShopItem" alias="shopitem"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.Orders" alias="orders"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.OrderDetails" alias="orderdetails"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.ChatEntity" alias="chat"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.User" alias="user"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.ShoppingCart" alias="shoppingcart"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.Topic" alias="topic"/>
+        <typeAlias type="com.spring.mood.projectmvc.entity.CartArchive" alias="cartarchive"/>
     </typeAliases>
 
     <mappers>
 <!--        <mapper resource="mappers/ReactionMapper.xml" />-->
+        <mapper resource="mapper/MemberMapper.xml" />
+        <mapper resource="mapper/TopicMapper.xml" />
+        <mapper resource="mapper/ShopItemMapper.xml" />
+        <mapper resource="mapper/OrdersMapper.xml" />
+        <mapper resource="mapper/OrderDetailsMapper.xml" />
+        <mapper resource="mapper/ChatMapper.xml" />
+        <mapper resource="mapper/ShopDetailMapper.xml" />
+        <mapper resource="mapper/ShoppingCartMapper.xml" />
+        <mapper resource="mapper/CartArchiveMapper.xml" />
     </mappers>
 </configuration>
