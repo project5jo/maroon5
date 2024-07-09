@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/assets/css/shop-header.css" />
   <link rel="stylesheet" href="/assets/css/order-detail.css" />
   <link rel="stylesheet" href="/assets/css/footer.css"/>
+  <link rel="stylesheet" href="/assets/css/common.css">
   <link rel="icon" href="/assets/img/favicon.ico">
   <script src="/assets/js/category.js/" defer></script>
 </head>
