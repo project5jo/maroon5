@@ -32,7 +32,7 @@
             <div class="cart-item-wrapper">
               <!-- img -->
               <div class="cart-item-img-box">
-                <a href="">
+                <a href="/shop/${cartItem.shopItemId}">
                   <img src="${cartItem.shopItemImg}" alt="${cartItem.shopItemName}">
                 </a>
               </div>

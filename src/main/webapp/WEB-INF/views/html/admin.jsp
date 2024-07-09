@@ -54,6 +54,7 @@
     </section>
 </main>
 <%@ include file="../include/footer.jsp" %>
+<script src="/assets/js/category.js"></script>
 <script>
     function updateTopicId() {
         const newTopicId = document.getElementById('newTopicId').value;
