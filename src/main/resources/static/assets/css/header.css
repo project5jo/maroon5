@@ -155,7 +155,3 @@ i.fa-bars {
 .cart {
   visibility: hidden;
 }
-/* 마우스 오버 시 오른쪽으로 움직이는 애니메이션 */
-.category li:hover {
-  transform: translateX(5px);
-}
