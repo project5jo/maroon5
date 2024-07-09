@@ -33,19 +33,14 @@
       <form action="/mypage-point" method="post">
         <div class="middleForm-box">
           <div class="middleForm-content">
-            <h2><i class="fas fa-check"></i>현재 포인트</h2>
-            <div class="form-indentation">
-              <p id="pointSRC" class="pointFont">${isUpdated ? updatedMember.point : nowMember.point}</p>
-              <span>원</span>
-            </div>
+            <h2><i class="fas fa-check"></i> 현재 포인트</h2>
+            <p id="pointSRC" class="pointFont">${isUpdated ? updatedMember.point : nowMember.point}</p>
           </div>
 
           <div class="middleForm-content">
-            <h2><i class="fas fa-check"></i>충전하실 포인트를 선택해주세요.</h2>
-            <div class="form-indentation">
-              <input type="text" class="formInput pointFont" name="point" value="0" readonly>
-              <button type="button" onclick="removePoint()"><i class="fas fa-times-circle"></i>정정</button>
-            </div>
+            <h2><i class="fas fa-check"></i> 충전하실 포인트를 선택해주세요.</h2>
+            <input type="text" class="formInput pointFont" name="point" value="0" readonly>
+            <button type="button" onclick="removePoint()"><i class="fas fa-times-circle"></i>정정</button>
 
             <div class="form-flex">
               <button type="button" onclick="addPoint(this)" value="1000"><i class="fas fa-plus-circle"></i>천원</button>
@@ -57,20 +52,17 @@
           </div>
 
           <div class="middleForm-content">
-            <h2><i class="fas fa-check"></i>충전 후 예상 포인트</h2>
-            <div class="form-indentation">
-              <p class="expectPoint pointFont"></p>
-              <span>원</span>
-            </div>
+            <h2><i class="fas fa-check"></i> 충전 후 예상 포인트</h2>
+            <p class="expectPoint pointFont"></p>
           </div>
 
           <div class="middleForm-content">
-            <h2><i class="fas fa-check"></i>충전안내</h2>
+            <h2><i class="fas fa-check"></i> 충전안내</h2>
             <p>포인트 충전시 최소 충전금액은 1,000원이며, 1,000원 단위로 충전이 가능합니다.</p>
             <p>포인트는 충전 후 취소할 수 없습니다.</p>
           </div>
 
-          <div class="middleForm-content">
+          <div class="middleForm-content centerBtn">
             <button class="check" type="button">충전하기</button>
           </div>
         </div>

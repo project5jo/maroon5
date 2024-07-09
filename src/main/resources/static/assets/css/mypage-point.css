@@ -40,7 +40,7 @@ body {
 
 }
 .middle-box {
-  padding: 20px;
+  padding-left: 120px;
   background-color: #ebeae3;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -54,13 +54,22 @@ body {
 }
 
 .middleForm-content {
-  margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 10px 0;
 }
 
 .middleForm-content h2 {
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #432626;
   font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.middleForm-content p {
+  margin-bottom: 10px;
+  padding: 10px 0 5px 20px;
+  font-size: 1rem;
+  color: #432626;
 }
 
 .form-indentation {
@@ -69,13 +78,7 @@ body {
   margin-top: 10px;
 }
 
-.form-indentation p {
-  margin: 0;
-  font-size: 24px;
-  color: #432626;
-}
-
-.form-indentation span {
+.middleForm-content span {
   margin-left: 10px;
   font-size: 18px;
   color: #432626;
@@ -83,38 +86,53 @@ body {
 
 .form-flex {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  margin: 30px 0 0px 25px;
+  justify-content: left;
 }
 
-.form-flex button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 10px;
-  background-color: #5c4033;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+.middleForm-content button  {
+  width: 100px;
+  height: 50px;
+  background-color:  #4d3333;
+  color: rgb(255, 255, 255);
+  margin-right: 15px;
 }
 
 .form-flex button:hover {
   background-color: #3b2a25;
 }
-.formInput {
-  font-size: 22px;
-  margin-left: 10px;
+
+.form-indentation {
+  display: flex;
+  margin: 20px 30px 0 40px;
 }
 
-.check {
-  background-color: #5c4033;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.middleForm-content input {
+  width: 450px;
   padding: 10px;
-  cursor: pointer;
-  font-size: 16px;
+  margin: 10px 20px 20px 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.pointFont {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.fa-plus-circle, .fa-times-circle {
+  margin-right: 20px;
+}
+
+.centerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check {
+  width: 100px;
+  height: 50px;
 }
 
 .check:hover {

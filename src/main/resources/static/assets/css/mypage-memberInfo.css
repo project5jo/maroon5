@@ -48,9 +48,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 200px;
 }
 
 .middleForm-content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  text-align: left;
   margin-bottom: 1.5rem;
   width: 100%;
 }
@@ -76,20 +82,24 @@ body {
   font-weight: bold;
 }
 
+.form-indentation h2 {
+  margin: 10px 0 20px 30px;
+}
+
 .middleForm-content input[type="text"],
 .middleForm-content input[type="date"],
 .middleForm-content input[type="email"] {
-  width: calc(100% - 20px);
+  width: 400px;
   padding: 10px;
-  margin-bottom: 0.5rem;
+  margin: 10px 0 20px 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  flex-direction: row-reverse;
 }
 
 .middleForm-content p {
-  margin: 0;
-  margin-left: 25px;
+  margin: 10px 0 20px 30px;
   font-size: 0.875rem;
 }
 
@@ -97,14 +107,22 @@ body {
   margin-top: 1rem;
 }
 
+.centerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .check {
-  padding: 0.5rem 2rem;
+  width: 100px;
+  height: 50px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: rgba(82, 51, 51, 0.3);
   color: white;
   font-size: 1rem;
+  margin-right: 170px;
 }
 
 .form-indentation {
@@ -170,12 +188,6 @@ body {
   .section-rightAside {
     width: 100%;
     margin: 10px 0;
-  }
-
-  .middleForm-content input[type="text"],
-  .middleForm-content input[type="date"],
-  .middleForm-content input[type="email"] {
-    width: calc(100% - 20px);
   }
 
   .actions {

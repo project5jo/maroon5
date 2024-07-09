@@ -75,7 +75,7 @@
 
               <div class="middleForm-content">
                 <h2>탈퇴 후에는 아이디 ${nowMember.account} 로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.</h2>
-                <h2><input type="checkbox" class="cancelInput" name="deleteFlag" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.</h2>
+                <h2 class="down"><input type="checkbox" class="cancelInput" name="deleteFlag" onclick="checkToggle(this)"> 안내사항을 모두 확인하였으며, 이에 동의합니다.</h2>
               </div>
 
               <div class="middleForm-content checkCenter">
