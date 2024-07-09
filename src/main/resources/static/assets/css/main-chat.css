@@ -74,11 +74,13 @@
 }
 
 .chat-title-content #admin {
-  background: #ffffff;
-  border-radius: 10%;
+  background: #666;
+  border-radius: 50px;
   margin-left: 10px;
-  padding: 3px;
+  padding: 5px 8px;
   text-align: center;
+  font-size: 12px;
+  font-weight: 500;
   align-content: center;
 }
 
