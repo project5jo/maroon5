@@ -184,3 +184,7 @@ section .inner {
   transform: translateY(1px); /* 클릭 시 아래로 이동 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0px 10px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 효과 감소 */
 }
+
+.footer-content {
+  padding-top: 20px;
+}
