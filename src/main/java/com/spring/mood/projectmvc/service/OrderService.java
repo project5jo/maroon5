@@ -121,12 +121,19 @@ public class OrderService {
         int totalItemsPrice = TotalItemsPrice(account);
         int totalPrice = calculateTotalPrice(totalItemsPrice);
 
+        // 멤버 찾기
+        Member user = memberMapper.findOne(account);
+        //디비 멤버 포인트
+        Integer userPoint = user.getUserPoint();
+
 
         if (totalPrice < point) {
             message = "입력하신 포인트가 결제 금액을 초과했습니다.";
         } else if (totalPrice > point) {
             message = "포인트가 부족합니다.";
 
+        } else if (userPoint < totalPrice) {
+            message = "보유하신 포인트가 부족합니다.";
         } else {
             message = "결제 성공";
         }

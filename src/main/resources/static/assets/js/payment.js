@@ -138,8 +138,11 @@ $payBtn.addEventListener("click", async (event) => {
       payErrorStyle("입력하신 포인트가 결제 금액을 초과했습니다.");
     } else if (payPointMessage === "포인트가 부족합니다.") {
       payErrorStyle("포인트가 부족합니다.");
-    } else if (isValid === false) {
-    } else {
+    } else if (!isValid) {
+      return;
+    } else if (payPointMessage === "보유하신 포인트가 부족합니다.") {
+      payErrorStyle("보유하신 포인트가 부족합니다.")
+    }else {
       document.querySelector(".form-pay").submit();
     }
   }
