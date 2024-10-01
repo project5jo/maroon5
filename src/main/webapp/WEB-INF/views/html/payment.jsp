@@ -14,8 +14,11 @@
   <link rel="stylesheet" href="/assets/css/footer.css"/>
   <link rel="icon" href="/assets/img/favicon.ico">
   <script src="/assets/js/category.js/" defer></script>
-  <script src="/assets/js/payment.js/" defer></script>
-  
+  <script type="module" src="/assets/js/paymentElements.js" defer></script>
+  <script type="module" src="/assets/js/paymentFetch.js" defer></script>
+  <script type="module" src="/assets/js/paymentFunction.js" defer></script>
+  <script type="module" src="assets/js/payment.js" defer></script>
+
   <!-- 카카오 주소 검색 API 스크립트 -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>

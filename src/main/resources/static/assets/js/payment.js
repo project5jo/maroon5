@@ -1,41 +1,21 @@
-//====================== 변수
-const $inputPhonNum = document.querySelector(".receiver-phone");
-const $PointBtn = document.querySelector(".btn-point");
-const $InputPointBtn = document.querySelector(".usesPoint");
-const $pointInfo = document.querySelector(".user-point-info");
-const $btnPay = document.querySelector(".btn-pay");
-const totalOrderPrice = document.querySelector(".total-price").innerHTML;
-const requiredFields = document.querySelectorAll("[required]");
-console.log(requiredFields);
+import {
+  $inputPhonNum,
+  $InputPointBtn,
+  $btnPay,
+  totalOrderPrice,
+  requiredFields,
+  $payBtn,
+  numPatten,
+} from "./paymentElements.js";
+import { fetchPayPoint, fetchPoint } from "./paymentFetch.js";
+import { payErrorStyle, scrollToError } from "./paymentFunction.js";
 
-const $payBtn = document.querySelector(".btn-pay");
-const numPatten = /^[0-9]*$/;
 let pointFlag = false;
 
 //입력값 검증
 let IsInput = false;
 
 let InputPlaceholder = $InputPointBtn.placeholder;
-console.log(InputPlaceholder);
-
-//====================== 비동기 fetch
-
-//포인트 사용 검증
-async function fetchPoint(InputValue) {
-  const res = await fetch(`/checkPoint?point=${InputValue}`);
-  const flag = await res.json();
-  pointFlag = flag;
-  console.log(flag);
-}
-
-//결제 검증
-async function fetchPayPoint(InputValue) {
-  const res = await fetch(`/payPoint?point=${InputValue}`);
-  const message = await res.json();
-  return message.message; // 메시지 반환
-}
-
-// ====================== 결제 창 활성화
 
 //====================== 이벤트
 
@@ -114,10 +94,10 @@ $payBtn.addEventListener("click", async (event) => {
 
   // 패턴 체크
   if (InputValue === "") {
-    payErrorStyle("포인트를 입력하세요");
+    payErrorStyle("포인트를 입력하세요", $InputPointBtn, $btnPay);
   } else if (!numPatten.test(InputValue)) {
     $InputPointBtn.classList.add("falsefocus");
-    payErrorStyle("올바른 형식으로 입력부탁드립니다.");
+    payErrorStyle("올바른 형식으로 입력부탁드립니다.", $InputPointBtn, $btnPay);
   } else {
     // 입력 값이 유효한 경우 falsefocus 클래스를 제거합니다.
     if ($InputPointBtn.classList.contains("falsefocus")) {
@@ -125,7 +105,7 @@ $payBtn.addEventListener("click", async (event) => {
     }
 
     if (pointFlag === false) {
-      payErrorStyle("보유한 포인트를 초과하였습니다");
+      payErrorStyle("보유한 포인트를 초과하였습니다", $InputPointBtn, $btnPay);
     } else if (isPhonNumPatten === false) {
       $inputPhonNum.classList.add("falsefocus");
       scrollToError($inputPhonNum);
@@ -135,26 +115,16 @@ $payBtn.addEventListener("click", async (event) => {
     } else if (
       payPointMessage === "입력하신 포인트가 결제 금액을 초과했습니다."
     ) {
-      payErrorStyle("입력하신 포인트가 결제 금액을 초과했습니다.");
+      payErrorStyle(
+        "입력하신 포인트가 결제 금액을 초과했습니다.",
+        $InputPointBtn,
+        $btnPay
+      );
     } else if (payPointMessage === "포인트가 부족합니다.") {
-      payErrorStyle("포인트가 부족합니다.");
+      payErrorStyle("포인트가 부족합니다.", $InputPointBtn, $btnPay);
     } else if (isValid === false) {
     } else {
       document.querySelector(".form-pay").submit();
     }
   }
 });
-
-//====================== 함수
-
-//결제부분 에러 함수
-const payErrorStyle = (text) => {
-  $InputPointBtn.classList.add("falsefocus");
-  $InputPointBtn.value = "";
-  $InputPointBtn.placeholder = text;
-  $btnPay.type = "button";
-};
-
-function scrollToError(errorDiv) {
-  errorDiv.scrollIntoView({ behavior: "smooth", block: "center" });
-}
