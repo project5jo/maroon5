@@ -121,9 +121,14 @@ $payBtn.addEventListener("click", async (event) => {
         $btnPay
       );
     } else if (payPointMessage === "포인트가 부족합니다.") {
-      payErrorStyle("포인트가 부족합니다.", $InputPointBtn, $btnPay);
-    } else if (isValid === false) {
-    } else {
+
+      payErrorStyle("포인트가 부족합니다.");
+    } else if (!isValid) {
+      return;
+    } else if (payPointMessage === "보유하신 포인트가 부족합니다.") {
+      payErrorStyle("보유하신 포인트가 부족합니다.")
+    }else {
+
       document.querySelector(".form-pay").submit();
     }
   }

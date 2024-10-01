@@ -97,21 +97,13 @@ $inputEmail.addEventListener('keyup', e => {
           // fetch 사용
           const $emailAccountValue = $inputEmail.value;
           let encodedEmail = encodeURIComponent($emailAccountValue);
-          const URL = `http://localhost:8383/checkemail?email=${encodedEmail}`;
-          const IPURL = `http://172.30.1.60:8383/checkemail?email=${encodedEmail}`;
+          const URL = `/checkemail?email=${encodedEmail}`;
 
-          Promise.any([
               fetch(URL, {
                   method: 'POST',
                   headers: {'content-type': 'application/json'},
                   body: JSON.stringify({ email: $inputEmail.value })
-              }),
-              fetch(IPURL, {
-                  method: 'POST',
-                  headers: {'content-type': 'application/json'},
-                  body: JSON.stringify({ email: $inputEmail.value })
               })
-          ])
           .then(res => res.json())
           .then(json => {
               if (json === false) {
